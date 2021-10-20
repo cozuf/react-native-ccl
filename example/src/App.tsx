@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, } from 'react-native';
-import { multiply, Text } from 'react-native-ccl';
+import { multiply, Text, Button, Icon } from 'react-native-ccl';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
@@ -17,6 +17,8 @@ export default function App() {
       <Text weigth="Medium" style={{ fontSize: 20 }}>Result: {result}</Text>
       <Text weigth="Regular" style={{ fontSize: 20 }}>Result: {result}</Text>
       <Text weigth="Light" style={{ fontSize: 20 }}>Result: {result}</Text>
+      <Button childType={"Both"} clickType={"Changeable"} onPress={() => { }} icon={{ family: "Fontisto", name: "react", size: 20 }} />
+      <Icon size={40} />
     </View>
   );
 }
