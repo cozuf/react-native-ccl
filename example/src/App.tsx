@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-ccl';
+import { StyleSheet, View, } from 'react-native';
+import { multiply, Text } from 'react-native-ccl';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
@@ -12,7 +12,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text weigth="Bold" style={{ fontSize: 20 }}>Result: {result}</Text>
+      <Text weigth="SemiBold" style={{ fontSize: 20 }}>Result: {result}</Text>
+      <Text weigth="Medium" style={{ fontSize: 20 }}>Result: {result}</Text>
+      <Text weigth="Regular" style={{ fontSize: 20 }}>Result: {result}</Text>
+      <Text weigth="Light" style={{ fontSize: 20 }}>Result: {result}</Text>
     </View>
   );
 }
