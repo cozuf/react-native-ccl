@@ -24,6 +24,10 @@ import {
   GREEN,
   GREEN_PALE,
   GREY,
+  GREY_80,
+  GREY_80_PALE,
+  GREY_90,
+  GREY_90_PALE,
   GREY_PALE,
   ORANGE,
   ORANGE_OPPOSITE,
@@ -199,9 +203,11 @@ const checkBox: CheckBoxColorScheme = {
 const checkBoxGroup: CheckBoxGroupColorScheme = {
   active: {
     background: BLACK,
+    seperator: GREY_80
   },
   passive: {
     background: BLACK_PALE,
+    seperator: GREY_80_PALE
   },
 };
 

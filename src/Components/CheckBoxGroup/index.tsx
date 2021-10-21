@@ -1,5 +1,6 @@
-import React, { FC, useEffect } from 'react';
-import { FlatList, FlatListProps, ListRenderItemInfo, Omit } from 'react-native';
+import React, { FC, Fragment, useEffect } from 'react';
+import { FlatList, FlatListProps, ListRenderItemInfo, Omit, View } from 'react-native';
+import { Seperator, useThemeContext } from 'react-native-ccl';
 import { CheckBox } from '..';
 
 export interface ICheckBoxGroupProps<ItemT> {
@@ -34,7 +35,9 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   onSelect,
   renderItem,
 }) => {
-  console.log("CheckBoxGroup", { data })
+  const [theme] = useThemeContext();
+  const { checkBoxGroup } = theme.colors;
+
   const onButtonSelect = (index: number) => {
     const nData = data.map((v, i) => ({
       ...v,
@@ -61,20 +64,31 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     }
   });
 
+  const renderSeperator = (): JSX.Element => {
+    console.error(checkBoxGroup.active.seperator)
+    return (
+      <View style={{ alignItems: "center", paddingVertical: 4, }}>
+        <Seperator.Vertical width={"96%"} height={1} color={checkBoxGroup.active.seperator} />
+      </View>
+    )
+  }
+
   const customRenderItem = (
     info: ListRenderItemInfo<any>,
   ): React.ReactElement | null => {
     const { item, index } = info;
     return (
-      <CheckBox
-        key={index.toString()}
-        active={item.active}
-        selected={item.selected}
-        title={item.title}
-        onSelect={() => {
-          onButtonSelect(index);
-        }}
-      />
+      <Fragment>
+        <CheckBox
+          key={index.toString()}
+          active={item.active}
+          selected={item.selected}
+          title={item.title}
+          onSelect={() => {
+            onButtonSelect(index);
+          }}
+        />
+      </Fragment>
     );
   };
 
@@ -83,6 +97,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
       keyExtractor={(_, index) => index.toString()}
       data={data}
       renderItem={renderItem || customRenderItem}
+      ItemSeparatorComponent={renderSeperator}
     />
   );
 };

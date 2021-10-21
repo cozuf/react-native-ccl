@@ -107,9 +107,6 @@ const CheckBox: FC<ICheckBoxProps> = ({
       disabled={!active}
       style={[
         styles.container,
-        {
-          borderBottomColor: checkBox[active ? 'active' : 'passive'].border,
-        },
       ]}
       onPress={() => {
         setIsSelected(!isSelected);
@@ -134,7 +131,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: TOKENS.paddings.componentContainerVertical,
     paddingHorizontal: TOKENS.paddings.componentContainerVertical,
-    borderBottomWidth: TOKENS.borders.radioButton,
   },
   iconContainer: {
     borderWidth: 2,
