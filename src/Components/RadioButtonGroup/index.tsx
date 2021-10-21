@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, Fragment, useEffect, useState } from 'react';
 import { FlatList, FlatListProps, ListRenderItemInfo, View } from 'react-native';
-import { Seperator, useThemeContext } from 'react-native-ccl';
+import { Button, Seperator, useThemeContext } from 'react-native-ccl';
 import { RadioButton } from '..';
 
 export interface IRadioButtonGroupProps<ItemT> {
@@ -25,6 +25,11 @@ export interface IRadioButtonGroupProps<ItemT> {
    * callback if you want render custom item
    */
   renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
+
+  /**
+   * 
+   */
+  onSubmit?: (selectedList: ItemT[],/* data: ItemT[], selectedIndexes: number[]*/) => void
 }
 
 export type IRadioButtonGroupTypes = IRadioButtonGroupProps<any> &
@@ -34,6 +39,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   data,
   onSelect,
   renderItem,
+  onSubmit = () => { }
 }) => {
   const [theme] = useThemeContext();
   const { radioButtonGroup } = theme.colors;
@@ -42,17 +48,16 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   const onButtonSelect = (index: number) => {
     const tData = nData.map((v, i) => ({ ...v, selected: i === index }));
     setNData(tData);
-    const sData = tData.filter(item => item.selected);
     if (typeof onSelect === 'function') {
-      onSelect(sData[0], index);
+      onSelect(tData[index], index);
     } else {
       console.error("'onSelect' is undefined");
     }
   };
 
-  // useEffect(() => {
-  //   setNData(data);
-  // }, [data]);
+  useEffect(() => {
+    setNData(data.map((v: any) => ({ ...v, selected: v.selected || false })));
+  }, [data]);
 
   /**
    * warning useeffect
@@ -102,12 +107,29 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   };
 
   return (
-    <FlatList
-      keyExtractor={(_, index: number) => index.toString()}
-      data={nData}
-      renderItem={renderItem || customRenderItem}
-      ItemSeparatorComponent={renderSeperator}
-    />
+    <Fragment>
+      <FlatList
+        keyExtractor={(_, index: number) => index.toString()}
+        data={nData}
+        renderItem={renderItem || customRenderItem}
+        ItemSeparatorComponent={renderSeperator}
+      />
+      <Button wrap="no-wrap" onPress={() => {
+        onSubmit(
+          nData.map((v: any) => ({ ...v })),
+          // nData.map((v: any) => ({ ...v })),
+          // nData.map(
+          //   (v: any, i: number) => {
+          //     if (v.selected) {
+          //       return i
+          //     } else {
+          //       return -1
+          //     }
+          //   }
+          // ).filter((v) => v !== -1)
+        )
+      }} />
+    </Fragment>
   );
 };
 
