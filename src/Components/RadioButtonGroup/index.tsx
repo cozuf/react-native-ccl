@@ -30,6 +30,11 @@ export interface IRadioButtonGroupProps<ItemT> {
    * 
    */
   onSubmit?: (selectedList: ItemT[],/* data: ItemT[], selectedIndexes: number[]*/) => void
+
+  /**
+   * 
+   */
+  submitTitle?: string,
 }
 
 export type IRadioButtonGroupTypes = IRadioButtonGroupProps<any> &
@@ -39,7 +44,8 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   data,
   onSelect,
   renderItem,
-  onSubmit = () => { }
+  onSubmit = () => { },
+  submitTitle = "Tamam"
 }) => {
   const [theme] = useThemeContext();
   const { radioButtonGroup } = theme.colors;
@@ -60,7 +66,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   }, [data]);
 
   /**
-   * warning useeffect
+   * warning useEffect
    */
   useEffect(() => {
     if (data.some(v => !v.active)) {
@@ -114,21 +120,14 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         renderItem={renderItem || customRenderItem}
         ItemSeparatorComponent={renderSeperator}
       />
-      <Button wrap="no-wrap" onPress={() => {
-        onSubmit(
-          nData.map((v: any) => ({ ...v })),
-          // nData.map((v: any) => ({ ...v })),
-          // nData.map(
-          //   (v: any, i: number) => {
-          //     if (v.selected) {
-          //       return i
-          //     } else {
-          //       return -1
-          //     }
-          //   }
-          // ).filter((v) => v !== -1)
-        )
-      }} />
+      <Button
+        wrap="no-wrap"
+        title={submitTitle}
+        onPress={() => {
+          onSubmit(
+            nData.map((v: any) => ({ ...v })),
+          )
+        }} />
     </Fragment>
   );
 };
