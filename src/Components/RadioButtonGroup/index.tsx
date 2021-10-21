@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import { FlatList, FlatListProps, ListRenderItemInfo } from 'react-native';
+import { FlatList, FlatListProps, ListRenderItemInfo, View } from 'react-native';
+import { Seperator, useThemeContext } from 'react-native-ccl';
 import { RadioButton } from '..';
 
 export interface IRadioButtonGroupProps<ItemT> {
@@ -34,6 +35,8 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   onSelect,
   renderItem,
 }) => {
+  const [theme] = useThemeContext();
+  const { radioButtonGroup } = theme.colors;
   const [nData, setNData] = useState(data);
 
   const onButtonSelect = (index: number) => {
@@ -65,6 +68,14 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     }
   });
 
+  const renderSeperator = (): JSX.Element => {
+    return (
+      <View style={{ alignItems: "center", paddingVertical: 4, }}>
+        <Seperator.Vertical width={"96%"} height={1} color={radioButtonGroup.active.seperator} />
+      </View>
+    )
+  }
+
   const customRenderItem = (
     info: ListRenderItemInfo<Required<any>>,
   ): React.ReactElement | null => {
@@ -95,10 +106,11 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
       keyExtractor={(_, index: number) => index.toString()}
       data={nData}
       renderItem={renderItem || customRenderItem}
+      ItemSeparatorComponent={renderSeperator}
     />
   );
 };
 
 export default RadioButtonGroup;
 
-// TODO: onSubnit eklenecek
+// TODO: onSubmit eklenecek

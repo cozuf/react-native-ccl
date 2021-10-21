@@ -65,7 +65,6 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   });
 
   const renderSeperator = (): JSX.Element => {
-    console.error(checkBoxGroup.active.seperator)
     return (
       <View style={{ alignItems: "center", paddingVertical: 4, }}>
         <Seperator.Vertical width={"96%"} height={1} color={checkBoxGroup.active.seperator} />

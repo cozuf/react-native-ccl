@@ -101,9 +101,6 @@ const RadioButton: FC<IRadionButtonProps> = ({
       key={value}
       style={[
         styles.container,
-        {
-          borderBottomColor: radioButton[active ? 'active' : 'passive'].border,
-        },
       ]}
       onPress={() => {
         setIsSelected(!isSelected);
@@ -128,8 +125,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: TOKENS.paddings.componentContainerVertical,
     paddingHorizontal: TOKENS.paddings.componentContainerVertical,
-    borderBottomWidth: TOKENS.borders.radioButton,
   },
 });
-
-// TODO: alttaki border'ı kaldır

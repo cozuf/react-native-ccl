@@ -160,9 +160,11 @@ interface RadioButtonColorScheme {
 interface RadioButtonGroupColorScheme {
   active: {
     background: ColorValue
+    seperator: ColorValue
   }
   passive: {
     background: ColorValue
+    seperator: ColorValue
   }
 }
 

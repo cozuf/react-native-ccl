@@ -177,9 +177,11 @@ const radioButton: RadioButtonColorScheme = {
 const radioButtonGroup: RadioButtonGroupColorScheme = {
   active: {
     background: BLACK,
+    seperator: GREY_80
   },
   passive: {
     background: BLACK_PALE,
+    seperator: GREY_80_PALE
   },
 };
 
