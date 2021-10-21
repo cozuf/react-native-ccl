@@ -131,3 +131,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: TOKENS.borders.radioButton,
   },
 });
+
+// TODO: alttaki border'ı kaldır

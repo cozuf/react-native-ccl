@@ -133,3 +133,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
+
+// TODO: Page gösterim olamaz
+// TODO: BottomSheet gösterim yap

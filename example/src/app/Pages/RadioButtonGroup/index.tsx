@@ -1,5 +1,5 @@
 import React from 'react';
-import {PageContainer, RadioButtonGroup} from 'react-native-ccl';
+import { PageContainer, RadioButtonGroup } from 'react-native-ccl';
 
 const DATA = [
   {
@@ -35,7 +35,7 @@ const RadioButtonGroupPage = () => {
       <RadioButtonGroup
         data={DATA}
         onSelect={(item, index) => {
-          console.log({item, index});
+          console.log({ item, index });
         }}
       />
     </PageContainer>
@@ -43,3 +43,5 @@ const RadioButtonGroupPage = () => {
 };
 
 export default RadioButtonGroupPage;
+
+// TODO: Araya border koy

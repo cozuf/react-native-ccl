@@ -16,3 +16,5 @@ const CheckBoxPage = () => {
 };
 
 export default CheckBoxPage;
+
+// TODO: Alttaki border'ı kaldır

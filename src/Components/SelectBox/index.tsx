@@ -1,6 +1,3 @@
-// TODO:3 tür yapılır "MODAL" | "BOTTOMSHEET" | "PAGE"
-// TODO: Searchable olabilir Searchable ise BottomSheet olamaz
-
 import React, { FC, useState } from 'react';
 import {
   FlatListProps,
@@ -298,3 +295,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
+
+// TODO:3 tür yapılır "MODAL" | "BOTTOMSHEET" | "PAGE"
+// TODO: Searchable olabilir Searchable ise BottomSheet olamaz
+// TODO: onaylamayı onSubmit'e koy
