@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
  // Tema Context √
  // TODO: Style Context
  // TODO: Language Context
+ // TODO: SelectBox renderItem ekle
 /**
  * theme.colors|styles|fonts
  * setTheme({colors,styles,fonts})
