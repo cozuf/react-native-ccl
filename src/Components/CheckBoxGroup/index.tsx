@@ -66,8 +66,8 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   renderItem,
   onSubmit = () => { },
   submitTitle = "Tamam",
-  minChoice = 1,
-  maxChoice = 3,
+  minChoice = 0,
+  maxChoice = 0,
   selectAllTitle = "Tümünü Seç",
   unSelectAllTitle = "Tümünü Kaldır"
 }) => {
