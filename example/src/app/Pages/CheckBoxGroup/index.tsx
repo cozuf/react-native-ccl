@@ -35,6 +35,9 @@ const CheckBoxGroupPage = () => {
         onSelect={(item, index) => {
           console.log({ item, index });
         }}
+        onSubmit={(data: any[]) => {
+          console.log({ data })
+        }}
       />
     </PageContainer>
   );

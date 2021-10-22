@@ -1,4 +1,4 @@
-import React, { FC, isValidElement, useState } from 'react';
+import React, { FC, isValidElement, memo, useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Icon, IIconProps, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
@@ -50,6 +50,8 @@ const CheckBox: FC<ICheckBoxProps> = ({
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   const [theme] = useThemeContext();
   const { checkBox } = theme.colors;
+
+  useEffect(() => { setIsSelected(selected) }, [selected])
 
   const renderIcon = (): React.ReactElement | null => {
     if (iconSet) {
@@ -123,7 +125,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
   );
 };
 
-export default CheckBox;
+export default memo(CheckBox);
 
 const styles = StyleSheet.create({
   container: {
