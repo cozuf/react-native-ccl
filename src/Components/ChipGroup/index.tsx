@@ -86,7 +86,3 @@ const ChipGroup: FC<IChipGroupTypes> = ({
 };
 
 export default ChipGroup;
-
-// TODO: Buraya tekrar bak
-// TODO: Style ile ilgili margin padding
-// TODO: maxchoice minchoice ekle

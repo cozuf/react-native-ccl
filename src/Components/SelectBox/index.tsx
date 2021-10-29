@@ -295,4 +295,3 @@ const styles = StyleSheet.create({
 
 // TODO:3 tür yapılır "MODAL" | "BOTTOMSHEET" | "PAGE"
 // TODO: Searchable olabilir Searchable ise BottomSheet olamaz
-// TODO: onaylamayı onSubmit'e koy

@@ -45,4 +45,3 @@ const CheckBoxGroupPage = () => {
 
 export default CheckBoxGroupPage;
 
-// TODO: araya line koy

@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
 // TODO: Tüm comoponentlerde eksikleri tamamla (containerStyle vs.)
 // TODO: Tüm padding, borderWidth, borderRadius belirle color scheme gibi
-// TODO: CheckBoxGroup ve RadioButtonGroup alt borderları kaldır seperator olarak ver
 // TODO: Örnek Sayfalar da varyantları ekle
 // TODO: Düzenlemsi gereken componentleri unutma
 // TODO: Yapılacak componentler var (bottomsheet vs.)

@@ -320,4 +320,3 @@ const styles = StyleSheet.create({
 
 //  TODO: Warning Button oluştur snackbar ile
 //  TODO: Tip belirle email password vs
-//  TODO: Loading den sonra geliştirlmeye devam edilecek devam edilecek

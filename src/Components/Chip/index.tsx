@@ -33,7 +33,7 @@ const Chip: FC<IChipProps> = ({
   selected = false,
   title = `Chip ${selected}`,
   active = true,
-  onSelect = () => {},
+  onSelect = () => { },
   containerStyle = {},
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
@@ -56,5 +56,3 @@ const Chip: FC<IChipProps> = ({
 };
 
 export default Chip;
-
-// TODO: Tekrar bi bak belki butondan türetmezsin

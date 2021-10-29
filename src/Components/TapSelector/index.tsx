@@ -46,5 +46,3 @@ const TapSelector: FC<ITapSelectorTypes> = ({ data, onTap, ...props }) => {
 };
 
 export default TapSelector;
-
-// TODO: Tekrar bak belki butondan türetmezsin

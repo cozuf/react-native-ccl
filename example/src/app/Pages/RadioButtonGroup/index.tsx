@@ -47,4 +47,3 @@ const RadioButtonGroupPage = () => {
 
 export default RadioButtonGroupPage;
 
-// TODO: Araya border koy
