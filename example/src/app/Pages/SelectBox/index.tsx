@@ -56,7 +56,7 @@ const SELECT_TYPE_DATA = [
 
 const SelectBoxPage = () => {
   const navigation = useNavigation();
-  const [areas, setAreas] = useState(DATA);
+  const [areas, setAreas] = useState<any[]>(DATA);
   const [selectTypeIndex, setSelectTypeIndex] = useState<number>(0);
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
 
@@ -75,19 +75,8 @@ const SelectBoxPage = () => {
         title="Bölge"
         searchable={true}
         navigation={navigation}
-        onSubmit={selectedData => {
-          let nAreas = areas;
-          for (let i = 0; i < nAreas.length; i++) {
-            const nArea = nAreas[i];
-            for (let j = 0; j < selectedData.length; j++) {
-              const selected = selectedData[j];
-              if (nArea.value === selected.value) {
-                nArea.selected = true;
-                break;
-              }
-            }
-          }
-          setAreas(nAreas);
+        onSubmit={data => {
+          setAreas(data as any[]);
         }}
         minChoice={2}
         maxChoice={4}

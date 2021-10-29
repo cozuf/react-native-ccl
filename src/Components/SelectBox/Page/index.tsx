@@ -51,7 +51,7 @@ export type PageParamsList<ItemT> = {
      */
     data: ReadonlyArray<ItemT>;
 
-    setData: (data: ItemT[]) => void;
+    // setData: (data: ItemT[]) => void;
     /**
      * invokes when click the option
      */
@@ -93,7 +93,7 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
     title = 'Başlık',
     searchable,
     data,
-    setData = () => { },
+    // setData = () => { },
     searchText,
     selectionType = 'SingleSelect',
     onSearch = () => { },
@@ -103,7 +103,9 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
     maxChoice = 0,
     minChoice = 0
   } = route.params;
+
   console.log({ data })
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title,
@@ -129,10 +131,14 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
           if (typeof onSelect === 'function') {
             onSelect(navigation, item, index);
           }
-          const nData = data.map((v: any, i: number) => ({ ...v, selected: index === i }));
-          setData(nData);
         }}
         renderItem={renderItem || undefined}
+        onSubmit={(data: any[]) => {
+          if (typeof onSubmit === "function") {
+            onSubmit(data)
+          }
+          navigation.goBack()
+        }}
       />
     );
   };
@@ -145,32 +151,16 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
           if (typeof onSelect === 'function') {
             onSelect(navigation, item, index);
           }
-          const nData = data.map((v: any, i: number) => ({
-            ...v,
-            selected: index === i ? !v.selected : v.selected,
-          }));
-          if (maxChoice !== 0) {
-            const selectedData = nData.filter((v: any) => v.selected);
-            console.log({ maxChoice, selectedData: selectedData.length, case: maxChoice === selectedData.length })
-            if (selectedData.length === maxChoice) {
-              const mData = nData.map((v: any) => ({
-                ...v,
-                active: v.selected
-              }));
-              console.log({ mData })
-              setData(mData)
-            } else {
-              const mData = nData.map((v: any) => ({
-                ...v,
-                active: true
-              }));
-              setData(mData)
-            }
-          } else {
-            setData(nData);
-          }
         }}
         renderItem={renderItem || undefined}
+        maxChoice={maxChoice}
+        minChoice={minChoice}
+        onSubmit={(data: any[]) => {
+          if (typeof onSubmit === "function") {
+            onSubmit(data)
+          }
+          navigation.goBack()
+        }}
       />
     );
   };
@@ -184,41 +174,11 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
     }
   };
 
-  const isButtonDisabled = (): boolean => {
-    if (minChoice !== 0 || maxChoice !== 0) {
-      const selectedCount = data.filter((v: any) => v.selected).length;
-      console.log({ selectedCount })
-      if (selectedCount < minChoice) {
-        return true
-      } else {
-        return false
-      }
-    } else {
-      return false
-    }
-  }
-
-  const renderSubmit = () => {
-    return (
-      <Button
-        title={'Tamam'}
-        disabled={isButtonDisabled()}
-        onPress={() => {
-          if (typeof onSubmit === 'function') {
-            onSubmit(data.filter((v: any) => v.selected));
-          }
-          navigation.goBack();
-        }}
-      />
-    );
-  };
-
   return (
     <PageContainer type="Default">
       {searchable ? renderSearch() : null}
       {searchable ? <View style={{ height: 8 }} /> : null}
       {renderChildren()}
-      {renderSubmit()}
     </PageContainer>
   );
 };

@@ -75,7 +75,7 @@ export interface ISelectBoxProps<ItemT> {
   /**
    * invokes when selection complete and press submit button
    */
-  onSubmit?: (selectedData: ReadonlyArray<ItemT>) => void;
+  onSubmit?: (data: ReadonlyArray<ItemT>) => void;
 
   /**
    * callback if you want render custom item
@@ -116,7 +116,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   searchText,
   // onSearch,
   data,
-  onSelect,
+  // onSelect,
   onSubmit,
   renderItem,
   navigation,
@@ -146,17 +146,15 @@ const SelectBox: FC<ISelectBoxTypes> = ({
             );
             setDataList(nDataList);
           } else {
+            console.log({ data })
             setDataList(data as any[]);
-          }
-          if (typeof setValue === 'function') {
-            setValue(text);
           }
         }}
         data={dataList}
-        setData={setDataList}
         selectionType={selectionType}
         minChoice={minChoice}
         maxChoice={maxChoice}
+        onSubmit={(data: any[]) => { setDataList(data) }}
       />
     );
   };
@@ -169,71 +167,65 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     return null
   };
 
+  const openModal = () => {
+    setVisible(true);
+  }
+
+  const openPage = () => {
+    if (!navigation) {
+      console.error('Navigation is undefined');
+      return;
+    }
+    if (!page) {
+      console.error('page prop is undefined');
+      return;
+    }
+
+    navigation.navigate(page, {
+      title,
+      data: dataList,
+      setData: setDataList,
+      selectionType,
+      searchable,
+      searchText,
+      onSearch: (
+        _navigation: NavigationProp<ParamListBase>,
+        text: string,
+      ) => {
+        setValue(text);
+        let nData;
+        if (text.length > 0) {
+          const nDataList = data.filter(v =>
+            v.title?.toLowerCase().includes(text.toLowerCase()),
+          );
+          setDataList(nDataList);
+          nData = nDataList;
+        } else {
+          setDataList(data as any[]);
+          nData = data;
+        }
+        console.log({ _navigation, text, nData })
+        _navigation.setParams({ searchText: text, data: nData });
+      },
+      onSubmit: (data: any[]) => {
+        setDataList(data)
+        if (typeof onSubmit === 'function') {
+          onSubmit(data);
+        }
+      },
+      renderItem,
+      minChoice: minChoice,
+      maxChoice: maxChoice
+    });
+  }
+
   const onPress = () => {
     switch (displayType) {
       case 'Modal':
-        setVisible(true);
+        openModal();
         break;
       case 'Page':
-        if (!navigation) {
-          console.error('Navigation is undefined');
-          return;
-        }
-        if (!page) {
-          console.error('page prop is undefined');
-          return;
-        }
-
-        navigation.navigate(page, {
-          title,
-          data: dataList,
-          setData: setDataList,
-          selectionType,
-          searchable,
-          searchText,
-          onSearch: (
-            _navigation: NavigationProp<ParamListBase>,
-            text: string,
-          ) => {
-            setValue(text);
-            if (text.length > 0) {
-              const nDataList = data.filter(v =>
-                v.title?.toLowerCase().includes(text.toLowerCase()),
-              );
-              setDataList(nDataList);
-            } else {
-              setDataList(data as any[]);
-            }
-            if (typeof setValue === 'function') {
-              setValue(text);
-            }
-            _navigation.setParams({ searchText: text });
-          },
-          onSelect: (
-            _navigation: NavigationProp<ParamListBase>,
-            item: any,
-            index: number,
-          ) => {
-            if (typeof onSelect === 'function') {
-              onSelect(item, index);
-            }
-            const nData = dataList.map((v, i) => ({
-              ...v,
-              selected: index === i ? !v.selected : v.selected,
-            }));
-            setDataList(nData);
-            _navigation.setParams({ data: nData });
-          },
-          onSubmit: () => {
-            if (typeof onSubmit === 'function') {
-              onSubmit(dataList.filter(v => v.selected));
-            }
-          },
-          renderItem,
-          minChoice: minChoice,
-          maxChoice: maxChoice
-        });
-
+        openPage();
         break;
     }
   };

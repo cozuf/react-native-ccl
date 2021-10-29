@@ -41,7 +41,7 @@ type SelectBoxModalTypes<ItemT> = {
    */
   data: ReadonlyArray<ItemT>;
 
-  setData: (data: ItemT[]) => void;
+  // setData: (data: ItemT[]) => void;
 
   /**
    * invokes when click the option
@@ -51,7 +51,7 @@ type SelectBoxModalTypes<ItemT> = {
   /**
    * invokes when selection complete and press submit button
    */
-  onSubmit?: (selectedData: ReadonlyArray<ItemT>) => void;
+  onSubmit?: (selectedData: ItemT[]) => void;
 
   /**
    * callback if you want render custom item
@@ -74,7 +74,6 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
   setVisible = () => { },
   searchable,
   data,
-  setData = () => { },
   value,
   selectionType = 'SingleSelect',
   onSearch = () => { },
@@ -96,10 +95,14 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
           if (typeof onSelect === 'function') {
             onSelect(item, index);
           }
-          const nData = data.map((v, i) => ({ ...v, selected: index === i }));
-          setData(nData);
         }}
         renderItem={renderItem || undefined}
+        onSubmit={(data: any[]) => {
+          if (typeof onSubmit === "function") {
+            onSubmit(data)
+          }
+          setVisible(false);
+        }}
       />
     );
   };
@@ -112,30 +115,16 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
           if (typeof onSelect === 'function') {
             onSelect(item, index);
           }
-          const nData = data.map((v, i) => ({
-            ...v,
-            selected: index === i ? !v.selected : v.selected,
-          }));
-          if (maxChoice !== 0) {
-            const selectedData = nData.filter((v: any) => v.selected);
-            if (selectedData.length === maxChoice) {
-              const mData = nData.map((v: any) => ({
-                ...v,
-                active: v.selected
-              }));
-              setData(mData)
-            } else {
-              const mData = nData.map((v: any) => ({
-                ...v,
-                active: true
-              }));
-              setData(mData)
-            }
-          } else {
-            setData(nData);
-          }
         }}
         renderItem={renderItem || undefined}
+        minChoice={minChoice}
+        maxChoice={maxChoice}
+        onSubmit={(data: any[]) => {
+          if (typeof onSubmit === "function") {
+            onSubmit(data)
+          }
+          setVisible(false);
+        }}
       />
     );
   };
@@ -149,34 +138,6 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
     }
   };
 
-  const isButtonDisabled = (): boolean => {
-    if (minChoice !== 0 || maxChoice !== 0) {
-      const selectedCount = data.filter((v: any) => v.selected).length;
-      if (selectedCount < minChoice) {
-        return true
-      } else {
-        return false
-      }
-    } else {
-      return false
-    }
-  }
-
-  const renderSubmit = () => {
-    return (
-      <Button
-        title={'Tamam'}
-        disabled={isButtonDisabled()}
-        onPress={() => {
-          if (typeof onSubmit === 'function') {
-            onSubmit(data.filter(v => v.selected));
-          }
-          setVisible(false);
-        }}
-      />
-    );
-  };
-
   return (
     <Modal.Default
       visible={visible}
@@ -187,7 +148,6 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
       {searchable ? renderSearch() : null}
       {searchable ? <View style={{ height: 8 }} /> : null}
       {renderChildren()}
-      {renderSubmit()}
     </Modal.Default>
   );
 };
