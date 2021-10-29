@@ -1,7 +1,7 @@
 import React, { FC, Fragment, memo, useEffect, useState } from 'react';
 import { FlatList, FlatListProps, ListRenderItemInfo, Omit, View } from 'react-native';
-import { Button, Seperator, useThemeContext } from 'react-native-ccl';
-import { CheckBox } from '..';
+import { CheckBox, Button, Seperator } from '..';
+import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface ICheckBoxGroupProps<ItemT> {
   /**
