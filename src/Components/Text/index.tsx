@@ -95,7 +95,8 @@ const Regular: FC<ITextTypes> = ({
         },
         style,
       ]}
-      {...props}>
+      {...props}
+    >
       {children}
     </NativeText>
   );

@@ -1,4 +1,4 @@
-import React, {FC, isValidElement, ReactNode, useState} from 'react';
+import React, { FC, isValidElement, ReactNode, useState } from 'react';
 import {
   PressableProps,
   TouchableOpacityProps,
@@ -13,10 +13,10 @@ import {
   Omit,
   GestureResponderEvent,
 } from 'react-native';
-import {Icon, IIconProps, Text} from '..';
-import {FONTS} from '../../Assets';
-import {useThemeContext} from '../../Context/ThemeContext';
-import {TOKENS} from '../../Theme';
+import { Icon, IIconProps, Text } from '..';
+import { FONTS } from '../../Assets';
+import { useThemeContext } from '../../Context/ThemeContext';
+import { TOKENS } from '../../Theme';
 
 export interface IButtonProps {
   /**
@@ -95,7 +95,7 @@ const Button: FC<IButtonTypes> = ({
 }) => {
   const [pressed, setPressed] = useState<boolean>(false);
   const [theme] = useThemeContext();
-  const {button} = theme.colors;
+  const { button } = theme.colors;
 
   const backgroundColor = (): ColorValue => {
     const BUTTON_FILLED_BACKGROUND =
@@ -213,7 +213,7 @@ const Button: FC<IButtonTypes> = ({
 
   const renderTitle = () => {
     return (
-      <Text style={[{color: titleColor()}, styles.title, titleStyle]}>
+      <Text style={[{ color: titleColor() }, styles.title, titleStyle]}>
         {title}
       </Text>
     );
@@ -252,7 +252,8 @@ const Button: FC<IButtonTypes> = ({
           wrap !== 'free' ? styles.container : {},
           containerStyle,
         ]}
-        {...(props as TouchableOpacityProps)}>
+        {...(props as TouchableOpacityProps)}
+      >
         {renderChildren()}
       </TouchableOpacity>
     );
@@ -286,7 +287,8 @@ const Button: FC<IButtonTypes> = ({
           wrap !== 'free' ? styles.container : {},
           containerStyle,
         ]}
-        {...(props as PressableProps)}>
+        {...(props as PressableProps)}
+      >
         {renderChildren()}
       </Pressable>
     );

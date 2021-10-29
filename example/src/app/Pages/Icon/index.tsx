@@ -1,11 +1,6 @@
-import React, {useState} from 'react';
-import {FlatList, View} from 'react-native';
-import {
-  PageContainer,
-  Icon,
-  IIconProps,
-  TapSelector,
-} from 'react-native-ccl';
+import React, { useState } from 'react';
+import { FlatList, View } from 'react-native';
+import { PageContainer, Icon, IIconProps, TapSelector } from 'react-native-ccl';
 
 const ACTIVE_DATA = [
   {
@@ -108,7 +103,7 @@ const IconPage = () => {
       <FlatList
         keyExtractor={(_, index) => index.toString()}
         data={ICONS}
-        renderItem={({item, index}) => {
+        renderItem={({ item, index }) => {
           return (
             <Icon
               key={index.toString()}
@@ -122,10 +117,10 @@ const IconPage = () => {
         }}
       />
 
-      <View style={{paddingVertical: 16}}>
+      <View style={{ paddingVertical: 16 }}>
         <TapSelector
           data={ACTIVE_DATA}
-          onTap={(sItem, sIndex) => {
+          onTap={() => {
             setActive(!active);
           }}
         />

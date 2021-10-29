@@ -9,20 +9,23 @@ const BadgePage = () => {
   const [valueIndex, setValueIndex] = useState<number>(0);
   return (
     <PageContainer type="Default">
-      <View style={{ alignItems: "center" }}>
-        <Badge size={SIZES[sizeIndex].title as "small" | "medium" | "large"} value={VALUES[valueIndex].title} />
+      <View style={{ alignItems: 'center' }}>
+        <Badge
+          size={SIZES[sizeIndex].title as 'small' | 'medium' | 'large'}
+          value={VALUES[valueIndex].title}
+        />
       </View>
       <View style={{ paddingVertical: 16 }}>
         <TapSelector
           containerStyle={{ marginBottom: 8 }}
           data={SIZES}
-          onTap={(item, index) => {
+          onTap={(_, index) => {
             setSizeIndex(index);
           }}
         />
         <TapSelector
           data={VALUES}
-          onTap={(item, index) => {
+          onTap={(_, index) => {
             setValueIndex(index);
           }}
         />

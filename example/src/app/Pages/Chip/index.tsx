@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Chip, PageContainer} from 'react-native-ccl';
+import React, { useState } from 'react';
+import { Chip, PageContainer } from 'react-native-ccl';
 
 const ChipPage = () => {
   const [selected, setSelected] = useState<boolean>(false);
@@ -7,6 +7,7 @@ const ChipPage = () => {
     <PageContainer type="Default">
       <Chip
         selected={selected}
+        title={`Chip ${selected}`}
         active={true}
         onSelect={() => {
           setSelected(!selected);

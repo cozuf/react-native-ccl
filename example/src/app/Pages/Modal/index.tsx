@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Modal,
@@ -18,14 +18,16 @@ const ModalPage = () => {
     return (
       <Modal.Default
         visible={visibleDefault}
-        containerStyle={{flex: 1}}
-        onTouchOutSide={v => {
+        containerStyle={{ flex: 1 }}
+        onTouchOutSide={(v) => {
           setVisibleDefault(v);
-        }}>
+        }}
+      >
         <Text
           onPress={() => {
             // setVisible(false);
-          }}>
+          }}
+        >
           Yusuf
         </Text>
       </Modal.Default>
@@ -37,7 +39,7 @@ const ModalPage = () => {
       <Modal.Loading
         type="UIActivityIndicator"
         visible={visibleLoading}
-        containerStyle={{flex: 1}}
+        containerStyle={{ flex: 1 }}
       />
     );
   };
@@ -46,7 +48,7 @@ const ModalPage = () => {
     return (
       <Modal.Warning
         visible={visibleWarning}
-        containerStyle={{flex: 1}}
+        containerStyle={{ flex: 1 }}
         onButtonPress={() => {
           setVisibleWarning(false);
         }}
@@ -58,7 +60,7 @@ const ModalPage = () => {
     return (
       <Modal.Fault
         visible={visibleFault}
-        containerStyle={{flex: 1}}
+        containerStyle={{ flex: 1 }}
         onButtonPress={() => {
           setVisibleFault(false);
         }}
@@ -70,7 +72,7 @@ const ModalPage = () => {
     return (
       <Modal.YesNo
         visible={visibleYesNo}
-        containerStyle={{flex: 1}}
+        containerStyle={{ flex: 1 }}
         onYesButtonPress={() => {
           setVisibleYesNo(false);
         }}

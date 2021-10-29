@@ -1,11 +1,6 @@
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {
-  PageContainer,
-  Seperator,
-  TapSelector,
-  Text,
-} from 'react-native-ccl';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { PageContainer, Seperator, TapSelector, Text } from 'react-native-ccl';
 
 const SIZES = [
   {
@@ -110,7 +105,8 @@ const TextPage = () => {
               | 'Medium'
               | 'SemiBold'
               | 'Bold'
-          }>
+          }
+        >
           {WEIGHTS[weightIndex].title}
         </Text>
         {/* <Text
@@ -146,7 +142,7 @@ const TextPage = () => {
           {'Bold'}
         </Text> */}
       </View>
-      <View style={{paddingVertical: 16}}>
+      <View style={{ paddingVertical: 16 }}>
         <TapSelector
           data={ACTIVE_DATA}
           onTap={(_, index) => {

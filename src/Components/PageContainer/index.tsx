@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Omit,
   ScrollView,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
 import { useThemeContext } from '../../Context/ThemeContext';
 import { TOKENS } from '../../Theme';
@@ -53,7 +53,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
             { backgroundColor: pageContainer.background },
             style,
           ]}
-          {...props}>
+          {...props}
+        >
           {children}
         </SafeAreaView>
       );
@@ -67,7 +68,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
             { backgroundColor: pageContainer.background },
             contentContainerStyle,
           ]}
-          {...props}>
+          {...props}
+        >
           {children}
         </ScrollView>
       );
@@ -80,7 +82,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
             { backgroundColor: pageContainer.background },
             style,
           ]}
-          {...props}>
+          {...props}
+        >
           {children}
         </View>
       );

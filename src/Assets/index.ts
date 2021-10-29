@@ -7,4 +7,4 @@ const FONTS = {
   bold: 'Quicksand-Bold',
 };
 
-export {FONTS};
+export { FONTS };

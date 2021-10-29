@@ -1,4 +1,4 @@
-import React, {FC, isValidElement, ReactNode, useRef, useState} from 'react';
+import React, { FC, isValidElement, ReactNode, useRef, useState } from 'react';
 import {
   StyleSheet,
   TextStyle,
@@ -13,9 +13,9 @@ import {
   Pressable,
   Omit,
 } from 'react-native';
-import {Button, Icon, IIconProps, Text} from '..';
-import {useThemeContext} from '../../Context/ThemeContext';
-import {TOKENS} from '../../Theme';
+import { Button, Icon, IIconProps, Text } from '..';
+import { useThemeContext } from '../../Context/ThemeContext';
+import { TOKENS } from '../../Theme';
 
 export interface ITextInputProps {
   /**
@@ -128,7 +128,7 @@ const NTextInput: FC<ITextInputTypes> = ({
   ...props
 }) => {
   const [theme] = useThemeContext();
-  const {textInput} = theme.colors;
+  const { textInput } = theme.colors;
   const NativeTextInputRef = useRef<TextInput | null>(null);
   const [isFocused, setIsFocused] = useState<boolean>();
 
@@ -230,19 +230,20 @@ const NTextInput: FC<ITextInputTypes> = ({
       ]}
       onPress={() => {
         changeFocus();
-      }}>
+      }}
+    >
       {title ? (
-        <Text style={[titleStyle, {color: titleTextColor()}]}>
+        <Text style={[titleStyle, { color: titleTextColor() }]}>
           {isRequired ? `* ${title}` : title}
         </Text>
       ) : null}
       <View style={[styles.inputContainer]}>
         {icon ? renderIcon() : null}
-        {icon ? <View style={{width: 8}} /> : null}
+        {icon ? <View style={{ width: 8 }} /> : null}
         {
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <TextInput
-              ref={ref => {
+              ref={(ref) => {
                 NativeTextInputRef.current = ref;
               }}
               editable={active}
@@ -267,7 +268,7 @@ const NTextInput: FC<ITextInputTypes> = ({
                     },
                   }),
                 },
-                {color: inputTextColor()},
+                { color: inputTextColor() },
               ]}
               secureTextEntry={type === 'Password'}
               onFocus={(e: NativeSyntheticEvent<TextInputFocusEventData>) => {

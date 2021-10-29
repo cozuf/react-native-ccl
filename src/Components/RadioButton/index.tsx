@@ -99,15 +99,14 @@ const RadioButton: FC<IRadionButtonProps> = ({
     <TouchableOpacity
       disabled={!active}
       key={value}
-      style={[
-        styles.container,
-      ]}
+      style={[styles.container]}
       onPress={() => {
         setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {
           onSelect(!isSelected);
         }
-      }}>
+      }}
+    >
       {renderIcon()}
       {renderIcon() !== null ? (
         <View style={{ width: TOKENS.paddings.componentContainerVertical }} />

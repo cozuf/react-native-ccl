@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
-import {PageContainer, TapSelector, TextInput} from 'react-native-ccl';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { PageContainer, TapSelector, TextInput } from 'react-native-ccl';
 
 const ACTIVE_DATA = [
   {
@@ -25,7 +25,7 @@ const TextInputPage = () => {
         cleanable={true}
       />
 
-      <View style={{paddingVertical: 16}}>
+      <View style={{ paddingVertical: 16 }}>
         <TapSelector
           data={ACTIVE_DATA}
           onTap={() => {

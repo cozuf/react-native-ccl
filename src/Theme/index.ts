@@ -1,3 +1,3 @@
-import {TOKENS} from './Tokens';
+import { TOKENS } from './Tokens';
 
-export {TOKENS};
+export { TOKENS };

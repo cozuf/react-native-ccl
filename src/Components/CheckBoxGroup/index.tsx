@@ -1,5 +1,11 @@
 import React, { FC, Fragment, memo, useEffect, useState } from 'react';
-import { FlatList, FlatListProps, ListRenderItemInfo, Omit, View } from 'react-native';
+import {
+  FlatList,
+  FlatListProps,
+  ListRenderItemInfo,
+  Omit,
+  View,
+} from 'react-native';
 import { CheckBox, Button, Seperator } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
 
@@ -14,47 +20,47 @@ export interface ICheckBoxGroupProps<ItemT> {
    * {active} to be selectable
    * {selected} to show selected before
    */
-  data: ReadonlyArray<ItemT>
+  data: ReadonlyArray<ItemT>;
 
   /**
    * invokes when click the option
    */
-  onSelect: (item: ItemT, index: number) => void
+  onSelect: (item: ItemT, index: number) => void;
 
   /**
    * callback if you want render custom item
    */
-  renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null
+  renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
 
   /**
-   * 
+   *
    */
-  onSubmit?: (data: ItemT[]) => void
+  onSubmit?: (data: ItemT[]) => void;
 
   /**
-   * 
+   *
    */
-  submitTitle?: string
+  submitTitle?: string;
 
   /**
-   * 
+   *
    */
-  minChoice?: number
+  minChoice?: number;
 
   /**
-   * 
+   *
    */
-  maxChoice?: number
+  maxChoice?: number;
 
   /**
-   * 
+   *
    */
-  selectAllTitle?: string
+  selectAllTitle?: string;
 
   /**
-   * 
+   *
    */
-  unSelectAllTitle?: string
+  unSelectAllTitle?: string;
 }
 
 export type ICheckBoxGroupTypes = ICheckBoxGroupProps<any> &
@@ -64,31 +70,36 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   data,
   onSelect,
   renderItem,
-  onSubmit = () => { },
-  submitTitle = "Tamam",
+  onSubmit = () => {},
+  submitTitle = 'Tamam',
   minChoice = 0,
   maxChoice = 0,
-  selectAllTitle = "Tümünü Seç",
-  unSelectAllTitle = "Tümünü Kaldır"
+  selectAllTitle = 'Tümünü Seç',
+  unSelectAllTitle = 'Tümünü Kaldır',
 }) => {
   const [theme] = useThemeContext();
   const { checkBoxGroup } = theme.colors;
 
-  const [nData, setNData] = useState(data)
+  const [nData, setNData] = useState(data);
 
   useEffect(() => {
     if (maxChoice !== 0) {
       const selectedDataLength = data.filter((v: any) => v.selected).length;
       if (selectedDataLength === maxChoice) {
-        setNData(data.map((v: any) => ({ ...v, active: v.selected })))
+        setNData(data.map((v: any) => ({ ...v, active: v.selected })));
       } else {
-        setNData(data.map((v: any) => ({ ...v, active: true })))
+        setNData(data.map((v: any) => ({ ...v, active: true })));
       }
     } else {
-      setNData(data.map((v: any) => ({ ...v, selected: v.selected || false, active: v.active || true })));
+      setNData(
+        data.map((v: any) => ({
+          ...v,
+          selected: v.selected || false,
+          active: v.active || true,
+        }))
+      );
     }
-  }, [data])
-
+  }, [data]);
 
   const onButtonSelect = (index: number) => {
     const tData = nData.map((v: any, i: number) => ({
@@ -98,20 +109,20 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     if (maxChoice !== 0) {
       const selectedDataLength = tData.filter((v: any) => v.selected).length;
       if (selectedDataLength === maxChoice) {
-        const mData = tData.map((v: any,) => ({
+        const mData = tData.map((v: any) => ({
           ...v,
-          active: v.selected
+          active: v.selected,
         }));
-        setNData(mData)
+        setNData(mData);
       } else {
-        const mData = tData.map((v: any,) => ({
+        const mData = tData.map((v: any) => ({
           ...v,
-          active: true
+          active: true,
         }));
-        setNData(mData)
+        setNData(mData);
       }
     } else {
-      setNData(tData)
+      setNData(tData);
     }
     if (typeof onSelect === 'function') {
       onSelect(nData[index], index);
@@ -124,12 +135,12 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
    * warning useEffect
    */
   useEffect(() => {
-    if (data.some(v => v.active === undefined)) {
+    if (data.some((v) => v.active === undefined)) {
       console.warn("It would be good if items of data contain 'active' key");
     }
-    if (data.some(v => v.active === undefined)) {
+    if (data.some((v) => v.active === undefined)) {
       console.warn(
-        'It would be good to define selected item at the begining, to show them.',
+        'It would be good to define selected item at the begining, to show them.'
       );
     }
   }, []);
@@ -137,22 +148,26 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   const isDisabled = (): boolean => {
     if (minChoice !== 0) {
       const selectedLength = nData.filter((v: any) => v.selected).length;
-      return selectedLength < minChoice
+      return selectedLength < minChoice;
     } else {
       return false;
     }
-  }
+  };
 
   const renderSeperator = (): JSX.Element => {
     return (
-      <View style={{ alignItems: "center", paddingVertical: 4, }}>
-        <Seperator.Vertical width={"96%"} height={1} color={checkBoxGroup.active.seperator} />
+      <View style={{ alignItems: 'center', paddingVertical: 4 }}>
+        <Seperator.Vertical
+          width={'96%'}
+          height={1}
+          color={checkBoxGroup.active.seperator}
+        />
       </View>
-    )
-  }
+    );
+  };
 
   const customRenderItem = (
-    info: ListRenderItemInfo<any>,
+    info: ListRenderItemInfo<any>
   ): React.ReactElement | null => {
     const { item, index } = info;
     return (
@@ -170,23 +185,27 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   return (
     <Fragment>
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Button
-          wrap={"wrap"}
+          wrap={'wrap'}
           title={unSelectAllTitle}
           type="Simplied"
           containerStyle={{ paddingHorizontal: 0 }}
           onPress={() => {
-            setNData(nData.map((v: any) => ({ ...v, selected: false, active: true })))
-          }} />
+            setNData(
+              nData.map((v: any) => ({ ...v, selected: false, active: true }))
+            );
+          }}
+        />
         <Button
-          wrap={"wrap"}
+          wrap={'wrap'}
           title={selectAllTitle}
           type="Simplied"
           containerStyle={{ paddingHorizontal: 0 }}
           onPress={() => {
-            setNData(nData.map((v: any) => ({ ...v, selected: true })))
-          }} />
+            setNData(nData.map((v: any) => ({ ...v, selected: true })));
+          }}
+        />
       </View>
 
       <FlatList
@@ -201,10 +220,9 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         title={submitTitle}
         disabled={isDisabled()}
         onPress={() => {
-          onSubmit(
-            nData.map((v: any) => ({ ...v })),
-          )
-        }} />
+          onSubmit(nData.map((v: any) => ({ ...v })));
+        }}
+      />
     </Fragment>
   );
 };

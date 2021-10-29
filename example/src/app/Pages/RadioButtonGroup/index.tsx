@@ -38,7 +38,7 @@ const RadioButtonGroupPage = () => {
           console.log({ item, index });
         }}
         onSubmit={(data: any[]) => {
-          console.log({ data })
+          console.log({ data });
         }}
       />
     </PageContainer>

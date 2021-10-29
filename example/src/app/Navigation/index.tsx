@@ -8,7 +8,16 @@ import {
 import { PAGES_NAMES } from '../Pages';
 import type { NavigationProp } from '@react-navigation/core';
 import type { ParamListBase } from '@react-navigation/routers';
-import { Button, Switch, useThemeContext, FONTS, dark, light, SelectPage as SelectBoxSelectPage } from 'react-native-ccl';
+import {
+  Button,
+  Switch,
+  useThemeContext,
+  FONTS,
+  dark,
+  light,
+  SelectPage as SelectBoxSelectPage,
+} from 'react-native-ccl';
+
 //#region Pages
 import TextPage from '../Pages/Text';
 import MainPage from '../Pages/MainPage';
@@ -42,7 +51,7 @@ const Router = () => {
 
   const renderHeaderLeft = (
     props: StackHeaderLeftButtonProps,
-    navigation: NavigationProp<ParamListBase>,
+    navigation: NavigationProp<ParamListBase>
   ): React.ReactNode => {
     if (!props.canGoBack) {
       return null;
@@ -94,7 +103,7 @@ const Router = () => {
             <Switch
               title={'Koyu Tema'}
               value={theme.name === 'Dark'}
-              onValueChange={v => {
+              onValueChange={(v) => {
                 if (v) {
                   setTheme({ name: 'Dark', colors: dark });
                 } else {
@@ -107,7 +116,8 @@ const Router = () => {
         },
       })}
       headerMode="screen"
-      initialRouteName={PAGES_NAMES.MainPage}>
+      initialRouteName={PAGES_NAMES.MainPage}
+    >
       <Stack.Screen name={PAGES_NAMES.MainPage} component={MainPage} />
 
       <Stack.Screen name={PAGES_NAMES.TextPage} component={TextPage} />

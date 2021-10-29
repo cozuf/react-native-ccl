@@ -1,5 +1,10 @@
 import React, { FC, Fragment, useEffect, useState } from 'react';
-import { FlatList, FlatListProps, ListRenderItemInfo, View } from 'react-native';
+import {
+  FlatList,
+  FlatListProps,
+  ListRenderItemInfo,
+  View,
+} from 'react-native';
 import { RadioButton, Button, Seperator } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
 
@@ -27,14 +32,16 @@ export interface IRadioButtonGroupProps<ItemT> {
   renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
 
   /**
-   * 
+   *
    */
-  onSubmit?: (selectedList: ItemT[],/* data: ItemT[], selectedIndexes: number[]*/) => void
+  onSubmit?: (
+    selectedList: ItemT[] /* data: ItemT[], selectedIndexes: number[]*/
+  ) => void;
 
   /**
-   * 
+   *
    */
-  submitTitle?: string,
+  submitTitle?: string;
 }
 
 export type IRadioButtonGroupTypes = IRadioButtonGroupProps<any> &
@@ -44,8 +51,8 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   data,
   onSelect,
   renderItem,
-  onSubmit = () => { },
-  submitTitle = "Tamam"
+  onSubmit = () => {},
+  submitTitle = 'Tamam',
 }) => {
   const [theme] = useThemeContext();
   const { radioButtonGroup } = theme.colors;
@@ -69,31 +76,35 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
    * warning useEffect
    */
   useEffect(() => {
-    if (data.some(v => !v.active)) {
+    if (data.some((v) => !v.active)) {
       console.warn("It would be good if items of data contain 'active' key");
     }
-    if (data.some(v => !v.selected)) {
+    if (data.some((v) => !v.selected)) {
       console.warn(
-        'It would be good to define selected item at the begining, to show them.',
+        'It would be good to define selected item at the begining, to show them.'
       );
     }
   });
 
   const renderSeperator = (): JSX.Element => {
     return (
-      <View style={{ alignItems: "center", paddingVertical: 4, }}>
-        <Seperator.Vertical width={"96%"} height={1} color={radioButtonGroup.active.seperator} />
+      <View style={{ alignItems: 'center', paddingVertical: 4 }}>
+        <Seperator.Vertical
+          width={'96%'}
+          height={1}
+          color={radioButtonGroup.active.seperator}
+        />
       </View>
-    )
-  }
+    );
+  };
 
   const customRenderItem = (
-    info: ListRenderItemInfo<Required<any>>,
+    info: ListRenderItemInfo<Required<any>>
   ): React.ReactElement | null => {
     const { item, index } = info;
     if (!item.title || !item.value) {
       console.error(
-        "Items of 'data' property In RadioButtonGroup Component must contain 'title' and 'value' keys",
+        "Items of 'data' property In RadioButtonGroup Component must contain 'title' and 'value' keys"
       );
       return null;
     }
@@ -124,10 +135,9 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         wrap="no-wrap"
         title={submitTitle}
         onPress={() => {
-          onSubmit(
-            nData.map((v: any) => ({ ...v })),
-          )
-        }} />
+          onSubmit(nData.map((v: any) => ({ ...v })));
+        }}
+      />
     </Fragment>
   );
 };

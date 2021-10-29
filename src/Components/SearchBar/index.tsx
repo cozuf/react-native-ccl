@@ -33,7 +33,7 @@ const SearchBar: FC<ISearchBarTypes> = ({
     <TextInput
       title={title}
       value={value}
-      onChangeText={text => {
+      onChangeText={(text) => {
         if (text.length >= minimumCharToInvoke || text.length === 0) {
           onSearch(text);
         }

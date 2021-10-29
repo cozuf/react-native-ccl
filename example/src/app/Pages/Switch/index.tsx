@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {Switch as RNSwitch} from 'react-native';
-import {PageContainer, Switch} from 'react-native-ccl';
+import React, { useState } from 'react';
+import { Switch as RNSwitch } from 'react-native';
+import { PageContainer, Switch } from 'react-native-ccl';
 
 const SwitchPage = () => {
   const [value, setValue] = useState<boolean>(false);

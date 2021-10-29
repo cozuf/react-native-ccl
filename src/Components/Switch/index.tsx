@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import {
   View,
   Switch as NativeSwitch,
@@ -7,8 +7,8 @@ import {
   StyleSheet,
   ViewStyle,
 } from 'react-native';
-import {Text} from '..';
-import {useThemeContext} from '../../Context/ThemeContext';
+import { Text } from '..';
+import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface ISwitchProps {
   active?: boolean;
@@ -44,7 +44,7 @@ const Switch: FC<ISwitchTypes> = ({
   ...props
 }) => {
   const [theme] = useThemeContext();
-  const {switchComponent} = theme.colors;
+  const { switchComponent } = theme.colors;
   return (
     <View
       style={[
@@ -55,8 +55,9 @@ const Switch: FC<ISwitchTypes> = ({
             switchComponent[active ? 'active' : 'passive'].background,
           borderColor: switchComponent[active ? 'active' : 'passive'].border,
         },
-      ]}>
-      <Text active={active} style={{flex: 1}}>
+      ]}
+    >
+      <Text active={active} style={{ flex: 1 }}>
         {title}
       </Text>
       <NativeSwitch

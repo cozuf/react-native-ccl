@@ -93,14 +93,14 @@ export interface ISelectBoxProps<ItemT> {
   page?: string;
 
   /**
-   * 
+   *
    */
-  maxChoice?: number
+  maxChoice?: number;
 
   /**
-   * 
+   *
    */
-  minChoice?: number
+  minChoice?: number;
 }
 
 export type ISelectBoxTypes = ISelectBoxProps<any> &
@@ -122,7 +122,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   navigation,
   page = 'SelectPage',
   maxChoice,
-  minChoice
+  minChoice,
 }) => {
   const [dataList, setDataList] = useState<any[]>(data as any[]);
   const [value, setValue] = useState<string>(searchText || '');
@@ -138,15 +138,15 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         searchable={searchable}
         value={value}
         setValue={setValue}
-        onSearch={text => {
+        onSearch={(text) => {
           setValue(text);
           if (text.length > 0) {
-            const nDataList = data.filter(v =>
-              v.title?.toLowerCase().includes(text.toLowerCase()),
+            const nDataList = data.filter((v) =>
+              v.title?.toLowerCase().includes(text.toLowerCase())
             );
             setDataList(nDataList);
           } else {
-            console.log({ data })
+            console.log({ data });
             setDataList(data as any[]);
           }
         }}
@@ -154,7 +154,9 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         selectionType={selectionType}
         minChoice={minChoice}
         maxChoice={maxChoice}
-        onSubmit={(data: any[]) => { setDataList(data) }}
+        onSubmit={(data: any[]) => {
+          setDataList(data);
+        }}
       />
     );
   };
@@ -164,12 +166,12 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       case 'Modal':
         return renderModal();
     }
-    return null
+    return null;
   };
 
   const openModal = () => {
     setVisible(true);
-  }
+  };
 
   const openPage = () => {
     if (!navigation) {
@@ -188,15 +190,12 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       selectionType,
       searchable,
       searchText,
-      onSearch: (
-        _navigation: NavigationProp<ParamListBase>,
-        text: string,
-      ) => {
+      onSearch: (_navigation: NavigationProp<ParamListBase>, text: string) => {
         setValue(text);
         let nData;
         if (text.length > 0) {
-          const nDataList = data.filter(v =>
-            v.title?.toLowerCase().includes(text.toLowerCase()),
+          const nDataList = data.filter((v) =>
+            v.title?.toLowerCase().includes(text.toLowerCase())
           );
           setDataList(nDataList);
           nData = nDataList;
@@ -204,20 +203,20 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           setDataList(data as any[]);
           nData = data;
         }
-        console.log({ _navigation, text, nData })
+        console.log({ _navigation, text, nData });
         _navigation.setParams({ searchText: text, data: nData });
       },
       onSubmit: (data: any[]) => {
-        setDataList(data)
+        setDataList(data);
         if (typeof onSubmit === 'function') {
           onSubmit(data);
         }
       },
       renderItem,
       minChoice: minChoice,
-      maxChoice: maxChoice
+      maxChoice: maxChoice,
     });
-  }
+  };
 
   const onPress = () => {
     switch (displayType) {
@@ -231,10 +230,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   };
 
   const renderPlaceholder = () => {
-    const selectedData = dataList.filter(v => v.selected);
+    const selectedData = dataList.filter((v) => v.selected);
     if (selectedData.length > 0) {
       let result: string = '';
-      selectedData.map(v => {
+      selectedData.map((v) => {
         result += v.title + ', ';
       });
       return result.substr(0, result.length - 2);
@@ -253,12 +252,14 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           borderColor: selectBox[active ? 'active' : 'passive'].border,
         },
         styles.container,
-      ]}>
+      ]}
+    >
       {
         <Text
           style={{
             color: selectBox[active ? 'active' : 'passive'].title,
-          }}>
+          }}
+        >
           {title}
         </Text>
       }
@@ -267,8 +268,12 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         <Text
           numberOfLines={1}
           style={{
-            color: renderPlaceholder() === placeholder ? selectBox[active ? 'active' : 'passive'].placeholder : selectBox[active ? 'active' : 'passive'].value,
-          }}>
+            color:
+              renderPlaceholder() === placeholder
+                ? selectBox[active ? 'active' : 'passive'].placeholder
+                : selectBox[active ? 'active' : 'passive'].value,
+          }}
+        >
           {renderPlaceholder()}
         </Text>
       }

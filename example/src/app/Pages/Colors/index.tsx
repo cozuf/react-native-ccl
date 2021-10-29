@@ -1,5 +1,5 @@
 import React from 'react';
-import {ColorValue, FlatList, View} from 'react-native';
+import { ColorValue, FlatList, View } from 'react-native';
 
 const ColorsPage = () => {
   const LIMIT: number = 256;
@@ -16,8 +16,8 @@ const ColorsPage = () => {
     <FlatList
       bounces={false}
       data={colorsArray}
-      renderItem={({item}) => {
-        return <View style={{height: 50, backgroundColor: item}} />;
+      renderItem={({ item }) => {
+        return <View style={{ height: 50, backgroundColor: item }} />;
       }}
     />
   );

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
-import {PageContainer, TapSelector, Text} from 'react-native-ccl';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { PageContainer, TapSelector, Text } from 'react-native-ccl';
 
 const DATA = [
-  {title: 'Sade', value: 0},
-  {title: 'Orta', value: 1},
-  {title: 'Şekerli', value: 2},
+  { title: 'Sade', value: 0 },
+  { title: 'Orta', value: 1 },
+  { title: 'Şekerli', value: 2 },
 ];
 
 const TapSelectorPage = () => {
@@ -16,8 +16,9 @@ const TapSelectorPage = () => {
       <Text
         style={{
           textAlign: 'center',
-        }}>{`value = ${DATA[selectedIndex].value}`}</Text>
-      <View style={{paddingTop: 16}}>
+        }}
+      >{`value = ${DATA[selectedIndex].value}`}</Text>
+      <View style={{ paddingTop: 16 }}>
         <TapSelector
           data={DATA}
           onTap={(_, index) => {

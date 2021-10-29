@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {PageContainer, RadioButton} from 'react-native-ccl';
+import React, { useState } from 'react';
+import { PageContainer, RadioButton } from 'react-native-ccl';
 
 const RadioButtonPage = () => {
   const [selected, setSelected] = useState<boolean>(false);
@@ -7,7 +7,7 @@ const RadioButtonPage = () => {
     <PageContainer type="Default">
       <RadioButton
         selected={selected}
-        onSelect={v => {
+        onSelect={(v) => {
           setSelected(v);
         }}
       />

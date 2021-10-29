@@ -8,7 +8,7 @@ export interface ICheckBoxProps {
   /**
    * @default true
    */
-  active: boolean;
+  active?: boolean;
 
   /**
    * @default false
@@ -51,7 +51,9 @@ const CheckBox: FC<ICheckBoxProps> = ({
   const [theme] = useThemeContext();
   const { checkBox } = theme.colors;
 
-  useEffect(() => { setIsSelected(selected) }, [selected])
+  useEffect(() => {
+    setIsSelected(selected);
+  }, [selected]);
 
   const renderIcon = (): React.ReactElement | null => {
     if (iconSet) {
@@ -81,7 +83,8 @@ const CheckBox: FC<ICheckBoxProps> = ({
                 ? checkBox[active ? 'active' : 'passive'].iconBorder
                 : 'transparent',
             },
-          ]}>
+          ]}
+        >
           {isSelected ? (
             <Icon
               family="Feather"
@@ -107,15 +110,14 @@ const CheckBox: FC<ICheckBoxProps> = ({
     <TouchableOpacity
       key={value}
       disabled={!active}
-      style={[
-        styles.container,
-      ]}
+      style={[styles.container]}
       onPress={() => {
         setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {
           onSelect(!isSelected);
         }
-      }}>
+      }}
+    >
       {renderIcon()}
       {renderIcon() !== null ? (
         <View style={{ width: TOKENS.paddings.componentContainerVertical }} />

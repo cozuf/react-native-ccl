@@ -35,7 +35,7 @@ export type PageParamsList<ItemT> = {
      */
     onSearch?: (
       _navigation: NavigationProp<ParamListBase>,
-      text: string,
+      text: string
     ) => void;
 
     /**
@@ -57,7 +57,7 @@ export type PageParamsList<ItemT> = {
     onSelect?: (
       navigation: NavigationProp<ParamListBase>,
       item: ItemT,
-      index: number,
+      index: number
     ) => void;
 
     /**
@@ -71,14 +71,14 @@ export type PageParamsList<ItemT> = {
     renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
 
     /**
-     * 
+     *
      */
-    maxChoice?: number
+    maxChoice?: number;
 
     /**
-     * 
+     *
      */
-    minChoice?: number
+    minChoice?: number;
   };
 };
 
@@ -95,15 +95,15 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
     // setData = () => { },
     searchText,
     selectionType = 'SingleSelect',
-    onSearch = () => { },
-    onSelect = () => { },
-    onSubmit = () => { },
+    onSearch = () => {},
+    onSelect = () => {},
+    onSubmit = () => {},
     renderItem,
     maxChoice = 0,
-    minChoice = 0
+    minChoice = 0,
   } = route.params;
 
-  console.log({ data })
+  console.log({ data });
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -133,10 +133,10 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
         }}
         renderItem={renderItem || undefined}
         onSubmit={(data: any[]) => {
-          if (typeof onSubmit === "function") {
-            onSubmit(data)
+          if (typeof onSubmit === 'function') {
+            onSubmit(data);
           }
-          navigation.goBack()
+          navigation.goBack();
         }}
       />
     );
@@ -155,10 +155,10 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
         maxChoice={maxChoice}
         minChoice={minChoice}
         onSubmit={(data: any[]) => {
-          if (typeof onSubmit === "function") {
-            onSubmit(data)
+          if (typeof onSubmit === 'function') {
+            onSubmit(data);
           }
-          navigation.goBack()
+          navigation.goBack();
         }}
       />
     );

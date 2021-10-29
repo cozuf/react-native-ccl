@@ -1,4 +1,4 @@
-import React, { FC, } from 'react';
+import React, { FC } from 'react';
 import {
   Image as NativeImage,
   ImageProps,
@@ -30,7 +30,9 @@ const Image: FC<IImageTypes> = ({ source, defaultSource, ...props }) => {
   //   }
   // }, []);
 
-  return <NativeImage source={source} defaultSource={defaultSource} {...props} />;
+  return (
+    <NativeImage source={source} defaultSource={defaultSource} {...props} />
+  );
 };
 
 export default Image;

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {PageContainer, SearchBar} from 'react-native-ccl';
+import React, { useState } from 'react';
+import { PageContainer, SearchBar } from 'react-native-ccl';
 
 const SearchBarPage = () => {
   const [searchText, setSearchText] = useState<string>('');

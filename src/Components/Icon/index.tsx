@@ -37,21 +37,21 @@ export interface IIconProps {
    *
    */
   family?:
-  | 'AntDesign'
-  | 'Entypo'
-  | 'EvilIcons'
-  | 'Feather'
-  | 'FontAwesome'
-  | 'FontAwesome5'
-  | 'FontAwesome5Pro'
-  | 'Fontisto'
-  | 'Foundation'
-  | 'Ionicons'
-  | 'MaterialCommunityIcons'
-  | 'MaterialIcons'
-  | 'Octicons'
-  | 'SimpleLineIcons'
-  | 'Zocial';
+    | 'AntDesign'
+    | 'Entypo'
+    | 'EvilIcons'
+    | 'Feather'
+    | 'FontAwesome'
+    | 'FontAwesome5'
+    | 'FontAwesome5Pro'
+    | 'Fontisto'
+    | 'Foundation'
+    | 'Ionicons'
+    | 'MaterialCommunityIcons'
+    | 'MaterialIcons'
+    | 'Octicons'
+    | 'SimpleLineIcons'
+    | 'Zocial';
   /**
    * @see https://oblador.github.io/react-native-vector-icons/
    */

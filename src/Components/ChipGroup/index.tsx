@@ -31,7 +31,7 @@ export interface IChipGroupProps<ItemT> {
   renderItem?: (
     value: ItemT,
     index: number,
-    array: readonly ItemT[],
+    array: readonly ItemT[]
   ) => React.ReactElement | null;
 }
 export type IChipGroupTypes = IChipGroupProps<any> &
@@ -61,7 +61,7 @@ const ChipGroup: FC<IChipGroupTypes> = ({
   };
   const customRenderItem = (
     item: any,
-    index: number,
+    index: number
   ): React.ReactElement | null => {
     return (
       <Fragment key={index.toString()}>

@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import {
   Modal as NativeModal,
   ModalProps,
@@ -9,8 +9,8 @@ import {
   StyleSheet,
   ViewStyle,
 } from 'react-native';
-import {ActivityIndicator, IActivityIndicatorProps, Text} from '..';
-import {useThemeContext} from '../../Context/ThemeContext';
+import { ActivityIndicator, IActivityIndicatorProps, Text } from '..';
+import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface IModalProps {
   visible: boolean;
@@ -34,7 +34,7 @@ const Loading: FC<IModalTypes> = ({
   const ModalRef = useRef<NativeModal | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(visible);
   const [theme] = useThemeContext();
-  const {modal} = theme.colors;
+  const { modal } = theme.colors;
 
   useEffect(() => {
     setIsVisible(visible);
@@ -42,13 +42,14 @@ const Loading: FC<IModalTypes> = ({
 
   return (
     <NativeModal
-      ref={ref => {
+      ref={(ref) => {
         ModalRef.current = ref;
       }}
       animationType="fade"
       visible={isVisible}
       transparent={true}
-      {...props}>
+      {...props}
+    >
       <Pressable
         style={[
           styles.outside,
@@ -56,7 +57,8 @@ const Loading: FC<IModalTypes> = ({
             backgroundColor: modal.outsideBackground,
           },
           outsideStyle,
-        ]}>
+        ]}
+      >
         <Pressable
           style={[
             styles.container,
@@ -65,9 +67,10 @@ const Loading: FC<IModalTypes> = ({
               shadowColor: modal.shadow,
             },
             containerStyle,
-          ]}>
+          ]}
+        >
           <ActivityIndicator type={type} size={40} />
-          <Text size="XL" weigth="Medium" style={{textAlign: 'center'}}>
+          <Text size="XL" weigth="Medium" style={{ textAlign: 'center' }}>
             {message}
           </Text>
         </Pressable>

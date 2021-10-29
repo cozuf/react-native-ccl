@@ -33,8 +33,8 @@ const Chip: FC<IChipProps> = ({
   selected = false,
   title = `Chip ${selected}`,
   active = true,
-  onSelect = () => { },
-  containerStyle = {}
+  onSelect = () => {},
+  containerStyle = {},
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   return (

@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {Dimensions, Image, View} from 'react-native';
-import {PageContainer, Text} from 'react-native-ccl';
+import React, { useState } from 'react';
+import { Dimensions, Image, View } from 'react-native';
+import { PageContainer, Text } from 'react-native-ccl';
 
 const ImagePage = () => {
   const [_loaded, _setLoaded] = useState<number>(0);
@@ -18,12 +18,13 @@ const ImagePage = () => {
           width: Dimensions.get('window').width - 32,
         }}
         source={{
-          uri: 'https://images.wallpapersden.com/image/download/4k-goku-ultra-2020_bGloaG2UmZqaraWkpJRobWllrWdma2U.jpg',
+          uri:
+            'https://images.wallpapersden.com/image/download/4k-goku-ultra-2020_bGloaG2UmZqaraWkpJRobWllrWdma2U.jpg',
         }}
         onLoadStart={() => {
           console.warn('start');
         }}
-        onProgress={({nativeEvent}) => {
+        onProgress={({ nativeEvent }) => {
           _setLoaded(nativeEvent.loaded);
           _setTotal(nativeEvent.total);
         }}

@@ -175,11 +175,11 @@ const radioButton: RadioButtonColorScheme = {
 const radioButtonGroup: RadioButtonGroupColorScheme = {
   active: {
     background: BLACK,
-    seperator: GREY_80
+    seperator: GREY_80,
   },
   passive: {
     background: BLACK_PALE,
-    seperator: GREY_80_PALE
+    seperator: GREY_80_PALE,
   },
 };
 
@@ -203,11 +203,11 @@ const checkBox: CheckBoxColorScheme = {
 const checkBoxGroup: CheckBoxGroupColorScheme = {
   active: {
     background: WHITE,
-    seperator: GREY_80
+    seperator: GREY_80,
   },
   passive: {
     background: WHITE_PALE,
-    seperator: GREY_80_PALE
+    seperator: GREY_80_PALE,
   },
 };
 
@@ -261,7 +261,7 @@ const selectBox: SelectBoxColorScheme = {
     border: BLACK_PALE,
     title: BLACK_PALE,
     placeholder: GREY_PALE,
-    value: BLACK_PALE
+    value: BLACK_PALE,
   },
 };
 
@@ -279,7 +279,7 @@ const dateTimePicker: DateTimePickerColorScheme = {
     border: BLACK_PALE,
     title: BLACK_PALE,
     placeholder: GREY_PALE,
-    value: BLACK_PALE
+    value: BLACK_PALE,
   },
 };
 

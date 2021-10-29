@@ -16,4 +16,4 @@ const TOKENS = {
   },
 };
 
-export {TOKENS};
+export { TOKENS };

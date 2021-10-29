@@ -49,16 +49,16 @@ type IDateTimePickerTypes = IDateTimePickerProps &
 const DateTimePicker: FC<IDateTimePickerTypes> = ({
   active = true,
   title = 'Başlık',
-  placeholder = "Placeholder",
+  placeholder = 'Placeholder',
   date,
   display = 'Modal',
   mode = 'datetime',
-  onDateChange = () => { },
-  onSubmit = () => { },
+  onDateChange = () => {},
+  onSubmit = () => {},
   ...props
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
-  const [_date, _setDate] = useState<Date>(date || new Date())
+  const [_date, _setDate] = useState<Date>(date || new Date());
   const [theme] = useThemeContext();
   const { dateTimePicker } = theme.colors;
 
@@ -80,17 +80,18 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         onTouchOutSide={() => {
           setVisible(false);
         }}
-        containerStyle={{ alignItems: 'center' }}>
+        containerStyle={{ alignItems: 'center' }}
+      >
         <RNDatePicker
           date={_date}
           onDateChange={(nDate: Date) => {
             _setDate(nDate);
-            onDateChange(nDate)
+            onDateChange(nDate);
           }}
           mode={mode}
           textColor={dateTimePicker.active.pickerText as string}
           {...props}
-          fadeToColor={theme.name === "Dark" ? "black" : "white"}
+          fadeToColor={theme.name === 'Dark' ? 'black' : 'white'}
         />
         {renderSubmit()}
       </Modal.Default>
@@ -115,7 +116,8 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
           borderColor: dateTimePicker[active ? 'active' : 'passive'].border,
         },
         styles.container,
-      ]}>
+      ]}
+    >
       <Text>{title}</Text>
       <Text>{date ? date.toLocaleString() : placeholder}</Text>
       {renderModal()}

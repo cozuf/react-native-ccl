@@ -27,11 +27,15 @@ const Vertical: FC<IVerticalProps> = ({
     if (typeof width === 'string') {
       return width;
     }
-    return undefined
+    return undefined;
   };
   return (
     <View
-      style={{ height: height, width: calculateWidth(), backgroundColor: color }}
+      style={{
+        height: height,
+        width: calculateWidth(),
+        backgroundColor: color,
+      }}
     />
   );
 };

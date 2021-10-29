@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
-import {Button, PageContainer, TapSelector} from 'react-native-ccl';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { Button, PageContainer, TapSelector } from 'react-native-ccl';
 
 const ACTIVE_DATA = [
   {
@@ -12,10 +12,14 @@ const ACTIVE_DATA = [
     value: false,
   },
 ];
-const CLICK_TYPES = [{title: 'Opacity'}, {title: 'Changeable'}];
-const CHILD_TYPES = [{title: 'Text'}, {title: 'Icon'}, {title: 'Both'}];
-const TYPES = [{title: 'Filled'}, {title: 'Outlined'}, {title: 'Simplied'}];
-const WRAP_TYPES = [{title: 'wrap'}, {title: 'no-wrap'}, {title: 'free'}];
+const CLICK_TYPES = [{ title: 'Opacity' }, { title: 'Changeable' }];
+const CHILD_TYPES = [{ title: 'Text' }, { title: 'Icon' }, { title: 'Both' }];
+const TYPES = [
+  { title: 'Filled' },
+  { title: 'Outlined' },
+  { title: 'Simplied' },
+];
+const WRAP_TYPES = [{ title: 'wrap' }, { title: 'no-wrap' }, { title: 'free' }];
 
 const ButtonPage = () => {
   const [active, setActive] = useState<boolean>(true);
@@ -42,38 +46,38 @@ const ButtonPage = () => {
         wrap={WRAP_TYPES[wrapIndex].title as 'wrap' | 'no-wrap' | 'free'}
         onPress={() => {}}
       />
-      <View style={{paddingVertical: 16}}>
+      <View style={{ paddingVertical: 16 }}>
         <TapSelector
           data={ACTIVE_DATA}
           onTap={() => {
             setActive(!active);
           }}
         />
-        <View style={{paddingVertical: 8}} />
+        <View style={{ paddingVertical: 8 }} />
         <TapSelector
           data={CHILD_TYPES}
-          onTap={(item, index) => {
+          onTap={(_, index) => {
             setChildTypeIndex(index);
           }}
         />
-        <View style={{paddingVertical: 8}} />
+        <View style={{ paddingVertical: 8 }} />
         <TapSelector
           data={CLICK_TYPES}
-          onTap={(item, index) => {
+          onTap={(_, index) => {
             setClickTypeIndex(index);
           }}
         />
-        <View style={{paddingVertical: 8}} />
+        <View style={{ paddingVertical: 8 }} />
         <TapSelector
           data={TYPES}
-          onTap={(item, index) => {
+          onTap={(_, index) => {
             setTypeIndex(index);
           }}
         />
-        <View style={{paddingVertical: 8}} />
+        <View style={{ paddingVertical: 8 }} />
         <TapSelector
           data={WRAP_TYPES}
-          onTap={(item, index) => {
+          onTap={(_, index) => {
             setWrapIndex(index);
           }}
         />

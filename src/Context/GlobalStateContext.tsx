@@ -16,12 +16,12 @@ const GlaobalStateContext = createContext<{
 const GlobalStateDispatchContext = createContext<{
   setState: Dispatch<GlobalStateInterface>;
 }>({
-  setState: () => { },
+  setState: () => {},
 });
 
 const reducer = (
   state: GlobalStateInterface,
-  newState: GlobalStateInterface,
+  newState: GlobalStateInterface
 ): GlobalStateInterface => {
   return { ...state, ...newState };
 };
@@ -42,8 +42,8 @@ export default GlobalStateProvider;
 
 export const UseGlobalState = (): [
   GlobalStateInterface,
-  Dispatch<GlobalStateInterface>,
+  Dispatch<GlobalStateInterface>
 ] => [
-    useContext(GlaobalStateContext).state,
-    useContext(GlobalStateDispatchContext).setState,
-  ];
+  useContext(GlaobalStateContext).state,
+  useContext(GlobalStateDispatchContext).setState,
+];

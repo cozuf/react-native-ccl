@@ -7,7 +7,7 @@ export interface IBadgeProps {
   /**
    *
    */
-  size?: "small" | "medium" | "large" | number;
+  size?: 'small' | 'medium' | 'large' | number;
 
   /**
    *
@@ -19,37 +19,40 @@ const Badge: FC<IBadgeProps> = ({ size = 20, value = 1 }) => {
   const [theme] = useThemeContext();
   const { badge } = theme.colors;
 
-
   const calculateSize = (): number => {
     switch (size) {
-      case "small":
-        return 16
-      case "medium":
-        return 20
-      case "large":
-        return 24
+      case 'small':
+        return 16;
+      case 'medium':
+        return 20;
+      case 'large':
+        return 24;
       default:
         return size < 20 ? 20 : size > 30 ? 30 : size;
     }
-  }
+  };
 
   const getValue = (): string | undefined => {
     if (typeof value === 'number' && value > 9) {
-      return "9+"
-
+      return '9+';
     } else {
-      return value.toString()
+      return value.toString();
     }
-  }
+  };
 
   return (
     <View
       style={[
         styles.container,
         {
-          height: Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
-          width: Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
-          borderRadius: Platform.OS === 'android' ? calculateSize() / 2 : (calculateSize() + 6) / 2,
+          height:
+            Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
+          width:
+            Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
+          borderRadius:
+            Platform.OS === 'android'
+              ? calculateSize() / 2
+              : (calculateSize() + 6) / 2,
           borderColor: badge.border,
           backgroundColor: badge.background,
           ...Platform.select({
@@ -58,7 +61,8 @@ const Badge: FC<IBadgeProps> = ({ size = 20, value = 1 }) => {
             },
           }),
         },
-      ]}>
+      ]}
+    >
       <Text
         style={[
           styles.text,
@@ -66,7 +70,8 @@ const Badge: FC<IBadgeProps> = ({ size = 20, value = 1 }) => {
             fontSize: Number(((calculateSize() / 3) * 2).toFixed(0)),
             color: badge.text,
           },
-        ]}>
+        ]}
+      >
         {getValue()}
       </Text>
     </View>

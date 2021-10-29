@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import {
   Modal as NativeModal,
   ModalProps,
@@ -10,8 +10,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {Button, Seperator, Text} from '..';
-import {useThemeContext} from '../../Context/ThemeContext';
+import { Button, Seperator, Text } from '..';
+import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface IModalProps {
   visible: boolean;
@@ -42,7 +42,7 @@ const YesNo: FC<IModalTypes> = ({
   const ModalRef = useRef<NativeModal | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(visible);
   const [theme] = useThemeContext();
-  const {modal} = theme.colors;
+  const { modal } = theme.colors;
 
   useEffect(() => {
     setIsVisible(visible);
@@ -50,13 +50,14 @@ const YesNo: FC<IModalTypes> = ({
 
   return (
     <NativeModal
-      ref={ref => {
+      ref={(ref) => {
         ModalRef.current = ref;
       }}
       animationType="fade"
       visible={isVisible}
       transparent={true}
-      {...props}>
+      {...props}
+    >
       <Pressable
         style={[
           styles.outside,
@@ -64,7 +65,8 @@ const YesNo: FC<IModalTypes> = ({
             backgroundColor: modal.outsideBackground,
           },
           outsideStyle,
-        ]}>
+        ]}
+      >
         <Pressable
           style={[
             styles.container,
@@ -73,33 +75,35 @@ const YesNo: FC<IModalTypes> = ({
               shadowColor: modal.shadow,
             },
             containerStyle,
-          ]}>
+          ]}
+        >
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-            }}>
-            <View style={{flex: 1}}>
-              <Text weigth="Bold" size={'XL'} style={{textAlign: 'center'}}>
+            }}
+          >
+            <View style={{ flex: 1 }}>
+              <Text weigth="Bold" size={'XL'} style={{ textAlign: 'center' }}>
                 {title}
               </Text>
             </View>
           </View>
-          <View style={{flex: 1, justifyContent: 'center'}}>
+          <View style={{ flex: 1, justifyContent: 'center' }}>
             <Text size="XL" weigth="Medium">
               {message}
             </Text>
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <Button
               type="Outlined"
-              containerStyle={{flex: 1}}
+              containerStyle={{ flex: 1 }}
               title={buttonNoTitle}
               onPress={onNoButtonPress}
             />
             <Seperator.Horizontal />
             <Button
-              containerStyle={{flex: 1}}
+              containerStyle={{ flex: 1 }}
               title={buttonYesTitle}
               onPress={onYesButtonPress}
             />

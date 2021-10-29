@@ -27,11 +27,15 @@ const Horizontal: FC<IHorizontalProps> = ({
     if (typeof height === 'string') {
       return height;
     }
-    return undefined
+    return undefined;
   };
   return (
     <View
-      style={{ height: calculateHeight(), width: width, backgroundColor: color }}
+      style={{
+        height: calculateHeight(),
+        width: width,
+        backgroundColor: color,
+      }}
     />
   );
 };

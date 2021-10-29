@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import {
   ActivityIndicator,
   IActivityIndicatorProps,
@@ -41,9 +41,9 @@ const ActivityIndicatorPage = () => {
   return (
     <PageContainer type={'Default'}>
       <FlatList
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         data={INDICATORS}
-        renderItem={({item, index}) => {
+        renderItem={({ item, index }) => {
           return (
             <View key={index.toString()} style={styles.container}>
               <ActivityIndicator type={item.type} />

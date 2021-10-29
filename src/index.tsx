@@ -19,7 +19,7 @@ import {
   Seperator,
   DateTimePicker,
   Switch,
-} from "./Components"
+} from './Components';
 
 import type {
   ITextProps,
@@ -48,10 +48,15 @@ import type {
   ISelectBoxTypes,
   ISwitchProps,
   ISwitchTypes,
-} from "./Components"
+} from './Components';
 
-import { ThemeProvider, useThemeContext, GlobalStateProvider, UseGlobalState } from "./Context"
-import { FONTS } from "./Assets";
+import {
+  ThemeProvider,
+  useThemeContext,
+  GlobalStateProvider,
+  UseGlobalState,
+} from './Context';
+import { FONTS } from './Assets';
 import { dark, light } from './Theme/Variants';
 import SelectPage from './Components/SelectBox/Page';
 
@@ -87,8 +92,8 @@ export {
   FONTS,
   dark,
   light,
-  SelectPage
-}
+  SelectPage,
+};
 
 export type {
   ITextProps,

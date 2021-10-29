@@ -65,8 +65,8 @@ const SelectBoxPage = () => {
       <SelectBox
         selectionType={
           SELECT_TYPE_DATA[selectTypeIndex].value as
-          | 'SingleSelect'
-          | 'MultiSelect'
+            | 'SingleSelect'
+            | 'MultiSelect'
         }
         displayType={
           DISPLAY_TYPE_DATA[displayTypeIndex].value as 'Modal' | 'Page'
@@ -75,7 +75,7 @@ const SelectBoxPage = () => {
         title="Bölge"
         searchable={true}
         navigation={navigation}
-        onSubmit={data => {
+        onSubmit={(data) => {
           setAreas(data as any[]);
         }}
         minChoice={2}

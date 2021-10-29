@@ -23,4 +23,4 @@ const PAGES_NAMES = {
   ColorsPage: 'ColorsPage',
 };
 
-export {PAGES_NAMES};
+export { PAGES_NAMES };

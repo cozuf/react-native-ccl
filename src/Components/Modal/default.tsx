@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import {
   Modal as NativeModal,
   ModalProps,
@@ -9,7 +9,7 @@ import {
   StyleSheet,
   ViewStyle,
 } from 'react-native';
-import {useThemeContext} from '../../Context/ThemeContext';
+import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface IModalProps {
   visible: boolean;
@@ -33,7 +33,7 @@ const Default: FC<IModalTypes> = ({
   const ModalRef = useRef<NativeModal | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(visible);
   const [theme] = useThemeContext();
-  const {modal} = theme.colors;
+  const { modal } = theme.colors;
 
   useEffect(() => {
     setIsVisible(visible);
@@ -41,13 +41,14 @@ const Default: FC<IModalTypes> = ({
 
   return (
     <NativeModal
-      ref={ref => {
+      ref={(ref) => {
         ModalRef.current = ref;
       }}
       animationType="fade"
       visible={isVisible}
       transparent={true}
-      {...props}>
+      {...props}
+    >
       <Pressable
         style={[
           styles.outside,
@@ -61,7 +62,8 @@ const Default: FC<IModalTypes> = ({
           if (typeof onTouchOutSide === 'function') {
             onTouchOutSide(!isVisible);
           }
-        }}>
+        }}
+      >
         <Pressable
           style={[
             styles.container,
@@ -70,7 +72,8 @@ const Default: FC<IModalTypes> = ({
               shadowColor: modal.shadow,
             },
             containerStyle,
-          ]}>
+          ]}
+        >
           {children}
         </Pressable>
       </Pressable>

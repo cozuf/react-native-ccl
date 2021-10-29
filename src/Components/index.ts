@@ -2,9 +2,14 @@ import Text, { ITextProps, ITextTypes } from './Text';
 import PageContainer from './PageContainer';
 import Icon, { IIconProps } from './Icon';
 import TextInput, { ITextInputProps, ITextInputTypes } from './TextInput';
-import ActivityIndicator, { IActivityIndicatorProps } from './ActivityIndicator';
+import ActivityIndicator, {
+  IActivityIndicatorProps,
+} from './ActivityIndicator';
 import Button, { IButtonProps, IButtonTypes } from './Button';
-import TapSelector, { ITapSelectorProps, ITapSelectorTypes } from './TapSelector';
+import TapSelector, {
+  ITapSelectorProps,
+  ITapSelectorTypes,
+} from './TapSelector';
 import RadioButton, { IRadionButtonProps } from './RadioButton';
 import RadioButtonGroup, {
   IRadioButtonGroupProps,

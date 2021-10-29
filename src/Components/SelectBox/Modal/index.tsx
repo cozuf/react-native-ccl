@@ -59,29 +59,29 @@ type SelectBoxModalTypes<ItemT> = {
   renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
 
   /**
-   * 
+   *
    */
-  maxChoice?: number
+  maxChoice?: number;
 
   /**
-   * 
+   *
    */
-  minChoice?: number
+  minChoice?: number;
 };
 
 const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
   visible = false,
-  setVisible = () => { },
+  setVisible = () => {},
   searchable,
   data,
   value,
   selectionType = 'SingleSelect',
-  onSearch = () => { },
-  onSelect = () => { },
-  onSubmit = () => { },
+  onSearch = () => {},
+  onSelect = () => {},
+  onSubmit = () => {},
   renderItem,
   maxChoice = 0,
-  minChoice = 0
+  minChoice = 0,
 }) => {
   const renderSearch = () => {
     return <SearchBar value={value} onSearch={onSearch} />;
@@ -98,8 +98,8 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
         }}
         renderItem={renderItem || undefined}
         onSubmit={(data: any[]) => {
-          if (typeof onSubmit === "function") {
-            onSubmit(data)
+          if (typeof onSubmit === 'function') {
+            onSubmit(data);
           }
           setVisible(false);
         }}
@@ -120,8 +120,8 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
         minChoice={minChoice}
         maxChoice={maxChoice}
         onSubmit={(data: any[]) => {
-          if (typeof onSubmit === "function") {
-            onSubmit(data)
+          if (typeof onSubmit === 'function') {
+            onSubmit(data);
           }
           setVisible(false);
         }}
@@ -141,10 +141,11 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
   return (
     <Modal.Default
       visible={visible}
-      onTouchOutSide={v => {
+      onTouchOutSide={(v) => {
         setVisible(v);
       }}
-      containerStyle={{ flex: 1 }}>
+      containerStyle={{ flex: 1 }}
+    >
       {searchable ? renderSearch() : null}
       {searchable ? <View style={{ height: 8 }} /> : null}
       {renderChildren()}
