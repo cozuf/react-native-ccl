@@ -2,7 +2,6 @@ import React, { FC, useLayoutEffect } from 'react';
 import type { NavigationProp, RouteProp } from '@react-navigation/core';
 import type { ParamListBase } from '@react-navigation/routers';
 import {
-  Button,
   CheckBoxGroup,
   PageContainer,
   RadioButtonGroup,

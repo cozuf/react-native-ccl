@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ListRenderItemInfo, View } from 'react-native';
-import { Button, CheckBoxGroup, Modal, RadioButtonGroup, SearchBar } from '../..';
+import { CheckBoxGroup, Modal, RadioButtonGroup, SearchBar } from '../..';
 
 type SelectBoxModalTypes<ItemT> = {
   visible: boolean;
