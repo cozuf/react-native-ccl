@@ -21,6 +21,7 @@ const PAGES_NAMES = {
   DateTimePickerPage: 'DateTimePickerPage',
   SwitchPage: 'SwitchPage',
   ColorsPage: 'ColorsPage',
+  BottomSheetPage: 'BottomSheetPage',
 };
 
 export { PAGES_NAMES };

@@ -13,6 +13,7 @@ interface GlobalStateInterface {
 const GlaobalStateContext = createContext<{
   state: GlobalStateInterface;
 }>({ state: { token: '' } });
+
 const GlobalStateDispatchContext = createContext<{
   setState: Dispatch<GlobalStateInterface>;
 }>({

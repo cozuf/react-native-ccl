@@ -89,6 +89,10 @@ const COMPONENTS: ComponentListType[] = [
     name: 'Colors',
     navigation: 'ColorsPage',
   },
+  {
+    name: 'BottomSheet',
+    navigation: 'BottomSheetPage',
+  },
 ];
 
 const MainPage = () => {

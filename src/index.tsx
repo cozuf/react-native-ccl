@@ -55,14 +55,12 @@ import {
   useThemeContext,
   GlobalStateProvider,
   UseGlobalState,
+  BottomSheetProvider,
+  useBottomSheet
 } from './Context';
 import { FONTS } from './Assets';
 import { dark, light } from './Theme/Variants';
 import SelectPage from './Components/SelectBox/Page';
-
-export function multiply(a: number, b: number): Promise<number> {
-  return Promise.resolve(a * b);
-}
 
 export {
   Text,
@@ -89,6 +87,8 @@ export {
   GlobalStateProvider,
   useThemeContext,
   UseGlobalState,
+  BottomSheetProvider,
+  useBottomSheet,
   FONTS,
   dark,
   light,

@@ -7,15 +7,18 @@ import {
   ThemeProvider,
   useThemeContext,
   GlobalStateProvider,
+  BottomSheetProvider
 } from 'react-native-ccl';
 
 const App = () => {
   return (
     <GlobalStateProvider>
       <ThemeProvider>
-        <NavigationContainer>
-          <Child />
-        </NavigationContainer>
+        <BottomSheetProvider>
+          <NavigationContainer>
+            <Child />
+          </NavigationContainer>
+        </BottomSheetProvider>
       </ThemeProvider>
     </GlobalStateProvider>
   );
