@@ -1,6 +1,6 @@
 import type { ColorValue } from 'react-native';
 
-interface CommonColorScheme {
+export interface CommonColorScheme {
   primary: ColorValue;
   secondary: ColorValue;
   active: ColorValue;
@@ -8,21 +8,21 @@ interface CommonColorScheme {
   statusbar: ColorValue;
 }
 
-interface PageContainerColorScheme {
+export interface PageContainerColorScheme {
   background: ColorValue;
 }
 
-interface TextColorScheme {
+export interface TextColorScheme {
   active: ColorValue;
   passive: ColorValue;
 }
 
-interface IconColorScheme {
+export interface IconColorScheme {
   active: ColorValue;
   passive: ColorValue;
 }
 
-interface TextInputColorScheme {
+export interface TextInputColorScheme {
   /**
    * Pressable but not focused
    */
@@ -55,7 +55,7 @@ interface TextInputColorScheme {
   };
 }
 
-interface ButtonColorScheme {
+export interface ButtonColorScheme {
   /**
    * Pressable
    */
@@ -136,7 +136,7 @@ interface ButtonColorScheme {
   };
 }
 
-interface RadioButtonColorScheme {
+export interface RadioButtonColorScheme {
   /**
    * Pressable
    */
@@ -157,7 +157,7 @@ interface RadioButtonColorScheme {
   };
 }
 
-interface RadioButtonGroupColorScheme {
+export interface RadioButtonGroupColorScheme {
   active: {
     background: ColorValue;
     seperator: ColorValue;
@@ -168,7 +168,7 @@ interface RadioButtonGroupColorScheme {
   };
 }
 
-interface CheckBoxColorScheme {
+export interface CheckBoxColorScheme {
   /**
    * Pressable
    */
@@ -191,7 +191,7 @@ interface CheckBoxColorScheme {
   };
 }
 
-interface CheckBoxGroupColorScheme {
+export interface CheckBoxGroupColorScheme {
   active: {
     background: ColorValue;
     seperator: ColorValue;
@@ -202,7 +202,7 @@ interface CheckBoxGroupColorScheme {
   };
 }
 
-interface ChipColorScheme {
+export interface ChipColorScheme {
   /**
    * Pressable
    */
@@ -223,7 +223,7 @@ interface ChipColorScheme {
   };
 }
 
-interface ChipGroupColorScheme {
+export interface ChipGroupColorScheme {
   active: {
     background: ColorValue;
   };
@@ -232,20 +232,20 @@ interface ChipGroupColorScheme {
   };
 }
 
-interface BadgeColorScheme {
+export interface BadgeColorScheme {
   border: ColorValue;
   background: ColorValue;
   text: ColorValue;
   shadow: ColorValue;
 }
 
-interface ModalColorScheme {
+export interface ModalColorScheme {
   outsideBackground: ColorValue;
   containerBackground: ColorValue;
   shadow: ColorValue;
 }
 
-interface SelectBoxColorScheme {
+export interface SelectBoxColorScheme {
   active: {
     background: ColorValue;
     border: ColorValue;
@@ -262,7 +262,7 @@ interface SelectBoxColorScheme {
   };
 }
 
-interface DateTimePickerColorScheme {
+export interface DateTimePickerColorScheme {
   active: {
     background: ColorValue;
     border: ColorValue;
@@ -280,7 +280,7 @@ interface DateTimePickerColorScheme {
   };
 }
 
-interface SwitchComponentColorScheme {
+export interface SwitchComponentColorScheme {
   active: {
     border: ColorValue;
     background: ColorValue;
@@ -297,7 +297,7 @@ interface SwitchComponentColorScheme {
   };
 }
 
-type ColorScheme = {
+export interface ColorScheme {
   common: CommonColorScheme;
   pageContainer: PageContainerColorScheme;
   text: TextColorScheme;
@@ -315,25 +315,4 @@ type ColorScheme = {
   selectBox: SelectBoxColorScheme;
   dateTimePicker: DateTimePickerColorScheme;
   switchComponent: SwitchComponentColorScheme;
-};
-
-export type {
-  ColorScheme,
-  BadgeColorScheme,
-  ButtonColorScheme,
-  CheckBoxColorScheme,
-  CheckBoxGroupColorScheme,
-  ChipColorScheme,
-  ChipGroupColorScheme,
-  CommonColorScheme,
-  DateTimePickerColorScheme,
-  IconColorScheme,
-  ModalColorScheme,
-  PageContainerColorScheme,
-  RadioButtonColorScheme,
-  RadioButtonGroupColorScheme,
-  SelectBoxColorScheme,
-  SwitchComponentColorScheme,
-  TextColorScheme,
-  TextInputColorScheme,
-};
+}
