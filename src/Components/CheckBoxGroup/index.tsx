@@ -99,7 +99,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         }))
       );
     }
-  }, [data]);
+  }, [data, maxChoice]);
 
   const onButtonSelect = (index: number) => {
     const tData = nData.map((v: any, i: number) => ({
@@ -143,7 +143,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         'It would be good to define selected item at the begining, to show them.'
       );
     }
-  }, []);
+  }, [data]);
 
   const isDisabled = (): boolean => {
     if (minChoice !== 0) {

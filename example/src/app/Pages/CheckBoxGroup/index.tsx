@@ -44,4 +44,3 @@ const CheckBoxGroupPage = () => {
 };
 
 export default CheckBoxGroupPage;
-

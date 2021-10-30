@@ -16,4 +16,3 @@ const CheckBoxPage = () => {
 };
 
 export default CheckBoxPage;
-

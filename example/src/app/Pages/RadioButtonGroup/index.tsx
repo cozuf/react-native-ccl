@@ -46,4 +46,3 @@ const RadioButtonGroupPage = () => {
 };
 
 export default RadioButtonGroupPage;
-

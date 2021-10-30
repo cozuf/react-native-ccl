@@ -51,7 +51,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   data,
   onSelect,
   renderItem,
-  onSubmit = () => { },
+  onSubmit = () => {},
   submitTitle = 'Tamam',
 }) => {
   const [theme] = useThemeContext();
