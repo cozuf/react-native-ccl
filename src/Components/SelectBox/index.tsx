@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, ReactElement, ReactNode, useEffect, useState } from 'react';
 import {
   FlatListProps,
   ListRenderItemInfo,
@@ -6,11 +6,12 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { Seperator, Text } from '..';
+import { Seperator, Text, Button, CheckBox, RadioButton, } from '..';
 import type { NavigationProp } from '@react-navigation/core';
 import type { ParamListBase } from '@react-navigation/routers';
 import SelectBoxModal from './Modal';
 import { useThemeContext } from '../../Context/ThemeContext';
+import { useBottomSheet } from '../../Context/BottomSheetContext';
 
 export interface ISelectBoxProps<ItemT> {
   /**
@@ -21,7 +22,7 @@ export interface ISelectBoxProps<ItemT> {
    * type to display
    * @default Modal
    */
-  displayType: 'Modal' | 'Page';
+  displayType: 'Modal' | "BottomSheet" | 'Page';
 
   /**
    * type to choose
@@ -124,13 +125,15 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   maxChoice,
   minChoice,
 }) => {
+  const [bottomSheet, setBottomSheet] = useBottomSheet();
+  const [bottomSheetData, setBottomSheetData] = useState<any[]>(data as any[]);
   const [dataList, setDataList] = useState<any[]>(data as any[]);
   const [value, setValue] = useState<string>(searchText || '');
   const [visible, setVisible] = useState<boolean>(false);
   const [theme] = useThemeContext();
-  const { selectBox } = theme.colors;
+  const { selectBox, modal } = theme.colors;
 
-  const renderModal = () => {
+  const renderModal = (): ReactNode => {
     return (
       <SelectBoxModal
         visible={visible}
@@ -146,7 +149,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
             );
             setDataList(nDataList);
           } else {
-            console.log({ data });
             setDataList(data as any[]);
           }
         }}
@@ -156,22 +158,198 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         maxChoice={maxChoice}
         onSubmit={(data: any[]) => {
           setDataList(data);
+          setBottomSheetData(data);
         }}
       />
     );
   };
 
-  const renderRest = (): JSX.Element | null => {
+  const renderRest = (): ReactNode | null => {
     switch (displayType) {
       case 'Modal':
         return renderModal();
+      default:
+        return null;
     }
-    return null;
   };
 
   const openModal = () => {
     setVisible(true);
   };
+
+  const onButtonSelect = (index: number) => {
+    if (selectionType === "SingleSelect") {
+      const tData = bottomSheetData.map((v, i) => ({ ...v, selected: i === index }));
+      setBottomSheetData(tData);
+    } else {
+      const tData = bottomSheetData.map((v: any, i: number) => ({
+        ...v,
+        selected: i === index ? !v.selected : v.selected,
+      }));
+      if (maxChoice !== 0) {
+        const selectedDataLength = tData.filter((v: any) => v.selected).length;
+        if (selectedDataLength === maxChoice) {
+          const mData = tData.map((v: any) => ({
+            ...v,
+            active: v.selected,
+          }));
+          setBottomSheetData(mData);
+        } else {
+          const mData = tData.map((v: any) => ({
+            ...v,
+            active: true,
+          }));
+          setBottomSheetData(mData);
+        }
+      } else {
+        setBottomSheetData(tData);
+      }
+    }
+  };
+
+  const isDisabled = (): boolean => {
+    if (minChoice && minChoice !== 0) {
+      const selectedLength = bottomSheetData.filter((v: any) => v.selected).length;
+      return selectedLength < minChoice;
+    } else {
+      return false;
+    }
+  };
+
+  const openBottomSheet = () => {
+    setBottomSheet({
+      props: {
+        adjustToContentHeight: true,
+        modalStyle: {
+          backgroundColor: modal.containerBackground
+        },
+        overlayStyle: {
+          backgroundColor: modal.outsideBackground,
+        },
+        handlePosition: "inside",
+        childrenStyle: {
+          padding: 8
+        },
+        flatListProps: {
+          keyExtractor: (_, index) => index.toString(),
+          data: bottomSheetData,
+          renderItem: (info: ListRenderItemInfo<any>): ReactElement | null => {
+            const { item, index } = info;
+            if (selectionType === "SingleSelect") {
+              return (
+                <RadioButton
+                  key={index.toString()}
+                  active={item.active}
+                  selected={item.selected}
+                  title={item.title}
+                  value={item.value}
+                  onSelect={() => {
+                    onButtonSelect(index);
+                  }}
+                />
+              );
+            } else {
+              return (
+                <CheckBox
+                  key={index.toString()}
+                  active={item.active}
+                  selected={item.selected}
+                  title={item.title}
+                  onSelect={() => {
+                    onButtonSelect(index);
+                  }}
+                />
+              );
+            }
+          },
+          ListHeaderComponent: () => {
+            return (
+              <Text size="L" style={{ textAlign: "center", marginTop: 12 }}>{title}</Text>
+            )
+          },
+          ListFooterComponent: () => {
+            return (
+              <Button
+                title="Onayla"
+                disabled={isDisabled()}
+                onPress={() => {
+                  setDataList(bottomSheetData)
+                  bottomSheet.close()
+                }} />
+            )
+          }
+        }
+      },
+    })
+    bottomSheet.show();
+  }
+
+  useEffect(() => {
+    setBottomSheet({
+      props: {
+        adjustToContentHeight: true,
+        modalStyle: {
+          backgroundColor: modal.containerBackground
+        },
+        overlayStyle: {
+          backgroundColor: modal.outsideBackground,
+        },
+        handlePosition: "inside",
+        childrenStyle: {
+          padding: 8
+        },
+        flatListProps: {
+          keyExtractor: (_, index) => index.toString(),
+          data: bottomSheetData,
+          renderItem: (info: ListRenderItemInfo<any>): ReactElement | null => {
+            const { item, index } = info;
+            if (selectionType === "SingleSelect") {
+              return (
+                <RadioButton
+                  key={index.toString()}
+                  active={item.active}
+                  selected={item.selected}
+                  title={item.title}
+                  value={item.value}
+                  onSelect={() => {
+                    onButtonSelect(index);
+                  }}
+                />
+              );
+            } else {
+              return (
+                <CheckBox
+                  key={index.toString()}
+                  active={item.active}
+                  selected={item.selected}
+                  title={item.title}
+                  onSelect={() => {
+                    onButtonSelect(index);
+                  }}
+                />
+              );
+            }
+          },
+          ListHeaderComponent: () => {
+            return (
+              <Text size="L" style={{ textAlign: "center", marginTop: 12 }}>{title}</Text>
+            )
+          },
+          ListFooterComponent: () => {
+            return (
+              <Button
+                title="Onayla"
+                disabled={isDisabled()}
+                onPress={() => {
+                  setDataList(bottomSheetData)
+                  bottomSheet.close()
+                }} />
+            )
+          }
+        }
+      },
+    })
+  }, [bottomSheetData])
 
   const openPage = () => {
     if (!navigation) {
@@ -203,10 +381,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           setDataList(data as any[]);
           nData = data;
         }
-        console.log({ _navigation, text, nData });
         _navigation.setParams({ searchText: text, data: nData });
       },
       onSubmit: (data: any[]) => {
+        setBottomSheetData(data);
         setDataList(data);
         if (typeof onSubmit === 'function') {
           onSubmit(data);
@@ -222,6 +400,9 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     switch (displayType) {
       case 'Modal':
         openModal();
+        break;
+      case 'BottomSheet':
+        openBottomSheet();
         break;
       case 'Page':
         openPage();
@@ -292,6 +473,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
-
-// TODO:3 tür yapılır "MODAL" | "BOTTOMSHEET" | "PAGE"
-// TODO: Searchable olabilir Searchable ise BottomSheet olamaz

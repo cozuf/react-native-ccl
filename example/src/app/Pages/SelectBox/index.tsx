@@ -47,6 +47,7 @@ const DATA = [
 ];
 const DISPLAY_TYPE_DATA = [
   { title: 'Modal', value: 'Modal' },
+  { title: 'BottomSheet', value: 'BottomSheet' },
   { title: 'Page', value: 'Page' },
 ];
 const SELECT_TYPE_DATA = [
@@ -65,11 +66,11 @@ const SelectBoxPage = () => {
       <SelectBox
         selectionType={
           SELECT_TYPE_DATA[selectTypeIndex].value as
-            | 'SingleSelect'
-            | 'MultiSelect'
+          | 'SingleSelect'
+          | 'MultiSelect'
         }
         displayType={
-          DISPLAY_TYPE_DATA[displayTypeIndex].value as 'Modal' | 'Page'
+          DISPLAY_TYPE_DATA[displayTypeIndex].value as 'Modal' | "BottomSheet" | 'Page'
         }
         data={areas}
         title="Bölge"

@@ -18,7 +18,7 @@ export const BottomSheetContext = createContext<IBottomSheetFunctions>({
     close: () => { }
 });
 
-export const BottomSheetDispatchContext = createContext<Dispatch<IBottomSheetProps>>(() => {
+export const BottomSheetDispatchContext = createContext<Dispatch<Partial<IBottomSheetProps>>>(() => {
 
 });
 
@@ -31,24 +31,26 @@ const BottomSheetProvider: FC<any> = ({ children }) => {
         },
         close: () => {
             bottomSheetRef.current?.close()
-            setBottomSheetProps({
-                props: {},
-                renderContent: () => <View />
-            })
         }
     })
 
-    const [bottomSheetProps, setBottomSheetProps] = useState<IBottomSheetProps>({
-        props: {},
+    const initial: IBottomSheetProps = {
+        props: {
+            onClosed: () => {
+                setBottomSheetProps(initial)
+            }
+        },
         renderContent: () => <View />
-    })
+    }
+
+    const [bottomSheetProps, setBottomSheetProps] = useState<Partial<IBottomSheetProps>>(initial)
 
     return (
         <BottomSheetContext.Provider value={bottomSheet}>
             <BottomSheetDispatchContext.Provider value={setBottomSheetProps}>
                 {children}
                 <BottomSheet ref={bottomSheetRef} {...bottomSheetProps.props} >
-                    {bottomSheetProps.renderContent()}
+                    {typeof bottomSheetProps.renderContent === "function" ? bottomSheetProps.renderContent() : null}
                 </BottomSheet>
             </BottomSheetDispatchContext.Provider>
         </BottomSheetContext.Provider>
@@ -59,7 +61,7 @@ export default BottomSheetProvider;
 
 export const useBottomSheet = (): [
     IBottomSheetFunctions,
-    Dispatch<IBottomSheetProps>,
+    Dispatch<Partial<IBottomSheetProps>>,
 ] => [
         useContext(BottomSheetContext),
         useContext(BottomSheetDispatchContext)
