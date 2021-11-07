@@ -1,15 +1,20 @@
-import React, { FC, useState } from 'react';
-import { Omit, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
+import { Dimensions, Omit, StyleSheet, TouchableOpacity, View } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
 import { Button, Modal, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
+import { useBottomSheet } from '../../Context/BottomSheetContext';
+import type { ModalizeProps } from 'react-native-modalize';
 
 export interface IDateTimePickerProps {
+  /**
+   * 
+   */
   active?: boolean;
   /**
    *
    */
-  display?: 'Modal';
+  display?: 'Modal' | 'BottomSheet';
 
   /**
    *
@@ -38,8 +43,11 @@ export interface IDateTimePickerProps {
    * The first and only argument is a Date object representing the new
    * date and time.
    */
-  onDateChange: (date: Date) => void;
+  onDateChange?: (date: Date) => void;
 
+  /**
+   * 
+   */
   onSubmit?: (date: Date) => void;
 }
 
@@ -53,27 +61,33 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   date,
   display = 'Modal',
   mode = 'datetime',
-  onDateChange = () => {},
-  onSubmit = () => {},
+  onDateChange = () => { },
+  onSubmit = () => { },
   ...props
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
-  const [_date, _setDate] = useState<Date>(date || new Date());
+  const [nDate, setNDate] = useState<Date>(date || new Date());
+  const [bottomSheet, setBottomSheet] = useBottomSheet();
   const [theme] = useThemeContext();
-  const { dateTimePicker } = theme.colors;
+  const { dateTimePicker, modal } = theme.colors;
 
   const renderSubmit = () => {
     return (
       <Button
         onPress={() => {
-          onSubmit(date || _date);
-          setVisible(false);
+          onSubmit(nDate);
+          if (display === "Modal") {
+            setVisible(false);
+          }
+          else {
+            bottomSheet.close()
+          }
         }}
       />
     );
   };
 
-  const renderModal = () => {
+  const renderModal = (): ReactNode => {
     return (
       <Modal.Default
         visible={visible}
@@ -83,10 +97,10 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         containerStyle={{ alignItems: 'center' }}
       >
         <RNDatePicker
-          date={_date}
-          onDateChange={(nDate: Date) => {
-            _setDate(nDate);
-            onDateChange(nDate);
+          date={nDate}
+          onDateChange={(date: Date) => {
+            setNDate(date);
+            onDateChange(date);
           }}
           mode={mode}
           textColor={dateTimePicker.active.pickerText as string}
@@ -98,13 +112,82 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     );
   };
 
+  const renderChildren = (): ReactNode | null => {
+    switch (display) {
+      case "Modal":
+        return renderModal();
+      default:
+        return null
+    }
+  }
+
+  const openModal = () => {
+    setVisible(true);
+  }
+
+  const bottomSheetProps: ModalizeProps = {
+    adjustToContentHeight: true,
+    modalStyle: {
+      backgroundColor: modal.containerBackground,
+    },
+    overlayStyle: {
+      backgroundColor: modal.outsideBackground,
+    },
+    handlePosition: "inside",
+    childrenStyle: {
+      padding: 8
+    },
+  }
+
+  const renderBottomSheetContent = (): ReactNode => {
+    return (
+      <View style={{ alignItems: "center" }}>
+        <RNDatePicker
+          date={nDate}
+          onDateChange={(date: Date) => {
+            setNDate(date);
+            onDateChange(date);
+          }}
+          mode={mode}
+          textColor={dateTimePicker.active.pickerText as string}
+          {...props}
+          fadeToColor={theme.name === 'Dark' ? 'black' : 'white'}
+          style={{
+            width: Dimensions.get("screen").width - 16,
+          }}
+
+        />
+        {renderSubmit()}
+      </View>
+    )
+  }
+
+  const openBottomSheet = () => {
+    setBottomSheet({
+      props: bottomSheetProps,
+      renderContent: renderBottomSheetContent
+    })
+    bottomSheet.show()
+  }
+
+  useEffect(() => {
+    setBottomSheet({
+      props: bottomSheetProps,
+      renderContent: renderBottomSheetContent
+    })
+  }, [date, nDate])
+
   const onPress = () => {
     switch (display) {
       case 'Modal':
-        setVisible(true);
+        openModal();
+        break;
+      case "BottomSheet":
+        openBottomSheet();
         break;
     }
   };
+
   return (
     <TouchableOpacity
       disabled={!active}
@@ -120,7 +203,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     >
       <Text>{title}</Text>
       <Text>{date ? date.toLocaleString() : placeholder}</Text>
-      {renderModal()}
+      {renderChildren()}
     </TouchableOpacity>
   );
 };
@@ -135,6 +218,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
-
-// TODO: Page gösterim olamaz
-// TODO: BottomSheet gösterim yap
