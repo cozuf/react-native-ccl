@@ -95,15 +95,13 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
     // setData = () => { },
     searchText,
     selectionType = 'SingleSelect',
-    onSearch = () => {},
-    onSelect = () => {},
-    onSubmit = () => {},
+    onSearch = () => { },
+    onSelect = () => { },
+    onSubmit = () => { },
     renderItem,
     maxChoice = 0,
     minChoice = 0,
   } = route.params;
-
-  console.log({ data });
 
   useLayoutEffect(() => {
     navigation.setOptions({
