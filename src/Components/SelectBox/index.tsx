@@ -12,6 +12,7 @@ import type { ParamListBase } from '@react-navigation/routers';
 import SelectBoxModal from './Modal';
 import { useThemeContext } from '../../Context/ThemeContext';
 import { useBottomSheet } from '../../Context/BottomSheetContext';
+import type { ModalizeProps } from 'react-native-modalize';
 
 export interface ISelectBoxProps<ItemT> {
   /**
@@ -216,139 +217,82 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     }
   };
 
-  const openBottomSheet = () => {
-    setBottomSheet({
-      props: {
-        adjustToContentHeight: true,
-        modalStyle: {
-          backgroundColor: modal.containerBackground
-        },
-        overlayStyle: {
-          backgroundColor: modal.outsideBackground,
-        },
-        handlePosition: "inside",
-        childrenStyle: {
-          padding: 8
-        },
-        flatListProps: {
-          keyExtractor: (_, index) => index.toString(),
-          data: bottomSheetData,
-          renderItem: (info: ListRenderItemInfo<any>): ReactElement | null => {
-            const { item, index } = info;
-            if (selectionType === "SingleSelect") {
-              return (
-                <RadioButton
-                  key={index.toString()}
-                  active={item.active}
-                  selected={item.selected}
-                  title={item.title}
-                  value={item.value}
-                  onSelect={() => {
-                    onButtonSelect(index);
-                  }}
-                />
-              );
-            } else {
-              return (
-                <CheckBox
-                  key={index.toString()}
-                  active={item.active}
-                  selected={item.selected}
-                  title={item.title}
-                  onSelect={() => {
-                    onButtonSelect(index);
-                  }}
-                />
-              );
-            }
-          },
-          ListHeaderComponent: () => {
-            return (
-              <Text size="L" style={{ textAlign: "center", marginTop: 12 }}>{title}</Text>
-            )
-          },
-          ListFooterComponent: () => {
-            return (
-              <Button
-                title="Onayla"
-                disabled={isDisabled()}
-                onPress={() => {
-                  setDataList(bottomSheetData)
-                  bottomSheet.close()
-                }} />
-            )
-          }
+  const bottomSheetProps: ModalizeProps = {
+    adjustToContentHeight: true,
+    modalStyle: {
+      backgroundColor: modal.containerBackground
+    },
+    overlayStyle: {
+      backgroundColor: modal.outsideBackground,
+    },
+    handlePosition: "inside",
+    childrenStyle: {
+      padding: 8
+    },
+    flatListProps: {
+      keyExtractor: (_, index) => index.toString(),
+      data: bottomSheetData,
+      renderItem: (info: ListRenderItemInfo<any>): ReactElement | null => {
+        const { item, index } = info;
+        if (selectionType === "SingleSelect") {
+          return (
+            <RadioButton
+              key={index.toString()}
+              active={item.active}
+              selected={item.selected}
+              title={item.title}
+              value={item.value}
+              onSelect={() => {
+                onButtonSelect(index);
+              }}
+            />
+          );
+        } else {
+          return (
+            <CheckBox
+              key={index.toString()}
+              active={item.active}
+              selected={item.selected}
+              title={item.title}
+              onSelect={() => {
+                onButtonSelect(index);
+              }}
+            />
+          );
         }
       },
+      ListHeaderComponent: () => {
+        return (
+          <Text size="L" style={{ textAlign: "center", marginTop: 12 }}>{title}</Text>
+        )
+      },
+      ListFooterComponent: () => {
+        return (
+          <Button
+            title="Onayla"
+            disabled={isDisabled()}
+            onPress={() => {
+              setDataList(bottomSheetData)
+              bottomSheet.close()
+            }} />
+        )
+      }
+    }
+  }
+
+  const openBottomSheet = () => {
+    setBottomSheet({
+      props: bottomSheetProps,
     })
     bottomSheet.show();
   }
 
   useEffect(() => {
-    setBottomSheet({
-      props: {
-        adjustToContentHeight: true,
-        modalStyle: {
-          backgroundColor: modal.containerBackground
-        },
-        overlayStyle: {
-          backgroundColor: modal.outsideBackground,
-        },
-        handlePosition: "inside",
-        childrenStyle: {
-          padding: 8
-        },
-        flatListProps: {
-          keyExtractor: (_, index) => index.toString(),
-          data: bottomSheetData,
-          renderItem: (info: ListRenderItemInfo<any>): ReactElement | null => {
-            const { item, index } = info;
-            if (selectionType === "SingleSelect") {
-              return (
-                <RadioButton
-                  key={index.toString()}
-                  active={item.active}
-                  selected={item.selected}
-                  title={item.title}
-                  value={item.value}
-                  onSelect={() => {
-                    onButtonSelect(index);
-                  }}
-                />
-              );
-            } else {
-              return (
-                <CheckBox
-                  key={index.toString()}
-                  active={item.active}
-                  selected={item.selected}
-                  title={item.title}
-                  onSelect={() => {
-                    onButtonSelect(index);
-                  }}
-                />
-              );
-            }
-          },
-          ListHeaderComponent: () => {
-            return (
-              <Text size="L" style={{ textAlign: "center", marginTop: 12 }}>{title}</Text>
-            )
-          },
-          ListFooterComponent: () => {
-            return (
-              <Button
-                title="Onayla"
-                disabled={isDisabled()}
-                onPress={() => {
-                  setDataList(bottomSheetData)
-                  bottomSheet.close()
-                }} />
-            )
-          }
-        }
-      },
-    })
+    if (displayType === "BottomSheet") {
+      setBottomSheet({
+        props: bottomSheetProps,
+      })
+    }
   }, [bottomSheetData])
 
   const openPage = () => {
