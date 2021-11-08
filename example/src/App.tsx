@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// TODO: Tüm comoponentlere testID ekle
 // TODO: Inner Style'ları kaldır
 // TODO: Listelemeli componentlerde searchable'yi ekle
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
