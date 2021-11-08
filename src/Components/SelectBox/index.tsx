@@ -209,12 +209,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   };
 
   const isDisabled = (): boolean => {
-    if (minChoice && minChoice !== 0) {
-      const selectedLength = bottomSheetData.filter((v: any) => v.selected).length;
-      return selectedLength < minChoice;
+    if (selectionType === "MultiSelect") {
+      if (minChoice && minChoice !== 0) {
+        const selectedLength = bottomSheetData.filter((v: any) => v.selected).length;
+        return selectedLength < minChoice;
+      } else {
+        return false;
+      }
     } else {
-      return false;
+      return false
     }
+
   };
 
   const bottomSheetProps: ModalizeProps = {
