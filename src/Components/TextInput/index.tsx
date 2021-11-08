@@ -12,6 +12,7 @@ import {
   Platform,
   Pressable,
   Omit,
+  KeyboardTypeOptions,
 } from 'react-native';
 import { Button, Icon, IIconProps, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
@@ -26,7 +27,7 @@ export interface ITextInputProps {
   /**
    *
    */
-  type?: 'Email' | 'Password' | 'Normal';
+  type?: 'email' | 'password' | 'default' | "phone" | "calculator";
 
   /**
    *
@@ -105,11 +106,11 @@ export interface ITextInputProps {
 }
 
 export type ITextInputTypes = ITextInputProps &
-  Omit<TextInputProps, 'onChangeText' | 'onFocus' | 'onBlur' | 'style'>;
+  Omit<TextInputProps, 'onChangeText' | 'onFocus' | 'onBlur' | 'style' | "keyboardType">;
 
 const NTextInput: FC<ITextInputTypes> = ({
   active = true,
-  type = 'Normal',
+  type = 'default',
   title = 'Başlık',
   titleStyle,
   icon,
@@ -195,6 +196,19 @@ const NTextInput: FC<ITextInputTypes> = ({
     }
   };
 
+  const keyboardType = (): KeyboardTypeOptions => {
+    switch (type) {
+      case "phone":
+        return "phone-pad"
+      case "email":
+        return "email-address"
+      case "calculator":
+        return "decimal-pad"
+      default:
+        return "default"
+    }
+  }
+
   const renderClean = () => {
     return (
       <View>
@@ -270,7 +284,8 @@ const NTextInput: FC<ITextInputTypes> = ({
                 },
                 { color: inputTextColor() },
               ]}
-              secureTextEntry={type === 'Password'}
+              keyboardType={keyboardType()}
+              secureTextEntry={type === 'password'}
               onFocus={(e: NativeSyntheticEvent<TextInputFocusEventData>) => {
                 setIsFocused(true);
                 if (typeof onFocus === 'function') {
@@ -318,5 +333,4 @@ const styles = StyleSheet.create({
   cleanContainer: {},
 });
 
-//  TODO: Warning Button oluştur snackbar ile
-//  TODO: Tip belirle email password vs
+//  TODO: Info Button oluştur snackbar ile
