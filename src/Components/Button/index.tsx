@@ -20,6 +20,11 @@ import { TOKENS } from '../../Theme';
 
 export interface IButtonProps {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    * @enum 'Opacity' | 'Changeable'
    * @default Opacity
    */
@@ -81,6 +86,7 @@ export type IButtonTypes = IButtonProps &
   );
 
 const Button: FC<IButtonTypes> = ({
+  testID,
   clickType = 'Opacity',
   childType = 'Text',
   type = 'Filled',
@@ -89,8 +95,8 @@ const Button: FC<IButtonTypes> = ({
   icon,
   titleStyle,
   containerStyle,
-  onPress = () => {},
-  onLongPress = () => {},
+  onPress = () => { },
+  onLongPress = () => { },
   ...props
 }) => {
   const [pressed, setPressed] = useState<boolean>(false);
@@ -238,6 +244,7 @@ const Button: FC<IButtonTypes> = ({
   const renderOpacity = () => {
     return (
       <TouchableOpacity
+        testID={testID}
         activeOpacity={0.5}
         onPress={onPress}
         onLongPress={onLongPress}
@@ -245,9 +252,9 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-                paddingVertical: TOKENS.paddings.componentContainerVertical,
-                paddingHorizontal: TOKENS.paddings.componentContainerHorizontal,
-              }
+              paddingVertical: TOKENS.paddings.componentContainerVertical,
+              paddingHorizontal: TOKENS.paddings.componentContainerHorizontal,
+            }
             : {},
           wrap !== 'free' ? styles.container : {},
           containerStyle,
@@ -262,6 +269,7 @@ const Button: FC<IButtonTypes> = ({
   const renderChangeable = () => {
     return (
       <Pressable
+        testID={testID}
         onPress={onPress}
         onPressIn={(e: GestureResponderEvent) => {
           setPressed(true);
@@ -280,9 +288,9 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-                paddingVertical: TOKENS.paddings.componentContainerVertical,
-                paddingHorizontal: TOKENS.paddings.componentContainerHorizontal,
-              }
+              paddingVertical: TOKENS.paddings.componentContainerVertical,
+              paddingHorizontal: TOKENS.paddings.componentContainerHorizontal,
+            }
             : {},
           wrap !== 'free' ? styles.container : {},
           containerStyle,

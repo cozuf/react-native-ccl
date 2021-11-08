@@ -16,6 +16,11 @@ import type { ModalizeProps } from 'react-native-modalize';
 
 export interface ISelectBoxProps<ItemT> {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    * @default true
    */
   active?: boolean;
@@ -109,6 +114,7 @@ export type ISelectBoxTypes = ISelectBoxProps<any> &
   Omit<FlatListProps<any>, 'data' | 'renderItem'>;
 
 const SelectBox: FC<ISelectBoxTypes> = ({
+  testID,
   active = true,
   displayType = 'Modal',
   selectionType = 'SingleSelect',
@@ -374,6 +380,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   return (
     <TouchableOpacity
+      testID={testID}
       disabled={!active}
       onPress={onPress}
       style={[

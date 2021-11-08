@@ -12,6 +12,11 @@ type TextStyle = Omit<NativeTextStyle, 'fontFamily' | 'fontWeight'>;
 
 export interface ITextProps {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    * Text Sizes
    */
   size?: 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
@@ -40,6 +45,7 @@ export type ITextTypes = ITextProps &
   Omit<NativeTextProps, 'style' | 'onPress' | 'onLongPress'>;
 
 const Regular: FC<ITextTypes> = ({
+  testID,
   active = true,
   size = 'M',
   weigth = 'Regular',
@@ -87,6 +93,7 @@ const Regular: FC<ITextTypes> = ({
 
   return (
     <NativeText
+      testID={testID}
       style={[
         {
           fontFamily: defineFont(),

@@ -6,6 +6,11 @@ import { TOKENS } from '../../Theme';
 
 export interface ICheckBoxProps {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    * @default true
    */
   active?: boolean;
@@ -40,6 +45,7 @@ export interface ICheckBoxProps {
 }
 
 const CheckBox: FC<ICheckBoxProps> = ({
+  testID,
   active = true,
   selected,
   title = `Check Box ${selected ? 1 : 0}`,
@@ -108,6 +114,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
 
   return (
     <TouchableOpacity
+      testID={testID}
       key={value}
       disabled={!active}
       style={[styles.container]}

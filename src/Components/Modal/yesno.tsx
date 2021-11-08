@@ -14,6 +14,11 @@ import { Button, Seperator, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface IModalProps {
+  /**
+   * 
+   */
+  testID?: string
+
   visible: boolean;
   outsideStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
@@ -28,6 +33,7 @@ export interface IModalProps {
 export type IModalTypes = IModalProps & Omit<ModalProps, 'visible' | 'style'>;
 
 const YesNo: FC<IModalTypes> = ({
+  testID,
   title = 'Uyarı',
   message = 'Lütfen Bekleyin',
   visible,
@@ -35,8 +41,8 @@ const YesNo: FC<IModalTypes> = ({
   containerStyle,
   buttonYesTitle = 'Tamam',
   buttonNoTitle = 'İptal',
-  onYesButtonPress = () => {},
-  onNoButtonPress = () => {},
+  onYesButtonPress = () => { },
+  onNoButtonPress = () => { },
   ...props
 }) => {
   const ModalRef = useRef<NativeModal | null>(null);
@@ -50,6 +56,7 @@ const YesNo: FC<IModalTypes> = ({
 
   return (
     <NativeModal
+      testID={testID}
       ref={(ref) => {
         ModalRef.current = ref;
       }}

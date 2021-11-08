@@ -14,6 +14,11 @@ import { Button, Icon, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface IModalProps {
+  /**
+   * 
+   */
+  testID?: string
+
   visible: boolean;
   outsideStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
@@ -26,13 +31,14 @@ export interface IModalProps {
 export type IModalTypes = IModalProps & Omit<ModalProps, 'visible' | 'style'>;
 
 const Warning: FC<IModalTypes> = ({
+  testID,
   title = 'Uyarı',
   message = 'Lütfen Bekleyin',
   visible,
   outsideStyle,
   containerStyle,
   buttonTitle = 'Tamam',
-  onButtonPress = () => {},
+  onButtonPress = () => { },
   ...props
 }) => {
   const ModalRef = useRef<NativeModal | null>(null);
@@ -46,6 +52,7 @@ const Warning: FC<IModalTypes> = ({
 
   return (
     <NativeModal
+      testID={testID}
       ref={(ref) => {
         ModalRef.current = ref;
       }}

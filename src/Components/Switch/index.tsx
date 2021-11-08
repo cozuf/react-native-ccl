@@ -11,6 +11,11 @@ import { Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface ISwitchProps {
+  /**
+   * 
+   */
+  testID?: string
+
   active?: boolean;
   title: string;
   value: boolean;
@@ -33,10 +38,11 @@ export type ISwitchTypes = ISwitchProps &
   >;
 
 const Switch: FC<ISwitchTypes> = ({
+  testID,
   active = true,
   title = 'Başlık',
   value = false,
-  onValueChange = () => {},
+  onValueChange = () => { },
   containerStyle,
   //   backgroundColorOn,
   //   backgroundColorOff,
@@ -61,6 +67,7 @@ const Switch: FC<ISwitchTypes> = ({
         {title}
       </Text>
       <NativeSwitch
+        testID={testID}
         disabled={!active}
         value={value}
         onValueChange={onValueChange}

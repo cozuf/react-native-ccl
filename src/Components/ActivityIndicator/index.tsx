@@ -16,19 +16,24 @@ import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface IActivityIndicatorProps {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    *
    */
   type:
-    | 'Default'
-    | 'BallIndicator'
-    | 'BarIndicator'
-    | 'DotIndicator'
-    | 'MaterialIndicator'
-    | 'PacmanIndicator'
-    | 'PulseIndicator'
-    | 'SkypeIndicator'
-    | 'UIActivityIndicator'
-    | 'WaveIndicator';
+  | 'Default'
+  | 'BallIndicator'
+  | 'BarIndicator'
+  | 'DotIndicator'
+  | 'MaterialIndicator'
+  | 'PacmanIndicator'
+  | 'PulseIndicator'
+  | 'SkypeIndicator'
+  | 'UIActivityIndicator'
+  | 'WaveIndicator';
 
   /**
    *
@@ -42,6 +47,7 @@ export interface IActivityIndicatorProps {
 }
 
 const NActivityIndicator: FC<IActivityIndicatorProps> = ({
+  testID,
   type = 'Default',
   color,
   size = 24,
@@ -70,7 +76,7 @@ const NActivityIndicator: FC<IActivityIndicatorProps> = ({
       return <WaveIndicator color={COLOR} size={size} />;
     default:
       return (
-        <ActivityIndicator color={COLOR} size={size > 15 ? 'large' : 'small'} />
+        <ActivityIndicator testID={testID} color={COLOR} size={size > 15 ? 'large' : 'small'} />
       );
   }
 };

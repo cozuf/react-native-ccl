@@ -12,6 +12,11 @@ import {
 import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface IModalProps {
+  /**
+   * 
+   */
+  testID?: string
+
   visible: boolean;
   outsideStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
@@ -21,6 +26,7 @@ export interface IModalProps {
 export type IModalTypes = IModalProps & Omit<ModalProps, 'visible' | 'style'>;
 
 const Default: FC<IModalTypes> = ({
+  testID,
   visible,
   outsideStyle,
   containerStyle,
@@ -41,6 +47,7 @@ const Default: FC<IModalTypes> = ({
 
   return (
     <NativeModal
+      testID={testID}
       ref={(ref) => {
         ModalRef.current = ref;
       }}

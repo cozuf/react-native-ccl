@@ -4,6 +4,11 @@ import { Button, IButtonProps } from '..';
 
 export interface ITapSelectorProps<ItemT> {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    *it must contain 'title' and 'value' key
    */
   data: ReadonlyArray<ItemT>;
@@ -17,7 +22,7 @@ export interface ITapSelectorProps<ItemT> {
 export type ITapSelectorTypes = ITapSelectorProps<any> &
   Omit<IButtonProps, 'onPress' | 'title'>;
 
-const TapSelector: FC<ITapSelectorTypes> = ({ data, onTap, ...props }) => {
+const TapSelector: FC<ITapSelectorTypes> = ({ testID, data, onTap, ...props }) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   const onButtonTap = (index: number) => {
@@ -35,6 +40,7 @@ const TapSelector: FC<ITapSelectorTypes> = ({ data, onTap, ...props }) => {
 
   return (
     <Button
+      testID={testID}
       type="Outlined"
       title={data[selectedIndex].title}
       onPress={() => {

@@ -2,12 +2,18 @@ import React, { FC } from 'react';
 import { ColorValue, View } from 'react-native';
 
 export interface IVerticalProps {
+  /**
+   * 
+   */
+  testID?: string
+
   width?: 'small' | 'medium' | 'high' | string | number;
   height?: number;
   color?: ColorValue;
 }
 
 const Vertical: FC<IVerticalProps> = ({
+  testID,
   height = 8,
   width = 'small',
   color = 'transparent',
@@ -31,6 +37,7 @@ const Vertical: FC<IVerticalProps> = ({
   };
   return (
     <View
+      testID={testID}
       style={{
         height: height,
         width: calculateWidth(),

@@ -4,6 +4,11 @@ import { Button } from '..';
 
 export interface IChipProps {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    * @default false
    */
   selected: boolean;
@@ -30,15 +35,18 @@ export interface IChipProps {
 }
 
 const Chip: FC<IChipProps> = ({
+  testID,
   selected = false,
   title = `Chip ${selected}`,
   active = true,
-  onSelect = () => {},
+  onSelect = () => { },
   containerStyle = {},
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
+
   return (
     <Button
+      testID={testID}
       disabled={!active}
       clickType={'Opacity'}
       wrap={'wrap'}

@@ -2,12 +2,18 @@ import React, { FC } from 'react';
 import { ColorValue, View } from 'react-native';
 
 export interface IHorizontalProps {
+  /**
+   * 
+   */
+  testID?: string
+
   height?: 'small' | 'medium' | 'high' | string | number;
   width?: number;
   color?: ColorValue;
 }
 
 const Horizontal: FC<IHorizontalProps> = ({
+  testID,
   height = 'small',
   width = 8,
   color = 'transparent',
@@ -31,6 +37,7 @@ const Horizontal: FC<IHorizontalProps> = ({
   };
   return (
     <View
+      testID={testID}
       style={{
         height: calculateHeight(),
         width: width,

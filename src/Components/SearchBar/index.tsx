@@ -3,6 +3,11 @@ import type { Omit } from 'react-native';
 import { ITextInputTypes, TextInput } from '..';
 export interface ISearchBarProps {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    *
    */
   value: string;
@@ -23,6 +28,7 @@ export type ISearchBarTypes = ISearchBarProps &
   Omit<ITextInputTypes, 'value' | 'onChangeText'>;
 
 const SearchBar: FC<ISearchBarTypes> = ({
+  testID,
   title = '',
   minimumCharToInvoke = 1,
   value,
@@ -31,6 +37,7 @@ const SearchBar: FC<ISearchBarTypes> = ({
 }) => {
   return (
     <TextInput
+      testID={testID}
       title={title}
       value={value}
       onChangeText={(text) => {

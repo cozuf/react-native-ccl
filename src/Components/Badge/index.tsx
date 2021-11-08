@@ -5,6 +5,11 @@ import { FONTS } from '../../Assets';
 import { useThemeContext } from '../../Context/ThemeContext';
 export interface IBadgeProps {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    *
    */
   size?: 'small' | 'medium' | 'large' | number;
@@ -15,7 +20,7 @@ export interface IBadgeProps {
   value: number | string;
 }
 
-const Badge: FC<IBadgeProps> = ({ size = 20, value = 1 }) => {
+const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
   const [theme] = useThemeContext();
   const { badge } = theme.colors;
 
@@ -42,6 +47,7 @@ const Badge: FC<IBadgeProps> = ({ size = 20, value = 1 }) => {
 
   return (
     <View
+      testID={testID}
       style={[
         styles.container,
         {

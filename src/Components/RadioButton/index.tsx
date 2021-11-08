@@ -6,6 +6,11 @@ import { TOKENS } from '../../Theme';
 
 export interface IRadionButtonProps {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    *@default true
    */
   active?: boolean;
@@ -40,6 +45,7 @@ export interface IRadionButtonProps {
 }
 
 const RadioButton: FC<IRadionButtonProps> = ({
+  testID,
   active = true,
   selected = false,
   title = `Radio Button ${selected ? 1 : 0}`,
@@ -97,6 +103,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
 
   return (
     <TouchableOpacity
+      testID={testID}
       disabled={!active}
       key={value}
       style={[styles.container]}

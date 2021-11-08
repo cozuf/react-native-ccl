@@ -13,6 +13,11 @@ import { ActivityIndicator, IActivityIndicatorProps, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface IModalProps {
+  /**
+   * 
+   */
+  testID?: string
+
   visible: boolean;
   outsideStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
@@ -24,6 +29,7 @@ export type IModalTypes = IModalProps &
   IActivityIndicatorProps;
 
 const Loading: FC<IModalTypes> = ({
+  testID,
   message = 'Lütfen Bekleyin',
   visible,
   outsideStyle,
@@ -42,6 +48,7 @@ const Loading: FC<IModalTypes> = ({
 
   return (
     <NativeModal
+      testID={testID}
       ref={(ref) => {
         ModalRef.current = ref;
       }}

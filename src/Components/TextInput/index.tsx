@@ -20,6 +20,11 @@ import { TOKENS } from '../../Theme';
 
 export interface ITextInputProps {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    *
    */
   active?: boolean;
@@ -109,6 +114,7 @@ export type ITextInputTypes = ITextInputProps &
   Omit<TextInputProps, 'onChangeText' | 'onFocus' | 'onBlur' | 'style' | "keyboardType">;
 
 const NTextInput: FC<ITextInputTypes> = ({
+  testID,
   active = true,
   type = 'default',
   title = 'Başlık',
@@ -233,6 +239,7 @@ const NTextInput: FC<ITextInputTypes> = ({
 
   return (
     <Pressable
+      testID={testID}
       disabled={!active}
       style={[
         styles.container,

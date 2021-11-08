@@ -10,6 +10,11 @@ export interface IDateTimePickerProps {
   /**
    * 
    */
+  testID?: string
+
+  /**
+   * 
+   */
   active?: boolean;
   /**
    *
@@ -55,6 +60,7 @@ type IDateTimePickerTypes = IDateTimePickerProps &
   Omit<DatePickerProps, 'date' | 'mode' | 'onDateChange'>;
 
 const DateTimePicker: FC<IDateTimePickerTypes> = ({
+  testID,
   active = true,
   title = 'Başlık',
   placeholder = 'Placeholder',
@@ -190,6 +196,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 
   return (
     <TouchableOpacity
+      testID={testID}
       disabled={!active}
       onPress={onPress}
       style={[

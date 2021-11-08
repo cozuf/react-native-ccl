@@ -14,6 +14,11 @@ import { TOKENS } from '../../Theme';
 
 interface IPageContainerProps {
   /**
+   * 
+   */
+  testID?: string
+
+  /**
    *
    */
   type: 'SafeArea' | 'Default' | 'Scroll';
@@ -36,6 +41,7 @@ type IPageContainerTypes = IPageContainerProps &
   );
 
 const PageContainer: FC<IPageContainerTypes> = ({
+  testID,
   type = 'Default',
   style,
   contentContainerStyle,
@@ -48,6 +54,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
     case 'SafeArea':
       return (
         <SafeAreaView
+          testID={testID}
           style={[
             styles.view,
             { backgroundColor: pageContainer.background },
@@ -62,6 +69,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
     case 'Scroll':
       return (
         <ScrollView
+          testID={testID}
           style={[style]}
           contentContainerStyle={[
             styles.scrollview,
@@ -77,6 +85,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
     default:
       return (
         <View
+          testID={testID}
           style={[
             styles.view,
             { backgroundColor: pageContainer.background },
