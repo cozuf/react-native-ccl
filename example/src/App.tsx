@@ -48,17 +48,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-// TODO: Inner Style'ları kaldır
-// TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
-// TODO: Tüm comoponentlerde eksikleri tamamla (containerStyle vs.)
-// TODO: Tüm padding, borderWidth, borderRadius belirle color scheme gibi
-// TODO: Örnek Sayfalar da varyantları ekle
-// TODO: Düzenlemsi gereken componentleri unutma
-// TODO: Style Context
-// TODO: Language Context
-// TODO: Snackbar componenti oluştur
-/**
- * theme.colors|styles|fonts
- * setTheme({colors,styles,fonts})
- */
