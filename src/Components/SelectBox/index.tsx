@@ -13,6 +13,7 @@ import SelectBoxModal from './Modal';
 import { useThemeContext } from '../../Context/ThemeContext';
 import { useBottomSheet } from '../../Context/BottomSheetContext';
 import type { ModalizeProps } from 'react-native-modalize';
+import SelectBoxBottomSheet from './BottomSheet';
 
 export interface ISelectBoxProps<ItemT> {
   /**
@@ -133,7 +134,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   minChoice,
 }) => {
   const [bottomSheet, setBottomSheet] = useBottomSheet();
-  const [bottomSheetData, setBottomSheetData] = useState<any[]>(data as any[]);
   const [dataList, setDataList] = useState<any[]>(data as any[]);
   const [value, setValue] = useState<string>(searchText || '');
   const [visible, setVisible] = useState<boolean>(false);
@@ -165,7 +165,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         maxChoice={maxChoice}
         onSubmit={(data: any[]) => {
           setDataList(data);
-          setBottomSheetData(data);
         }}
       />
     );
@@ -184,127 +183,39 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     setVisible(true);
   };
 
-  const onButtonSelect = (index: number) => {
-    if (selectionType === "SingleSelect") {
-      const tData = bottomSheetData.map((v, i) => ({ ...v, selected: i === index }));
-      setBottomSheetData(tData);
-    } else {
-      const tData = bottomSheetData.map((v: any, i: number) => ({
-        ...v,
-        selected: i === index ? !v.selected : v.selected,
-      }));
-      if (maxChoice !== 0) {
-        const selectedDataLength = tData.filter((v: any) => v.selected).length;
-        if (selectedDataLength === maxChoice) {
-          const mData = tData.map((v: any) => ({
-            ...v,
-            active: v.selected,
-          }));
-          setBottomSheetData(mData);
-        } else {
-          const mData = tData.map((v: any) => ({
-            ...v,
-            active: true,
-          }));
-          setBottomSheetData(mData);
-        }
-      } else {
-        setBottomSheetData(tData);
-      }
-    }
-  };
-
-  const isDisabled = (): boolean => {
-    if (selectionType === "MultiSelect") {
-      if (minChoice && minChoice !== 0) {
-        const selectedLength = bottomSheetData.filter((v: any) => v.selected).length;
-        return selectedLength < minChoice;
-      } else {
-        return false;
-      }
-    } else {
-      return false
-    }
-
-  };
-
-  const bottomSheetProps: ModalizeProps = {
-    adjustToContentHeight: true,
-    modalStyle: {
-      backgroundColor: modal.containerBackground
-    },
-    overlayStyle: {
-      backgroundColor: modal.outsideBackground,
-    },
-    handlePosition: "inside",
-    childrenStyle: {
-      padding: 8
-    },
-    flatListProps: {
-      keyExtractor: (_, index) => index.toString(),
-      data: bottomSheetData,
-      renderItem: (info: ListRenderItemInfo<any>): ReactElement | null => {
-        const { item, index } = info;
-        if (selectionType === "SingleSelect") {
-          return (
-            <RadioButton
-              key={index.toString()}
-              active={item.active}
-              selected={item.selected}
-              title={item.title}
-              value={item.value}
-              onSelect={() => {
-                onButtonSelect(index);
-              }}
-            />
-          );
-        } else {
-          return (
-            <CheckBox
-              key={index.toString()}
-              active={item.active}
-              selected={item.selected}
-              title={item.title}
-              onSelect={() => {
-                onButtonSelect(index);
-              }}
-            />
-          );
-        }
-      },
-      ListHeaderComponent: () => {
-        return (
-          <Text size="L" style={{ textAlign: "center", marginTop: 12 }}>{title}</Text>
-        )
-      },
-      ListFooterComponent: () => {
-        return (
-          <Button
-            title="Onayla"
-            disabled={isDisabled()}
-            onPress={() => {
-              setDataList(bottomSheetData)
-              bottomSheet.close()
-            }} />
-        )
-      }
-    }
-  }
-
   const openBottomSheet = () => {
     setBottomSheet({
-      props: bottomSheetProps,
+      props: {
+        adjustToContentHeight: true,
+        modalStyle: {
+          backgroundColor: modal.containerBackground
+        },
+        overlayStyle: {
+          backgroundColor: modal.outsideBackground,
+        },
+        handlePosition: "inside",
+        childrenStyle: {
+          padding: 8
+        },
+      },
+      renderContent: () => {
+        return (
+          <SelectBoxBottomSheet
+            title={title}
+            data={dataList}
+            selectionType={selectionType}
+            minChoice={minChoice}
+            maxChoice={maxChoice}
+            onSubmit={(data: any[]) => {
+              setDataList(data);
+              bottomSheet.close()
+            }}
+          />
+        )
+      }
     })
     bottomSheet.show();
   }
-
-  useEffect(() => {
-    if (displayType === "BottomSheet") {
-      setBottomSheet({
-        props: bottomSheetProps,
-      })
-    }
-  }, [bottomSheetData])
 
   const openPage = () => {
     if (!navigation) {
@@ -339,7 +250,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         _navigation.setParams({ searchText: text, data: nData });
       },
       onSubmit: (data: any[]) => {
-        setBottomSheetData(data);
         setDataList(data);
         if (typeof onSubmit === 'function') {
           onSubmit(data);
