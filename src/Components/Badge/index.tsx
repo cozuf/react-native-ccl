@@ -109,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// TODO: Tekrar bak
+// TODO: Tekrar bak Platform farklılıkalrı
