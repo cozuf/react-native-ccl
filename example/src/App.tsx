@@ -57,8 +57,6 @@ const styles = StyleSheet.create({
 // TODO: Düzenlemsi gereken componentleri unutma
 // TODO: Style Context
 // TODO: Language Context
-// TODO: SelectBox renderItem ekle
-// TODO: SelectBox'ta Bottomsheet itemlerini component'te render et
 // TODO: Snackbar componenti oluştur
 /**
  * theme.colors|styles|fonts
