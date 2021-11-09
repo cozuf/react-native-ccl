@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, ReactNode, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import {
   FlatListProps,
   ListRenderItemInfo,
@@ -6,13 +6,12 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { Seperator, Text, Button, CheckBox, RadioButton, } from '..';
+import { Seperator, Text } from '..';
 import type { NavigationProp } from '@react-navigation/core';
 import type { ParamListBase } from '@react-navigation/routers';
 import SelectBoxModal from './Modal';
 import { useThemeContext } from '../../Context/ThemeContext';
 import { useBottomSheet } from '../../Context/BottomSheetContext';
-import type { ModalizeProps } from 'react-native-modalize';
 import SelectBoxBottomSheet from './BottomSheet';
 
 export interface ISelectBoxProps<ItemT> {

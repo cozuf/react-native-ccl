@@ -1,7 +1,7 @@
 import React, { FC, Fragment, useState } from 'react';
-import { ListRenderItemInfo, View } from 'react-native';
+import { View } from 'react-native';
 import { Text } from 'react-native-ccl';
-import { Button, CheckBox, Seperator, CheckBoxGroup, RadioButtonGroup, RadioButton, SearchBar } from '../..';
+import { Button, CheckBox, Seperator, RadioButton } from '../..';
 import { useThemeContext } from '../../../Context/ThemeContext';
 
 type SelectBoxBottomSheetTypes<ItemT> = {
