@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
 });
 
 // TODO: Inner Style'ları kaldır
-// TODO: Listelemeli componentlerde searchable'yi ekle
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
 // TODO: Tüm comoponentlerde eksikleri tamamla (containerStyle vs.)
 // TODO: Tüm padding, borderWidth, borderRadius belirle color scheme gibi
