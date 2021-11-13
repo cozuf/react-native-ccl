@@ -9,7 +9,7 @@ const INFINITE_DURATION = -1
 const SHOWING_TIME = 700
 
 const WIDTH = Dimensions.get("window").width
-interface Props {
+export interface ISnackBarProps {
     duration?: "short" | "medium" | "long" | "infinite"
 }
 
@@ -20,8 +20,8 @@ interface State {
     visible: boolean
 }
 
-export default class SnackBar extends Component<Props, State>{
-    constructor(props: Props) {
+export default class SnackBar extends Component<ISnackBarProps, State>{
+    constructor(props: ISnackBarProps) {
         super(props)
         this.state = {
             opacity: new Animated.Value(0),
