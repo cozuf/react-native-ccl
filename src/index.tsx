@@ -19,6 +19,8 @@ import {
   Seperator,
   DateTimePicker,
   Switch,
+  SnackBar,
+  Card
 } from './Components';
 
 import type {
@@ -48,6 +50,8 @@ import type {
   ISelectBoxTypes,
   ISwitchProps,
   ISwitchTypes,
+  ISnackBarProps,
+  ICardProps
 } from './Components';
 
 import {
@@ -93,6 +97,8 @@ export {
   dark,
   light,
   SelectPage,
+  SnackBar,
+  Card
 };
 
 export type {
@@ -122,6 +128,8 @@ export type {
   ISelectBoxTypes,
   ISwitchProps,
   ISwitchTypes,
+  ISnackBarProps,
+  ICardProps
 };
 
 // TODO: Inner Style'ları kaldır
@@ -132,6 +140,8 @@ export type {
 // TODO: Style Context
 // TODO: Language Context
 // TODO: Snackbar componenti oluştur
+// TODO: yayınlamadan önce ReadMe düzenle
+// TODO: GlobalState'yi dışarıdan type verilebilir ve class component setState gibi yap
 /**
  * theme.colors|styles|fonts
  * setTheme({colors,styles,fonts})

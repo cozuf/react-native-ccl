@@ -22,6 +22,8 @@ const PAGES_NAMES = {
   SwitchPage: 'SwitchPage',
   ColorsPage: 'ColorsPage',
   BottomSheetPage: 'BottomSheetPage',
+  SnackBarPage: 'SnackBarPage',
+  CardPage: 'CardPage',
 };
 
 export { PAGES_NAMES };

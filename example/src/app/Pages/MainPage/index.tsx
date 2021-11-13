@@ -93,6 +93,14 @@ const COMPONENTS: ComponentListType[] = [
     name: 'BottomSheet',
     navigation: 'BottomSheetPage',
   },
+  {
+    name: 'SnackBar',
+    navigation: 'SnackBarPage',
+  },
+  {
+    name: 'Card',
+    navigation: 'CardPage',
+  },
 ];
 
 const MainPage = () => {
