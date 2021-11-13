@@ -139,8 +139,8 @@ export type {
 // TODO: Örnek Sayfalar da varyantları ekle
 // TODO: Style Context
 // TODO: Language Context
-// TODO: Snackbar componenti oluştur
 // TODO: yayınlamadan önce ReadMe düzenle
+// TODO: SearchBar'a aranacak key'i ekle
 // TODO: GlobalState'yi dışarıdan type verilebilir ve class component setState gibi yap
 /**
  * theme.colors|styles|fonts
