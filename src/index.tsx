@@ -60,7 +60,9 @@ import {
   GlobalStateProvider,
   UseGlobalState,
   BottomSheetProvider,
-  useBottomSheet
+  useBottomSheet,
+  ClassGlobalStateProvider,
+  useClassGlobalState
 } from './Context';
 import { FONTS } from './Assets';
 import { dark, light } from './Theme/Variants';
@@ -98,7 +100,9 @@ export {
   light,
   SelectPage,
   SnackBar,
-  Card
+  Card,
+  ClassGlobalStateProvider,
+  useClassGlobalState
 };
 
 export type {

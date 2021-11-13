@@ -24,6 +24,7 @@ const PAGES_NAMES = {
   BottomSheetPage: 'BottomSheetPage',
   SnackBarPage: 'SnackBarPage',
   CardPage: 'CardPage',
+  ClassGlobalStatePage: "ClassGlobalStatePage"
 };
 
 export { PAGES_NAMES };
