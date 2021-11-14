@@ -145,7 +145,8 @@ export type {
 // TODO: Language Context
 // TODO: yayınlamadan önce ReadMe düzenle
 // TODO: SearchBar'a aranacak key'i ekle
-// TODO: GlobalState'yi dışarıdan type verilebilir ve class component setState gibi yap
+// TODO: GlobalState'yi dışarıdan type verilebilir
+// TODO: import - export ları düzenle
 /**
  * theme.colors|styles|fonts
  * setTheme({colors,styles,fonts})
