@@ -41,7 +41,7 @@ const GlobalStateProvider: FC<any> = ({ children }) => {
 
 export default GlobalStateProvider;
 
-export const UseGlobalState = (): [
+export const useGlobalState = (): [
   GlobalStateInterface,
   Dispatch<GlobalStateInterface>
 ] => [
