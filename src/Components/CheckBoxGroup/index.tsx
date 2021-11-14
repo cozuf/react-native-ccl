@@ -4,6 +4,7 @@ import {
   FlatListProps,
   ListRenderItemInfo,
   Omit,
+  StyleSheet,
   View,
 } from 'react-native';
 import { CheckBox, Button, Seperator } from '..';
@@ -70,7 +71,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   data,
   onSelect,
   renderItem,
-  onSubmit = () => {},
+  onSubmit = () => { },
   submitTitle = 'Tamam',
   minChoice = 0,
   maxChoice = 0,
@@ -156,7 +157,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   const renderSeperator = (): JSX.Element => {
     return (
-      <View style={{ alignItems: 'center', paddingVertical: 4 }}>
+      <View style={styles.seperatorContainer}>
         <Seperator.Vertical
           width={'96%'}
           height={1}
@@ -185,12 +186,12 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   return (
     <Fragment>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View style={styles.buttonsContainer}>
         <Button
           wrap={'wrap'}
           title={unSelectAllTitle}
           type="Simplied"
-          containerStyle={{ paddingHorizontal: 0 }}
+          containerStyle={styles.buttons}
           onPress={() => {
             setNData(
               nData.map((v: any) => ({ ...v, selected: false, active: true }))
@@ -201,7 +202,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
           wrap={'wrap'}
           title={selectAllTitle}
           type="Simplied"
-          containerStyle={{ paddingHorizontal: 0 }}
+          containerStyle={styles.buttons}
           onPress={() => {
             setNData(nData.map((v: any) => ({ ...v, selected: true })));
           }}
@@ -226,5 +227,19 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     </Fragment>
   );
 };
+
+const styles = StyleSheet.create({
+  seperatorContainer: {
+    alignItems: 'center',
+    paddingVertical: 4
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  buttons: {
+    paddingHorizontal: 0
+  }
+})
 
 export default memo(CheckBoxGroup);

@@ -1,5 +1,5 @@
 import React, { FC, Fragment, useState } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-ccl';
 import { Button, CheckBox, Seperator, RadioButton } from '../..';
 import { useThemeContext } from '../../../Context/ThemeContext';
@@ -149,7 +149,7 @@ const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
                             }}
                         />}
                     {i !== nData.length - 1 ?
-                        <View style={{ alignItems: 'center', paddingVertical: 4 }}>
+                        <View style={styles.seperatorContainer}>
                             <Seperator.Vertical
                                 width={'96%'}
                                 height={1}
@@ -182,7 +182,7 @@ const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
                         />
                     }
                     {i !== nData.length - 1 ?
-                        <View style={{ alignItems: 'center', paddingVertical: 4 }}>
+                        <View style={styles.seperatorContainer}>
                             <Seperator.Vertical
                                 width={'96%'}
                                 height={1}
@@ -208,7 +208,7 @@ const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
 
     return (
         <View>
-            <Text size="L" style={{ textAlign: "center" }}>{title}</Text>
+            <Text size="L" style={styles.title}>{title}</Text>
             {renderChildren()}
             <Button
                 wrap="no-wrap"
@@ -221,5 +221,15 @@ const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    title: {
+        textAlign: "center"
+    },
+    seperatorContainer: {
+        alignItems: 'center',
+        paddingVertical: 4
+    }
+})
 
 export default SelectBoxBottomSheet;

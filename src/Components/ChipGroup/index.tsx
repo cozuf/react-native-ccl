@@ -1,5 +1,5 @@
 import React, { FC, Fragment, useState } from 'react';
-import { FlatListProps, Omit, View } from 'react-native';
+import { FlatListProps, Omit, StyleSheet, View } from 'react-native';
 import { Chip } from '..';
 
 export interface IChipGroupProps<ItemT> {
@@ -72,17 +72,30 @@ const ChipGroup: FC<IChipGroupTypes> = ({
           onSelect={() => {
             onButtonSelect(index);
           }}
-          containerStyle={{ marginBottom: 4 }}
+          containerStyle={styles.chipContainer}
         />
-        <View style={{ width: 8 }} />
+        <View style={styles.seperator} />
       </Fragment>
     );
   };
   return (
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+    <View style={styles.container}>
       {nData.map(renderItem || customRenderItem)}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  chipContainer: {
+    marginBottom: 4
+  },
+  seperator: {
+    width: 8
+  }
+})
 
 export default ChipGroup;

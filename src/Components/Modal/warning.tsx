@@ -81,19 +81,16 @@ const Warning: FC<IModalTypes> = ({
           ]}
         >
           <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
+            style={styles.headerContainer}
           >
             <Icon family="AntDesign" name="warning" size={24} />
-            <View style={{ flex: 1 }}>
-              <Text weigth="Bold" size={'XL'} style={{ textAlign: 'center' }}>
+            <View style={styles.titleContainer}>
+              <Text weigth="Bold" size={'XL'} style={styles.title}>
                 {title}
               </Text>
             </View>
           </View>
-          <View style={{ flex: 1, justifyContent: 'center' }}>
+          <View style={styles.messageContainer}>
             <Text size="XL" weigth="Medium">
               {message}
             </Text>
@@ -133,4 +130,18 @@ const styles = StyleSheet.create({
       },
     }),
   },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  titleContainer: {
+    flex: 1
+  },
+  title: {
+    textAlign: 'center'
+  },
+  messageContainer: {
+    flex: 1,
+    justifyContent: 'center'
+  }
 });

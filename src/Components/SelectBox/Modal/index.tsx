@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { ListRenderItemInfo, View } from 'react-native';
-import { CheckBoxGroup, Modal, RadioButtonGroup, SearchBar } from '../..';
+import { ListRenderItemInfo, StyleSheet } from 'react-native';
+import { CheckBoxGroup, Modal, RadioButtonGroup, SearchBar, Seperator } from '../..';
 
 type SelectBoxModalTypes<ItemT> = {
   visible: boolean;
@@ -71,14 +71,14 @@ type SelectBoxModalTypes<ItemT> = {
 
 const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
   visible = false,
-  setVisible = () => {},
+  setVisible = () => { },
   searchable,
   data,
   value,
   selectionType = 'SingleSelect',
-  onSearch = () => {},
-  onSelect = () => {},
-  onSubmit = () => {},
+  onSearch = () => { },
+  onSelect = () => { },
+  onSubmit = () => { },
   renderItem,
   maxChoice = 0,
   minChoice = 0,
@@ -144,13 +144,19 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
       onTouchOutSide={(v) => {
         setVisible(v);
       }}
-      containerStyle={{ flex: 1 }}
+      containerStyle={styles.modalContainer}
     >
       {searchable ? renderSearch() : null}
-      {searchable ? <View style={{ height: 8 }} /> : null}
+      {searchable ? <Seperator.Vertical /> : null}
       {renderChildren()}
     </Modal.Default>
   );
 };
+
+const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1
+  }
+})
 
 export default SelectBoxModal;

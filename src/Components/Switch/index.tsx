@@ -63,7 +63,7 @@ const Switch: FC<ISwitchTypes> = ({
         },
       ]}
     >
-      <Text active={active} style={{ flex: 1 }}>
+      <Text active={active} style={styles.titleContainer}>
         {title}
       </Text>
       <NativeSwitch
@@ -96,4 +96,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     alignItems: 'center',
   },
+  titleContainer: {
+    flex: 1
+  }
 });

@@ -77,7 +77,7 @@ const Loading: FC<IModalTypes> = ({
           ]}
         >
           <ActivityIndicator type={type} size={40} />
-          <Text size="XL" weigth="Medium" style={{ textAlign: 'center' }}>
+          <Text size="XL" weigth="Medium" style={styles.message}>
             {message}
           </Text>
         </Pressable>
@@ -114,4 +114,7 @@ const styles = StyleSheet.create({
       },
     }),
   },
+  message: {
+    textAlign: 'center'
+  }
 });

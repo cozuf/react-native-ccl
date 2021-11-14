@@ -6,8 +6,9 @@ import {
   PageContainer,
   RadioButtonGroup,
   SearchBar,
+  Seperator
 } from '../..';
-import { ListRenderItemInfo, View } from 'react-native';
+import { ListRenderItemInfo, StyleSheet } from 'react-native';
 
 export type PageParamsList<ItemT> = {
   base: {
@@ -174,10 +175,14 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
   return (
     <PageContainer type="Default">
       {searchable ? renderSearch() : null}
-      {searchable ? <View style={{ height: 8 }} /> : null}
+      {searchable ? <Seperator.Vertical /> : null}
       {renderChildren()}
     </PageContainer>
   );
 };
+
+const styles = StyleSheet.create({
+
+})
 
 export default SelectPage;

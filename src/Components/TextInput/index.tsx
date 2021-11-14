@@ -14,7 +14,7 @@ import {
   Omit,
   KeyboardTypeOptions,
 } from 'react-native';
-import { Button, Icon, IIconProps, Text } from '..';
+import { Button, Icon, IIconProps, Text, Seperator } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
 import { TOKENS } from '../../Theme';
 
@@ -260,9 +260,9 @@ const NTextInput: FC<ITextInputTypes> = ({
       ) : null}
       <View style={[styles.inputContainer]}>
         {icon ? renderIcon() : null}
-        {icon ? <View style={{ width: 8 }} /> : null}
+        {icon ? <Seperator.Vertical /> : null}
         {
-          <View style={{ flex: 1 }}>
+          <View style={styles.nativeInputContainer}>
             <TextInput
               ref={(ref) => {
                 NativeTextInputRef.current = ref;
@@ -332,6 +332,9 @@ const styles = StyleSheet.create({
   inputContainer: {
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  nativeInputContainer: {
+    flex: 1
   },
   input: {
     paddingLeft: 0,

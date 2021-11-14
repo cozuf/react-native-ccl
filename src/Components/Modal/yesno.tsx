@@ -85,32 +85,29 @@ const YesNo: FC<IModalTypes> = ({
           ]}
         >
           <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
+            style={styles.headerContainer}
           >
-            <View style={{ flex: 1 }}>
-              <Text weigth="Bold" size={'XL'} style={{ textAlign: 'center' }}>
+            <View style={styles.titleContainer}>
+              <Text weigth="Bold" size={'XL'} style={styles.title}>
                 {title}
               </Text>
             </View>
           </View>
-          <View style={{ flex: 1, justifyContent: 'center' }}>
+          <View style={styles.messageContainer}>
             <Text size="XL" weigth="Medium">
               {message}
             </Text>
           </View>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={styles.buttonsContainer}>
             <Button
               type="Outlined"
-              containerStyle={{ flex: 1 }}
+              containerStyle={styles.buttonContainer}
               title={buttonNoTitle}
               onPress={onNoButtonPress}
             />
             <Seperator.Horizontal />
             <Button
-              containerStyle={{ flex: 1 }}
+              containerStyle={styles.buttonContainer}
               title={buttonYesTitle}
               onPress={onYesButtonPress}
             />
@@ -149,4 +146,24 @@ const styles = StyleSheet.create({
       },
     }),
   },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  titleContainer: {
+    flex: 1
+  },
+  title: {
+    textAlign: 'center'
+  },
+  messageContainer: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  buttonsContainer: {
+    flexDirection: "row"
+  },
+  buttonContainer: {
+    flex: 1
+  }
 });

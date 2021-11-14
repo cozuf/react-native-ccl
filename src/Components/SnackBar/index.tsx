@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Animated, View, Dimensions, Easing } from "react-native";
+import { Animated, View, Dimensions, Easing, StyleSheet } from "react-native";
 
 const SHORT_DURATION = 1000
 const MEDIUM_DURATION = 3000
@@ -135,31 +135,16 @@ export default class SnackBar extends Component<ISnackBarProps, State>{
         const { opacity, zIndex, scale } = this.state
         return (
             <Animated.View
-                style={{
-                    overflow: "hidden",
-                    position: "absolute",
-                    zIndex: zIndex,
-                    bottom: 0,
-                    height: 66,
-                    paddingVertical: 8,
-                    paddingHorizontal: 16,
-                    width: WIDTH,
-                    opacity: opacity,
-                    transform: [{ scale }],
-                }}
+                style={[
+                    styles.animatedContainer,
+                    {
+                        zIndex: zIndex,
+                        opacity: opacity,
+                        transform: [{ scale }],
+                    }
+                ]}
             >
-                <View style={{
-                    flex: 1,
-                    backgroundColor: "black",
-                    shadowColor: "#000",
-                    shadowOffset: {
-                        width: 0,
-                        height: 2,
-                    },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-                    elevation: 5,
-                }}>
+                <View style={styles.contentContainer}>
                     {this.props.children}
                 </View>
             </Animated.View >
@@ -167,3 +152,27 @@ export default class SnackBar extends Component<ISnackBarProps, State>{
     }
 
 }
+
+const styles = StyleSheet.create({
+    animatedContainer: {
+        overflow: "hidden",
+        position: "absolute",
+        bottom: 0,
+        height: 66,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        width: WIDTH,
+    },
+    contentContainer: {
+        flex: 1,
+        backgroundColor: "black",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    }
+})

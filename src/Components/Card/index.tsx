@@ -58,7 +58,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     };
 
     return (
-        <Pressable onPress={() => toggleListItem()} style={{ borderWidth: 1, borderRadius: 8, paddingVertical: 8, paddingHorizontal: 16 }}>
+        <Pressable onPress={() => toggleListItem()} style={styles.container}>
             <View style={styles.titleContainer}>
                 {headerComponent()}
                 <Animated.View style={{ transform: [{ rotateZ: arrowAngle }] }}>
@@ -81,6 +81,12 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     );
 }
 const styles = StyleSheet.create({
+    container: {
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingVertical: 8,
+        paddingHorizontal: 16
+    },
     bodyBackground: {
         overflow: 'hidden',
     },
