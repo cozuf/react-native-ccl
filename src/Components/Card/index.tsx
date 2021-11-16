@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useRef, useState } from "react";
-import { Animated, View, Omit, StyleSheet, Pressable, Easing } from "react-native";
+import { Animated, View, Omit, StyleSheet, Pressable, Easing, ViewStyle } from "react-native";
 import { Icon, } from "..";
 
 export interface ICardProps {
@@ -17,11 +17,35 @@ export interface ICardProps {
      * 
      */
     footerComponent?: () => ReactNode
+
+    /**
+     * 
+     */
+    containerStyle?: ViewStyle
+
+    /**
+     * 
+     */
+    headerContainerStyle?: ViewStyle
+
+    /**
+     * 
+     */
+    footerContainerStyle?: ViewStyle
+
+    /**
+     * 
+     */
+    bodyContainerStyle?: ViewStyle
 }
 
 const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     headerComponent = () => null,
     footerComponent = () => null,
+    containerStyle,
+    headerContainerStyle,
+    bodyContainerStyle,
+    footerContainerStyle,
     children
 }) => {
     const [open, setOpen] = useState(false);
@@ -58,8 +82,8 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     };
 
     return (
-        <Pressable onPress={() => toggleListItem()} style={styles.container}>
-            <View style={styles.titleContainer}>
+        <Pressable onPress={() => toggleListItem()} style={[containerStyle, styles.container]}>
+            <View style={[headerContainerStyle, styles.titleContainer]}>
                 {headerComponent()}
                 <Animated.View style={{ transform: [{ rotateZ: arrowAngle }] }}>
                     <Icon family="MaterialIcons" name="keyboard-arrow-down" size={20} color="black" />
@@ -67,14 +91,14 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
             </View>
             <Animated.View style={[styles.bodyBackground, { height: bodyHeight }]}>
                 <View
-                    style={styles.bodyContainer}
+                    style={[bodyContainerStyle, styles.bodyContainer]}
                     onLayout={event =>
                         setBodySectionHeight(event.nativeEvent.layout.height)
                     }>
                     {children}
                 </View>
             </Animated.View>
-            <View>
+            <View style={[footerContainerStyle]}>
                 {footerComponent()}
             </View>
         </Pressable>
@@ -101,10 +125,25 @@ const styles = StyleSheet.create({
     },
 });
 
-const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({ children }) => {
+const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({
+    headerComponent = () => null,
+    footerComponent = () => null,
+    containerStyle,
+    headerContainerStyle,
+    bodyContainerStyle,
+    footerContainerStyle, children
+}) => {
     return (
-        <View>
-            {children}
+        <View style={[containerStyle]}>
+            <View style={[headerContainerStyle]}>
+                {headerComponent()}
+            </View>
+            <View style={[bodyContainerStyle]}>
+                {children}
+            </View>
+            <View style={[footerContainerStyle]}>
+                {footerComponent()}
+            </View>
         </View>
     )
 }
