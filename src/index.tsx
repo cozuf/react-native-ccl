@@ -137,7 +137,6 @@ export type {
 };
 
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
-// TODO: Tüm comoponentlerde eksikleri tamamla (containerStyle vs.)
 // TODO: Tüm padding, borderWidth, borderRadius belirle color scheme gibi
 // TODO: Örnek Sayfalar da varyantları ekle
 // TODO: Style Context
