@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Animated, View, Dimensions, Easing, StyleSheet } from "react-native";
+import { Animated, View, Dimensions, Easing, StyleSheet, ViewStyle } from "react-native";
 
 const SHORT_DURATION = 1000
 const MEDIUM_DURATION = 3000
@@ -10,7 +10,15 @@ const SHOWING_TIME = 700
 
 const WIDTH = Dimensions.get("window").width
 export interface ISnackBarProps {
-    duration?: "short" | "medium" | "long" | "infinite"
+    /**
+     * 
+     */
+    duration?: "short" | "medium" | "long" | "infinite",
+
+    /**
+     * 
+     */
+    containerStyle?: ViewStyle
 }
 
 interface State {
@@ -133,6 +141,7 @@ export default class SnackBar extends Component<ISnackBarProps, State>{
 
     render() {
         const { opacity, zIndex, scale } = this.state
+        const { containerStyle } = this.props
         return (
             <Animated.View
                 style={[
@@ -144,7 +153,7 @@ export default class SnackBar extends Component<ISnackBarProps, State>{
                     }
                 ]}
             >
-                <View style={styles.contentContainer}>
+                <View style={[containerStyle, styles.contentContainer]}>
                     {this.props.children}
                 </View>
             </Animated.View >
@@ -176,3 +185,5 @@ const styles = StyleSheet.create({
         elevation: 5,
     }
 })
+
+// TODO: https://github.com/cooperka/react-native-snackbar bunu kullanabilirsin
