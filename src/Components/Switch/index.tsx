@@ -16,14 +16,30 @@ export interface ISwitchProps {
    */
   testID?: string
 
+  /**
+   * 
+   */
   active?: boolean;
+
+  /**
+   * 
+   */
   title: string;
+
+  /**
+   * 
+   */
   value: boolean;
+
+  /**
+   * 
+   */
   onValueChange: (value: boolean) => void;
+
+  /**
+   * 
+   */
   containerStyle?: ViewStyle;
-  //   backgroundColorOn?: ColorValue;
-  //   backgroundColorOff?: ColorValue;
-  //   thumbcolor?: ColorValue;
 }
 
 export type ISwitchTypes = ISwitchProps &
@@ -44,9 +60,6 @@ const Switch: FC<ISwitchTypes> = ({
   value = false,
   onValueChange = () => { },
   containerStyle,
-  //   backgroundColorOn,
-  //   backgroundColorOff,
-  //   thumbcolor,
   ...props
 }) => {
   const [theme] = useThemeContext();
