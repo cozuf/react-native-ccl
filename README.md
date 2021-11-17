@@ -3,7 +3,7 @@
 react native cozuf component library
 
 ## explanation
-When I first started developing React Native, I had a dream of making my own component library. Later, this desire increased even more because in the projects I developed; I'm tired of creating a 'components' folder, editing the theme structure and copy-pasting the folder from previous projects.
+When I first started developing React Native, I had a dream of making my own component library. Later, this desire increased even more because in the projects I developed; I'm tired of creating a 'components' folder, editing the theme structure and copy-pasting the folder from previous projects.<br>
 I do not intend to compete with widely used react-native libraries. I just tried to do this for the purpose of using it myself. Still, friends who want to use it or who want to help develop it, of course, can use it.
 
 I would like to thank [Ziya Doğramacı](https://dogramaciziya.medium.com/), [Furkan Atakan Bozkurt](https://github.com/lfabl) and the [NİBGAT](https://github.com/nibgat) for their inspiration and help in developing this library.
