@@ -1,5 +1,5 @@
 import React, { FC, Fragment, useState } from 'react';
-import { FlatListProps, Omit, StyleSheet, View } from 'react-native';
+import { FlatListProps, ListRenderItemInfo, Omit, StyleSheet, View, ViewStyle } from 'react-native';
 import { Chip } from '..';
 
 export interface IChipGroupProps<ItemT> {
@@ -28,11 +28,12 @@ export interface IChipGroupProps<ItemT> {
   /**
    * callback if you want render custom item
    */
-  renderItem?: (
-    value: ItemT,
-    index: number,
-    array: readonly ItemT[]
-  ) => React.ReactElement | null;
+  renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
+
+  /**
+   * 
+   */
+  containerStyle?: ViewStyle
 }
 export type IChipGroupTypes = IChipGroupProps<any> &
   Omit<FlatListProps<any>, 'data' | 'renderItem'>;
@@ -42,6 +43,7 @@ const ChipGroup: FC<IChipGroupTypes> = ({
   onSelect,
   // onSubmit,
   renderItem,
+  containerStyle
 }) => {
   const [nData, setNData] = useState(data);
 
@@ -79,7 +81,7 @@ const ChipGroup: FC<IChipGroupTypes> = ({
     );
   };
   return (
-    <View style={styles.container}>
+    <View style={[containerStyle, styles.container]}>
       {nData.map(renderItem || customRenderItem)}
     </View>
   );
