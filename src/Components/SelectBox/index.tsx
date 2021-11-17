@@ -5,6 +5,7 @@ import {
   Omit,
   StyleSheet,
   TouchableOpacity,
+  ViewStyle,
 } from 'react-native';
 import { Seperator, Text } from '..';
 import type { NavigationProp } from '@react-navigation/core';
@@ -108,6 +109,11 @@ export interface ISelectBoxProps<ItemT> {
    *
    */
   minChoice?: number;
+
+  /**
+   * 
+   */
+  containerStyle?: ViewStyle
 }
 
 export type ISelectBoxTypes = ISelectBoxProps<any> &
@@ -131,6 +137,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   page = 'SelectPage',
   maxChoice,
   minChoice,
+  containerStyle,
 }) => {
   const [bottomSheet, setBottomSheet] = useBottomSheet();
   const [dataList, setDataList] = useState<any[]>(data as any[]);
@@ -293,6 +300,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       disabled={!active}
       onPress={onPress}
       style={[
+        containerStyle,
         {
           backgroundColor: selectBox[active ? 'active' : 'passive'].background,
           borderColor: selectBox[active ? 'active' : 'passive'].border,
