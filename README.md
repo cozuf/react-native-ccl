@@ -11,12 +11,12 @@ I would like to thank [Ziya Doğramacı](https://dogramaciziya.medium.com/), [Fu
 ## Installation
 This library then uses the following libraries, so you need to install them as well.
 
-[react-navigation](https://reactnavigation.org/docs/5.x/getting-started)
-[react-native-modal](https://github.com/react-native-modal/react-native-modal)
-[react-native-date-picker](https://github.com/henninghall/react-native-date-picker)
-[react-native-indicators](https://github.com/n4kz/react-native-indicators)
-[react-native-modalize](https://github.com/jeremybarbet/react-native-modalize)
-[react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
+[react-navigation](https://reactnavigation.org/docs/5.x/getting-started)<br>
+[react-native-modal](https://github.com/react-native-modal/react-native-modal)<br>
+[react-native-date-picker](https://github.com/henninghall/react-native-date-picker)<br>
+[react-native-indicators](https://github.com/n4kz/react-native-indicators)<br>
+[react-native-modalize](https://github.com/jeremybarbet/react-native-modalize)<br>
+[react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)<br>
 
 ```sh
 npm install react-native-ccl
