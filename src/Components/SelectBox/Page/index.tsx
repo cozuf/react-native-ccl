@@ -1,6 +1,7 @@
 import React, { FC, useLayoutEffect } from 'react';
 import type { NavigationProp, RouteProp } from '@react-navigation/core';
 import type { ParamListBase } from '@react-navigation/routers';
+import type { ListRenderItemInfo } from 'react-native';
 import {
   CheckBoxGroup,
   PageContainer,
@@ -8,7 +9,6 @@ import {
   SearchBar,
   Seperator
 } from '../..';
-import { ListRenderItemInfo, StyleSheet } from 'react-native';
 
 export type PageParamsList<ItemT> = {
   base: {
@@ -180,9 +180,5 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
     </PageContainer>
   );
 };
-
-const styles = StyleSheet.create({
-
-})
 
 export default SelectPage;
