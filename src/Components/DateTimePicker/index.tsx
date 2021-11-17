@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
-import { Dimensions, Omit, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Omit, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
 import { Button, Modal, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
@@ -54,6 +54,11 @@ export interface IDateTimePickerProps {
    * 
    */
   onSubmit?: (date: Date) => void;
+
+  /**
+   * 
+   */
+  containerStyle?: ViewStyle
 }
 
 type IDateTimePickerTypes = IDateTimePickerProps &
@@ -69,6 +74,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   mode = 'datetime',
   onDateChange = () => { },
   onSubmit = () => { },
+  containerStyle,
   ...props
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -200,6 +206,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
       disabled={!active}
       onPress={onPress}
       style={[
+        containerStyle,
         {
           backgroundColor:
             dateTimePicker[active ? 'active' : 'passive'].background,
