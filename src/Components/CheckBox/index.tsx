@@ -1,5 +1,5 @@
 import React, { FC, isValidElement, memo, useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Icon, IIconProps, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
 import { TOKENS } from '../../Theme';
@@ -42,6 +42,11 @@ export interface ICheckBoxProps {
    * invokes select item
    */
   onSelect?: (selected: boolean) => void;
+
+  /**
+   * 
+   */
+  containerStyle?: ViewStyle
 }
 
 const CheckBox: FC<ICheckBoxProps> = ({
@@ -52,6 +57,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
   value,
   iconSet,
   onSelect,
+  containerStyle
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   const [theme] = useThemeContext();
@@ -117,7 +123,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
       testID={testID}
       key={value}
       disabled={!active}
-      style={[styles.container]}
+      style={[containerStyle, styles.container]}
       onPress={() => {
         setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {
