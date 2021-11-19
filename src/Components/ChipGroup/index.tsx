@@ -20,11 +20,6 @@ export interface IChipGroupProps<ItemT> {
    */
   onSelect: (item: ItemT, index: number) => void;
 
-  // /**
-  //  * invokes when selection complete and press submit button
-  //  */
-  // onSubmit?: (selectedData: ReadonlyArray<ItemT>) => void;
-
   /**
    * callback if you want render custom item
    */
@@ -34,6 +29,11 @@ export interface IChipGroupProps<ItemT> {
    * 
    */
   containerStyle?: ViewStyle
+
+  /**
+   * 
+   */
+  selectionType?: "MultiSelect" | "SingleSelect"
 }
 export type IChipGroupTypes = IChipGroupProps<any> &
   Omit<FlatListProps<any>, 'data' | 'renderItem'>;
@@ -41,25 +41,21 @@ export type IChipGroupTypes = IChipGroupProps<any> &
 const ChipGroup: FC<IChipGroupTypes> = ({
   data,
   onSelect,
-  // onSubmit,
   renderItem,
-  containerStyle
+  containerStyle,
+  selectionType = "MultiSelect"
 }) => {
   const [nData, setNData] = useState(data);
 
   const onButtonSelect = (index: number) => {
     const tData = nData.map((v, i) => ({
       ...v,
-      selected: i === index ? !v.selected : v.selected,
+      selected: selectionType === "MultiSelect" ? i === index ? !v.selected : v.selected : i === index,
     }));
     setNData(tData);
-    // const sData = tData.filter(item => item.selected);
     if (typeof onSelect === 'function') {
       onSelect(tData[index], index);
     }
-    // if (typeof onSubmit === 'function') {
-    //   onSubmit(sData);
-    // }
   };
   const customRenderItem = (
     item: any,
