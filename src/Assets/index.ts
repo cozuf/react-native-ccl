@@ -1,5 +1,4 @@
 const FONTS = {
-  default: 'Quicksand-VariableFontWeight',
   light: 'Quicksand-Light',
   regular: 'Quicksand-Regular',
   medium: 'Quicksand-Medium',
