@@ -6,7 +6,7 @@ const ImagePage = () => {
   const [_loaded, _setLoaded] = useState<number>(0);
   const [_total, _setTotal] = useState<number>(0);
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <View>
         <Text>{`${_loaded} / ${_total}`}</Text>
         <Text>{`${((_loaded / _total) * 100).toFixed(0)}%`}</Text>

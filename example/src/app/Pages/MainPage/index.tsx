@@ -115,7 +115,7 @@ const MainPage = () => {
   );
 
   return (
-    <PageContainer type={'Default'}>
+    <PageContainer type={'default'}>
       <View style={{ paddingBottom: 16 }}>
         <SearchBar
           placeholder={'Ara'}
@@ -150,7 +150,7 @@ const MainPage = () => {
           return (
             <View key={item.name + index.toString()}>
               <Button
-                type="Outlined"
+                type="outlined"
                 title={item.name}
                 onPress={() => {
                   navigation.navigate(item.navigation);

@@ -7,39 +7,39 @@ import {
 } from 'react-native-ccl';
 const INDICATORS: IActivityIndicatorProps[] = [
   {
-    type: 'BallIndicator',
+    type: 'ballIndicator',
   },
   {
-    type: 'BarIndicator',
+    type: 'barIndicator',
   },
   {
-    type: 'DotIndicator',
+    type: 'dotIndicator',
   },
   {
-    type: 'MaterialIndicator',
+    type: 'materialIndicator',
   },
   {
-    type: 'PacmanIndicator',
+    type: 'pacmanIndicator',
   },
   {
-    type: 'PulseIndicator',
+    type: 'pulseIndicator',
   },
   {
-    type: 'SkypeIndicator',
+    type: 'skypeIndicator',
   },
   {
-    type: 'UIActivityIndicator',
+    type: 'uIActivityIndicator',
   },
   {
-    type: 'WaveIndicator',
+    type: 'waveIndicator',
   },
   {
-    type: 'Default',
+    type: 'default',
   },
 ];
 const ActivityIndicatorPage = () => {
   return (
-    <PageContainer type={'Default'}>
+    <PageContainer type={'default'}>
       <FlatList
         keyExtractor={(_, index) => index.toString()}
         data={INDICATORS}

@@ -99,7 +99,7 @@ const ICONS: IIconProps[] = [
 const IconPage = () => {
   const [active, setActive] = useState<boolean>(true);
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <FlatList
         keyExtractor={(_, index) => index.toString()}
         data={ICONS}

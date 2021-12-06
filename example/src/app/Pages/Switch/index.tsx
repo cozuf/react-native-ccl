@@ -5,7 +5,7 @@ import { PageContainer, Switch } from 'react-native-ccl';
 const SwitchPage = () => {
   const [value, setValue] = useState<boolean>(false);
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <Switch
         title={'Tema'}
         value={value}

@@ -46,13 +46,13 @@ const DATA = [
   },
 ];
 const DISPLAY_TYPE_DATA = [
-  { title: 'Modal', value: 'Modal' },
-  { title: 'BottomSheet', value: 'BottomSheet' },
-  { title: 'Page', value: 'Page' },
+  { title: 'Modal', value: 'modal' },
+  { title: 'BottomSheet', value: 'bottomSheet' },
+  { title: 'Page', value: 'page' },
 ];
 const SELECT_TYPE_DATA = [
-  { title: 'Multi Select', value: 'MultiSelect' },
-  { title: 'Single Select', value: 'SingleSelect' },
+  { title: 'Multi Select', value: 'multiSelect' },
+  { title: 'Single Select', value: 'singleSelect' },
 ];
 
 const SelectBoxPage = () => {
@@ -62,15 +62,15 @@ const SelectBoxPage = () => {
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
 
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <SelectBox
         selectionType={
           SELECT_TYPE_DATA[selectTypeIndex].value as
-          | 'SingleSelect'
-          | 'MultiSelect'
+          | 'singleSelect'
+          | 'multiSelect'
         }
         displayType={
-          DISPLAY_TYPE_DATA[displayTypeIndex].value as 'Modal' | "BottomSheet" | 'Page'
+          DISPLAY_TYPE_DATA[displayTypeIndex].value as 'modal' | "bottomSheet" | 'page'
         }
         data={areas}
         title="Bölge"

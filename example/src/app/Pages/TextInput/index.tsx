@@ -17,7 +17,7 @@ const TextInputPage = () => {
   const [value, setValue] = useState<string>('');
   const [active, setActive] = useState<boolean>(true);
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <TextInput
         active={active}
         value={value}

@@ -6,7 +6,7 @@ const SnackBarPage = () => {
     const [visible, setVisible] = useState(false)
 
     return (
-        <PageContainer type="Default">
+        <PageContainer type="default">
             <Button title="Show" disabled={visible} onPress={() => {
                 snackBarRef.current?.show()
                 setVisible(true)

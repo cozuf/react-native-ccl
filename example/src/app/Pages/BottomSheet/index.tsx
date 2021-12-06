@@ -5,7 +5,7 @@ import { Button, PageContainer, Text, useBottomSheet } from "react-native-ccl";
 const BottomSheetPage = () => {
     const [bottomSheet, setBottomSheet] = useBottomSheet();
     return (
-        <PageContainer type="Default">
+        <PageContainer type="default">
             <Button
                 title={"OPne BottomSheet"}
                 onPress={() => {

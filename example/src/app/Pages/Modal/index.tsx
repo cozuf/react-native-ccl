@@ -37,7 +37,7 @@ const ModalPage = () => {
   const renderLoadingModal = () => {
     return (
       <Modal.Loading
-        type="UIActivityIndicator"
+        type="uIActivityIndicator"
         visible={visibleLoading}
         containerStyle={{ flex: 1 }}
       />
@@ -84,9 +84,9 @@ const ModalPage = () => {
   };
 
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <Button
-        childType="Text"
+        childType="text"
         title={'Show Default Modal'}
         onPress={() => {
           setVisibleDefault(true);
@@ -94,7 +94,7 @@ const ModalPage = () => {
       />
       <Seperator.Vertical />
       <Button
-        childType="Text"
+        childType="text"
         title={'Show Loading Modal'}
         onPress={() => {
           setVisibleLoading(true);
@@ -105,7 +105,7 @@ const ModalPage = () => {
       />
       <Seperator.Vertical />
       <Button
-        childType="Text"
+        childType="text"
         title={'Show Warning Modal'}
         onPress={() => {
           setVisibleWarning(true);
@@ -113,7 +113,7 @@ const ModalPage = () => {
       />
       <Seperator.Vertical />
       <Button
-        childType="Text"
+        childType="text"
         title={'Show Fault Modal'}
         onPress={() => {
           setVisibleFault(true);
@@ -121,7 +121,7 @@ const ModalPage = () => {
       />
       <Seperator.Vertical />
       <Button
-        childType="Text"
+        childType="text"
         title={'Show Yes No Modal'}
         onPress={() => {
           setVisibleYesNo(true);

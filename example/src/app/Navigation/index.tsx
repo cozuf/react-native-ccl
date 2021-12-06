@@ -63,9 +63,9 @@ const Router = () => {
     }
     return (
       <Button
-        childType="Icon"
+        childType="icon"
         wrap="wrap"
-        type="Simplied"
+        type="simplied"
         icon={{
           family: 'AntDesign',
           name: 'arrowleft',

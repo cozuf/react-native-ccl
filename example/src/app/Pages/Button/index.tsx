@@ -12,12 +12,12 @@ const ACTIVE_DATA = [
     value: false,
   },
 ];
-const CLICK_TYPES = [{ title: 'Opacity' }, { title: 'Changeable' }];
-const CHILD_TYPES = [{ title: 'Text' }, { title: 'Icon' }, { title: 'Both' }];
+const CLICK_TYPES = [{ title: 'opacity' }, { title: 'changeable' }];
+const CHILD_TYPES = [{ title: 'text' }, { title: 'icon' }, { title: 'both' }];
 const TYPES = [
-  { title: 'Filled' },
-  { title: 'Outlined' },
-  { title: 'Simplied' },
+  { title: 'filled' },
+  { title: 'outlined' },
+  { title: 'simplied' },
 ];
 const WRAP_TYPES = [{ title: 'wrap' }, { title: 'no-wrap' }, { title: 'free' }];
 
@@ -28,21 +28,21 @@ const ButtonPage = () => {
   const [typeIndex, setTypeIndex] = useState<number>(0);
   const [wrapIndex, setWrapIndex] = useState<number>(0);
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <Button
         disabled={!active}
         childType={
-          CHILD_TYPES[childTypeIndex].title as 'Text' | 'Icon' | 'Both'
+          CHILD_TYPES[childTypeIndex].title as 'text' | 'icon' | 'both'
         }
         clickType={
-          CLICK_TYPES[clickTypeIndex].title as 'Opacity' | 'Changeable'
+          CLICK_TYPES[clickTypeIndex].title as 'opacity' | 'changeable'
         }
         icon={{
           family: 'Ionicons',
           name: 'close',
           size: 20,
         }}
-        type={TYPES[typeIndex].title as 'Filled' | 'Outlined' | 'Simplied'}
+        type={TYPES[typeIndex].title as 'filled' | 'outlined' | 'simplied'}
         wrap={WRAP_TYPES[wrapIndex].title as 'wrap' | 'no-wrap' | 'free'}
         onPress={() => {}}
       />

@@ -4,7 +4,7 @@ import { PageContainer, CheckBox } from 'react-native-ccl';
 const CheckBoxPage = () => {
   const [selected, setSelected] = useState<boolean>(false);
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <CheckBox
         selected={selected}
         onSelect={(v) => {

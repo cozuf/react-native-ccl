@@ -21,7 +21,7 @@ interface IPageContainerProps {
   /**
    *
    */
-  type: 'safeArea' | 'default' | 'scroll';
+  type?: 'safeArea' | 'default' | 'scroll';
 
   /**
    *

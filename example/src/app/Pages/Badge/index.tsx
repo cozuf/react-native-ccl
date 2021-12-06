@@ -8,7 +8,7 @@ const BadgePage = () => {
   const [sizeIndex, setSizeIndex] = useState<number>(0);
   const [valueIndex, setValueIndex] = useState<number>(0);
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <View style={{ alignItems: 'center' }}>
         <Badge
           size={SIZES[sizeIndex].title as 'small' | 'medium' | 'large'}

@@ -4,7 +4,7 @@ import { PageContainer, RadioButton } from 'react-native-ccl';
 const RadioButtonPage = () => {
   const [selected, setSelected] = useState<boolean>(false);
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <RadioButton
         selected={selected}
         onSelect={(v) => {

@@ -12,7 +12,7 @@ const TapSelectorPage = () => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <Text
         style={{
           textAlign: 'center',

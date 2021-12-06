@@ -10,11 +10,11 @@ const DateTimePickerPage = () => {
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
   const [date, setDate] = useState<Date | undefined>(undefined);
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <DateTimePicker
         date={date}
         display={
-          DISPLAY_TYPE_DATA[displayTypeIndex].value as 'Modal' | "BottomSheet"
+          DISPLAY_TYPE_DATA[displayTypeIndex].value as 'modal' | "bottomSheet"
         }
         // onDateChange={setDate}
         androidVariant="iosClone"

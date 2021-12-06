@@ -4,7 +4,7 @@ import { Chip, PageContainer } from 'react-native-ccl';
 const ChipPage = () => {
   const [selected, setSelected] = useState<boolean>(false);
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <Chip
         selected={selected}
         title={`Chip ${selected}`}

@@ -31,7 +31,7 @@ const DATA = [
 
 const RadioButtonGroupPage = () => {
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <RadioButtonGroup
         data={DATA}
         onSelect={(item, index) => {

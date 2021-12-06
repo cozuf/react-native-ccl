@@ -5,54 +5,54 @@ import { PageContainer, Seperator, TapSelector, Text } from 'react-native-ccl';
 const SIZES = [
   {
     title: 'XXS',
-    size: 'XXS',
+    size: 'xxs',
   },
   {
     title: 'XS',
-    size: 'XS',
+    size: 'xs',
   },
   {
     title: 'S',
-    size: 'S',
+    size: 's',
   },
   {
     title: 'M',
-    size: 'M',
+    size: 'm',
   },
   {
     title: 'L',
-    size: 'L',
+    size: 'l',
   },
   {
     title: 'XL',
-    size: 'XL',
+    size: 'xl',
   },
   {
     title: 'XXL',
-    size: 'XXL',
+    size: 'xxl',
   },
 ];
 
 const WEIGHTS = [
   {
     title: 'Light',
-    weight: 'Light',
+    weight: 'light',
   },
   {
     title: 'Regular',
-    weight: 'Regular',
+    weight: 'regular',
   },
   {
     title: 'Medium',
-    weight: 'Medium',
+    weight: 'medium',
   },
   {
     title: 'SemiBold',
-    weight: 'SemiBold',
+    weight: 'semiBold',
   },
   {
     title: 'Bold',
-    weight: 'Bold',
+    weight: 'bold',
   },
 ];
 
@@ -81,30 +81,30 @@ const TextPage = () => {
   };
 
   return (
-    <PageContainer type="Scroll" bounces={false}>
+    <PageContainer type="scroll" bounces={false}>
       <View>
         <Text
           onPress={onPress}
           onLongPress={onLongPress}
           size={
             SIZES[sizeIndex].size as
-              | 'XXS'
-              | 'XS'
-              | 'S'
-              | 'M'
-              | 'L'
-              | 'XL'
-              | 'XXL'
+              | 'xxs'
+              | 'xs'
+              | 's'
+              | 'm'
+              | 'l'
+              | 'xl'
+              | 'xxl'
           }
           active={ACTIVE_DATA[activeIndex].value}
           style={[styles.common]}
           weigth={
             WEIGHTS[weightIndex].weight as
-              | 'Light'
-              | 'Regular'
-              | 'Medium'
-              | 'SemiBold'
-              | 'Bold'
+              | 'light'
+              | 'regular'
+              | 'medium'
+              | 'semiBold'
+              | 'bold'
           }
         >
           {WEIGHTS[weightIndex].title}

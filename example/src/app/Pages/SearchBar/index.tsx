@@ -4,7 +4,7 @@ import { PageContainer, SearchBar } from 'react-native-ccl';
 const SearchBarPage = () => {
   const [searchText, setSearchText] = useState<string>('');
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <SearchBar
         value={searchText}
         onSearch={setSearchText}

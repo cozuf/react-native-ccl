@@ -29,7 +29,7 @@ const DATA = [
 ];
 const CheckBoxGroupPage = () => {
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       <CheckBoxGroup
         data={DATA}
         onSelect={(item, index) => {
