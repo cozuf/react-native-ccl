@@ -18,7 +18,7 @@ export type PageParamsList<ItemT> = {
      * type to choose
      * @default SingleSelect
      */
-    selectionType: 'SingleSelect' | 'MultiSelect';
+    selectionType: 'singleSelect' | 'multiSelect';
 
     /**
      * set true if you want to search in given list
@@ -165,15 +165,15 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
 
   const renderChildren = (): JSX.Element | undefined => {
     switch (selectionType) {
-      case 'SingleSelect':
+      case 'singleSelect':
         return renderSingleSelect();
-      case 'MultiSelect':
+      case 'multiSelect':
         return renderMultiSelect();
     }
   };
 
   return (
-    <PageContainer type="Default">
+    <PageContainer type="default">
       {searchable ? renderSearch() : null}
       {searchable ? <Seperator.Vertical /> : null}
       {renderChildren()}

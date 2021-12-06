@@ -24,16 +24,16 @@ export interface IActivityIndicatorProps {
    *
    */
   type:
-  | 'Default'
-  | 'BallIndicator'
-  | 'BarIndicator'
-  | 'DotIndicator'
-  | 'MaterialIndicator'
-  | 'PacmanIndicator'
-  | 'PulseIndicator'
-  | 'SkypeIndicator'
-  | 'UIActivityIndicator'
-  | 'WaveIndicator';
+  | 'default'
+  | 'ballIndicator'
+  | 'barIndicator'
+  | 'dotIndicator'
+  | 'materialIndicator'
+  | 'pacmanIndicator'
+  | 'pulseIndicator'
+  | 'skypeIndicator'
+  | 'uIActivityIndicator'
+  | 'waveIndicator';
 
   /**
    *
@@ -48,7 +48,7 @@ export interface IActivityIndicatorProps {
 
 const NActivityIndicator: FC<IActivityIndicatorProps> = ({
   testID,
-  type = 'Default',
+  type = 'default',
   color,
   size = 24,
 }) => {
@@ -56,24 +56,25 @@ const NActivityIndicator: FC<IActivityIndicatorProps> = ({
   const { common } = theme.colors;
   const COLOR = color ? color : common.active;
   switch (type) {
-    case 'BallIndicator':
+    case 'ballIndicator':
       return <BallIndicator color={COLOR} size={size} />;
-    case 'BarIndicator':
+    case 'barIndicator':
       return <BarIndicator color={COLOR} size={size} />;
-    case 'DotIndicator':
+    case 'dotIndicator':
       return <DotIndicator color={COLOR} size={size} />;
-    case 'MaterialIndicator':
+    case 'materialIndicator':
       return <MaterialIndicator color={COLOR} size={size} />;
-    case 'PacmanIndicator':
+    case 'pacmanIndicator':
       return <PacmanIndicator color={COLOR} size={size} />;
-    case 'PulseIndicator':
+    case 'pulseIndicator':
       return <PulseIndicator color={COLOR} size={size} />;
-    case 'SkypeIndicator':
+    case 'skypeIndicator':
       return <SkypeIndicator color={COLOR} size={size} />;
-    case 'UIActivityIndicator':
+    case 'uIActivityIndicator':
       return <UIActivityIndicator color={COLOR} size={size} />;
-    case 'WaveIndicator':
+    case 'waveIndicator':
       return <WaveIndicator color={COLOR} size={size} />;
+    case "default":
     default:
       return (
         <ActivityIndicator testID={testID} color={COLOR} size={size > 15 ? 'large' : 'small'} />

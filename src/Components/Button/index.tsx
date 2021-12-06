@@ -1,4 +1,4 @@
-import React, { FC, isValidElement, ReactNode, useState } from 'react';
+import React, { FC, Fragment, isValidElement, ReactNode, useState } from 'react';
 import {
   PressableProps,
   TouchableOpacityProps,
@@ -25,22 +25,22 @@ export interface IButtonProps {
   testID?: string
 
   /**
-   * @enum 'Opacity' | 'Changeable'
-   * @default Opacity
+   * @enum 'opacity' | 'changeable'
+   * @default opacity
    */
-  clickType?: 'Opacity' | 'Changeable';
+  clickType?: 'opacity' | 'changeable';
 
   /**
-   * @enum 'Text' | 'Icon' | 'Both'
-   * @default Text
+   * @enum 'text' | 'icon' | 'both'
+   * @default text
    */
-  childType?: 'Text' | 'Icon' | 'Both';
+  childType?: 'text' | 'icon' | 'both'
 
   /**
-   * @enum 'Filled' | 'Outlined' | 'Simplied'
-   * @default Filled
+   * @enum 'filled' | 'outlined' | 'simplied'
+   * @default filled
    */
-  type?: 'Filled' | 'Outlined' | 'Simplied';
+  type?: 'filled' | 'outlined' | 'simplied'
 
   /**
    * @enum 'wrap' | 'no-wrap' | 'free'
@@ -87,9 +87,9 @@ export type IButtonTypes = IButtonProps &
 
 const Button: FC<IButtonTypes> = ({
   testID,
-  clickType = 'Opacity',
-  childType = 'Text',
-  type = 'Filled',
+  clickType = 'opacity',
+  childType = 'text',
+  type = 'filled',
   wrap = 'no-wrap',
   title = 'Button',
   icon,
@@ -120,11 +120,11 @@ const Button: FC<IButtonTypes> = ({
       ].simplied.background;
 
     switch (type) {
-      case 'Filled':
+      case 'filled':
         return BUTTON_FILLED_BACKGROUND;
-      case 'Outlined':
+      case 'outlined':
         return BUTTON_OUTLINED_BACKGROUND;
-      case 'Simplied':
+      case 'simplied':
         return BUTTON_SIMPLIED_BACKGROUND;
     }
   };
@@ -146,11 +146,11 @@ const Button: FC<IButtonTypes> = ({
       ].simplied.border;
 
     switch (type) {
-      case 'Filled':
+      case 'filled':
         return BUTTON_FILLED_BORDER;
-      case 'Outlined':
+      case 'outlined':
         return BUTTON_OUTLINED_BORDER;
-      case 'Simplied':
+      case 'simplied':
         return BUTTON_SIMPLIED_BORDER;
     }
   };
@@ -172,11 +172,11 @@ const Button: FC<IButtonTypes> = ({
       ].simplied.text;
 
     switch (type) {
-      case 'Filled':
+      case 'filled':
         return BUTTON_FILLED_TEXT;
-      case 'Outlined':
+      case 'outlined':
         return BUTTON_OUTLINED_TEXT;
-      case 'Simplied':
+      case 'simplied':
         return BUTTON_SIMPLIED_TEXT;
     }
   };
@@ -217,7 +217,7 @@ const Button: FC<IButtonTypes> = ({
     }
   };
 
-  const renderTitle = () => {
+  const renderTitle = (): ReactNode => {
     return (
       <Text style={[{ color: titleColor() }, styles.title, titleStyle]}>
         {title}
@@ -227,16 +227,16 @@ const Button: FC<IButtonTypes> = ({
 
   const renderChildren = (): ReactNode => {
     switch (childType) {
-      case 'Text':
+      case 'text':
         return renderTitle();
-      case 'Icon':
+      case 'icon':
         return renderIcon();
-      case 'Both':
+      case 'both':
         return (
-          <>
+          <Fragment>
             {renderIcon()}
             {renderTitle()}
-          </>
+          </Fragment>
         );
     }
   };
@@ -303,11 +303,10 @@ const Button: FC<IButtonTypes> = ({
   };
 
   switch (clickType) {
-    case 'Opacity':
+    case 'opacity':
     default:
       return renderOpacity();
-
-    case 'Changeable':
+    case 'changeable':
       return renderChangeable();
   }
 };

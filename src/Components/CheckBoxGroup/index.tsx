@@ -190,7 +190,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         <Button
           wrap={'wrap'}
           title={unSelectAllTitle}
-          type="Simplied"
+          type="simplied"
           containerStyle={styles.buttons}
           onPress={() => {
             setNData(
@@ -201,7 +201,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         <Button
           wrap={'wrap'}
           title={selectAllTitle}
-          type="Simplied"
+          type="simplied"
           containerStyle={styles.buttons}
           onPress={() => {
             setNData(nData.map((v: any) => ({ ...v, selected: true })));

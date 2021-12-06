@@ -19,7 +19,7 @@ export interface IDateTimePickerProps {
   /**
    *
    */
-  display?: 'Modal' | 'BottomSheet';
+  display?: 'modal' | 'bottomSheet';
 
   /**
    *
@@ -70,7 +70,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   title = 'Başlık',
   placeholder = 'Placeholder',
   date,
-  display = 'Modal',
+  display = 'modal',
   mode = 'datetime',
   onDateChange = () => { },
   onSubmit = () => { },
@@ -88,7 +88,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
       <Button
         onPress={() => {
           onSubmit(nDate);
-          if (display === "Modal") {
+          if (display === "modal") {
             setVisible(false);
           }
           else {
@@ -126,7 +126,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 
   const renderChildren = (): ReactNode | null => {
     switch (display) {
-      case "Modal":
+      case "modal":
         return renderModal();
       default:
         return null
@@ -191,10 +191,10 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 
   const onPress = () => {
     switch (display) {
-      case 'Modal':
+      case 'modal':
         openModal();
         break;
-      case "BottomSheet":
+      case "bottomSheet":
         openBottomSheet();
         break;
     }

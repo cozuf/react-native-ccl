@@ -137,7 +137,6 @@ export type {
 };
 
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
-// TODO: Prop'lar küçük harf olmalı
 // TODO: Örnek Sayfalar da varyantları ekle
 // TODO: Style Context - Tüm padding, borderWidth, borderRadius belirle color scheme gibi
 // TODO: yayınlamadan önce ReadMe düzenle

@@ -104,6 +104,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
         </Pressable>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         borderWidth: 1,

@@ -17,7 +17,7 @@ type SelectBoxModalTypes<ItemT> = {
    * type to choose
    * @default SingleSelect
    */
-  selectionType: 'SingleSelect' | 'MultiSelect';
+  selectionType: 'singleSelect' | 'multiSelect';
 
   /**
    *
@@ -75,7 +75,7 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
   searchable,
   data,
   value,
-  selectionType = 'SingleSelect',
+  selectionType = 'singleSelect',
   onSearch = () => { },
   onSelect = () => { },
   onSubmit = () => { },
@@ -131,9 +131,9 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
 
   const renderChildren = () => {
     switch (selectionType) {
-      case 'SingleSelect':
+      case 'singleSelect':
         return renderSingleSelect();
-      case 'MultiSelect':
+      case 'multiSelect':
         return renderMultiSelect();
     }
   };

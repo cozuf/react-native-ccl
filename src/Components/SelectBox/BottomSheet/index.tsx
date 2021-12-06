@@ -10,7 +10,7 @@ type SelectBoxBottomSheetTypes<ItemT> = {
      * type to choose
      * @default SingleSelect
      */
-    selectionType: 'SingleSelect' | 'MultiSelect';
+    selectionType: 'singleSelect' | 'multiSelect';
 
     /**
      * 
@@ -65,7 +65,7 @@ type SelectBoxBottomSheetTypes<ItemT> = {
 const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
     title = "Başlık",
     data,
-    selectionType = 'SingleSelect',
+    selectionType = 'singleSelect',
     onSelect = () => { },
     submitTitle = "Onayla",
     onSubmit = () => { },
@@ -79,7 +79,7 @@ const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
     const [nData, setNData] = useState(data);
 
     const onButtonSelect = (index: number) => {
-        if (selectionType === "SingleSelect") {
+        if (selectionType === "singleSelect") {
             const tData = nData.map((v, i) => ({ ...v, selected: i === index }));
             setNData(tData);
             if (typeof onSelect === 'function') {
@@ -120,10 +120,10 @@ const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
     };
 
     const isDisabled = (): boolean => {
-        if (selectionType === "MultiSelect" && minChoice !== 0) {
+        if (selectionType === "multiSelect" && minChoice !== 0) {
             const selectedLength = nData.filter((v: any) => v.selected).length;
             return selectedLength < minChoice;
-        } else if (selectionType === "SingleSelect") {
+        } else if (selectionType === "singleSelect") {
             const selectedLength = nData.filter((v: any) => v.selected).length;
             return selectedLength < 1;
         }
@@ -199,16 +199,16 @@ const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
 
     const renderChildren = () => {
         switch (selectionType) {
-            case 'SingleSelect':
+            case 'singleSelect':
                 return renderSingleSelect();
-            case 'MultiSelect':
+            case 'multiSelect':
                 return renderMultiSelect();
         }
     };
 
     return (
         <View>
-            <Text size="L" style={styles.title}>{title}</Text>
+            <Text size="l" style={styles.title}>{title}</Text>
             {renderChildren()}
             <Button
                 wrap="no-wrap"

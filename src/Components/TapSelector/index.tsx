@@ -41,7 +41,7 @@ const TapSelector: FC<ITapSelectorTypes> = ({ testID, data, onTap, ...props }) =
   return (
     <Button
       testID={testID}
-      type="Outlined"
+      type="outlined"
       title={data[selectedIndex].title}
       onPress={() => {
         onButtonTap(calculateIndex(selectedIndex + 1));

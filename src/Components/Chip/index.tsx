@@ -48,9 +48,9 @@ const Chip: FC<IChipProps> = ({
     <Button
       testID={testID}
       disabled={!active}
-      clickType={'Opacity'}
+      clickType={'opacity'}
       wrap={'wrap'}
-      type={selected ? 'Filled' : 'Outlined'}
+      type={selected ? 'filled' : 'outlined'}
       title={title}
       onPress={() => {
         setIsSelected(!isSelected);

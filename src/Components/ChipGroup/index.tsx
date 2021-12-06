@@ -33,7 +33,7 @@ export interface IChipGroupProps<ItemT> {
   /**
    * 
    */
-  selectionType?: "MultiSelect" | "SingleSelect"
+  selectionType?: "multiSelect" | "singleSelect"
 }
 export type IChipGroupTypes = IChipGroupProps<any> &
   Omit<FlatListProps<any>, 'data' | 'renderItem'>;
@@ -43,14 +43,14 @@ const ChipGroup: FC<IChipGroupTypes> = ({
   onSelect,
   renderItem,
   containerStyle,
-  selectionType = "MultiSelect"
+  selectionType = "multiSelect"
 }) => {
   const [nData, setNData] = useState(data);
 
   const onButtonSelect = (index: number) => {
     const tData = nData.map((v, i) => ({
       ...v,
-      selected: selectionType === "MultiSelect" ? i === index ? !v.selected : v.selected : i === index,
+      selected: selectionType === "multiSelect" ? i === index ? !v.selected : v.selected : i === index,
     }));
     setNData(tData);
     if (typeof onSelect === 'function') {

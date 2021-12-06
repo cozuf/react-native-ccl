@@ -21,7 +21,7 @@ interface IPageContainerProps {
   /**
    *
    */
-  type: 'SafeArea' | 'Default' | 'Scroll';
+  type: 'safeArea' | 'default' | 'scroll';
 
   /**
    *
@@ -42,7 +42,7 @@ type IPageContainerTypes = IPageContainerProps &
 
 const PageContainer: FC<IPageContainerTypes> = ({
   testID,
-  type = 'Default',
+  type = 'default',
   style,
   contentContainerStyle,
   children,
@@ -51,7 +51,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
   const [theme] = useThemeContext();
   const { pageContainer } = theme.colors;
   switch (type) {
-    case 'SafeArea':
+    case 'safeArea':
       return (
         <SafeAreaView
           testID={testID}
@@ -66,7 +66,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
         </SafeAreaView>
       );
 
-    case 'Scroll':
+    case 'scroll':
       return (
         <ScrollView
           testID={testID}
@@ -81,7 +81,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
           {children}
         </ScrollView>
       );
-    case 'Default':
+    case 'default':
     default:
       return (
         <View

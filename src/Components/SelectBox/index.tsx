@@ -29,13 +29,13 @@ export interface ISelectBoxProps<ItemT> {
    * type to display
    * @default Modal
    */
-  displayType: 'Modal' | "BottomSheet" | 'Page';
+  displayType: 'modal' | "bottomSheet" | 'page';
 
   /**
    * type to choose
    * @default SingleSelect
    */
-  selectionType: 'SingleSelect' | 'MultiSelect';
+  selectionType: 'singleSelect' | 'multiSelect';
 
   /**
    * @default Başlık
@@ -122,8 +122,8 @@ export type ISelectBoxTypes = ISelectBoxProps<any> &
 const SelectBox: FC<ISelectBoxTypes> = ({
   testID,
   active = true,
-  displayType = 'Modal',
-  selectionType = 'SingleSelect',
+  displayType = 'modal',
+  selectionType = 'singleSelect',
   title = 'Başlık',
   placeholder = 'Placeholder',
   searchable = false,
@@ -178,7 +178,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   const renderRest = (): ReactNode | null => {
     switch (displayType) {
-      case 'Modal':
+      case 'modal':
         return renderModal();
       default:
         return null;
@@ -269,13 +269,13 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   const onPress = () => {
     switch (displayType) {
-      case 'Modal':
+      case 'modal':
         openModal();
         break;
-      case 'BottomSheet':
+      case 'bottomSheet':
         openBottomSheet();
         break;
-      case 'Page':
+      case 'page':
         openPage();
         break;
     }

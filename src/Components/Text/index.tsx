@@ -19,12 +19,12 @@ export interface ITextProps {
   /**
    * Text Sizes
    */
-  size?: 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
+  size?: 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 
   /**
    *
    */
-  weigth?: 'Light' | 'Regular' | 'Medium' | 'SemiBold' | 'Bold';
+  weigth?: 'light' | 'regular' | 'medium' | 'semiBold' | 'bold';
 
   /**
    * enable or disable
@@ -47,8 +47,8 @@ export type ITextTypes = ITextProps &
 const Regular: FC<ITextTypes> = ({
   testID,
   active = true,
-  size = 'M',
-  weigth = 'Regular',
+  size = 'm',
+  weigth = 'regular',
   style,
   children,
   ...props
@@ -59,34 +59,34 @@ const Regular: FC<ITextTypes> = ({
 
   const defineSize = (): number => {
     switch (size) {
-      case 'XXS':
+      case 'xxs':
         return 8;
-      case 'XS':
+      case 'xs':
         return 10;
-      case 'S':
+      case 's':
         return 12;
-      case 'M':
+      case 'm':
         return 14;
-      case 'L':
+      case 'l':
         return 16;
-      case 'XL':
+      case 'xl':
         return 18;
-      case 'XXL':
+      case 'xxl':
         return 20;
     }
   };
 
   const defineFont = (): string => {
     switch (weigth) {
-      case 'Light':
+      case 'light':
         return fonts.light;
-      case 'Regular':
+      case 'regular':
         return fonts.regular;
-      case 'Medium':
+      case 'medium':
         return fonts.medium;
-      case 'SemiBold':
+      case 'semiBold':
         return fonts.semibold;
-      case 'Bold':
+      case 'bold':
         return fonts.bold;
     }
   };
