@@ -137,13 +137,13 @@ export type {
 };
 
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
-// TODO: Tüm padding, borderWidth, borderRadius belirle color scheme gibi
+// TODO: Prop'lar küçük harf olmalı
 // TODO: Örnek Sayfalar da varyantları ekle
-// TODO: Style Context
-// TODO: Language Context
+// TODO: Style Context - Tüm padding, borderWidth, borderRadius belirle color scheme gibi
 // TODO: yayınlamadan önce ReadMe düzenle
 // TODO: SearchBar'a aranacak key'i ekle
-// TODO: GlobalState'yi dışarıdan type verilebilir
+// : GlobalState'yi dışarıdan type verilebilir -> Şimdilik mümkün değil
+// : Language Context -> Burası da GlobalState gibi dışardan yapılmayacak
 // TODO: import - export ları düzenle
 /**
  * theme.colors|styles|fonts
