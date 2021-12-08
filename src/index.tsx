@@ -142,8 +142,16 @@ export type {
 // TODO: yayınlamadan önce ReadMe düzenle
 // TODO: SearchBar'a aranacak key'i ekle
 // : GlobalState'yi dışarıdan type verilebilir -> Şimdilik mümkün değil
-// : Language Context -> Burası da GlobalState gibi dışardan yapılmayacak
+// : Language Context -> Burası da GlobalState gibi şimdilik mümkün değil
 // TODO: import - export ları düzenle
+// TODO: colors'a componentBackground eklenecek
+// TODO: modalı Furkan'ın ki gibi yap bir sürü modal açacam diye uğraşma
+// TODO: seperator'u da type ile yap
+// TODO: checkbox'a titleContainer ve titlestyle eklenecek - seperator eklenecek
+// TODO: datetimepicker'a titleContainer ve titlestyle, placeholderContainer placeholderStyle eklenecek
+// TODO: switch'e titleContainer ve titlestyle, eklenecek
+// TODO: textinput error warning seperator
+// TODO: tokens için yapı kur
 /**
  * theme.colors|styles|fonts
  * setTheme({colors,styles,fonts})
