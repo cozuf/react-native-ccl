@@ -1,5 +1,5 @@
 import type { FontScheme } from './types';
-import Fonts from './fonts';
+import { fonts } from './fonts';
 
-export { Fonts };
+export { fonts };
 export type { FontScheme };
