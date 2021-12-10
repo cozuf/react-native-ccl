@@ -88,59 +88,27 @@ const TextPage = () => {
           onLongPress={onLongPress}
           size={
             SIZES[sizeIndex].size as
-              | 'xxs'
-              | 'xs'
-              | 's'
-              | 'm'
-              | 'l'
-              | 'xl'
-              | 'xxl'
+            | 'xxs'
+            | 'xs'
+            | 's'
+            | 'm'
+            | 'l'
+            | 'xl'
+            | 'xxl'
           }
           active={ACTIVE_DATA[activeIndex].value}
           style={[styles.common]}
           weigth={
             WEIGHTS[weightIndex].weight as
-              | 'light'
-              | 'regular'
-              | 'medium'
-              | 'semiBold'
-              | 'bold'
+            | 'light'
+            | 'regular'
+            | 'medium'
+            | 'semiBold'
+            | 'bold'
           }
         >
           {WEIGHTS[weightIndex].title}
         </Text>
-        {/* <Text
-          onPress={onPress}
-          onLongPress={onLongPress}
-          active={ACTIVE_DATA[activeIndex].value}
-          style={[styles.common]}
-          weigth="Regular">
-          {'Regular'}
-        </Text>
-        <Text
-          onPress={onPress}
-          onLongPress={onLongPress}
-          active={ACTIVE_DATA[activeIndex].value}
-          style={[styles.common]}
-          weigth="Medium">
-          {'Medium'}
-        </Text>
-        <Text
-          onPress={onPress}
-          onLongPress={onLongPress}
-          active={ACTIVE_DATA[activeIndex].value}
-          style={[styles.common]}
-          weigth="SemiBold">
-          {'SemiBold'}
-        </Text>
-        <Text
-          onPress={onPress}
-          onLongPress={onLongPress}
-          active={ACTIVE_DATA[activeIndex].value}
-          style={[styles.common]}
-          weigth="Bold">
-          {'Bold'}
-        </Text> */}
       </View>
       <View style={{ paddingVertical: 16 }}>
         <TapSelector
