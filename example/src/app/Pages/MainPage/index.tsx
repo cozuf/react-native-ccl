@@ -144,7 +144,17 @@ const MainPage = () => {
       <FlatList
         bounces={false}
         keyExtractor={(item, index) => item.name + index.toString()}
-        data={componentList}
+        data={componentList.sort((f, s) => {
+          const nameF = f.name.toUpperCase();
+          const nameS = s.name.toUpperCase();
+          if (nameF < nameS) {
+            return -1
+          }
+          if (nameF > nameS) {
+            return 1
+          }
+          return 0
+        })}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => {
           return (
