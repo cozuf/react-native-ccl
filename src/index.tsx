@@ -138,7 +138,6 @@ export type {
 
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
 // TODO: Örnek Sayfalar da varyantları ekle
-// TODO: Style Context - Tüm padding, borderWidth, borderRadius belirle color scheme gibi
 // TODO: yayınlamadan önce ReadMe düzenle
 // TODO: SearchBar'a aranacak key'i ekle
 // : GlobalState'yi dışarıdan type verilebilir -> Şimdilik mümkün değil
@@ -151,7 +150,9 @@ export type {
 // TODO: datetimepicker'a titleContainer ve titlestyle, placeholderContainer placeholderStyle eklenecek
 // TODO: switch'e titleContainer ve titlestyle, eklenecek
 // TODO: textinput error warning seperator
-// TODO: tokens için yapı kur
+// TODO: styles'den componentlere eklenecekleri ekle
+// TODO: styles'de bulunan tokens'leri ve fontfamily'leri içeriye taşı
+// TODO: ClassComponent için withThemeContext yap
 /**
  * theme.colors|styles|fonts
  * setTheme({colors,styles,fonts})
