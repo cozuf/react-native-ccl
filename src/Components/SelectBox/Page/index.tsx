@@ -95,7 +95,7 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
     data,
     // setData = () => { },
     searchText,
-    selectionType = 'SingleSelect',
+    selectionType = 'singleSelect',
     onSearch = () => { },
     onSelect = () => { },
     onSubmit = () => { },
@@ -110,15 +110,27 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
     });
   });
 
-  const renderSearch = () => {
-    return (
-      <SearchBar
-        value={searchText || ''}
-        onSearch={(text: string) => {
-          onSearch(navigation, text);
-        }}
-      />
-    );
+  const renderSearch = (): JSX.Element | null => {
+    if (searchable) {
+      return (
+        <SearchBar
+          value={searchText || ''}
+          onSearch={(text: string) => {
+            onSearch(navigation, text);
+          }}
+        />
+      );
+    }
+    return null
+  };
+
+  const renderSeperator = (): JSX.Element | null => {
+    if (searchable) {
+      return (
+        <Seperator.Vertical />
+      );
+    }
+    return null
   };
 
   const renderSingleSelect = () => {
@@ -163,7 +175,7 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
     );
   };
 
-  const renderChildren = (): JSX.Element | undefined => {
+  const renderChildren = (): JSX.Element => {
     switch (selectionType) {
       case 'singleSelect':
         return renderSingleSelect();
@@ -174,8 +186,8 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
 
   return (
     <PageContainer type="default">
-      {searchable ? renderSearch() : null}
-      {searchable ? <Seperator.Vertical /> : null}
+      {renderSearch()}
+      {renderSeperator()}
       {renderChildren()}
     </PageContainer>
   );
