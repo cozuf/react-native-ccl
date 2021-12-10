@@ -77,7 +77,7 @@ const Loading: FC<IModalTypes> = ({
           ]}
         >
           <ActivityIndicator type={type} size={40} />
-          <Text size="XL" weigth="Medium" style={styles.message}>
+          <Text size="xl" weigth="medium" style={styles.message}>
             {message}
           </Text>
         </Pressable>

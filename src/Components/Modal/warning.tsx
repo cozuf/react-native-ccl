@@ -85,13 +85,13 @@ const Warning: FC<IModalTypes> = ({
           >
             <Icon family="AntDesign" name="warning" size={24} />
             <View style={styles.titleContainer}>
-              <Text weigth="Bold" size={'XL'} style={styles.title}>
+              <Text weigth="bold" size={'xl'} style={styles.title}>
                 {title}
               </Text>
             </View>
           </View>
           <View style={styles.messageContainer}>
-            <Text size="XL" weigth="Medium">
+            <Text size="xl" weigth="medium">
               {message}
             </Text>
           </View>
