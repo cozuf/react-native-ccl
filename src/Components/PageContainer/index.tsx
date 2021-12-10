@@ -4,13 +4,11 @@ import {
   ScrollViewProps,
   View,
   ViewStyle,
-  StyleSheet,
   Omit,
   ScrollView,
   SafeAreaView,
 } from 'react-native';
 import { useThemeContext } from '../../Context/ThemeContext';
-import { TOKENS } from '../../Theme';
 
 interface IPageContainerProps {
   /**
@@ -49,14 +47,17 @@ const PageContainer: FC<IPageContainerTypes> = ({
   ...props
 }) => {
   const [theme] = useThemeContext();
-  const { pageContainer } = theme.colors;
+  const { colors, styles } = theme;
+  const { pageContainer } = colors;
+  const { pageContainerStyle } = styles;
+
   switch (type) {
     case 'safeArea':
       return (
         <SafeAreaView
           testID={testID}
           style={[
-            styles.view,
+            pageContainerStyle?.container,
             { backgroundColor: pageContainer.background },
             style,
           ]}
@@ -72,7 +73,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
           testID={testID}
           style={[style]}
           contentContainerStyle={[
-            styles.scrollview,
+            pageContainerStyle?.contentContainer,
             { backgroundColor: pageContainer.background },
             contentContainerStyle,
           ]}
@@ -81,13 +82,14 @@ const PageContainer: FC<IPageContainerTypes> = ({
           {children}
         </ScrollView>
       );
+
     case 'default':
     default:
       return (
         <View
           testID={testID}
           style={[
-            styles.view,
+            pageContainerStyle?.container,
             { backgroundColor: pageContainer.background },
             style,
           ]}
@@ -100,16 +102,3 @@ const PageContainer: FC<IPageContainerTypes> = ({
 };
 
 export default PageContainer;
-
-const styles = StyleSheet.create({
-  view: {
-    flex: 1,
-    paddingVertical: TOKENS.paddings.pageVertical,
-    paddingHorizontal: TOKENS.paddings.pageHorizontal,
-  },
-  scrollview: {
-    flex: 1,
-    paddingVertical: TOKENS.paddings.pageVertical,
-    paddingHorizontal: TOKENS.paddings.pageHorizontal,
-  },
-});

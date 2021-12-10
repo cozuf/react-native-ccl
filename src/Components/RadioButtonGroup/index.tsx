@@ -3,7 +3,6 @@ import {
   FlatList,
   FlatListProps,
   ListRenderItemInfo,
-  StyleSheet,
   View,
 } from 'react-native';
 import { RadioButton, Button, Seperator } from '..';
@@ -56,7 +55,10 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   submitTitle = 'Tamam',
 }) => {
   const [theme] = useThemeContext();
-  const { radioButtonGroup } = theme.colors;
+  const { colors, styles } = theme;
+  const { radioButtonGroup } = colors;
+  const { radioButtonGroupStyle } = styles;
+
   const [nData, setNData] = useState(data);
 
   const onButtonSelect = (index: number) => {
@@ -89,7 +91,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
 
   const renderSeperator = (): JSX.Element => {
     return (
-      <View style={styles.seperatorContainer}>
+      <View style={radioButtonGroupStyle?.seperatorContainer}>
         <Seperator.Vertical
           width={'96%'}
           height={1}
@@ -142,12 +144,5 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     </Fragment>
   );
 };
-
-const styles = StyleSheet.create({
-  seperatorContainer: {
-    alignItems: 'center',
-    paddingVertical: 4
-  }
-})
 
 export default RadioButtonGroup;

@@ -6,7 +6,6 @@ import {
   Pressable,
   StyleProp,
   ViewStyle,
-  StyleSheet,
   FlexAlignType,
   ColorValue,
   TextStyle,
@@ -14,9 +13,8 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 import { Icon, IIconProps, Text } from '..';
-import { FONTS } from '../../Assets';
 import { useThemeContext } from '../../Context/ThemeContext';
-import { TOKENS } from '../../Theme';
+import { tokens } from '../../Theme';
 
 export interface IButtonProps {
   /**
@@ -76,7 +74,7 @@ export interface IButtonProps {
   /**
    *
    */
-  containerStyle?: ViewStyle;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 export type IButtonTypes = IButtonProps &
@@ -101,7 +99,9 @@ const Button: FC<IButtonTypes> = ({
 }) => {
   const [pressed, setPressed] = useState<boolean>(false);
   const [theme] = useThemeContext();
-  const { button } = theme.colors;
+  const { colors, styles } = theme;
+  const { button } = colors;
+  const { buttonStyle } = styles
 
   const backgroundColor = (): ColorValue => {
     const BUTTON_FILLED_BACKGROUND =
@@ -196,8 +196,8 @@ const Button: FC<IButtonTypes> = ({
   const renderContainerStyle = (): StyleProp<ViewStyle> => {
     return {
       backgroundColor: backgroundColor(),
-      borderRadius: TOKENS.radiuses.button,
-      borderWidth: TOKENS.borders.button,
+      borderRadius: tokens.component.borderRadius,
+      borderWidth: tokens.component.borderWidth,
       borderColor: borderColor(),
       alignSelf: wrappableStyle(),
     };
@@ -219,7 +219,16 @@ const Button: FC<IButtonTypes> = ({
 
   const renderTitle = (): ReactNode => {
     return (
-      <Text style={[{ color: titleColor() }, styles.title, titleStyle]}>
+      <Text
+        weigth="semiBold"
+        style={
+          [
+            { color: titleColor() },
+            buttonStyle?.title,
+            titleStyle
+          ]
+        }
+      >
         {title}
       </Text>
     );
@@ -252,12 +261,12 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-              paddingVertical: TOKENS.paddings.componentContainerVertical,
-              paddingHorizontal: TOKENS.paddings.componentContainerHorizontal,
+              paddingVertical: tokens.component.paddingVertical,
+              paddingHorizontal: tokens.component.paddingHorizontal,
             }
             : {},
-          wrap !== 'free' ? styles.container : {},
-          containerStyle,
+          wrap !== 'free' ? buttonStyle?.container : {},
+          containerStyle
         ]}
         {...(props as TouchableOpacityProps)}
       >
@@ -288,11 +297,11 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-              paddingVertical: TOKENS.paddings.componentContainerVertical,
-              paddingHorizontal: TOKENS.paddings.componentContainerHorizontal,
+              paddingVertical: tokens.component.paddingVertical,
+              paddingHorizontal: tokens.component.paddingHorizontal
             }
             : {},
-          wrap !== 'free' ? styles.container : {},
+          wrap !== 'free' ? buttonStyle?.container : {},
           containerStyle,
         ]}
         {...(props as PressableProps)}
@@ -312,15 +321,3 @@ const Button: FC<IButtonTypes> = ({
 };
 
 export default Button;
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontFamily: FONTS.semibold,
-    fontSize: 16,
-  },
-});

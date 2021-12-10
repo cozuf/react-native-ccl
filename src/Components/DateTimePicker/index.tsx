@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
-import { Dimensions, Omit, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Dimensions, Omit, TouchableOpacity, View, ViewStyle } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
 import { Button, Modal, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
@@ -81,7 +81,9 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const [nDate, setNDate] = useState<Date>(date || new Date());
   const [bottomSheet, setBottomSheet] = useBottomSheet();
   const [theme] = useThemeContext();
-  const { dateTimePicker, modal } = theme.colors;
+  const { colors, styles } = theme;
+  const { dateTimePicker, modal } = colors;
+  const { dateTimePickerStyle } = styles
 
   const renderSubmit = () => {
     return (
@@ -212,7 +214,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
             dateTimePicker[active ? 'active' : 'passive'].background,
           borderColor: dateTimePicker[active ? 'active' : 'passive'].border,
         },
-        styles.container,
+        dateTimePickerStyle?.container,
       ]}
     >
       <Text>{title}</Text>
@@ -223,12 +225,3 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 };
 
 export default DateTimePicker;
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-  },
-});

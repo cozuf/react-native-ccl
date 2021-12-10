@@ -110,9 +110,13 @@ const Router = () => {
               value={theme.name === 'Dark'}
               onValueChange={(v) => {
                 if (v) {
-                  setTheme({ name: 'Dark', colors: dark });
+                  // setTheme({ name: 'Dark', colors: dark });
+                  // @ts-ignore
+                  theme.changeTheme("Dark")
                 } else {
-                  setTheme({ name: 'Light', colors: light });
+                  // setTheme({ name: 'Light', colors: light });
+                  // @ts-ignore
+                  theme.changeTheme("Light")
                 }
               }}
               containerStyle={{ paddingVertical: 2 }}

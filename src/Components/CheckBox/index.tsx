@@ -1,8 +1,8 @@
 import React, { FC, isValidElement, memo, useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Icon, IIconProps, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
-import { TOKENS } from '../../Theme';
+import { tokens } from '../../Theme';
 
 export interface ICheckBoxProps {
   /**
@@ -61,7 +61,9 @@ const CheckBox: FC<ICheckBoxProps> = ({
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   const [theme] = useThemeContext();
-  const { checkBox } = theme.colors;
+  const { colors, styles } = theme
+  const { checkBox } = colors;
+  const { checkBoxStyle } = styles
 
   useEffect(() => {
     setIsSelected(selected);
@@ -88,7 +90,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
       return (
         <View
           style={[
-            styles.iconContainer,
+            checkBoxStyle?.iconContainer,
             {
               borderColor: checkBox[active ? 'active' : 'passive'].iconBorder,
               backgroundColor: isSelected
@@ -123,7 +125,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
       testID={testID}
       key={value}
       disabled={!active}
-      style={[containerStyle, styles.container]}
+      style={[containerStyle, checkBoxStyle?.container]}
       onPress={() => {
         setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {
@@ -133,7 +135,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
     >
       {renderIcon()}
       {renderIcon() !== null ? (
-        <View style={{ width: TOKENS.paddings.componentContainerVertical }} />
+        <View style={{ width: tokens.component.paddingHorizontal }} />
       ) : null}
       {renderTitle()}
     </TouchableOpacity>
@@ -141,20 +143,3 @@ const CheckBox: FC<ICheckBoxProps> = ({
 };
 
 export default memo(CheckBox);
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: TOKENS.paddings.componentContainerVertical,
-    paddingHorizontal: TOKENS.paddings.componentContainerVertical,
-  },
-  iconContainer: {
-    borderWidth: 2,
-    borderRadius: 4,
-    minHeight: 24,
-    minWidth: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

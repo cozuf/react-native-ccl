@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleProp, View, ViewStyle } from 'react-native';
 import { Text } from '..';
-import { FONTS } from '../../Assets';
 import { useThemeContext } from '../../Context/ThemeContext';
 export interface IBadgeProps {
   /**
@@ -22,7 +21,9 @@ export interface IBadgeProps {
 
 const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
   const [theme] = useThemeContext();
-  const { badge } = theme.colors;
+  const { colors, styles } = theme
+  const { badgeStyle } = styles
+  const { badge } = colors;
 
   const calculateSize = (): number => {
     switch (size) {
@@ -45,33 +46,31 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
     }
   };
 
+  const containerStyle: StyleProp<ViewStyle> = {
+    height:
+      Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
+    width:
+      Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
+    borderRadius:
+      Platform.OS === 'android'
+        ? calculateSize() / 2
+        : (calculateSize() + 6) / 2,
+    borderColor: badge.border,
+    backgroundColor: badge.background,
+    shadowColor: badge.shadow,
+  }
+
   return (
     <View
       testID={testID}
       style={[
-        styles.container,
-        {
-          height:
-            Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
-          width:
-            Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
-          borderRadius:
-            Platform.OS === 'android'
-              ? calculateSize() / 2
-              : (calculateSize() + 6) / 2,
-          borderColor: badge.border,
-          backgroundColor: badge.background,
-          ...Platform.select({
-            ios: {
-              shadowColor: badge.shadow,
-            },
-          }),
-        },
+        badgeStyle?.container,
+        containerStyle,
       ]}
     >
       <Text
         style={[
-          styles.text,
+          badgeStyle?.text,
           {
             fontSize: Number(((calculateSize() / 3) * 2).toFixed(0)),
             color: badge.text,
@@ -80,33 +79,10 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
       >
         {getValue()}
       </Text>
-    </View>
+    </View >
   );
 };
 
 export default Badge;
 
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 2,
-    alignItems: 'center',
-    ...Platform.select({
-      ios: {
-        justifyContent: 'center',
-      },
-    }),
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 6,
-  },
-  text: {
-    textAlign: 'center',
-    fontFamily: FONTS.bold,
-  },
-});
-
-// TODO: Tekrar bak Platform farklılıkalrı
+// TODO: Tekrar bak Platform farklılıkları

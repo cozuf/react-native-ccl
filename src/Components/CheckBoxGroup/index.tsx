@@ -79,7 +79,9 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   unSelectAllTitle = 'Tümünü Kaldır',
 }) => {
   const [theme] = useThemeContext();
-  const { checkBoxGroup } = theme.colors;
+  const { colors, styles } = theme
+  const { checkBoxGroup } = colors
+  const { checkBoxGroupStyle } = styles
 
   const [nData, setNData] = useState(data);
 
@@ -157,7 +159,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   const renderSeperator = (): JSX.Element => {
     return (
-      <View style={styles.seperatorContainer}>
+      <View style={checkBoxGroupStyle?.seperatorContainer}>
         <Seperator.Vertical
           width={'96%'}
           height={1}
@@ -186,12 +188,12 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   return (
     <Fragment>
-      <View style={styles.buttonsContainer}>
+      <View style={checkBoxGroupStyle?.buttonsContainer}>
         <Button
           wrap={'wrap'}
           title={unSelectAllTitle}
           type="simplied"
-          containerStyle={styles.buttons}
+          containerStyle={checkBoxGroupStyle?.buttons}
           onPress={() => {
             setNData(
               nData.map((v: any) => ({ ...v, selected: false, active: true }))
@@ -202,7 +204,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
           wrap={'wrap'}
           title={selectAllTitle}
           type="simplied"
-          containerStyle={styles.buttons}
+          containerStyle={checkBoxGroupStyle?.buttons}
           onPress={() => {
             setNData(nData.map((v: any) => ({ ...v, selected: true })));
           }}
@@ -227,19 +229,5 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     </Fragment>
   );
 };
-
-const styles = StyleSheet.create({
-  seperatorContainer: {
-    alignItems: 'center',
-    paddingVertical: 4
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  buttons: {
-    paddingHorizontal: 0
-  }
-})
 
 export default memo(CheckBoxGroup);

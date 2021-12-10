@@ -1,5 +1,6 @@
 import React, { FC, Fragment, useState } from 'react';
-import { FlatListProps, ListRenderItemInfo, Omit, StyleSheet, View, ViewStyle } from 'react-native';
+import { FlatListProps, ListRenderItemInfo, Omit, StyleProp, View, ViewStyle } from 'react-native';
+import { useThemeContext } from '../../Context/ThemeContext';
 import { Chip } from '..';
 
 export interface IChipGroupProps<ItemT> {
@@ -28,7 +29,7 @@ export interface IChipGroupProps<ItemT> {
   /**
    * 
    */
-  containerStyle?: ViewStyle
+  containerStyle?: StyleProp<ViewStyle>
 
   /**
    * 
@@ -45,6 +46,10 @@ const ChipGroup: FC<IChipGroupTypes> = ({
   containerStyle,
   selectionType = "multiSelect"
 }) => {
+  const [theme] = useThemeContext()
+  const { styles } = theme
+  const { chipGroupStyle } = styles
+
   const [nData, setNData] = useState(data);
 
   const onButtonSelect = (index: number) => {
@@ -70,30 +75,18 @@ const ChipGroup: FC<IChipGroupTypes> = ({
           onSelect={() => {
             onButtonSelect(index);
           }}
-          containerStyle={styles.chipContainer}
+          containerStyle={chipGroupStyle?.chipContainer}
         />
-        <View style={styles.seperator} />
+        <View style={chipGroupStyle?.seperator} />
       </Fragment>
     );
   };
   return (
-    <View style={[containerStyle, styles.container]}>
+    <View style={[containerStyle, chipGroupStyle?.container]}>
       {nData.map(renderItem || customRenderItem)}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  },
-  chipContainer: {
-    marginBottom: 4
-  },
-  seperator: {
-    width: 8
-  }
-})
 
 export default ChipGroup;

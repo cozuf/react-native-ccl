@@ -3,7 +3,6 @@ import {
   FlatListProps,
   ListRenderItemInfo,
   Omit,
-  StyleSheet,
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
@@ -144,7 +143,9 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const [value, setValue] = useState<string>(searchText || '');
   const [visible, setVisible] = useState<boolean>(false);
   const [theme] = useThemeContext();
-  const { selectBox, modal } = theme.colors;
+  const { colors, styles } = theme;
+  const { selectBox, modal } = colors;
+  const { selectBoxStyle } = styles
 
   const renderModal = (): ReactNode => {
     return (
@@ -305,7 +306,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           backgroundColor: selectBox[active ? 'active' : 'passive'].background,
           borderColor: selectBox[active ? 'active' : 'passive'].border,
         },
-        styles.container,
+        selectBoxStyle?.container,
       ]}
     >
       {
@@ -337,12 +338,3 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 };
 
 export default SelectBox;
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-  },
-});

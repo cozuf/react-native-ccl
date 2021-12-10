@@ -1,6 +1,5 @@
 import React, { FC, isValidElement, ReactNode, useRef, useState } from 'react';
 import {
-  StyleSheet,
   TextStyle,
   View,
   TextInput,
@@ -13,10 +12,10 @@ import {
   Pressable,
   Omit,
   KeyboardTypeOptions,
+  StyleProp,
 } from 'react-native';
 import { Button, Icon, IIconProps, Text, Seperator } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
-import { TOKENS } from '../../Theme';
 
 export interface ITextInputProps {
   /**
@@ -97,7 +96,7 @@ export interface ITextInputProps {
   /**
    *
    */
-  containerStyle?: ViewStyle;
+  containerStyle?: StyleProp<ViewStyle>;
 
   /**
    *
@@ -135,7 +134,10 @@ const NTextInput: FC<ITextInputTypes> = ({
   ...props
 }) => {
   const [theme] = useThemeContext();
-  const { textInput } = theme.colors;
+  const { colors, styles } = theme;
+  const { textInput } = colors;
+  const { textInputStyle } = styles;
+
   const NativeTextInputRef = useRef<TextInput | null>(null);
   const [isFocused, setIsFocused] = useState<boolean>();
 
@@ -242,7 +244,7 @@ const NTextInput: FC<ITextInputTypes> = ({
       testID={testID}
       disabled={!active}
       style={[
-        styles.container,
+        textInputStyle?.container,
         containerStyle,
         {
           backgroundColor: containerBackgroundColor(),
@@ -258,11 +260,11 @@ const NTextInput: FC<ITextInputTypes> = ({
           {isRequired ? `* ${title}` : title}
         </Text>
       ) : null}
-      <View style={[styles.inputContainer]}>
+      <View style={[textInputStyle?.inputContainer]}>
         {icon ? renderIcon() : null}
         {icon ? <Seperator.Vertical /> : null}
         {
-          <View style={styles.nativeInputContainer}>
+          <View style={textInputStyle?.nativeInputContainer}>
             <TextInput
               ref={(ref) => {
                 NativeTextInputRef.current = ref;
@@ -271,7 +273,7 @@ const NTextInput: FC<ITextInputTypes> = ({
               value={value}
               onChangeText={onChangeText}
               style={[
-                styles.input,
+                textInputStyle?.input,
                 style,
                 {
                   ...Platform.select({
@@ -322,25 +324,5 @@ const NTextInput: FC<ITextInputTypes> = ({
 };
 
 export default NTextInput;
-
-const styles = StyleSheet.create({
-  container: {
-    borderRadius: TOKENS.radiuses.component,
-    borderWidth: TOKENS.borders.inputContainer,
-    padding: TOKENS.paddings.componentContainerVertical,
-  },
-  inputContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  nativeInputContainer: {
-    flex: 1
-  },
-  input: {
-    paddingLeft: 0,
-    paddingVertical: 12,
-  },
-  cleanContainer: {},
-});
 
 //  TODO: Info Button oluştur snackbar ile

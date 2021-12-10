@@ -1,7 +1,13 @@
-import React, { createContext, FC, useContext, useState } from 'react';
+import React, { Component, ComponentType, createContext, FC, FunctionComponent, useContext, useState } from 'react';
 import { useColorScheme } from 'react-native';
-import { Fonts, FontScheme } from '../Theme/Fonts';
-import { dark, light, ColorScheme } from '../Theme/Variants';
+import { componentsStyles } from '../Theme/Styles';
+import type { CopmonentsStylesScheme } from '../Theme/Styles';
+import { tokens } from '../Theme/Tokens';
+import type { TokensScheme } from '../Theme/Tokens';
+import type { FontScheme } from '../Theme/Fonts';
+import { fonts } from '../Theme/Fonts';
+import type { ColorScheme } from '../Theme/Variants';
+import { dark, light } from '../Theme/Variants';
 
 export const ThemeContext = createContext<{
   theme: ThemeType;
@@ -9,7 +15,10 @@ export const ThemeContext = createContext<{
   theme: {
     name: 'Light',
     colors: light,
-    fonts: Fonts,
+    fonts: fonts,
+    styles: componentsStyles,
+    tokens: tokens,
+    changeTheme: () => { }
   },
 });
 
@@ -17,24 +26,44 @@ export const ThemeContext = createContext<{
 export const ThemeContextDispatch = createContext<{
   setTheme: (newTheme: Partial<ThemeType>) => void;
 }>({
-  setTheme: () => {},
+  setTheme: () => { },
 });
 
 type ThemeType = {
-  name: 'Light' | 'Dark';
-  colors: ColorScheme;
-  fonts: FontScheme;
+  name: 'Light' | 'Dark'
+  colors: ColorScheme
+  fonts: FontScheme
+  styles: CopmonentsStylesScheme
+  tokens: TokensScheme
+  changeTheme?: (name: ThemeType["name"]) => void
 };
 
 const ThemeProvider: FC<any> = ({ children }) => {
+
+  const changeTheme = (name: ThemeType["name"]) => {
+    switch (name) {
+      case "Light":
+      default:
+        setCurrentTheme({ name: "Light", colors: light })
+        break;
+
+      case "Dark":
+        setCurrentTheme({ name: "Dark", colors: dark })
+        break;
+    }
+  }
+
   const [theme, setTheme] = useState<ThemeType>({
     name: useColorScheme() === 'dark' ? 'Dark' : 'Light',
     colors: useColorScheme() === 'dark' ? dark : light,
-    fonts: Fonts,
+    fonts: fonts,
+    styles: componentsStyles,
+    tokens: tokens,
+    changeTheme: changeTheme
   });
 
   const setCurrentTheme = (n: Partial<ThemeType>) => {
-    setTheme({ ...theme, ...n });
+    setTheme((prevTheme) => ({ ...prevTheme, ...n }));
   };
 
   return (
@@ -52,6 +81,6 @@ export const useThemeContext = (): [
   ThemeType,
   (newTheme: Partial<ThemeType>) => void
 ] => [
-  useContext(ThemeContext).theme,
-  useContext(ThemeContextDispatch).setTheme,
-];
+    useContext(ThemeContext).theme,
+    useContext(ThemeContextDispatch).setTheme,
+  ];

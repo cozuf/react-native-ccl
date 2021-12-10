@@ -4,7 +4,6 @@ import {
   Switch as NativeSwitch,
   SwitchProps,
   Omit,
-  StyleSheet,
   ViewStyle,
 } from 'react-native';
 import { Text } from '..';
@@ -63,11 +62,13 @@ const Switch: FC<ISwitchTypes> = ({
   ...props
 }) => {
   const [theme] = useThemeContext();
-  const { switchComponent } = theme.colors;
+  const { colors, styles } = theme;
+  const { switchComponent } = colors;
+  const { switchStyle } = styles;
   return (
     <View
       style={[
-        styles.container,
+        switchStyle?.container,
         containerStyle,
         {
           backgroundColor:
@@ -76,7 +77,7 @@ const Switch: FC<ISwitchTypes> = ({
         },
       ]}
     >
-      <Text active={active} style={styles.titleContainer}>
+      <Text active={active} style={switchStyle?.titleContainer}>
         {title}
       </Text>
       <NativeSwitch
@@ -99,17 +100,3 @@ const Switch: FC<ISwitchTypes> = ({
 };
 
 export default Switch;
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    borderWidth: 2,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    paddingVertical: 8,
-    alignItems: 'center',
-  },
-  titleContainer: {
-    flex: 1
-  }
-});

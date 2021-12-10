@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useRef, useState } from "react";
-import { Animated, View, Omit, StyleSheet, Pressable, Easing, ViewStyle } from "react-native";
+import { Animated, View, Omit, Pressable, Easing, ViewStyle } from "react-native";
 import { Icon, } from "..";
-
+import { useThemeContext } from '../../Context/ThemeContext';
 export interface ICardProps {
     /**
      * 
@@ -48,6 +48,9 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     footerContainerStyle,
     children
 }) => {
+    const [theme] = useThemeContext()
+    const { colors, styles } = theme
+    const { cardStyle } = styles
     const [open, setOpen] = useState(false);
     const animatedController = useRef(new Animated.Value(0)).current;
     const [bodySectionHeight, setBodySectionHeight] = useState<number>(0);
@@ -82,16 +85,16 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     };
 
     return (
-        <Pressable onPress={() => toggleListItem()} style={[containerStyle, styles.container]}>
-            <View style={[headerContainerStyle, styles.titleContainer]}>
+        <Pressable onPress={() => toggleListItem()} style={[containerStyle, cardStyle?.container]}>
+            <View style={[headerContainerStyle, cardStyle?.titleContainer]}>
                 {headerComponent()}
                 <Animated.View style={{ transform: [{ rotateZ: arrowAngle }] }}>
                     <Icon family="MaterialIcons" name="keyboard-arrow-down" size={20} color="black" />
                 </Animated.View>
             </View>
-            <Animated.View style={[styles.bodyBackground, { height: bodyHeight }]}>
+            <Animated.View style={[cardStyle?.bodyBackground, { height: bodyHeight }]}>
                 <View
-                    style={[bodyContainerStyle, styles.bodyContainer]}
+                    style={[bodyContainerStyle, cardStyle?.bodyContainer]}
                     onLayout={event =>
                         setBodySectionHeight(event.nativeEvent.layout.height)
                     }>
@@ -104,27 +107,6 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
         </Pressable>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        borderWidth: 1,
-        borderRadius: 8,
-        paddingVertical: 8,
-        paddingHorizontal: 16
-    },
-    bodyBackground: {
-        overflow: 'hidden',
-    },
-    titleContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    bodyContainer: {
-        position: 'absolute',
-        bottom: 0,
-    },
-});
 
 const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({
     headerComponent = () => null,

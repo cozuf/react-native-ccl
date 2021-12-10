@@ -40,6 +40,7 @@ export interface IChipStyle {
 
 export interface IChipGroupStyle {
     container?: StyleProp<ViewStyle>
+    chipContainer?: StyleProp<ViewStyle>
     seperator?: StyleProp<ViewStyle>
 }
 
@@ -71,8 +72,8 @@ export interface IRadioButtonStyle {
 
 export interface IRadioButtonGroupStyle {
     container?: StyleProp<ViewStyle>
-    speratorContainer?: StyleProp<ViewStyle>
-    sperator?: StyleProp<ViewStyle>
+    seperatorContainer?: StyleProp<ViewStyle>
+    seperator?: StyleProp<ViewStyle>
 }
 
 export interface ISearchBarStyle {

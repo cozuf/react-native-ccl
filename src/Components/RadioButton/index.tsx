@@ -1,8 +1,8 @@
 import React, { FC, isValidElement, ReactNode, useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, ViewStyle } from 'react-native';
+import { View, TouchableOpacity, ViewStyle, StyleProp } from 'react-native';
 import { Icon, IIconProps, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
-import { TOKENS } from '../../Theme';
+import { tokens } from '../../Theme';
 
 export interface IRadionButtonProps {
   /**
@@ -46,7 +46,7 @@ export interface IRadionButtonProps {
   /**
    * 
    */
-  containerStyle?: ViewStyle
+  containerStyle?: StyleProp<ViewStyle>
 }
 
 const RadioButton: FC<IRadionButtonProps> = ({
@@ -72,7 +72,9 @@ const RadioButton: FC<IRadionButtonProps> = ({
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   const [theme] = useThemeContext();
-  const { radioButton } = theme.colors;
+  const { colors, styles } = theme;
+  const { radioButton } = colors;
+  const { radioButtonStyle } = styles;
 
   const renderIcon = (): React.ReactElement | null => {
     if (iconSet) {
@@ -112,7 +114,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
       testID={testID}
       disabled={!active}
       key={value}
-      style={[containerStyle, styles.container]}
+      style={[containerStyle, radioButtonStyle?.container]}
       onPress={() => {
         setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {
@@ -122,7 +124,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
     >
       {renderIcon()}
       {renderIcon() !== null ? (
-        <View style={{ width: TOKENS.paddings.componentContainerVertical }} />
+        <View style={{ width: tokens.component.paddingHorizontal }} />
       ) : null}
       {renderTitle()}
     </TouchableOpacity>
@@ -130,12 +132,3 @@ const RadioButton: FC<IRadionButtonProps> = ({
 };
 
 export default RadioButton;
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: TOKENS.paddings.componentContainerVertical,
-    paddingHorizontal: TOKENS.paddings.componentContainerVertical,
-  },
-});

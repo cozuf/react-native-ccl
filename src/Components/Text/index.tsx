@@ -54,8 +54,9 @@ const Regular: FC<ITextTypes> = ({
   ...props
 }) => {
   const [theme] = useThemeContext();
-  const { colors, fonts } = theme;
+  const { colors, styles, fonts } = theme;
   const { text } = colors;
+  const { textStyle } = styles
 
   const defineSize = (): number => {
     switch (size) {
@@ -101,7 +102,9 @@ const Regular: FC<ITextTypes> = ({
           color: text[active ? 'active' : 'passive'],
         },
         style,
-      ]}
+        textStyle?.style
+      ]
+      }
       {...props}
     >
       {children}
