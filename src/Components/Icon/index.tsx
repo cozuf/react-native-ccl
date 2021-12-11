@@ -30,7 +30,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 // @ts-ignore
 import Zocial from 'react-native-vector-icons/Zocial';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface IIconProps {
   /**
@@ -80,7 +80,7 @@ const Icon: FC<IIconProps> = ({
   color,
   active = true,
 }) => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { icon } = theme.colors;
   const COLOR = color ? color : icon[active ? 'active' : 'passive'];
   switch (family) {

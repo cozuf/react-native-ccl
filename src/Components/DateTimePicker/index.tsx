@@ -2,8 +2,8 @@ import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { Dimensions, Omit, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
 import { Button, Modal, Text } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
-import { useBottomSheet } from '../../Context/BottomSheetContext';
+import { useTheme } from '../../Context/Theme';
+import { useBottomSheet } from '../../Context/BottomSheet';
 import type { ModalizeProps } from 'react-native-modalize';
 
 export interface IDateTimePickerProps {
@@ -104,7 +104,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const [visible, setVisible] = useState<boolean>(false);
   const [nDate, setNDate] = useState<Date>(date || new Date());
   const [bottomSheet, setBottomSheet] = useBottomSheet();
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme;
   const { dateTimePicker, modal } = colors;
   const { dateTimePickerStyle } = styles

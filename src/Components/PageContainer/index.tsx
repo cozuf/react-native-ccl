@@ -8,7 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 interface IPageContainerProps {
   /**
@@ -46,7 +46,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
   children,
   ...props
 }) => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme;
   const { pageContainer } = colors;
   const { pageContainerStyle } = styles;

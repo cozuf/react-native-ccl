@@ -56,11 +56,11 @@ import type {
 
 import {
   ThemeProvider,
-  useThemeContext,
-  GlobalStateProvider,
-  useGlobalState,
+  useTheme,
   BottomSheetProvider,
   useBottomSheet,
+  GlobalStateProvider,
+  useGlobalState,
   ClassGlobalStateProvider,
   useClassGlobalState
 } from './Context';
@@ -89,20 +89,20 @@ export {
   Seperator,
   DateTimePicker,
   Switch,
+  SnackBar,
+  Card,
+  SelectPage,
   ThemeProvider,
-  useThemeContext,
-  GlobalStateProvider,
-  useGlobalState,
+  useTheme,
   BottomSheetProvider,
   useBottomSheet,
+  GlobalStateProvider,
+  useGlobalState,
+  ClassGlobalStateProvider,
+  useClassGlobalState,
   FONTS,
   dark,
   light,
-  SelectPage,
-  SnackBar,
-  Card,
-  ClassGlobalStateProvider,
-  useClassGlobalState
 };
 
 export type {
@@ -148,7 +148,3 @@ export type {
 // TODO: styles'den componentlere eklenecekleri ekle
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri içeriye taşı
 // TODO: ClassComponent için withThemeContext yap
-/**
- * theme.colors|styles|fonts
- * setTheme({colors,styles,fonts})
- */

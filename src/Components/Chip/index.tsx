@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
-import { useThemeContext } from "../../Context/ThemeContext"
+import { useTheme } from "../../Context/Theme"
 import { Button } from '..';
 
 export interface IChipProps {
@@ -43,7 +43,7 @@ const Chip: FC<IChipProps> = ({
   onSelect = () => { },
   containerStyle = {},
 }) => {
-  const [theme] = useThemeContext()
+  const [theme] = useTheme()
   const { styles } = theme
   const { chipStyle } = styles
   const [isSelected, setIsSelected] = useState<boolean>(selected);

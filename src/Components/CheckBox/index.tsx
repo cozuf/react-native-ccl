@@ -1,7 +1,7 @@
 import React, { FC, isValidElement, memo, useEffect, useState } from 'react';
 import { TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Icon, IIconProps, Text, Seperator } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface ICheckBoxProps {
   /**
@@ -71,7 +71,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
   titleStyle
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme
   const { checkBox } = colors;
   const { checkBoxStyle } = styles

@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useRef, useState } from "react";
 import { Animated, View, Omit, Pressable, Easing, ViewStyle } from "react-native";
 import { Icon, } from "..";
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 export interface ICardProps {
     /**
      * 
@@ -54,7 +54,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     footerContainerStyle,
     children
 }) => {
-    const [theme] = useThemeContext()
+    const [theme] = useTheme()
     const { colors, styles } = theme
     const { card } = colors
     const { cardStyle } = styles

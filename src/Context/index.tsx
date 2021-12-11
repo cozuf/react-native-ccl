@@ -1,6 +1,15 @@
-import ThemeProvider, { useThemeContext } from './ThemeContext';
-import GlobalStateProvider, { useGlobalState } from './GlobalStateContext';
-import BottomSheetProvider, { useBottomSheet } from "./BottomSheetContext";
-import ClassGlobalStateProvider, { useClassGlobalState } from "./ClassGlobalState";
+import { ThemeProvider, useTheme } from './Theme';
+import { BottomSheetProvider, useBottomSheet } from "./BottomSheet";
+import GlobalStateProvider, { useGlobalState } from './GlobalState/GlobalStateContext';
+import ClassGlobalStateProvider, { useClassGlobalState } from './GlobalState/ClassGlobalState';
 
-export { ThemeProvider, useThemeContext, GlobalStateProvider, useGlobalState, BottomSheetProvider, useBottomSheet, ClassGlobalStateProvider, useClassGlobalState };
+export {
+    ThemeProvider,
+    useTheme,
+    BottomSheetProvider,
+    useBottomSheet,
+    GlobalStateProvider,
+    useGlobalState,
+    ClassGlobalStateProvider,
+    useClassGlobalState,
+};

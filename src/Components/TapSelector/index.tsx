@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import type { Omit } from 'react-native';
 import { Button, IButtonProps } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface ITapSelectorProps<ItemT> {
   /**
@@ -24,7 +24,7 @@ export type ITapSelectorTypes = ITapSelectorProps<any> &
   Omit<IButtonProps, 'onPress' | 'title'>;
 
 const TapSelector: FC<ITapSelectorTypes> = ({ testID, data, onTap, ...props }) => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { styles } = theme
   const { tapSelectorStyle } = styles
 

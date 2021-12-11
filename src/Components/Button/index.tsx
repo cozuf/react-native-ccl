@@ -13,7 +13,7 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 import { Icon, IIconProps, Text } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 import { tokens } from '../../Theme';
 
 export interface IButtonProps {
@@ -98,7 +98,7 @@ const Button: FC<IButtonTypes> = ({
   ...props
 }) => {
   const [pressed, setPressed] = useState<boolean>(false);
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme;
   const { button } = colors;
   const { buttonStyle } = styles

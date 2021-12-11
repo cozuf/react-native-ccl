@@ -11,7 +11,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Button, Icon, Text } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface IModalProps {
   /**
@@ -43,7 +43,7 @@ const Fault: FC<IModalTypes> = ({
 }) => {
   const ModalRef = useRef<NativeModal | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(visible);
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { modal } = theme.colors;
 
   useEffect(() => {

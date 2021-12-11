@@ -4,11 +4,10 @@ import {
   FlatListProps,
   ListRenderItemInfo,
   Omit,
-  StyleSheet,
   View,
 } from 'react-native';
 import { CheckBox, Button, Seperator } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface ICheckBoxGroupProps<ItemT> {
   /**
@@ -78,7 +77,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   selectAllTitle = 'Tümünü Seç',
   unSelectAllTitle = 'Tümünü Kaldır',
 }) => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme
   const { checkBoxGroup } = colors
   const { checkBoxGroupStyle } = styles

@@ -1,7 +1,7 @@
 import React, { FC, isValidElement, ReactNode, useState } from 'react';
 import { View, TouchableOpacity, ViewStyle, StyleProp } from 'react-native';
 import { Icon, IIconProps, Text } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 import { tokens } from '../../Theme';
 
 export interface IRadionButtonProps {
@@ -71,7 +71,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
   containerStyle
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme;
   const { radioButton } = colors;
   const { radioButtonStyle } = styles;

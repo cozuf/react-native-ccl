@@ -12,7 +12,7 @@ import {
   WaveIndicator,
   // @ts-ignore
 } from 'react-native-indicators';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface IActivityIndicatorProps {
   /**
@@ -52,7 +52,7 @@ const NActivityIndicator: FC<IActivityIndicatorProps> = ({
   color,
   size = 24,
 }) => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { common } = theme.colors;
   const COLOR = color ? color : common.active;
   switch (type) {

@@ -11,7 +11,7 @@ import type { ParamListBase } from '@react-navigation/routers';
 import {
   Button,
   Switch,
-  useThemeContext,
+  useTheme,
   FONTS,
   SelectPage as SelectBoxSelectPage,
 } from 'react-native-ccl';
@@ -49,7 +49,7 @@ import ClassGlobalStatePage from '../Pages/ClassGlobalStateContext';
 const Stack = createStackNavigator();
 
 const Router = () => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { common, text, pageContainer } = theme.colors;
 
   const renderHeaderLeft = (

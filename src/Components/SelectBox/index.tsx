@@ -10,8 +10,8 @@ import { Seperator, Text } from '..';
 import type { NavigationProp } from '@react-navigation/core';
 import type { ParamListBase } from '@react-navigation/routers';
 import SelectBoxModal from './Modal';
-import { useThemeContext } from '../../Context/ThemeContext';
-import { useBottomSheet } from '../../Context/BottomSheetContext';
+import { useTheme } from '../../Context/Theme';
+import { useBottomSheet } from '../../Context/BottomSheet';
 import SelectBoxBottomSheet from './BottomSheet';
 
 export interface ISelectBoxProps<ItemT> {
@@ -142,7 +142,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const [dataList, setDataList] = useState<any[]>(data as any[]);
   const [value, setValue] = useState<string>(searchText || '');
   const [visible, setVisible] = useState<boolean>(false);
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme;
   const { selectBox, modal } = colors;
   const { selectBoxStyle } = styles

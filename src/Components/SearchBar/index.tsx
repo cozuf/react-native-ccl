@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import type { Omit } from 'react-native';
 import { ITextInputTypes, TextInput } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface ISearchBarProps {
   /**
@@ -37,7 +37,7 @@ const SearchBar: FC<ISearchBarTypes> = ({
   onSearch,
   ...props
 }) => {
-  const [theme] = useThemeContext()
+  const [theme] = useTheme()
   const { styles } = theme;
   const { searchBarStyle } = styles
   return (

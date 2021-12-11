@@ -9,7 +9,7 @@ import {
   TextStyle,
 } from 'react-native';
 import { Seperator, Text } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface ISwitchProps {
   /**
@@ -75,7 +75,7 @@ const Switch: FC<ISwitchTypes> = ({
   titleStyle,
   ...props
 }) => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme;
   const { switchComponent } = colors;
   const { switchStyle } = styles;

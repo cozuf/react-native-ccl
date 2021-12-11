@@ -15,7 +15,7 @@ import {
   StyleProp,
 } from 'react-native';
 import { Button, Icon, IIconProps, Text, Seperator } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface ITextInputProps {
   /**
@@ -133,7 +133,7 @@ const NTextInput: FC<ITextInputTypes> = ({
   isRequired,
   ...props
 }) => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme;
   const { textInput } = colors;
   const { textInputStyle } = styles;

@@ -1,26 +1,10 @@
-import React, { createContext, Dispatch, FC, ReactNode, useContext, useRef, useState } from 'react';
+import React, { FC, useRef, useState } from "react";
 import { View } from "react-native";
-import type { Modalize, ModalizeProps } from 'react-native-modalize';
+import type { Modalize } from "react-native-modalize";
 import { Modalize as BottomSheet } from 'react-native-modalize';
+import { BottomSheetContext, BottomSheetDispatchContext } from "./context";
+import type { IBottomSheetFunctions, IBottomSheetProps } from "./types";
 
-interface IBottomSheetFunctions {
-    show: () => void,
-    close: () => void,
-}
-
-interface IBottomSheetProps {
-    props: ModalizeProps,
-    renderContent: () => ReactNode
-}
-
-export const BottomSheetContext = createContext<IBottomSheetFunctions>({
-    show: () => { },
-    close: () => { }
-});
-
-export const BottomSheetDispatchContext = createContext<Dispatch<Partial<IBottomSheetProps>>>(() => {
-
-});
 
 const BottomSheetProvider: FC<any> = ({ children }) => {
     const bottomSheetRef = useRef<Modalize>(null);
@@ -58,11 +42,3 @@ const BottomSheetProvider: FC<any> = ({ children }) => {
 };
 
 export default BottomSheetProvider;
-
-export const useBottomSheet = (): [
-    IBottomSheetFunctions,
-    Dispatch<Partial<IBottomSheetProps>>,
-] => [
-        useContext(BottomSheetContext),
-        useContext(BottomSheetDispatchContext)
-    ];

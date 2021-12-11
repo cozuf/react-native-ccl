@@ -6,7 +6,7 @@ import {
   TextProps as NativeTextProps,
   TextStyle as NativeTextStyle,
 } from 'react-native';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 type TextStyle = Omit<NativeTextStyle, 'fontFamily' | 'fontWeight'>;
 
@@ -53,7 +53,7 @@ const Regular: FC<ITextTypes> = ({
   children,
   ...props
 }) => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles, fonts } = theme;
   const { text } = colors;
   const { textStyle } = styles

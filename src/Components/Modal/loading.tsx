@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { ActivityIndicator, IActivityIndicatorProps, Text } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface IModalProps {
   /**
@@ -39,7 +39,7 @@ const Loading: FC<IModalTypes> = ({
 }) => {
   const ModalRef = useRef<NativeModal | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(visible);
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { modal } = theme.colors;
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import React, { FC, Fragment, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-ccl';
 import { Button, CheckBox, Seperator, RadioButton } from '../..';
-import { useThemeContext } from '../../../Context/ThemeContext';
+import { useTheme } from '../../../Context/Theme';
 
 type SelectBoxBottomSheetTypes<ItemT> = {
 
@@ -73,7 +73,7 @@ const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
     maxChoice = 0,
     minChoice = 0,
 }) => {
-    const [theme] = useThemeContext();
+    const [theme] = useTheme();
     const { checkBoxGroup } = theme.colors;
 
     const [nData, setNData] = useState(data);

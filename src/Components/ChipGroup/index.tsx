@@ -1,6 +1,6 @@
 import React, { FC, Fragment, useState } from 'react';
 import { FlatListProps, ListRenderItemInfo, Omit, StyleProp, View, ViewStyle } from 'react-native';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 import { Chip } from '..';
 
 export interface IChipGroupProps<ItemT> {
@@ -46,7 +46,7 @@ const ChipGroup: FC<IChipGroupTypes> = ({
   containerStyle,
   selectionType = "multiSelect"
 }) => {
-  const [theme] = useThemeContext()
+  const [theme] = useTheme()
   const { styles } = theme
   const { chipGroupStyle } = styles
 

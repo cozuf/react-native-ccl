@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Platform, StyleProp, View, ViewStyle } from 'react-native';
 import { Text } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 export interface IBadgeProps {
   /**
    * 
@@ -20,7 +20,7 @@ export interface IBadgeProps {
 }
 
 const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme
   const { badgeStyle } = styles
   const { badge } = colors;

@@ -3,10 +3,9 @@ import {
   FlatList,
   FlatListProps,
   ListRenderItemInfo,
-  View,
 } from 'react-native';
 import { RadioButton, Button, Seperator } from '..';
-import { useThemeContext } from '../../Context/ThemeContext';
+import { useTheme } from '../../Context/Theme';
 
 export interface IRadioButtonGroupProps<ItemT> {
   /**
@@ -54,7 +53,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   onSubmit = () => { },
   submitTitle = 'Tamam',
 }) => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { colors, styles } = theme;
   const { radioButtonGroup } = colors;
   const { radioButtonGroupStyle } = styles;

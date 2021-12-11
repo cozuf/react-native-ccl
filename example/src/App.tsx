@@ -5,10 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import Router from './app/Navigation';
 import {
   ThemeProvider,
-  useThemeContext,
-  GlobalStateProvider,
+  useTheme,
   BottomSheetProvider,
   ClassGlobalStateProvider,
+  GlobalStateProvider
 } from 'react-native-ccl';
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
 export default App;
 
 const Child = () => {
-  const [theme] = useThemeContext();
+  const [theme] = useTheme();
   const { common } = theme.colors;
 
   return (
