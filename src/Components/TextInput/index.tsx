@@ -210,6 +210,13 @@ const NTextInput: FC<ITextInputTypes> = ({
     return null
   };
 
+  const renderWarningErrorSeperator = () => {
+    if (error && warning) {
+      return <Seperator type="vertical" />
+    }
+    return null
+  };
+
   const changeFocus = () => {
     if (NativeTextInputRef.current?.isFocused()) {
       NativeTextInputRef.current?.blur();
@@ -337,6 +344,7 @@ const NTextInput: FC<ITextInputTypes> = ({
         {renderClean()}
       </View>
       {renderWarning()}
+      {renderWarningErrorSeperator()}
       {renderError()}
     </Pressable>
   );

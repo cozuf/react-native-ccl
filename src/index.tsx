@@ -148,7 +148,6 @@ export type {
 // TODO: checkbox'a titleContainer ve titlestyle eklenecek 
 // TODO: datetimepicker'a titleContainer ve titlestyle, placeholderContainer placeholderStyle eklenecek
 // TODO: switch'e titleContainer ve titlestyle, eklenecek
-// TODO: textinput error warning seperator
 // TODO: styles'den componentlere eklenecekleri ekle
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri içeriye taşı
 // TODO: ClassComponent için withThemeContext yap
