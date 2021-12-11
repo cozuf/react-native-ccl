@@ -85,10 +85,10 @@ const COMPONENTS: ComponentListType[] = [
     name: 'Switch',
     navigation: 'SwitchPage',
   },
-  {
-    name: 'Colors',
-    navigation: 'ColorsPage',
-  },
+  // {
+  //   name: 'Colors',
+  //   navigation: 'ColorsPage',
+  // },
   {
     name: 'BottomSheet',
     navigation: 'BottomSheetPage',
@@ -101,10 +101,10 @@ const COMPONENTS: ComponentListType[] = [
     name: 'Card',
     navigation: 'CardPage',
   },
-  {
-    name: 'ClassGlobalState',
-    navigation: 'ClassGlobalStatePage',
-  },
+  // {
+  //   name: 'ClassGlobalState',
+  //   navigation: 'ClassGlobalStatePage',
+  // },
 ];
 
 const MainPage = () => {

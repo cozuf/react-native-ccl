@@ -44,6 +44,7 @@ const CardPage = () => {
                 keyExtractor={(_, i: number) => i.toString()}
                 data={ARRAY}
                 renderItem={renderItem}
+                showsVerticalScrollIndicator={false}
                 ItemSeparatorComponent={() => <Seperator type="vertical" size="large" />} />
         </PageContainer>
     )

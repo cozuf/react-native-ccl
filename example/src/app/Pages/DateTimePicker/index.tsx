@@ -3,8 +3,8 @@ import { View } from 'react-native';
 import { DateTimePicker, PageContainer, TapSelector } from 'react-native-ccl';
 
 const DISPLAY_TYPE_DATA = [
-  { title: 'Modal', value: 'Modal' },
-  { title: 'BottomSheet', value: 'BottomSheet' }
+  { title: 'Modal', value: 'modal' },
+  { title: 'BottomSheet', value: 'bottomSheet' }
 ];
 const DateTimePickerPage = () => {
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
