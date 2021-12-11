@@ -11,6 +11,11 @@ export interface ICardProps {
     /**
      * 
      */
+    active?: boolean
+
+    /**
+     * 
+     */
     headerComponent?: () => ReactNode
 
     /**
@@ -40,6 +45,7 @@ export interface ICardProps {
 }
 
 const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
+    active = true,
     headerComponent = () => null,
     footerComponent = () => null,
     containerStyle,
@@ -50,6 +56,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
 }) => {
     const [theme] = useThemeContext()
     const { colors, styles } = theme
+    const { card } = colors
     const { cardStyle } = styles
     const [open, setOpen] = useState(false);
     const animatedController = useRef(new Animated.Value(0)).current;
@@ -85,11 +92,23 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     };
 
     return (
-        <Pressable onPress={() => toggleListItem()} style={[containerStyle, cardStyle?.container]}>
+        <Pressable
+            onPress={() => toggleListItem()}
+            style={
+                [
+                    cardStyle?.container,
+                    {
+                        borderColor: card[active ? "active" : "passive"].border,
+                        backgroundColor: card[active ? "active" : "passive"].background,
+                    },
+                    containerStyle
+                ]
+            }
+        >
             <View style={[headerContainerStyle, cardStyle?.titleContainer]}>
                 {headerComponent()}
                 <Animated.View style={{ transform: [{ rotateZ: arrowAngle }] }}>
-                    <Icon family="MaterialIcons" name="keyboard-arrow-down" size={20} color="black" />
+                    <Icon family="MaterialIcons" name="keyboard-arrow-down" size={20} color={card[active ? "active" : "passive"].border} />
                 </Animated.View>
             </View>
             <Animated.View style={[cardStyle?.bodyBackground, { height: bodyHeight }]}>

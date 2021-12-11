@@ -65,7 +65,7 @@ import {
   useClassGlobalState
 } from './Context';
 import { FONTS } from './Assets';
-import { dark, light } from './Theme/Variants';
+import { dark, light } from './Theme/Colors';
 import SelectPage from './Components/SelectBox/Page';
 
 export {

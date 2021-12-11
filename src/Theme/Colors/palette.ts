@@ -1,4 +1,8 @@
 const BLACK = 'rgba(0, 0, 0, 1)';
+const BLACK_90 = 'rgba(13, 13, 13, 1)';
+const BLACK_90_PALE = 'rgba(13, 13, 13, 0.5)';
+const BLACK_80 = 'rgba(0, 0, 0, 0.8)';
+const BLACK_70 = 'rgba(0, 0, 0, 0.7)';
 const BLACK_20 = 'rgba(0, 0, 0, 0.2)';
 const BLACK_PALE = 'rgba(0, 0, 0, 0.5)';
 const WHITE = 'rgba(255, 255, 255, 1)';
@@ -36,6 +40,10 @@ const GREEN_PALE = 'rgba(0, 128, 0, 0.5)';
 export {
   BLACK,
   BLACK_20,
+  BLACK_90,
+  BLACK_90_PALE,
+  BLACK_80,
+  BLACK_70,
   BLACK_PALE,
   WHITE,
   WHITE_20,

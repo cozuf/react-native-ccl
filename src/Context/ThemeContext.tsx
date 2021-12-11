@@ -1,4 +1,4 @@
-import React, { Component, ComponentType, createContext, FC, FunctionComponent, useContext, useState } from 'react';
+import React, { createContext, FC, useContext, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import { componentsStyles } from '../Theme/Styles';
 import type { CopmonentsStylesScheme } from '../Theme/Styles';
@@ -6,8 +6,8 @@ import { tokens } from '../Theme/Tokens';
 import type { TokensScheme } from '../Theme/Tokens';
 import type { FontScheme } from '../Theme/Fonts';
 import { fonts } from '../Theme/Fonts';
-import type { ColorScheme } from '../Theme/Variants';
-import { dark, light } from '../Theme/Variants';
+import type { ColorScheme } from '../Theme/Colors';
+import { dark, light } from '../Theme/Colors';
 
 export const ThemeContext = createContext<{
   theme: ThemeType;

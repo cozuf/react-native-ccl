@@ -6,6 +6,7 @@ export interface CommonColorScheme {
   active: ColorValue;
   passive: ColorValue;
   statusbar: ColorValue;
+  componentBackground: ColorValue
 }
 
 export interface PageContainerColorScheme {
@@ -297,6 +298,19 @@ export interface SwitchComponentColorScheme {
   };
 }
 
+export interface CardColorScheme {
+  active: {
+    background: ColorValue
+    border: ColorValue
+    icon?: ColorValue
+  },
+  passive: {
+    background: ColorValue
+    border: ColorValue
+    icon?: ColorValue
+  }
+}
+
 export interface ColorScheme {
   common: CommonColorScheme;
   pageContainer: PageContainerColorScheme;
@@ -315,4 +329,5 @@ export interface ColorScheme {
   selectBox: SelectBoxColorScheme;
   dateTimePicker: DateTimePickerColorScheme;
   switchComponent: SwitchComponentColorScheme;
+  card: CardColorScheme
 }

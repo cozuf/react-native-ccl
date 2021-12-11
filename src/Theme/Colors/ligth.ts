@@ -14,71 +14,75 @@ import type {
   RadioButtonColorScheme,
   RadioButtonGroupColorScheme,
   SelectBoxColorScheme,
-  SwitchComponentColorScheme,
   TextColorScheme,
   TextInputColorScheme,
+  SwitchComponentColorScheme,
+  CardColorScheme,
 } from './types';
 import {
   BLACK,
+  BLACK_20,
   BLACK_PALE,
   GREEN,
   GREEN_PALE,
   GREY,
   GREY_80,
   GREY_80_PALE,
+  GREY_90,
+  GREY_90_PALE,
   GREY_PALE,
-  ORANGE,
-  ORANGE_OPPOSITE,
-  ORANGE_PALE,
+  OPEN_BLUE,
+  OPEN_BLUE_OPPOSITE,
+  OPEN_BLUE_PALE,
   TRANSPARENT,
   WHITE,
-  WHITE_20,
   WHITE_PALE,
 } from './palette';
 
 const common: CommonColorScheme = {
-  primary: BLACK,
-  secondary: WHITE,
-  active: ORANGE,
-  passive: ORANGE_PALE,
-  statusbar: BLACK,
+  primary: WHITE,
+  secondary: BLACK,
+  active: OPEN_BLUE,
+  passive: OPEN_BLUE_PALE,
+  statusbar: WHITE,
+  componentBackground: GREY_90
 };
 
 const pageContainer: PageContainerColorScheme = {
-  background: BLACK,
+  background: WHITE,
 };
 
 const text: TextColorScheme = {
-  active: WHITE,
-  passive: WHITE_PALE,
+  active: BLACK,
+  passive: BLACK_PALE,
 };
 
 const icon: IconColorScheme = {
-  active: WHITE,
-  passive: WHITE_PALE,
+  active: OPEN_BLUE,
+  passive: OPEN_BLUE_PALE,
 };
 
 const textInput: TextInputColorScheme = {
   active: {
-    inputText: WHITE,
-    titleText: WHITE,
-    border: WHITE,
-    background: BLACK,
+    titleText: BLACK,
+    inputText: BLACK,
+    border: BLACK,
+    background: GREY_90,
     placeholder: GREY,
   },
   passive: {
-    inputText: WHITE_PALE,
-    titleText: WHITE_PALE,
-    border: WHITE_PALE,
-    background: BLACK_PALE,
+    titleText: BLACK_PALE,
+    inputText: BLACK_PALE,
+    border: BLACK_PALE,
+    background: GREY_90_PALE,
     placeholder: GREY,
   },
   focused: {
-    inputText: WHITE,
-    titleText: ORANGE,
-    border: ORANGE,
-    background: BLACK,
-    selection: ORANGE,
+    titleText: OPEN_BLUE,
+    inputText: BLACK,
+    border: OPEN_BLUE,
+    background: GREY_90,
+    selection: OPEN_BLUE,
   },
 };
 
@@ -86,35 +90,35 @@ const button: ButtonColorScheme = {
   active: {
     normal: {
       filled: {
-        background: ORANGE,
-        text: BLACK,
-        border: ORANGE,
+        background: OPEN_BLUE,
+        text: WHITE,
+        border: OPEN_BLUE,
       },
       outlined: {
-        background: BLACK,
-        text: ORANGE,
-        border: ORANGE,
+        background: WHITE,
+        text: OPEN_BLUE,
+        border: OPEN_BLUE,
       },
       simplied: {
         background: TRANSPARENT,
-        text: ORANGE,
+        text: OPEN_BLUE,
         border: TRANSPARENT,
       },
     },
     pressed: {
       filled: {
-        background: ORANGE_OPPOSITE,
+        background: OPEN_BLUE_OPPOSITE,
         text: WHITE,
-        border: ORANGE_OPPOSITE,
+        border: OPEN_BLUE_OPPOSITE,
       },
       outlined: {
         background: WHITE,
-        text: ORANGE_OPPOSITE,
-        border: ORANGE_OPPOSITE,
+        text: OPEN_BLUE_OPPOSITE,
+        border: OPEN_BLUE_OPPOSITE,
       },
       simplied: {
         background: TRANSPARENT,
-        text: ORANGE_OPPOSITE,
+        text: OPEN_BLUE_OPPOSITE,
         border: TRANSPARENT,
       },
     },
@@ -122,35 +126,35 @@ const button: ButtonColorScheme = {
   passive: {
     normal: {
       filled: {
-        background: ORANGE_PALE,
+        background: OPEN_BLUE_PALE,
         text: BLACK_PALE,
-        border: ORANGE_PALE,
+        border: OPEN_BLUE_PALE,
       },
       outlined: {
-        background: BLACK_PALE,
-        text: ORANGE_PALE,
-        border: ORANGE_PALE,
+        background: WHITE_PALE,
+        text: OPEN_BLUE_PALE,
+        border: OPEN_BLUE_PALE,
       },
       simplied: {
         background: TRANSPARENT,
-        text: ORANGE_PALE,
+        text: OPEN_BLUE_PALE,
         border: TRANSPARENT,
       },
     },
     pressed: {
       filled: {
-        background: ORANGE_OPPOSITE,
+        background: OPEN_BLUE_OPPOSITE,
         text: WHITE,
-        border: ORANGE_OPPOSITE,
+        border: OPEN_BLUE_OPPOSITE,
       },
       outlined: {
         background: WHITE,
-        text: ORANGE_OPPOSITE,
-        border: ORANGE_OPPOSITE,
+        text: OPEN_BLUE_OPPOSITE,
+        border: OPEN_BLUE_OPPOSITE,
       },
       simplied: {
         background: TRANSPARENT,
-        text: ORANGE_OPPOSITE,
+        text: OPEN_BLUE_OPPOSITE,
         border: TRANSPARENT,
       },
     },
@@ -159,16 +163,16 @@ const button: ButtonColorScheme = {
 
 const radioButton: RadioButtonColorScheme = {
   active: {
-    text: WHITE,
-    background: BLACK,
-    border: WHITE,
-    icon: ORANGE,
+    text: BLACK,
+    background: WHITE,
+    border: BLACK,
+    icon: OPEN_BLUE,
   },
   passive: {
-    text: WHITE_PALE,
-    background: BLACK_PALE,
+    text: BLACK_PALE,
+    background: WHITE_PALE,
     border: BLACK_PALE,
-    icon: ORANGE_PALE,
+    icon: OPEN_BLUE_PALE,
   },
 };
 
@@ -185,44 +189,44 @@ const radioButtonGroup: RadioButtonGroupColorScheme = {
 
 const checkBox: CheckBoxColorScheme = {
   active: {
-    text: WHITE,
-    background: BLACK,
-    border: WHITE,
-    icon: BLACK,
-    iconBorder: ORANGE,
+    text: BLACK,
+    background: WHITE,
+    border: BLACK,
+    icon: WHITE,
+    iconBorder: OPEN_BLUE,
   },
   passive: {
-    text: WHITE_PALE,
-    background: BLACK_PALE,
-    border: WHITE_PALE,
-    icon: BLACK_PALE,
-    iconBorder: ORANGE_PALE,
+    text: BLACK_PALE,
+    background: WHITE_PALE,
+    border: BLACK_PALE,
+    icon: WHITE_PALE,
+    iconBorder: OPEN_BLUE_PALE,
   },
 };
 
 const checkBoxGroup: CheckBoxGroupColorScheme = {
   active: {
-    background: BLACK,
+    background: WHITE,
     seperator: GREY_80,
   },
   passive: {
-    background: BLACK_PALE,
+    background: WHITE_PALE,
     seperator: GREY_80_PALE,
   },
 };
 
 const chip: ChipColorScheme = {
   active: {
-    text: WHITE,
-    background: BLACK,
+    text: BLACK,
+    background: WHITE,
     border: BLACK,
-    icon: ORANGE,
+    icon: OPEN_BLUE,
   },
   passive: {
-    text: WHITE_PALE,
-    background: BLACK_PALE,
+    text: BLACK_PALE,
+    background: WHITE_PALE,
     border: BLACK_PALE,
-    icon: ORANGE_PALE,
+    icon: OPEN_BLUE_PALE,
   },
 };
 
@@ -236,71 +240,84 @@ const chipGroup: ChipGroupColorScheme = {
 };
 
 const badge: BadgeColorScheme = {
-  background: BLACK,
-  border: WHITE,
-  text: ORANGE,
-  shadow: WHITE,
+  background: WHITE,
+  border: BLACK,
+  text: OPEN_BLUE,
+  shadow: BLACK,
 };
 
 const modal: ModalColorScheme = {
-  outsideBackground: WHITE_20,
-  containerBackground: BLACK,
-  shadow: WHITE,
+  outsideBackground: BLACK_20,
+  containerBackground: WHITE,
+  shadow: BLACK,
 };
 
 const selectBox: SelectBoxColorScheme = {
   active: {
-    background: BLACK,
-    border: WHITE,
-    title: WHITE,
+    background: GREY_90,
+    border: BLACK,
+    title: BLACK,
     placeholder: GREY,
-    value: WHITE,
+    value: BLACK,
   },
   passive: {
-    background: BLACK_PALE,
-    border: WHITE_PALE,
-    title: WHITE_PALE,
+    background: GREY_90_PALE,
+    border: BLACK_PALE,
+    title: BLACK_PALE,
     placeholder: GREY_PALE,
-    value: WHITE_PALE,
+    value: BLACK_PALE,
   },
 };
 
 const dateTimePicker: DateTimePickerColorScheme = {
   active: {
-    background: BLACK,
-    border: WHITE,
-    title: WHITE,
+    background: WHITE,
+    border: BLACK,
+    title: BLACK,
     placeholder: GREY,
-    pickerText: WHITE,
-    value: WHITE,
+    value: BLACK,
+    pickerText: BLACK,
   },
   passive: {
-    background: BLACK_PALE,
-    border: WHITE_PALE,
-    title: WHITE_PALE,
+    background: WHITE_PALE,
+    border: BLACK_PALE,
+    title: BLACK_PALE,
     placeholder: GREY_PALE,
-    value: WHITE_PALE,
+    value: BLACK_PALE,
   },
 };
 
 const switchColors: SwitchComponentColorScheme = {
   active: {
-    border: WHITE,
-    background: BLACK,
+    border: BLACK,
+    background: GREY_90,
     backgroundOn: GREEN,
     backgroundOff: GREY,
-    thumb: ORANGE,
+    thumb: OPEN_BLUE,
   },
   passive: {
-    border: WHITE_PALE,
-    background: BLACK_PALE,
+    border: BLACK_PALE,
+    background: GREY_90_PALE,
     backgroundOn: GREEN_PALE,
     backgroundOff: GREY,
-    thumb: ORANGE_PALE,
+    thumb: OPEN_BLUE_PALE,
   },
 };
 
-const dark: ColorScheme = {
+const card: CardColorScheme = {
+  active: {
+    background: GREY_90,
+    border: BLACK,
+    icon: BLACK
+  },
+  passive: {
+    background: GREY_90_PALE,
+    border: BLACK_PALE,
+    icon: BLACK_PALE
+  }
+}
+
+const light: ColorScheme = {
   common,
   pageContainer,
   text,
@@ -318,6 +335,7 @@ const dark: ColorScheme = {
   selectBox,
   dateTimePicker,
   switchComponent: switchColors,
+  card
 };
 
-export default dark;
+export default light;
