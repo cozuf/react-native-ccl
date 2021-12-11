@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
-import { Dimensions, Omit, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Dimensions, Omit, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
 import { Button, Modal, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
@@ -58,7 +58,27 @@ export interface IDateTimePickerProps {
   /**
    * 
    */
-  containerStyle?: ViewStyle
+  containerStyle?: StyleProp<ViewStyle>
+
+  /**
+   * 
+   */
+  titleContainerStyle?: StyleProp<ViewStyle>
+
+  /**
+   * 
+   */
+  titleStyle?: StyleProp<TextStyle>
+
+  /**
+   * 
+   */
+  textContainerStyle?: StyleProp<ViewStyle>
+
+  /**
+   * 
+   */
+  textStyle?: StyleProp<TextStyle>
 }
 
 type IDateTimePickerTypes = IDateTimePickerProps &
@@ -75,6 +95,10 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   onDateChange = () => { },
   onSubmit = () => { },
   containerStyle,
+  titleContainerStyle,
+  titleStyle,
+  textContainerStyle,
+  textStyle,
   ...props
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -217,8 +241,16 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         dateTimePickerStyle?.container,
       ]}
     >
-      <Text>{title}</Text>
-      <Text>{date ? date.toLocaleString() : placeholder}</Text>
+      <View style={[dateTimePickerStyle?.titleContainer, titleContainerStyle]}>
+        <Text style={[dateTimePickerStyle?.title, titleStyle]}>
+          {title}
+        </Text>
+      </View>
+      <View style={[dateTimePickerStyle?.titleContainer, textContainerStyle]}>
+        <Text style={[dateTimePickerStyle?.title, textStyle]}>
+          {date ? date.toLocaleString() : placeholder}
+        </Text>
+      </View>
       {renderChildren()}
     </TouchableOpacity>
   );

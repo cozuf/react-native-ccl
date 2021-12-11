@@ -143,9 +143,8 @@ export type {
 // : GlobalState'yi dışarıdan type verilebilir -> Şimdilik mümkün değil
 // : Language Context -> Burası da GlobalState gibi şimdilik mümkün değil
 // : import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
-// TODO: colors'a componentBackground eklenecek
 // TODO: modalı Furkan'ın ki gibi yap bir sürü modal açacam diye uğraşma
-// TODO: datetimepicker'a titleContainer ve titlestyle, placeholderContainer placeholderStyle eklenecek
+// TODO: datetimepicker'a moment ile gösterim eklenecek
 // TODO: styles'den componentlere eklenecekleri ekle
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri içeriye taşı
 // TODO: ClassComponent için withThemeContext yap
