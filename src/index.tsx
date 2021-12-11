@@ -142,10 +142,9 @@ export type {
 // TODO: SearchBar'a aranacak key'i ekle
 // : GlobalState'yi dışarıdan type verilebilir -> Şimdilik mümkün değil
 // : Language Context -> Burası da GlobalState gibi şimdilik mümkün değil
-// TODO: import - export ları düzenle
+// : import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
 // TODO: colors'a componentBackground eklenecek
 // TODO: modalı Furkan'ın ki gibi yap bir sürü modal açacam diye uğraşma
-// TODO: checkbox'a titleContainer ve titlestyle eklenecek 
 // TODO: datetimepicker'a titleContainer ve titlestyle, placeholderContainer placeholderStyle eklenecek
 // TODO: styles'den componentlere eklenecekleri ekle
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri içeriye taşı

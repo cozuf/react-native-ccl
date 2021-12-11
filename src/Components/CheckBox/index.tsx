@@ -46,6 +46,16 @@ export interface ICheckBoxProps {
    * 
    */
   containerStyle?: ViewStyle
+
+  /**
+   * 
+   */
+  titleContainerStyle?: ViewStyle
+
+  /**
+   * 
+   */
+  titleStyle?: ViewStyle
 }
 
 const CheckBox: FC<ICheckBoxProps> = ({
@@ -56,7 +66,9 @@ const CheckBox: FC<ICheckBoxProps> = ({
   value,
   iconSet,
   onSelect,
-  containerStyle
+  containerStyle,
+  titleContainerStyle,
+  titleStyle
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   const [theme] = useThemeContext();
@@ -117,7 +129,13 @@ const CheckBox: FC<ICheckBoxProps> = ({
 
   const renderTitle = (): React.ReactElement | null => {
     if (title) {
-      return <Text>{title}</Text>;
+      return (
+        <View style={[checkBoxStyle?.titleContainer, titleContainerStyle]}>
+          <Text style={[checkBoxStyle?.title, titleStyle]}>
+            {title}
+          </Text>
+        </View>
+      )
     }
     return null;
   };
