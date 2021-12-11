@@ -105,7 +105,7 @@ const YesNo: FC<IModalTypes> = ({
               title={buttonNoTitle}
               onPress={onNoButtonPress}
             />
-            <Seperator.Horizontal />
+            <Seperator type="horizontal" />
             <Button
               containerStyle={styles.buttonContainer}
               title={buttonYesTitle}

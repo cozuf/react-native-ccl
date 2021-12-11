@@ -84,7 +84,17 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
   minChoice = 0,
 }) => {
   const renderSearch = () => {
-    return <SearchBar value={value} onSearch={onSearch} />;
+    if (searchable) {
+      return <SearchBar value={value} onSearch={onSearch} />;
+    }
+    return null
+  };
+
+  const renderSeperator = () => {
+    if (searchable) {
+      return <Seperator type="vertical" />
+    }
+    return null
   };
 
   const renderSingleSelect = () => {
@@ -146,8 +156,8 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
       }}
       containerStyle={styles.modalContainer}
     >
-      {searchable ? renderSearch() : null}
-      {searchable ? <Seperator.Vertical /> : null}
+      {renderSearch()}
+      {renderSeperator()}
       {renderChildren()}
     </Modal.Default>
   );

@@ -91,13 +91,11 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
 
   const renderSeperator = (): JSX.Element => {
     return (
-      <View style={radioButtonGroupStyle?.seperatorContainer}>
-        <Seperator.Vertical
-          width={'96%'}
-          height={1}
-          color={radioButtonGroup.active.seperator}
-        />
-      </View>
+      <Seperator
+        type="vertical"
+        size={1}
+        style={{ width: "96%", backgroundColor: radioButtonGroup.active.seperator }}
+        containerStyle={radioButtonGroupStyle?.seperatorContainer} />
     );
   };
 

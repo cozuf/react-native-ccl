@@ -145,8 +145,7 @@ export type {
 // TODO: import - export ları düzenle
 // TODO: colors'a componentBackground eklenecek
 // TODO: modalı Furkan'ın ki gibi yap bir sürü modal açacam diye uğraşma
-// TODO: seperator'u da type ile yap
-// TODO: checkbox'a titleContainer ve titlestyle eklenecek - seperator eklenecek
+// TODO: checkbox'a titleContainer ve titlestyle eklenecek 
 // TODO: datetimepicker'a titleContainer ve titlestyle, placeholderContainer placeholderStyle eklenecek
 // TODO: switch'e titleContainer ve titlestyle, eklenecek
 // TODO: textinput error warning seperator

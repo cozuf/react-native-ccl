@@ -262,9 +262,9 @@ export const textStyle: ITextStyle = {
 
 export const textInputStyle: ITextInputStyle = {
     container: {
-        borderRadius: tokens.component.borderRadius,
+        borderRadius: 8,
         borderWidth: tokens.component.borderWidth,
-        padding: tokens.component.paddingHorizontal,
+        padding: tokens.component.paddingVertical,
     },
     titleContainer: {},
     title: {},

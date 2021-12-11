@@ -196,7 +196,7 @@ const Button: FC<IButtonTypes> = ({
   const renderContainerStyle = (): StyleProp<ViewStyle> => {
     return {
       backgroundColor: backgroundColor(),
-      borderRadius: tokens.component.borderRadius,
+      borderRadius: 8,
       borderWidth: tokens.component.borderWidth,
       borderColor: borderColor(),
       alignSelf: wrappableStyle(),

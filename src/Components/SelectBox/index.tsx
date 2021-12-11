@@ -318,7 +318,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           {title}
         </Text>
       }
-      {<Seperator.Vertical height={4} />}
+      {<Seperator type="vertical" size="small" />}
       {
         <Text
           numberOfLines={1}

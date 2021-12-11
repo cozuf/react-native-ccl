@@ -117,14 +117,14 @@ const TextPage = () => {
             setActiveIndex(index);
           }}
         />
-        <Seperator.Vertical />
+        <Seperator type="vertical" />
         <TapSelector
           data={SIZES}
           onTap={(_, index) => {
             setSizeIndex(index);
           }}
         />
-        <Seperator.Vertical />
+        <Seperator type="vertical" />
         <TapSelector
           data={WEIGHTS}
           onTap={(_, index) => {

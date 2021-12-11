@@ -127,7 +127,7 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
   const renderSeperator = (): JSX.Element | null => {
     if (searchable) {
       return (
-        <Seperator.Vertical />
+        <Seperator type="vertical" />
       );
     }
     return null

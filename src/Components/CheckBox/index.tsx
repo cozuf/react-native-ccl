@@ -1,8 +1,7 @@
 import React, { FC, isValidElement, memo, useEffect, useState } from 'react';
 import { TouchableOpacity, View, ViewStyle } from 'react-native';
-import { Icon, IIconProps, Text } from '..';
+import { Icon, IIconProps, Text, Seperator } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
-import { tokens } from '../../Theme';
 
 export interface ICheckBoxProps {
   /**
@@ -112,12 +111,15 @@ const CheckBox: FC<ICheckBoxProps> = ({
     }
   };
 
+  const renderSeperator = () => {
+    return <Seperator type="horizontal" size="large" />
+  }
+
   const renderTitle = (): React.ReactElement | null => {
     if (title) {
       return <Text>{title}</Text>;
-    } else {
-      return null;
     }
+    return null;
   };
 
   return (
@@ -134,9 +136,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
       }}
     >
       {renderIcon()}
-      {renderIcon() !== null ? (
-        <View style={{ width: tokens.component.paddingHorizontal }} />
-      ) : null}
+      {renderSeperator()}
       {renderTitle()}
     </TouchableOpacity>
   );

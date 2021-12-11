@@ -89,7 +89,7 @@ const SelectBoxPage = () => {
             setSelectTypeIndex(index);
           }}
         />
-        <Seperator.Vertical />
+        <Seperator type="vertical" />
         <TapSelector
           data={DISPLAY_TYPE_DATA}
           onTap={(_, index) => {

@@ -92,7 +92,7 @@ const ModalPage = () => {
           setVisibleDefault(true);
         }}
       />
-      <Seperator.Vertical />
+      <Seperator type="vertical" />
       <Button
         childType="text"
         title={'Show Loading Modal'}
@@ -103,7 +103,7 @@ const ModalPage = () => {
           }, 2000);
         }}
       />
-      <Seperator.Vertical />
+      <Seperator type="vertical" />
       <Button
         childType="text"
         title={'Show Warning Modal'}
@@ -111,7 +111,7 @@ const ModalPage = () => {
           setVisibleWarning(true);
         }}
       />
-      <Seperator.Vertical />
+      <Seperator type="vertical" />
       <Button
         childType="text"
         title={'Show Fault Modal'}
@@ -119,7 +119,7 @@ const ModalPage = () => {
           setVisibleFault(true);
         }}
       />
-      <Seperator.Vertical />
+      <Seperator type="vertical" />
       <Button
         childType="text"
         title={'Show Yes No Modal'}

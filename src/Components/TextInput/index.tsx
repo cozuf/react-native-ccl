@@ -171,27 +171,43 @@ const NTextInput: FC<ITextInputTypes> = ({
   };
 
   const renderIcon = () => {
-    if (isValidElement(icon)) {
-      return icon;
-    } else {
-      const CoreIcon = icon as IIconProps;
-      return (
-        <Icon
-          family={CoreIcon.family}
-          name={CoreIcon.name}
-          size={CoreIcon.size}
-          color={CoreIcon.color || titleTextColor()}
-        />
-      );
+    if (icon) {
+      if (isValidElement(icon)) {
+        return icon;
+      } else {
+        const CoreIcon = icon as IIconProps;
+        return (
+          <Icon
+            family={CoreIcon.family}
+            name={CoreIcon.name}
+            size={CoreIcon.size}
+            color={CoreIcon.color || titleTextColor()}
+          />
+        );
+      }
     }
+    return null
+  };
+
+  const renderSeperator = () => {
+    if (icon) {
+      return <Seperator type="horizontal" />
+    }
+    return null
   };
 
   const renderWarning = () => {
-    return <Text style={[warningStyle]}>{warning}</Text>;
+    if (warning) {
+      return <Text style={[warningStyle]}>{warning}</Text>;
+    }
+    return null
   };
 
   const renderError = () => {
-    return <Text style={[errorStyle]}>{error}</Text>;
+    if (error) {
+      return <Text style={[errorStyle]}>{error}</Text>;
+    }
+    return null
   };
 
   const changeFocus = () => {
@@ -218,25 +234,28 @@ const NTextInput: FC<ITextInputTypes> = ({
   }
 
   const renderClean = () => {
-    return (
-      <View>
-        <Button
-          wrap={'free'}
-          childType={'icon'}
-          type="simplied"
-          icon={{
-            family: 'Ionicons',
-            name: 'close',
-            size: 20,
-            color: inputTextColor(),
-          }}
-          onPress={() => {
-            NativeTextInputRef.current?.clear();
-            onChangeText('');
-          }}
-        />
-      </View>
-    );
+    if (cleanable && value.length > 0 && active) {
+      return (
+        <View>
+          <Button
+            wrap={'free'}
+            childType={'icon'}
+            type="simplied"
+            icon={{
+              family: 'Ionicons',
+              name: 'close',
+              size: 20,
+              color: inputTextColor(),
+            }}
+            onPress={() => {
+              NativeTextInputRef.current?.clear();
+              onChangeText('');
+            }}
+          />
+        </View>
+      );
+    }
+    return null
   };
 
   return (
@@ -261,8 +280,8 @@ const NTextInput: FC<ITextInputTypes> = ({
         </Text>
       ) : null}
       <View style={[textInputStyle?.inputContainer]}>
-        {icon ? renderIcon() : null}
-        {icon ? <Seperator.Vertical /> : null}
+        {renderIcon()}
+        {renderSeperator()}
         {
           <View style={textInputStyle?.nativeInputContainer}>
             <TextInput
@@ -315,10 +334,10 @@ const NTextInput: FC<ITextInputTypes> = ({
             />
           </View>
         }
-        {cleanable && value.length > 0 && active ? renderClean() : null}
+        {renderClean()}
       </View>
-      {warning ? renderWarning() : null}
-      {error ? renderError() : null}
+      {renderWarning()}
+      {renderError()}
     </Pressable>
   );
 };

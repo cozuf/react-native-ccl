@@ -159,13 +159,11 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   const renderSeperator = (): JSX.Element => {
     return (
-      <View style={checkBoxGroupStyle?.seperatorContainer}>
-        <Seperator.Vertical
-          width={'96%'}
-          height={1}
-          color={checkBoxGroup.active.seperator}
-        />
-      </View>
+      <Seperator
+        type="vertical"
+        size={1}
+        style={{ width: "96%", backgroundColor: checkBoxGroup.active.seperator }}
+        containerStyle={checkBoxGroupStyle?.seperatorContainer} />
     );
   };
 
