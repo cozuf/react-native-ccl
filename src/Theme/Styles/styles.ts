@@ -244,9 +244,12 @@ export const switchStyle: ISwitchStyle = {
         alignItems: 'center',
     },
     titleContainer: {
-        flex: 1
+        flex: 1,
+        justifyContent: "center"
     },
-    title: {},
+    title: {
+
+    },
 }
 
 export const tapSelectorStyle: ITapSelectorStyle = {

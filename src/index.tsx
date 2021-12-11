@@ -147,7 +147,6 @@ export type {
 // TODO: modalı Furkan'ın ki gibi yap bir sürü modal açacam diye uğraşma
 // TODO: checkbox'a titleContainer ve titlestyle eklenecek 
 // TODO: datetimepicker'a titleContainer ve titlestyle, placeholderContainer placeholderStyle eklenecek
-// TODO: switch'e titleContainer ve titlestyle, eklenecek
 // TODO: styles'den componentlere eklenecekleri ekle
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri içeriye taşı
 // TODO: ClassComponent için withThemeContext yap

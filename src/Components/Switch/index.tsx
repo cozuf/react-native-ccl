@@ -5,8 +5,10 @@ import {
   SwitchProps,
   Omit,
   ViewStyle,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
-import { Text } from '..';
+import { Seperator, Text } from '..';
 import { useThemeContext } from '../../Context/ThemeContext';
 
 export interface ISwitchProps {
@@ -38,7 +40,17 @@ export interface ISwitchProps {
   /**
    * 
    */
-  containerStyle?: ViewStyle;
+  containerStyle?: StyleProp<ViewStyle>;
+
+  /**
+   * 
+   */
+  titleContainerStyle?: StyleProp<ViewStyle>
+
+  /**
+   * 
+   */
+  titleStyle?: StyleProp<TextStyle>
 }
 
 export type ISwitchTypes = ISwitchProps &
@@ -59,6 +71,8 @@ const Switch: FC<ISwitchTypes> = ({
   value = false,
   onValueChange = () => { },
   containerStyle,
+  titleContainerStyle,
+  titleStyle,
   ...props
 }) => {
   const [theme] = useThemeContext();
@@ -77,9 +91,12 @@ const Switch: FC<ISwitchTypes> = ({
         },
       ]}
     >
-      <Text active={active} style={switchStyle?.titleContainer}>
-        {title}
-      </Text>
+      <View style={[switchStyle?.titleContainer, titleContainerStyle]}>
+        <Text active={active} style={[switchStyle?.title, titleStyle]}>
+          {title}
+        </Text>
+      </View>
+      <Seperator type="horizontal" />
       <NativeSwitch
         testID={testID}
         disabled={!active}
