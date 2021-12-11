@@ -13,8 +13,6 @@ import {
   Switch,
   useThemeContext,
   FONTS,
-  dark,
-  light,
   SelectPage as SelectBoxSelectPage,
 } from 'react-native-ccl';
 
@@ -51,7 +49,7 @@ import ClassGlobalStatePage from '../Pages/ClassGlobalStateContext';
 const Stack = createStackNavigator();
 
 const Router = () => {
-  const [theme, setTheme] = useThemeContext();
+  const [theme] = useThemeContext();
   const { common, text, pageContainer } = theme.colors;
 
   const renderHeaderLeft = (
