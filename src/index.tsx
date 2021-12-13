@@ -139,12 +139,12 @@ export type {
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
 // TODO: Örnek Sayfalar da varyantları ekle
 // TODO: yayınlamadan önce ReadMe düzenle
-// TODO: SearchBar'a aranacak key'i ekle
 // : GlobalState'yi dışarıdan type verilebilir -> Şimdilik mümkün değil
 // : Language Context -> Burası da GlobalState gibi şimdilik mümkün değil
 // : import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
-// TODO: modalı Furkan'ın ki gibi yap bir sürü modal açacam diye uğraşma
-// TODO: datetimepicker'a moment ile gösterim eklenecek
-// TODO: styles'den componentlere eklenecekleri ekle
+// TODO: --modalı Furkan'ın ki gibi yap bir sürü modal açacam diye uğraşma
+// TODO: --datetimepicker'a moment ile gösterim eklenecek
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri içeriye taşı
-// TODO: ClassComponent için withThemeContext yap
+// TODO: --ClassComponent için withThemeContext yap
+
+// FIXME: Style'lar theme.style'dan color'lar theme.color'dan çekilmeli - gözden geçir unutma!
