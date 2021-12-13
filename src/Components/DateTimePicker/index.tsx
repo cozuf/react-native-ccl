@@ -246,8 +246,8 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
           {title}
         </Text>
       </View>
-      <View style={[dateTimePickerStyle?.titleContainer, textContainerStyle]}>
-        <Text style={[dateTimePickerStyle?.title, textStyle]}>
+      <View style={[dateTimePickerStyle?.textContainer, textContainerStyle]}>
+        <Text style={[dateTimePickerStyle?.text, textStyle]}>
           {date ? date.toLocaleString() : placeholder}
         </Text>
       </View>

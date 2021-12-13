@@ -3,7 +3,10 @@ import {
   FlatListProps,
   ListRenderItemInfo,
   Omit,
+  StyleProp,
+  TextStyle,
   TouchableOpacity,
+  View,
   ViewStyle,
 } from 'react-native';
 import { Seperator, Text } from '..';
@@ -42,9 +45,29 @@ export interface ISelectBoxProps<ItemT> {
   title?: string;
 
   /**
+   * 
+   */
+  titleStyle?: StyleProp<TextStyle>
+
+  /**
+   * 
+   */
+  titleContainerStyle?: StyleProp<TextStyle>
+
+  /**
    * @default Placeholder
    */
   placeholder?: string;
+
+  /**
+   * 
+   */
+  textStyle?: StyleProp<TextStyle>
+
+  /**
+   * 
+   */
+  textContainerStyle?: StyleProp<TextStyle>
 
   /**
    * set true if you want to search in given list
@@ -124,7 +147,11 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   displayType = 'modal',
   selectionType = 'singleSelect',
   title = 'Başlık',
+  titleStyle,
+  titleContainerStyle,
   placeholder = 'Placeholder',
+  textStyle,
+  textContainerStyle,
   searchable = false,
   searchText,
   // onSearch,
@@ -295,6 +322,26 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     }
   };
 
+  const renderTitle = () => {
+    return (
+      <View style={[selectBoxStyle?.titleContainer, titleContainerStyle]}>
+        <Text
+          style={
+            [
+              {
+                color: selectBox[active ? 'active' : 'passive'].title,
+              },
+              selectBoxStyle?.title,
+              titleStyle
+            ]
+          }
+        >
+          {title}
+        </Text>
+      </View>
+    )
+  }
+
   return (
     <TouchableOpacity
       testID={testID}
@@ -309,29 +356,26 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         selectBoxStyle?.container,
       ]}
     >
-      {
-        <Text
-          style={{
-            color: selectBox[active ? 'active' : 'passive'].title,
-          }}
-        >
-          {title}
-        </Text>
-      }
-      {<Seperator type="vertical" size="small" />}
-      {
+      {renderTitle()}
+      <Seperator type="vertical" size="small" style={[selectBoxStyle?.seperator]} />
+      <View
+        style={[selectBoxStyle?.textContainer, textContainerStyle]}>
         <Text
           numberOfLines={1}
-          style={{
-            color:
-              renderPlaceholder() === placeholder
-                ? selectBox[active ? 'active' : 'passive'].placeholder
-                : selectBox[active ? 'active' : 'passive'].value,
-          }}
+          style={[
+            {
+              color:
+                renderPlaceholder() === placeholder
+                  ? selectBox[active ? 'active' : 'passive'].placeholder
+                  : selectBox[active ? 'active' : 'passive'].value,
+            },
+            selectBoxStyle?.text,
+            textStyle
+          ]}
         >
           {renderPlaceholder()}
         </Text>
-      }
+      </View>
       {renderRest()}
     </TouchableOpacity>
   );

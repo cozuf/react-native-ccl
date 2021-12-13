@@ -49,8 +49,8 @@ export interface IDateTimePickerStyle {
     titleContainer?: StyleProp<ViewStyle>
     title?: StyleProp<TextStyle>
     seperator?: StyleProp<TextStyle>
-    placeholderContainer?: StyleProp<ViewStyle>
-    placeholder?: StyleProp<TextStyle>
+    textContainer?: StyleProp<ViewStyle>
+    text?: StyleProp<TextStyle>
 }
 
 export interface IModalStyle {
@@ -94,8 +94,8 @@ export interface ISelectBoxStyle {
     titleContainer?: StyleProp<ViewStyle>
     title?: StyleProp<TextStyle>
     seperator?: StyleProp<TextStyle>
-    placeholderContainer?: StyleProp<ViewStyle>
-    placeholder?: StyleProp<TextStyle>
+    textContainer?: StyleProp<ViewStyle>
+    text?: StyleProp<TextStyle>
 }
 
 export interface ISeperatorStyle {

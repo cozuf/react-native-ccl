@@ -123,7 +123,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
     }
   };
 
-  const renderSeperator = () => {
+  const renderSeperator = (): React.ReactElement => {
     return <Seperator type="horizontal" size="large" />
   }
 

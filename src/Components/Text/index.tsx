@@ -101,8 +101,8 @@ const Regular: FC<ITextTypes> = ({
           fontSize: defineSize(),
           color: text[active ? 'active' : 'passive'],
         },
+        textStyle?.style,
         style,
-        textStyle?.style
       ]
       }
       {...props}

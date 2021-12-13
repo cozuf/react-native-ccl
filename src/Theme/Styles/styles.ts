@@ -152,8 +152,8 @@ export const dateTimePickerStyle: IDateTimePickerStyle = {
     titleContainer: {},
     title: {},
     seperator: {},
-    placeholderContainer: {},
-    placeholder: {},
+    textContainer: {},
+    text: {},
 }
 
 export const modalStyle: IModalStyle = {
@@ -218,12 +218,13 @@ export const selectBoxStyle: ISelectBoxStyle = {
     titleContainer: {},
     title: {},
     seperator: {},
-    placeholderContainer: {},
-    placeholder: {},
+    textContainer: {},
+    text: {},
 }
 
 export const seperatorStyle: ISeperatorStyle = {
-
+    container: {},
+    style: {}
 }
 
 export const snackbarStyle: ISnackbarStyle = {

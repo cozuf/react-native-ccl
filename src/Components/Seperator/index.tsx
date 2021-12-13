@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { FlexStyle, StyleProp, View, ViewStyle } from "react-native";
+import { useTheme } from "../../Context";
 
 export interface ISperatorProps {
   /**
@@ -29,6 +30,9 @@ const Seperator: FC<ISperatorProps> = ({
   containerStyle = {},
   style = {}
 }) => {
+  const [theme] = useTheme();
+  const { styles } = theme;
+  const { seperatorStyle } = styles
 
   const defineSize = (): FlexStyle["height"] | FlexStyle["width"] => {
     switch (size) {
@@ -43,7 +47,7 @@ const Seperator: FC<ISperatorProps> = ({
   }
 
   return (
-    <View style={[containerStyle]}>
+    <View style={[seperatorStyle?.container, containerStyle]}>
       <View
         style={
           [
@@ -51,6 +55,7 @@ const Seperator: FC<ISperatorProps> = ({
               { width: defineSize() }
               :
               { height: defineSize() },
+            seperatorStyle?.style,
             style
           ]
         }

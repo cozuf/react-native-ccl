@@ -93,7 +93,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
       <Seperator
         type="vertical"
         size={1}
-        style={{ width: "96%", backgroundColor: radioButtonGroup.active.seperator }}
+        style={[{ width: "96%", backgroundColor: radioButtonGroup.active.seperator }, radioButtonGroupStyle?.seperator]}
         containerStyle={radioButtonGroupStyle?.seperatorContainer} />
     );
   };

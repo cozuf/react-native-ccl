@@ -1,8 +1,7 @@
 import React, { FC, isValidElement, ReactNode, useState } from 'react';
-import { View, TouchableOpacity, ViewStyle, StyleProp } from 'react-native';
-import { Icon, IIconProps, Text } from '..';
+import { View, TouchableOpacity, ViewStyle, StyleProp, TextStyle } from 'react-native';
+import { Icon, IIconProps, Seperator, Text } from '..';
 import { useTheme } from '../../Context/Theme';
-import { tokens } from '../../Theme';
 
 export interface IRadionButtonProps {
   /**
@@ -47,6 +46,21 @@ export interface IRadionButtonProps {
    * 
    */
   containerStyle?: StyleProp<ViewStyle>
+
+  /**
+   * 
+   */
+  iconContainerStyle?: StyleProp<ViewStyle>
+
+  /**
+   * 
+   */
+  titleContainerStyle?: StyleProp<ViewStyle>
+
+  /**
+   * 
+   */
+  titleStyle?: StyleProp<TextStyle>
 }
 
 const RadioButton: FC<IRadionButtonProps> = ({
@@ -68,7 +82,10 @@ const RadioButton: FC<IRadionButtonProps> = ({
     },
   },
   onSelect,
-  containerStyle
+  containerStyle,
+  iconContainerStyle,
+  titleContainerStyle,
+  titleStyle,
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   const [theme] = useTheme();
@@ -84,7 +101,11 @@ const RadioButton: FC<IRadionButtonProps> = ({
         } else {
           const coreIcon = iconSet.selected as IIconProps;
           const ICON_COLOR = radioButton[active ? 'active' : 'passive'].icon;
-          return <Icon {...coreIcon} color={ICON_COLOR} />;
+          return (
+            <View style={[radioButtonStyle?.iconContainer, iconContainerStyle]}>
+              <Icon {...coreIcon} color={ICON_COLOR} />
+            </View>
+          )
         }
       } else {
         if (isValidElement(iconSet.notSelected)) {
@@ -92,7 +113,11 @@ const RadioButton: FC<IRadionButtonProps> = ({
         } else {
           const coreIcon = iconSet.notSelected as IIconProps;
           const ICON_COLOR = radioButton[active ? 'active' : 'passive'].icon;
-          return <Icon {...coreIcon} color={ICON_COLOR} />;
+          return (
+            <View style={[radioButtonStyle?.iconContainer, iconContainerStyle]}>
+              <Icon {...coreIcon} color={ICON_COLOR} />
+            </View>
+          )
         }
       }
     } else {
@@ -103,18 +128,26 @@ const RadioButton: FC<IRadionButtonProps> = ({
   const renderTitle = (): React.ReactElement | null => {
     if (title) {
       const TEXT_COLOR = radioButton[active ? 'active' : 'passive'].text;
-      return <Text style={{ color: TEXT_COLOR }}>{title}</Text>;
-    } else {
-      return null;
+      return (
+        <View style={[radioButtonStyle?.titleContainer, titleContainerStyle]}>
+          <Text style={[{ color: TEXT_COLOR }, radioButtonStyle?.title, titleStyle]}>{title}</Text>
+        </View>
+      )
     }
+    return null;
+
   };
+
+  const renderSeperator = (): React.ReactElement | null => {
+    return <Seperator type="horizontal" size="large" />
+  }
 
   return (
     <TouchableOpacity
       testID={testID}
       disabled={!active}
       key={value}
-      style={[containerStyle, radioButtonStyle?.container]}
+      style={[radioButtonStyle?.container, containerStyle]}
       onPress={() => {
         setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {
@@ -123,9 +156,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
       }}
     >
       {renderIcon()}
-      {renderIcon() !== null ? (
-        <View style={{ width: tokens.component.paddingHorizontal }} />
-      ) : null}
+      {renderSeperator()}
       {renderTitle()}
     </TouchableOpacity>
   );

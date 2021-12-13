@@ -62,6 +62,7 @@ const ChipGroup: FC<IChipGroupTypes> = ({
       onSelect(tData[index], index);
     }
   };
+  
   const customRenderItem = (
     item: any,
     index: number
@@ -81,6 +82,7 @@ const ChipGroup: FC<IChipGroupTypes> = ({
       </Fragment>
     );
   };
+
   return (
     <View style={[containerStyle, chipGroupStyle?.container]}>
       {nData.map(renderItem || customRenderItem)}

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { useTheme } from "../../Context/Theme"
 import { Button } from '..';
 
@@ -33,6 +33,11 @@ export interface IChipProps {
    *
    */
   containerStyle?: StyleProp<ViewStyle>;
+
+  /**
+   * 
+   */
+  titleStyle?: StyleProp<TextStyle>
 }
 
 const Chip: FC<IChipProps> = ({
@@ -42,6 +47,7 @@ const Chip: FC<IChipProps> = ({
   active = true,
   onSelect = () => { },
   containerStyle = {},
+  titleStyle = {}
 }) => {
   const [theme] = useTheme()
   const { styles } = theme
@@ -56,7 +62,7 @@ const Chip: FC<IChipProps> = ({
       wrap={'wrap'}
       type={selected ? 'filled' : 'outlined'}
       title={title}
-      titleStyle={chipStyle?.title}
+      titleStyle={[chipStyle?.title, titleStyle]}
       onPress={() => {
         setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {

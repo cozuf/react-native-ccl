@@ -35,6 +35,14 @@ const SearchBar: FC<ISearchBarTypes> = ({
   minimumCharToInvoke = 1,
   value,
   onSearch,
+  containerStyle,
+  titleContainerStyle,
+  titleStyle,
+  inputStyle,
+  warningContainerStyle,
+  warningStyle,
+  errorContainerStyle,
+  errorStyle,
   ...props
 }) => {
   const [theme] = useTheme()
@@ -56,7 +64,10 @@ const SearchBar: FC<ISearchBarTypes> = ({
         size: 24,
       }}
       cleanable={true}
-      containerStyle={searchBarStyle?.container}
+      containerStyle={[searchBarStyle?.container, containerStyle]}
+      titleContainerStyle={[searchBarStyle?.titleContainer, titleContainerStyle]}
+      titleStyle={[searchBarStyle?.title, titleStyle]}
+      inputStyle={[searchBarStyle?.input, inputStyle]}
       {...props}
     />
   );
