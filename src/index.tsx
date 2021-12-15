@@ -146,6 +146,5 @@ export type {
 // TODO: --datetimepicker'a moment ile gösterim eklenecek
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri inner yap
 // TODO: --ClassComponent için withTheme yap
-// TODO: PageContainer'e loading ekle
 
 // FIXME: Style'lar theme.style'dan color'lar theme.color'dan çekilmeli - gözden geçir unutma!

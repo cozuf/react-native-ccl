@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
+import { ActivityIndicator } from '..';
 import { useTheme } from '../../Context/Theme';
 
 interface IPageContainerProps {
@@ -30,6 +31,11 @@ interface IPageContainerProps {
    *
    */
   contentContainerStyle?: ViewStyle;
+
+  /**
+   * 
+   */
+  loading?: boolean
 }
 
 type IPageContainerTypes = IPageContainerProps &
@@ -44,12 +50,30 @@ const PageContainer: FC<IPageContainerTypes> = ({
   style,
   contentContainerStyle,
   children,
+  loading,
   ...props
 }) => {
   const [theme] = useTheme();
   const { colors, styles } = theme;
   const { pageContainer } = colors;
   const { pageContainerStyle } = styles;
+
+  if (loading) {
+    return (
+      <View
+        testID={testID}
+        style={[
+          pageContainerStyle?.container,
+          { backgroundColor: pageContainer.background },
+          { alignItems: "center", justifyContent: "center" },
+          style,
+        ]}
+        {...props}
+      >
+        <ActivityIndicator />
+      </View>
+    )
+  }
 
   switch (type) {
     case 'safeArea':

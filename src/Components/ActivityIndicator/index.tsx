@@ -23,7 +23,7 @@ export interface IActivityIndicatorProps {
   /**
    *
    */
-  type:
+  type?:
   | 'default'
   | 'ballIndicator'
   | 'barIndicator'
