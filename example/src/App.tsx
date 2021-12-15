@@ -7,23 +7,23 @@ import {
   ThemeProvider,
   useTheme,
   BottomSheetProvider,
-  ClassGlobalStateProvider,
+  // ClassGlobalStateProvider,
   GlobalStateProvider
 } from 'react-native-ccl';
 
 const App = () => {
   return (
-    <ClassGlobalStateProvider>
-      <GlobalStateProvider>
-        <ThemeProvider>
-          <BottomSheetProvider>
-            <NavigationContainer>
-              <Child />
-            </NavigationContainer>
-          </BottomSheetProvider>
-        </ThemeProvider>
-      </GlobalStateProvider>
-    </ClassGlobalStateProvider>
+    // <ClassGlobalStateProvider>
+    <GlobalStateProvider>
+      <ThemeProvider>
+        <BottomSheetProvider>
+          <NavigationContainer>
+            <Child />
+          </NavigationContainer>
+        </BottomSheetProvider>
+      </ThemeProvider>
+    </GlobalStateProvider>
+    // </ClassGlobalStateProvider>
   );
 };
 

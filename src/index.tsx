@@ -61,8 +61,8 @@ import {
   useBottomSheet,
   GlobalStateProvider,
   useGlobalState,
-  ClassGlobalStateProvider,
-  useClassGlobalState
+  // ClassGlobalStateProvider,
+  // useClassGlobalState
 } from './Context';
 import { FONTS } from './Assets';
 import { dark, light } from './Theme/Colors';
@@ -98,8 +98,8 @@ export {
   useBottomSheet,
   GlobalStateProvider,
   useGlobalState,
-  ClassGlobalStateProvider,
-  useClassGlobalState,
+  // ClassGlobalStateProvider,
+  // useClassGlobalState,
   FONTS,
   dark,
   light,
