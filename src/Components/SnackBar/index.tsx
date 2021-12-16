@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import { Animated, View, Dimensions, Easing, StyleSheet, ViewStyle } from "react-native";
+import React, { useEffect, useImperativeHandle, useState, forwardRef, Ref, PropsWithChildren, useRef } from "react";
+import { Animated, Dimensions, Easing, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+
 
 const SHORT_DURATION = 1000
 const MEDIUM_DURATION = 3000
@@ -9,6 +10,12 @@ const INFINITE_DURATION = -1
 const SHOWING_TIME = 700
 
 const WIDTH = Dimensions.get("window").width
+
+export interface SnackBarRef {
+    show: () => void
+    close: () => void
+}
+
 export interface ISnackBarProps {
     /**
      * 
@@ -18,30 +25,45 @@ export interface ISnackBarProps {
     /**
      * 
      */
-    containerStyle?: ViewStyle
+    containerStyle?: StyleProp<ViewStyle>
 }
 
-interface State {
-    opacity: Animated.Value
-    zIndex: Animated.Value
-    scale: Animated.Value,
-    visible: boolean
-}
+const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<SnackBarRef>) => {
+    const { duration, containerStyle, children } = props
+    const opacity = useRef(new Animated.Value(0)).current
+    const zIndex = useRef(new Animated.Value(-1)).current
+    const scale = useRef(new Animated.Value(0)).current
+    const [visible, setVisible] = useState<boolean>(false)
+    useImperativeHandle(ref, () => ({
+        show: show,
+        close: close
+    }));
 
-export default class SnackBar extends Component<ISnackBarProps, State>{
-    constructor(props: ISnackBarProps) {
-        super(props)
-        this.state = {
-            opacity: new Animated.Value(0),
-            zIndex: new Animated.Value(-1),
-            scale: new Animated.Value(0),
-            visible: false
+    useEffect(() => {
+        if (visible) {
+            let DURATION: number;
+            switch (duration) {
+                case "short":
+                default:
+                    DURATION = SHORT_DURATION
+                    break;
+                case "medium":
+                    DURATION = MEDIUM_DURATION
+                    break;
+                case "long":
+                    DURATION = LONG_DURATION
+                    break;
+                case "infinite":
+                    DURATION = INFINITE_DURATION
+                    break;
+            }
+            setTimeout(() => { close() }, DURATION);
         }
-    }
+    }, [visible])
 
-    private fadeIn = () => {
+    const fadeIn = () => {
         Animated.timing(
-            this.state.opacity,
+            opacity,
             {
                 duration: SHOWING_TIME,
                 toValue: 1,
@@ -49,9 +71,9 @@ export default class SnackBar extends Component<ISnackBarProps, State>{
             }
         ).start();
     }
-    private fadeOut = () => {
+    const fadeOut = () => {
         Animated.timing(
-            this.state.opacity,
+            opacity,
             {
                 duration: SHOWING_TIME,
                 toValue: 0,
@@ -61,9 +83,9 @@ export default class SnackBar extends Component<ISnackBarProps, State>{
         ).start();
     }
 
-    private front = () => {
+    const front = () => {
         Animated.timing(
-            this.state.zIndex,
+            zIndex,
             {
                 duration: SHOWING_TIME,
                 toValue: 1,
@@ -71,9 +93,9 @@ export default class SnackBar extends Component<ISnackBarProps, State>{
             }
         ).start();
     }
-    private back = () => {
+    const back = () => {
         Animated.timing(
-            this.state.zIndex,
+            zIndex,
             {
                 duration: SHOWING_TIME,
                 toValue: -1,
@@ -82,9 +104,9 @@ export default class SnackBar extends Component<ISnackBarProps, State>{
         ).start();
     }
 
-    private scaleIn = () => {
+    const scaleIn = () => {
         Animated.timing(
-            this.state.scale,
+            scale,
             {
                 duration: SHOWING_TIME,
                 toValue: 1,
@@ -92,9 +114,9 @@ export default class SnackBar extends Component<ISnackBarProps, State>{
             }
         ).start();
     }
-    private scaleOut = () => {
+    const scaleOut = () => {
         Animated.timing(
-            this.state.scale,
+            scale,
             {
                 duration: SHOWING_TIME,
                 toValue: 0,
@@ -103,64 +125,39 @@ export default class SnackBar extends Component<ISnackBarProps, State>{
         ).start();
     }
 
-    show = () => {
-        this.fadeIn()
-        this.front()
-        this.scaleIn()
-        this.setState(
-            { visible: true },
-            () => {
-                let DURATION: number;
-                switch (this.props.duration) {
-                    case "short":
-                    default:
-                        DURATION = SHORT_DURATION
-                        break;
-                    case "medium":
-                        DURATION = MEDIUM_DURATION
-                        break;
-                    case "long":
-                        DURATION = LONG_DURATION
-                        break;
-                    case "infinite":
-                        DURATION = INFINITE_DURATION
-                        break;
+    const show = () => {
+        fadeIn()
+        front()
+        scaleIn()
+        setVisible(true)
+    }
+
+    const close = () => {
+        fadeOut()
+        back()
+        scaleOut()
+        setVisible(false)
+    }
+
+    return (
+        <Animated.View
+            style={[
+                styles.animatedContainer,
+                {
+                    zIndex: zIndex,
+                    opacity: opacity,
+                    transform: [{ scale }],
                 }
-                setTimeout(() => {
-                    this.close()
-                }, DURATION);
-            })
-    }
+            ]}
+        >
+            <View style={[containerStyle, styles.contentContainer]}>
+                {children}
+            </View>
+        </Animated.View >
+    );
+})
 
-    close = () => {
-        this.fadeOut()
-        this.back()
-        this.scaleOut()
-        this.setState({ visible: false })
-    }
-
-    render() {
-        const { opacity, zIndex, scale } = this.state
-        const { containerStyle } = this.props
-        return (
-            <Animated.View
-                style={[
-                    styles.animatedContainer,
-                    {
-                        zIndex: zIndex,
-                        opacity: opacity,
-                        transform: [{ scale }],
-                    }
-                ]}
-            >
-                <View style={[containerStyle, styles.contentContainer]}>
-                    {this.props.children}
-                </View>
-            </Animated.View >
-        );
-    }
-
-}
+export default SnackBar
 
 const styles = StyleSheet.create({
     animatedContainer: {
@@ -186,4 +183,4 @@ const styles = StyleSheet.create({
     }
 })
 
-// TODO: https://github.com/cooperka/react-native-snackbar bunu kullanabilirsin
+// TODO: https://github.com/cooperka/react-native-snackbar bunu da kullanabilirsin

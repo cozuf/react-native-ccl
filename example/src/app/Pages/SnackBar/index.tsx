@@ -1,8 +1,8 @@
-import React, { createRef, useState } from 'react';
-import { Button, PageContainer, SnackBar } from 'react-native-ccl';
+import React, { RefObject, useRef, useState } from 'react';
+import { Button, PageContainer, SnackBar, SnackBarRef } from 'react-native-ccl';
 
 const SnackBarPage = () => {
-    const snackBarRef = createRef<SnackBar>()
+    const snackBarRef = useRef<SnackBarRef>() as RefObject<SnackBarRef>
     const [visible, setVisible] = useState(false)
 
     return (

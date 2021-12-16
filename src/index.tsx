@@ -51,6 +51,7 @@ import type {
   ISwitchProps,
   ISwitchTypes,
   ISnackBarProps,
+  SnackBarRef,
   ICardProps
 } from './Components';
 
@@ -133,6 +134,7 @@ export type {
   ISwitchProps,
   ISwitchTypes,
   ISnackBarProps,
+  SnackBarRef,
   ICardProps
 };
 

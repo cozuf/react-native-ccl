@@ -29,7 +29,7 @@ import SelectBox, { ISelectBoxProps, ISelectBoxTypes } from './SelectBox';
 import Seperator from './Seperator';
 import DateTimePicker from './DateTimePicker';
 import Switch, { ISwitchProps, ISwitchTypes } from './Switch';
-import SnackBar, { ISnackBarProps } from './SnackBar';
+import SnackBar, { ISnackBarProps, SnackBarRef } from './SnackBar';
 import Card, { ICardProps } from './Card';
 
 export {
@@ -84,5 +84,6 @@ export type {
   ISwitchProps,
   ISwitchTypes,
   ISnackBarProps,
+  SnackBarRef,
   ICardProps
 };
