@@ -228,7 +228,24 @@ export const seperatorStyle: ISeperatorStyle = {
 }
 
 export const snackbarStyle: ISnackbarStyle = {
-
+    animatedContainer: {
+        overflow: "hidden",
+        position: "absolute",
+        bottom: 0,
+        height: 66,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+    },
+    contentContainer: {
+        flex: 1,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    }
 }
 
 export const stateCardStyle: IStateCardStyle = {

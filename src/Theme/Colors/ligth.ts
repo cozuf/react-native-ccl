@@ -18,6 +18,7 @@ import type {
   TextInputColorScheme,
   SwitchComponentColorScheme,
   CardColorScheme,
+  SnackBarColorScheme,
 } from './types';
 import {
   BLACK,
@@ -317,6 +318,11 @@ const card: CardColorScheme = {
   }
 }
 
+const snackBar: SnackBarColorScheme = {
+  background: GREY_90,
+  shadow: BLACK
+}
+
 const light: ColorScheme = {
   common,
   pageContainer,
@@ -335,7 +341,8 @@ const light: ColorScheme = {
   selectBox,
   dateTimePicker,
   switchComponent: switchColors,
-  card
+  card,
+  snackBar
 };
 
 export default light;

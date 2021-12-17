@@ -1,59 +1,10 @@
 import type { ColorValue } from 'react-native';
 
-export interface CommonColorScheme {
-  primary: ColorValue;
-  secondary: ColorValue;
-  active: ColorValue;
-  passive: ColorValue;
-  statusbar: ColorValue;
-  componentBackground: ColorValue
-}
-
-export interface PageContainerColorScheme {
+export interface BadgeColorScheme {
+  border: ColorValue;
   background: ColorValue;
-}
-
-export interface TextColorScheme {
-  active: ColorValue;
-  passive: ColorValue;
-}
-
-export interface IconColorScheme {
-  active: ColorValue;
-  passive: ColorValue;
-}
-
-export interface TextInputColorScheme {
-  /**
-   * Pressable but not focused
-   */
-  active: {
-    background: ColorValue;
-    border: ColorValue;
-    titleText: ColorValue;
-    inputText: ColorValue;
-    placeholder: ColorValue;
-  };
-  /**
-   * Not pressable
-   */
-  passive: {
-    background: ColorValue;
-    border: ColorValue;
-    titleText: ColorValue;
-    inputText: ColorValue;
-    placeholder: ColorValue;
-  };
-  /**
-   * focused
-   */
-  focused: {
-    background: ColorValue;
-    border: ColorValue;
-    titleText: ColorValue;
-    inputText: ColorValue;
-    selection: ColorValue;
-  };
+  text: ColorValue;
+  shadow: ColorValue;
 }
 
 export interface ButtonColorScheme {
@@ -137,36 +88,17 @@ export interface ButtonColorScheme {
   };
 }
 
-export interface RadioButtonColorScheme {
-  /**
-   * Pressable
-   */
+export interface CardColorScheme {
   active: {
-    text: ColorValue;
-    icon: ColorValue;
-    background: ColorValue;
-    border: ColorValue;
-  };
-  /**
-   * Not pressable
-   */
+    background: ColorValue
+    border: ColorValue
+    icon?: ColorValue
+  },
   passive: {
-    text: ColorValue;
-    icon: ColorValue;
-    background: ColorValue;
-    border: ColorValue;
-  };
-}
-
-export interface RadioButtonGroupColorScheme {
-  active: {
-    background: ColorValue;
-    seperator: ColorValue;
-  };
-  passive: {
-    background: ColorValue;
-    seperator: ColorValue;
-  };
+    background: ColorValue
+    border: ColorValue
+    icon?: ColorValue
+  }
 }
 
 export interface CheckBoxColorScheme {
@@ -233,34 +165,13 @@ export interface ChipGroupColorScheme {
   };
 }
 
-export interface BadgeColorScheme {
-  border: ColorValue;
-  background: ColorValue;
-  text: ColorValue;
-  shadow: ColorValue;
-}
-
-export interface ModalColorScheme {
-  outsideBackground: ColorValue;
-  containerBackground: ColorValue;
-  shadow: ColorValue;
-}
-
-export interface SelectBoxColorScheme {
-  active: {
-    background: ColorValue;
-    border: ColorValue;
-    title: ColorValue;
-    placeholder: ColorValue;
-    value: ColorValue;
-  };
-  passive: {
-    background: ColorValue;
-    border: ColorValue;
-    title: ColorValue;
-    placeholder: ColorValue;
-    value: ColorValue;
-  };
+export interface CommonColorScheme {
+  primary: ColorValue;
+  secondary: ColorValue;
+  active: ColorValue;
+  passive: ColorValue;
+  statusbar: ColorValue;
+  componentBackground: ColorValue
 }
 
 export interface DateTimePickerColorScheme {
@@ -281,6 +192,75 @@ export interface DateTimePickerColorScheme {
   };
 }
 
+export interface IconColorScheme {
+  active: ColorValue;
+  passive: ColorValue;
+}
+
+export interface ModalColorScheme {
+  outsideBackground: ColorValue;
+  containerBackground: ColorValue;
+  shadow: ColorValue;
+}
+
+export interface PageContainerColorScheme {
+  background: ColorValue;
+}
+
+export interface RadioButtonColorScheme {
+  /**
+   * Pressable
+   */
+  active: {
+    text: ColorValue;
+    icon: ColorValue;
+    background: ColorValue;
+    border: ColorValue;
+  };
+  /**
+   * Not pressable
+   */
+  passive: {
+    text: ColorValue;
+    icon: ColorValue;
+    background: ColorValue;
+    border: ColorValue;
+  };
+}
+
+export interface RadioButtonGroupColorScheme {
+  active: {
+    background: ColorValue;
+    seperator: ColorValue;
+  };
+  passive: {
+    background: ColorValue;
+    seperator: ColorValue;
+  };
+}
+
+export interface SelectBoxColorScheme {
+  active: {
+    background: ColorValue;
+    border: ColorValue;
+    title: ColorValue;
+    placeholder: ColorValue;
+    value: ColorValue;
+  };
+  passive: {
+    background: ColorValue;
+    border: ColorValue;
+    title: ColorValue;
+    placeholder: ColorValue;
+    value: ColorValue;
+  };
+}
+
+export interface SnackBarColorScheme {
+  background: ColorValue
+  shadow: ColorValue
+}
+
 export interface SwitchComponentColorScheme {
   active: {
     border: ColorValue;
@@ -298,36 +278,62 @@ export interface SwitchComponentColorScheme {
   };
 }
 
-export interface CardColorScheme {
+export interface TextColorScheme {
+  active: ColorValue;
+  passive: ColorValue;
+}
+
+export interface TextInputColorScheme {
+  /**
+   * Pressable but not focused
+   */
   active: {
-    background: ColorValue
-    border: ColorValue
-    icon?: ColorValue
-  },
+    background: ColorValue;
+    border: ColorValue;
+    titleText: ColorValue;
+    inputText: ColorValue;
+    placeholder: ColorValue;
+  };
+  /**
+   * Not pressable
+   */
   passive: {
-    background: ColorValue
-    border: ColorValue
-    icon?: ColorValue
-  }
+    background: ColorValue;
+    border: ColorValue;
+    titleText: ColorValue;
+    inputText: ColorValue;
+    placeholder: ColorValue;
+  };
+  /**
+   * focused
+   */
+  focused: {
+    background: ColorValue;
+    border: ColorValue;
+    titleText: ColorValue;
+    inputText: ColorValue;
+    selection: ColorValue;
+  };
 }
 
 export interface ColorScheme {
-  common: CommonColorScheme;
-  pageContainer: PageContainerColorScheme;
-  text: TextColorScheme;
-  icon: IconColorScheme;
-  textInput: TextInputColorScheme;
-  button: ButtonColorScheme;
-  radioButton: RadioButtonColorScheme;
-  radioButtonGroup: RadioButtonGroupColorScheme;
-  checkBox: CheckBoxColorScheme;
-  checkBoxGroup: CheckBoxGroupColorScheme;
-  chip: ChipColorScheme;
-  chipGroup: ChipGroupColorScheme;
-  badge: BadgeColorScheme;
-  modal: ModalColorScheme;
-  selectBox: SelectBoxColorScheme;
-  dateTimePicker: DateTimePickerColorScheme;
-  switchComponent: SwitchComponentColorScheme;
+  badge: BadgeColorScheme
+  button: ButtonColorScheme
   card: CardColorScheme
+  checkBox: CheckBoxColorScheme
+  checkBoxGroup: CheckBoxGroupColorScheme
+  chip: ChipColorScheme
+  chipGroup: ChipGroupColorScheme
+  common: CommonColorScheme
+  dateTimePicker: DateTimePickerColorScheme
+  icon: IconColorScheme
+  modal: ModalColorScheme
+  pageContainer: PageContainerColorScheme
+  radioButton: RadioButtonColorScheme
+  radioButtonGroup: RadioButtonGroupColorScheme
+  selectBox: SelectBoxColorScheme
+  snackBar: SnackBarColorScheme
+  switchComponent: SwitchComponentColorScheme
+  text: TextColorScheme
+  textInput: TextInputColorScheme
 }

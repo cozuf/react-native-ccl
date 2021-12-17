@@ -1,6 +1,6 @@
 import React, { useEffect, useImperativeHandle, useState, forwardRef, Ref, PropsWithChildren, useRef } from "react";
-import { Animated, Dimensions, Easing, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-
+import { Animated, Dimensions, Easing, StyleProp, View, ViewStyle } from "react-native";
+import { useTheme } from "../../Context";
 
 const SHORT_DURATION = 1000
 const MEDIUM_DURATION = 3000
@@ -29,6 +29,11 @@ export interface ISnackBarProps {
 }
 
 const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<SnackBarRef>) => {
+    const [theme] = useTheme();
+    const { colors, styles } = theme;
+    const { snackBar } = colors;
+    const { snackbarStyle } = styles;
+
     const { duration, containerStyle, children } = props
     const opacity = useRef(new Animated.Value(0)).current
     const zIndex = useRef(new Animated.Value(-1)).current
@@ -61,6 +66,7 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
         }
     }, [visible])
 
+    //#region FADE
     const fadeIn = () => {
         Animated.timing(
             opacity,
@@ -82,7 +88,9 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
             }
         ).start();
     }
+    //#endregion
 
+    //#region BRING
     const front = () => {
         Animated.timing(
             zIndex,
@@ -103,7 +111,9 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
             }
         ).start();
     }
+    //#endregion
 
+    //#region SCALE
     const scaleIn = () => {
         Animated.timing(
             scale,
@@ -124,6 +134,7 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
             }
         ).start();
     }
+    //#endregion
 
     const show = () => {
         fadeIn()
@@ -141,16 +152,26 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
 
     return (
         <Animated.View
-            style={[
-                styles.animatedContainer,
-                {
-                    zIndex: zIndex,
-                    opacity: opacity,
-                    transform: [{ scale }],
-                }
-            ]}
+            style={
+                [
+                    snackbarStyle?.animatedContainer,
+                    {
+                        width: WIDTH,
+                        zIndex: zIndex,
+                        opacity: opacity,
+                        transform: [{ scale }],
+                    }
+                ]
+            }
         >
-            <View style={[containerStyle, styles.contentContainer]}>
+            <View
+                style={
+                    [snackbarStyle?.contentContainer,
+                        containerStyle,
+                    { backgroundColor: snackBar.background, shadowColor: snackBar.shadow }
+                    ]
+                }
+            >
                 {children}
             </View>
         </Animated.View >
@@ -158,29 +179,5 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
 })
 
 export default SnackBar
-
-const styles = StyleSheet.create({
-    animatedContainer: {
-        overflow: "hidden",
-        position: "absolute",
-        bottom: 0,
-        height: 66,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        width: WIDTH,
-    },
-    contentContainer: {
-        flex: 1,
-        backgroundColor: "black",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    }
-})
 
 // TODO: https://github.com/cooperka/react-native-snackbar bunu da kullanabilirsin
