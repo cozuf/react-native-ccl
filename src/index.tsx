@@ -146,7 +146,7 @@ export type {
 // : GlobalState'yi dışarıdan type verilebilir -> Şimdilik mümkün değil
 // : Language Context -> Burası da GlobalState gibi şimdilik mümkün değil
 // : import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
-// TODO: --modalı Furkan'ın ki gibi yap bir sürü modal açacam diye uğraşma
+// TODO: --modal için Context yap
 // TODO: --datetimepicker'a moment ile gösterim eklenecek
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri inner yap
 // TODO: --ClassComponent için withTheme yap
