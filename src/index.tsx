@@ -52,7 +52,8 @@ import type {
   ISwitchTypes,
   ISnackBarProps,
   SnackBarRef,
-  ICardProps
+  ICardProps,
+  IModalProps
 } from './Components';
 
 import {
@@ -135,7 +136,8 @@ export type {
   ISwitchTypes,
   ISnackBarProps,
   SnackBarRef,
-  ICardProps
+  ICardProps,
+  IModalProps
 };
 
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
