@@ -127,7 +127,8 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 
   const renderModal = (): ReactNode => {
     return (
-      <Modal.Default
+      <Modal
+        type="default"
         visible={visible}
         onTouchOutSide={() => {
           setVisible(false);
@@ -146,7 +147,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
           fadeToColor={theme.name === 'Dark' ? 'black' : 'white'}
         />
         {renderSubmit()}
-      </Modal.Default>
+      </Modal>
     );
   };
 
