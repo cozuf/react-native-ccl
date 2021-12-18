@@ -34,7 +34,7 @@ const RadioButtonGroupPage = () => {
     <PageContainer type="default">
       <RadioButtonGroup
         data={DATA}
-        onSelect={(item, index) => {
+        onSelect={(item: any, index: number) => {
           console.log({ item, index });
         }}
         onSubmit={(data: any[]) => {

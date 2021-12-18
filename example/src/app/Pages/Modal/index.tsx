@@ -19,7 +19,7 @@ const ModalPage = () => {
         type={type}
         visible={visibleNew}
         // containerStyle={{ flex: 1 }}
-        onTouchOutSide={(v) => {
+        onTouchOutSide={(v: boolean) => {
           setVisibleNew(v);
         }}
         onAcceptButtonPress={() => {

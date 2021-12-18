@@ -107,7 +107,7 @@ const ChipGroupPage = () => {
     <PageContainer type="default">
       <ChipGroup
         data={DATA}
-        onSelect={(item, index) => {
+        onSelect={(item: any, index: number) => {
           console.log({ item, index });
         }}
       />

@@ -44,7 +44,7 @@ const ButtonPage = () => {
         }}
         type={TYPES[typeIndex].title as 'filled' | 'outlined' | 'simplied'}
         wrap={WRAP_TYPES[wrapIndex].title as 'wrap' | 'no-wrap' | 'free'}
-        onPress={() => {}}
+        onPress={() => { }}
       />
       <View style={{ paddingVertical: 16 }}>
         <TapSelector
@@ -56,28 +56,28 @@ const ButtonPage = () => {
         <View style={{ paddingVertical: 8 }} />
         <TapSelector
           data={CHILD_TYPES}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setChildTypeIndex(index);
           }}
         />
         <View style={{ paddingVertical: 8 }} />
         <TapSelector
           data={CLICK_TYPES}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setClickTypeIndex(index);
           }}
         />
         <View style={{ paddingVertical: 8 }} />
         <TapSelector
           data={TYPES}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setTypeIndex(index);
           }}
         />
         <View style={{ paddingVertical: 8 }} />
         <TapSelector
           data={WRAP_TYPES}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setWrapIndex(index);
           }}
         />

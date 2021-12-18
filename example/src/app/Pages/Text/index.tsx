@@ -113,21 +113,21 @@ const TextPage = () => {
       <View style={{ paddingVertical: 16 }}>
         <TapSelector
           data={ACTIVE_DATA}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setActiveIndex(index);
           }}
         />
         <Seperator type="vertical" />
         <TapSelector
           data={SIZES}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setSizeIndex(index);
           }}
         />
         <Seperator type="vertical" />
         <TapSelector
           data={WEIGHTS}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setWeightIndex(index);
           }}
         />

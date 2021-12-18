@@ -21,7 +21,7 @@ const TapSelectorPage = () => {
       <View style={{ paddingTop: 16 }}>
         <TapSelector
           data={DATA}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setSelectedIndex(index);
           }}
         />

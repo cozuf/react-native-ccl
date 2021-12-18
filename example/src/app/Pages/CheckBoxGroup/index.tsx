@@ -32,7 +32,7 @@ const CheckBoxGroupPage = () => {
     <PageContainer type="default">
       <CheckBoxGroup
         data={DATA}
-        onSelect={(item, index) => {
+        onSelect={(item: any, index: number) => {
           console.log({ item, index });
         }}
         onSubmit={(data: any[]) => {

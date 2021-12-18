@@ -7,7 +7,7 @@ const RadioButtonPage = () => {
     <PageContainer type="default">
       <RadioButton
         selected={selected}
-        onSelect={(v) => {
+        onSelect={(v:boolean) => {
           setSelected(v);
         }}
       />

@@ -25,7 +25,7 @@ const DateTimePickerPage = () => {
       <View style={{ paddingTop: 16 }}>
         <TapSelector
           data={DISPLAY_TYPE_DATA}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setDisplayTypeIndex(index);
           }}
         />

@@ -76,8 +76,8 @@ const SelectBoxPage = () => {
         title="Bölge"
         searchable={true}
         navigation={navigation}
-        onSubmit={(data) => {
-          setAreas(data as any[]);
+        onSubmit={(data: any) => {
+          setAreas(data);
         }}
         minChoice={2}
         maxChoice={4}
@@ -85,14 +85,14 @@ const SelectBoxPage = () => {
       <View style={{ paddingTop: 16 }}>
         <TapSelector
           data={SELECT_TYPE_DATA}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setSelectTypeIndex(index);
           }}
         />
         <Seperator type="vertical" />
         <TapSelector
           data={DISPLAY_TYPE_DATA}
-          onTap={(_, index) => {
+          onTap={(_: any, index: number) => {
             setDisplayTypeIndex(index);
           }}
         />
