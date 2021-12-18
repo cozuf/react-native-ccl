@@ -155,9 +155,28 @@ export const dateTimePickerStyle: IDateTimePickerStyle = {
     textContainer: {},
     text: {},
 }
-
 export const modalStyle: IModalStyle = {
-
+    outside: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    container: {
+        borderRadius: 16,
+        padding: 16,
+        ...Platform.select({
+            ios: {
+                shadowOffset: {
+                    width: 0,
+                    height: 3,
+                },
+                shadowOpacity: 0.5,
+                shadowRadius: 4.65,
+            },
+            android: {
+                elevation: 6,
+            },
+        }),
+    },
 }
 
 export const pageContainerStyle: IPageContainerStyle = {

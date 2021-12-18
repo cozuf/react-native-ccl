@@ -24,7 +24,7 @@ import Chip, { IChipProps } from './Chip';
 import ChipGroup, { IChipGroupProps, IChipGroupTypes } from './ChipGroup';
 import Badge, { IBadgeProps } from './Badge';
 import SearchBar, { ISearchBarProps, ISearchBarTypes } from './SearchBar';
-import Modal from './Modal';
+import Modal, { IModalProps } from './Modal';
 import SelectBox, { ISelectBoxProps, ISelectBoxTypes } from './SelectBox';
 import Seperator from './Seperator';
 import DateTimePicker from './DateTimePicker';
@@ -77,6 +77,7 @@ export type {
   IChipGroupProps,
   IChipGroupTypes,
   IBadgeProps,
+  IModalProps,
   ISearchBarProps,
   ISearchBarTypes,
   ISelectBoxProps,

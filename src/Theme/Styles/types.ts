@@ -54,7 +54,8 @@ export interface IDateTimePickerStyle {
 }
 
 export interface IModalStyle {
-
+    outside?: StyleProp<ViewStyle>
+    container?: StyleProp<ViewStyle>
 }
 
 export interface IPageContainerStyle {
