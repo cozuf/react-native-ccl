@@ -1,5 +1,5 @@
 import React, { RefObject, useRef, useState } from 'react';
-import { Button, PageContainer, SnackBar, SnackBarRef } from 'react-native-ccl';
+import { Button, PageContainer, Seperator, SnackBar, SnackBarRef } from 'react-native-ccl';
 
 const SnackBarPage = () => {
     const snackBarRef = useRef<SnackBarRef>() as RefObject<SnackBarRef>
@@ -11,6 +11,9 @@ const SnackBarPage = () => {
                 snackBarRef.current?.show()
                 setVisible(true)
             }} />
+
+            <Seperator type='vertical' />
+
             <Button title="Close" disabled={!visible} onPress={() => {
                 snackBarRef.current?.close()
                 setVisible(false)

@@ -23,7 +23,7 @@ const TYPES: TapDataType[] = [
 const ModalPage = () => {
   const [visibleNew, setVisibleNew] = useState<boolean>(false);
 
-  const [type, setType] = useState<IModalProps["type"]>("selective")
+  const [type, setType] = useState<IModalProps["type"]>("default")
 
   const renderNewModal = () => {
     return (
