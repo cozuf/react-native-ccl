@@ -1,4 +1,4 @@
 import BottomSheetProvider from "./provider";
-import useBottomSheet from "./useBottomSheet";
+import useBottomSheet from "./hook";
 
 export { BottomSheetProvider, useBottomSheet }

@@ -7,6 +7,4 @@ export const BottomSheetContext = createContext<IBottomSheetFunctions>({
     close: () => { }
 });
 
-export const BottomSheetDispatchContext = createContext<Dispatch<Partial<IBottomSheetProps>>>(() => {
-
-});
+export const BottomSheetDispatchContext = createContext<Dispatch<Partial<IBottomSheetProps>>>(() => { });
