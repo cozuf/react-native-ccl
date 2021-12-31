@@ -1,75 +1,3 @@
-import {
-  Text,
-  PageContainer,
-  Icon,
-  TextInput,
-  ActivityIndicator,
-  Button,
-  TapSelector,
-  RadioButton,
-  RadioButtonGroup,
-  CheckBox,
-  CheckBoxGroup,
-  Chip,
-  ChipGroup,
-  Badge,
-  SearchBar,
-  Modal,
-  SelectBox,
-  Seperator,
-  DateTimePicker,
-  Switch,
-  SnackBar,
-  Card
-} from './Components';
-
-import type {
-  ITextProps,
-  ITextTypes,
-  IIconProps,
-  ITextInputProps,
-  ITextInputTypes,
-  IActivityIndicatorProps,
-  IButtonProps,
-  IButtonTypes,
-  ITapSelectorProps,
-  ITapSelectorTypes,
-  IRadionButtonProps,
-  IRadioButtonGroupProps,
-  IRadioButtonGroupTypes,
-  ICheckBoxProps,
-  ICheckBoxGroupProps,
-  ICheckBoxGroupTypes,
-  IChipProps,
-  IChipGroupProps,
-  IChipGroupTypes,
-  IBadgeProps,
-  ISearchBarProps,
-  ISearchBarTypes,
-  ISelectBoxProps,
-  ISelectBoxTypes,
-  ISwitchProps,
-  ISwitchTypes,
-  ISnackBarProps,
-  SnackBarRef,
-  ICardProps,
-  IModalProps
-} from './Components';
-
-import {
-  ThemeProvider,
-  useTheme,
-  BottomSheetProvider,
-  useBottomSheet,
-  GlobalStateProvider,
-  useGlobalState,
-  // ClassGlobalStateProvider,
-  // useClassGlobalState
-} from './Context';
-import { FONTS } from './Assets';
-import { dark, light } from './Theme/Colors';
-import SelectPage from './Components/SelectBox/Page';
-
 export {
   Text,
   PageContainer,
@@ -93,19 +21,11 @@ export {
   Switch,
   SnackBar,
   Card,
-  SelectPage,
-  ThemeProvider,
-  useTheme,
-  BottomSheetProvider,
-  useBottomSheet,
-  GlobalStateProvider,
-  useGlobalState,
-  // ClassGlobalStateProvider,
-  // useClassGlobalState,
-  FONTS,
-  dark,
-  light,
-};
+} from "./Components";
+
+export { SelectPage } from "./Components/SelectBox/Page"
+export { FONTS } from './Assets';
+export { dark, light } from './Theme/Colors';
 
 export type {
   ITextProps,
@@ -138,14 +58,24 @@ export type {
   SnackBarRef,
   ICardProps,
   IModalProps
-};
+} from "./Components"
+
+export {
+  ThemeProvider,
+  useTheme,
+  BottomSheetProvider,
+  useBottomSheet,
+  GlobalStateProvider,
+  useGlobalState,
+  ModalProvider,
+  useModal
+} from "./Context"
 
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
 // TODO: yayınlamadan önce ReadMe düzenle
 // : GlobalState'yi dışarıdan type verilebilir -> Şimdilik mümkün değil
 // : Language Context -> Burası da GlobalState gibi şimdilik mümkün değil
 // : import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
-// TODO: --modal için Context yap
 //  --datetimepicker'a moment ile gösterim eklenecek // EKLEME sadece dışarı Date tipini ver
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri inner yap
 // TODO: --ClassComponent için withTheme yap

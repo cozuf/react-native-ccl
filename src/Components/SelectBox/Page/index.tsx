@@ -88,7 +88,7 @@ export interface ISelectBoxPageProps {
   route: RouteProp<PageParamsList<any>, 'base'>;
 }
 
-const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
+export const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
   const {
     title = 'Başlık',
     searchable,
@@ -192,5 +192,3 @@ const SelectPage: FC<ISelectBoxPageProps> = ({ navigation, route }) => {
     </PageContainer>
   );
 };
-
-export default SelectPage;
