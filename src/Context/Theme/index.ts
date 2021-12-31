@@ -1,4 +1,4 @@
 import ThemeProvider from "./provider";
-import useTheme from "./useTheme";
+import useTheme from "./hook";
 
 export { ThemeProvider, useTheme }
