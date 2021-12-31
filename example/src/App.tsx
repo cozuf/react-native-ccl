@@ -8,7 +8,8 @@ import {
   useTheme,
   BottomSheetProvider,
   // ClassGlobalStateProvider,
-  GlobalStateProvider
+  GlobalStateProvider,
+  ModalProvider
 } from 'react-native-ccl';
 
 const App = () => {
@@ -17,9 +18,11 @@ const App = () => {
     <GlobalStateProvider>
       <ThemeProvider>
         <BottomSheetProvider>
-          <NavigationContainer>
-            <Child />
-          </NavigationContainer>
+          <ModalProvider>
+            <NavigationContainer>
+              <Child />
+            </NavigationContainer>
+          </ModalProvider>
         </BottomSheetProvider>
       </ThemeProvider>
     </GlobalStateProvider>
