@@ -7,8 +7,8 @@ const useGlobalState = (): [
     GlobalStateInterface,
     Dispatch<Partial<GlobalStateInterface>>
 ] => [
-        useContext(GlaobalStateContext).state,
-        useContext(GlobalStateDispatchContext).setState,
+        useContext(GlaobalStateContext),
+        useContext(GlobalStateDispatchContext),
     ];
 
 export default useGlobalState

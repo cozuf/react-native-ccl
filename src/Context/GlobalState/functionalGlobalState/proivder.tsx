@@ -15,8 +15,8 @@ const GlobalStateProvider: FC<any> = ({ children }) => {
     const [state, setState] = useReducer(reducer, DEFAULT_GLOBAL_STATE);
 
     return (
-        <GlaobalStateContext.Provider value={{ state }}>
-            <GlobalStateDispatchContext.Provider value={{ setState }}>
+        <GlaobalStateContext.Provider value={state}>
+            <GlobalStateDispatchContext.Provider value={setState}>
                 {children}
             </GlobalStateDispatchContext.Provider>
         </GlaobalStateContext.Provider>
