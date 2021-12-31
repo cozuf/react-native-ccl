@@ -3,10 +3,22 @@ import {
   Button,
   Modal,
   PageContainer,
+  Seperator,
+  TapSelector,
 } from 'react-native-ccl';
 import type { IModalProps } from 'src/Components/Modal';
 
-// const TYPES: IModalProps["type"][] = ["default", "fault", "loading", "selective", "warning"]
+type TapDataType = {
+  title: IModalProps["type"]
+}
+
+const TYPES: TapDataType[] = [
+  { title: "default" },
+  { title: "fault" },
+  { title: "loading" },
+  { title: "selective" },
+  { title: "warning" }
+]
 
 const ModalPage = () => {
   const [visibleNew, setVisibleNew] = useState<boolean>(false);
@@ -18,17 +30,14 @@ const ModalPage = () => {
       <Modal
         type={type}
         visible={visibleNew}
-        // containerStyle={{ flex: 1 }}
         onTouchOutSide={(v: boolean) => {
           setVisibleNew(v);
         }}
         onAcceptButtonPress={() => {
           setVisibleNew(false);
-          // setType("default")
         }}
         onRejectButtonPress={() => {
           setVisibleNew(false);
-          // setType("default")
         }}
         indicatorProps={{
           type: "uIActivityIndicator",
@@ -40,15 +49,13 @@ const ModalPage = () => {
 
   return (
     <PageContainer type="default">
+      <TapSelector data={TYPES} onTap={(item: TapDataType) => { setType(item.title) }} />
+      <Seperator type="vertical" />
       <Button
         childType="text"
         title={'Show New Modal'}
         onPress={() => {
           setVisibleNew(true);
-
-          setTimeout(() => {
-            setType("fault")
-          }, 5000);
         }}
       />
       {renderNewModal()}

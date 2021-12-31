@@ -133,7 +133,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         onTouchOutSide={() => {
           setVisible(false);
         }}
-        containerStyle={{ alignItems: 'center' }}
+        containerStyle={{ flex: undefined, alignItems: 'center' }}
       >
         <RNDatePicker
           date={nDate}

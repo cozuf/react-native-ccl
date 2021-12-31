@@ -1,23 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
-import { Button, PageContainer, Text, useBottomSheet } from "react-native-ccl";
+import { Button, PageContainer, Seperator, Text, useBottomSheet } from "react-native-ccl";
 
 const BottomSheetPage = () => {
     const [bottomSheet, setBottomSheet] = useBottomSheet();
+    const [handlePosition, setHandlePosition] = useState<"inside" | "outside">("inside");
+    const [adjustToContentHeight, setAdjustToContentHeight] = useState<boolean>(false);
     return (
         <PageContainer type="default">
             <Button
-                title={"OPne BottomSheet"}
+                title={`Handle Position = ${handlePosition}`}
+                onPress={() => {
+                    setHandlePosition((v) => {
+                        if (v === "inside") {
+                            return "outside"
+                        } else {
+                            return "inside"
+                        }
+                    })
+                }} />
+            <Seperator type="vertical" />
+            <Button
+                title={`Adjust To Content Height = ${adjustToContentHeight}`}
+                onPress={() => {
+                    setAdjustToContentHeight(v => !v)
+                }} />
+            <Seperator type="vertical" />
+            <Button
+                title={"Open BottomSheet"}
                 onPress={() => {
                     setBottomSheet({
                         props: {
-                            adjustToContentHeight: true
+                            adjustToContentHeight,
+                            handlePosition
                         },
                         renderContent: () => {
                             return (
-
-                                <View style={{ height: 100, backgroundColor: "red" }}>
-                                    <Text>Yusuf</Text>
+                                <View style={{ height: 100, }}>
+                                    <Text style={{ textAlign: "center", color: "#000" }}>Yusuf</Text>
                                 </View>
                             )
                         }

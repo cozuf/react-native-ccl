@@ -166,7 +166,7 @@ const SelectBoxModal: FC<SelectBoxModalTypes<any>> = ({
 
 const styles = StyleSheet.create({
   modalContainer: {
-    flex: 1
+    flex: undefined
   }
 })
 
