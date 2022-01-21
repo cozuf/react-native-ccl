@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ColorValue, ActivityIndicator } from 'react-native';
+import { ColorValue, ActivityIndicator as Default } from 'react-native';
 import {
   BallIndicator,
   BarIndicator,
@@ -46,7 +46,7 @@ export interface IActivityIndicatorProps {
   size?: number;
 }
 
-const NActivityIndicator: FC<IActivityIndicatorProps> = ({
+const ActivityIndicator: FC<IActivityIndicatorProps> = ({
   testID,
   type = 'default',
   color,
@@ -77,11 +77,9 @@ const NActivityIndicator: FC<IActivityIndicatorProps> = ({
     case "default":
     default:
       return (
-        <ActivityIndicator testID={testID} color={COLOR} size={size > 15 ? 'large' : 'small'} />
+        <Default testID={testID} color={COLOR} size={size > 15 ? 'large' : 'small'} />
       );
   }
 };
 
-export default NActivityIndicator;
-
-// TODO: Belki Container konulabilir
+export default ActivityIndicator;
