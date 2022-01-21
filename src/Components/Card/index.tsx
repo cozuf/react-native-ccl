@@ -160,5 +160,3 @@ const Card: FC<ICardProps> = ({ expandable = true, ...props }) => {
 
 
 export default Card;
-
-// TODO: Geliştirlmeye devam edilecek
