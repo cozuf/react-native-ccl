@@ -11,6 +11,7 @@ const SHOWING_TIME = 700
 
 const WIDTH = Dimensions.get("window").width
 
+// https://github.com/cooperka/react-native-snackbar bunu da kullanabilirsin
 export interface SnackBarRef {
     show: () => void
     close: () => void
@@ -179,5 +180,3 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
 })
 
 export default SnackBar
-
-// TODO: https://github.com/cooperka/react-native-snackbar bunu da kullanabilirsin
