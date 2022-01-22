@@ -2,6 +2,7 @@ import React, { FC, ReactNode, useRef, useState } from "react";
 import { Animated, View, Omit, Pressable, Easing, ViewStyle } from "react-native";
 import { Icon, } from "..";
 import { useTheme } from '../../Context/Theme';
+
 export interface ICardProps {
     /**
      * 
@@ -120,7 +121,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
                     {children}
                 </View>
             </Animated.View>
-            <View style={[footerContainerStyle]}>
+            <View style={[footerContainerStyle, cardStyle?.footerContainer]}>
                 {footerComponent()}
             </View>
         </Pressable>
@@ -128,6 +129,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
 }
 
 const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({
+    active = true,
     headerComponent = () => null,
     footerComponent = () => null,
     containerStyle,
@@ -135,22 +137,37 @@ const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({
     bodyContainerStyle,
     footerContainerStyle, children
 }) => {
+    const [theme] = useTheme()
+    const { colors, styles } = theme
+    const { card } = colors
+    const { cardStyle } = styles
+
     return (
-        <View style={[containerStyle]}>
-            <View style={[headerContainerStyle]}>
+        <View
+            style={
+                [
+                    cardStyle?.container,
+                    {
+                        borderColor: card[active ? "active" : "passive"].border,
+                        backgroundColor: card[active ? "active" : "passive"].background,
+                    },
+                    containerStyle
+                ]
+            }>
+            <View style={[headerContainerStyle, cardStyle?.titleContainer]}>
                 {headerComponent()}
             </View>
-            <View style={[bodyContainerStyle]}>
+            <View style={[bodyContainerStyle, cardStyle?.bodyContainer]}>
                 {children}
             </View>
-            <View style={[footerContainerStyle]}>
+            <View style={[footerContainerStyle, cardStyle?.footerContainer]}>
                 {footerComponent()}
             </View>
         </View>
     )
 }
 
-const Card: FC<ICardProps> = ({ expandable = true, ...props }) => {
+const Card: FC<ICardProps> = ({ expandable = false, ...props }) => {
     if (expandable) {
         return <ExpandableCard  {...props} />
     } else {
