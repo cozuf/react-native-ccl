@@ -22,6 +22,9 @@ This library then uses the following libraries, so you need to install them as w
 npm install react-native-ccl
 ```
 
+## Components
+1. ActivityIndicator
+
 ## Usage
 
 ```js
