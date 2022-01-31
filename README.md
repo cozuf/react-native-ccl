@@ -64,13 +64,34 @@ import { ActivityIndicator } from "react-native-ccl";
 
 ## Badge
 ```js
-import { ActivityIndicator } from "react-native-ccl";
+import { Badge } from "react-native-ccl";
 
 (
     <Badge
         testID
         size = 'small' | 'medium' | 'large' | number
         value = number | string
+   />
+)
+```
+
+## Button
+```js
+import { Button } from "react-native-ccl";
+
+(
+    <Button
+        testID= string
+        clickType= 'opacity' | 'changeable'
+        childType= 'text' | 'icon' | 'both'
+        type= 'filled' | 'outlined' | 'simplied'
+        wrap= 'wrap' | 'no-wrap' | 'free'
+        onPress= () => void
+        onLongPress= () => void
+        icon= IIconProps | ReactNode
+        title= string;
+        titleStyle= StyleProp<TextStyle>
+        containerStyle= StyleProp<ViewStyle>
    />
 )
 ```
