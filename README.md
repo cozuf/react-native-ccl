@@ -52,14 +52,25 @@ npm install react-native-ccl
 ```js
 import { ActivityIndicator } from "react-native-ccl";
 
-// ...
-
 (
     <ActivityIndicator
-        testID=
-        type = 'default' | 'default' | 'ballIndicator' | 'barIndicator' | 'dotIndicator' | 'materialIndicator' | 'pacmanIndicator' | 'pulseIndicator' | 'skypeIndicator' | 'uIActivityIndicator' | 'waveIndicator'
+        testID
+        type = 'default' | 'ballIndicator' | 'barIndicator' | 'dotIndicator' | 'materialIndicator' | 'pacmanIndicator' | 'pulseIndicator' | 'skypeIndicator' | 'uIActivityIndicator' | 'waveIndicator'
         color
         size = {24}
+   />
+)
+```
+
+## Badge
+```js
+import { ActivityIndicator } from "react-native-ccl";
+
+(
+    <Badge
+        testID
+        size = 'small' | 'medium' | 'large' | number
+        value = number | string
    />
 )
 ```
