@@ -24,27 +24,27 @@ npm install react-native-ccl
 
 ## Components
 
-1. [ActivityIndicator](https://www.youtube.com) <br>
-2. [Badge](https://www.youtube.com) <br>
-3. [Button](https://www.youtube.com) <br>
-4. [Card](https://www.youtube.com) <br>
-5. [CheckBox](https://www.youtube.com) <br>
-6. [CheckBoxGroup](https://www.youtube.com) <br>
-7. [Chip](https://www.youtube.com) <br>
-8. [ChipGroup](https://www.youtube.com) <br>
-9. [DateTimePicker](https://www.youtube.com) <br>
-10. [Icon](https://www.youtube.com) <br>
-11. [Modal](https://www.youtube.com) <br>
-12. [RadioButton](https://www.youtube.com) <br>
-13. [RadioButtonGroup](https://www.youtube.com) <br>
-14. [SearchBar](https://www.youtube.com) <br>
-15. [SelectBox](https://www.youtube.com) <br>
-16. [SnackBar](https://www.youtube.com) <br>
-17. [Seperator](https://www.youtube.com) <br>
-18. [Switch](https://www.youtube.com) <br>
-19. [TapSelector](https://www.youtube.com) <br>
-20. [Text](https://www.youtube.com) <br>
-21. [TextInput](https://www.youtube.com) <br>
+1. [ActivityIndicator](https://github.com/cozuf/react-native-ccl/tree/develop#activityindicator) <br>
+2. [Badge](https://github.com/cozuf/react-native-ccl/tree/develop#badge) <br>
+3. [Button](https://github.com/cozuf/react-native-ccl/tree/develop#button) <br>
+4. [Card](https://github.com/cozuf/react-native-ccl/tree/develop#card) <br>
+5. [CheckBox](https://github.com/cozuf/react-native-ccl/tree/develop#checkbox) <br>
+6. [CheckBoxGroup](https://github.com/cozuf/react-native-ccl/tree/develop#checkboxgroup) <br>
+7. [Chip](https://github.com/cozuf/react-native-ccl/tree/develop#chip) <br>
+8. [ChipGroup](https://github.com/cozuf/react-native-ccl/tree/develop#chipgroup) <br>
+9. [DateTimePicker](https://github.com/cozuf/react-native-ccl/tree/develop#datetimepicker) <br>
+10. [Icon](https://github.com/cozuf/react-native-ccl/tree/develop#icon) <br>
+11. [Modal](https://github.com/cozuf/react-native-ccl/tree/develop#modal) <br>
+12. [RadioButton](https://github.com/cozuf/react-native-ccl/tree/develop#radiobutton) <br>
+13. [RadioButtonGroup](https://github.com/cozuf/react-native-ccl/tree/develop#radiobuttongroup) <br>
+14. [SearchBar](https://github.com/cozuf/react-native-ccl/tree/develop#searchbar) <br>
+15. [SelectBox](https://github.com/cozuf/react-native-ccl/tree/develop#selectbox) <br>
+16. [SnackBar](https://github.com/cozuf/react-native-ccl/tree/develop#snackbar) <br>
+17. [Seperator](https://github.com/cozuf/react-native-ccl/tree/develop#seperator) <br>
+18. [Switch](https://github.com/cozuf/react-native-ccl/tree/develop#switch) <br>
+19. [TapSelector](https://github.com/cozuf/react-native-ccl/tree/develop#tapselector) <br>
+20. [Text](https://github.com/cozuf/react-native-ccl/tree/develop#text) <br>
+21. [TextInput](https://github.com/cozuf/react-native-ccl/tree/develop#textinput) <br>
 
 ## Usage
 
