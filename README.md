@@ -23,27 +23,27 @@ npm install react-native-ccl
 ```
 
 ## Components
-[ActivityIndicator] (https://www.youtube.com)
-2. [Badge]
-3. [Button]
-4. [Card]
-5. [CheckBox]
-6. [CheckBoxGroup]
-7. [Chip]
-8. [ChipGroup]
-9. [DateTimePicker]
-10. [Icon]
-11. [Modal]
-12. [RadioButton]
-13. [RadioButtonGroup]
-14. [SearchBar]
-15. [SelectBox]
-16. [SnackBar]
-17. [Seperator]
-18. [Switch]
-19. [TapSelector]
-20. [Text]
-21. [TextInput]
+[ActivityIndicator] (https://www.youtube.com) <br>
+[Badge] (https://www.youtube.com) <br>
+[Button] (https://www.youtube.com) <br>
+[Card] (https://www.youtube.com) <br>
+[CheckBox] (https://www.youtube.com) <br>
+[CheckBoxGroup] (https://www.youtube.com) <br>
+[Chip] (https://www.youtube.com) <br>
+[ChipGroup] (https://www.youtube.com) <br>
+[DateTimePicker] (https://www.youtube.com) <br>
+[Icon] (https://www.youtube.com) <br>
+[Modal] (https://www.youtube.com) <br>
+[RadioButton] (https://www.youtube.com) <br>
+[RadioButtonGroup] (https://www.youtube.com) <br>
+[SearchBar] (https://www.youtube.com) <br>
+[SelectBox] (https://www.youtube.com) <br>
+[SnackBar] (https://www.youtube.com) <br>
+[Seperator] (https://www.youtube.com) <br>
+[Switch] (https://www.youtube.com) <br>
+[TapSelector] (https://www.youtube.com) <br>
+[Text] (https://www.youtube.com) <br>
+[TextInput] (https://www.youtube.com) <br>
 
 ## Usage
 
