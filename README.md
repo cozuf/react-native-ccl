@@ -55,7 +55,12 @@ import { ActivityIndicator } from "react-native-ccl";
 // ...
 
 (
-    <ActivityIndicator />
+    <ActivityIndicator
+        testID=
+        type = 'default' | 'default' | 'ballIndicator' | 'barIndicator' | 'dotIndicator' | 'materialIndicator' | 'pacmanIndicator' | 'pulseIndicator' | 'skypeIndicator' | 'uIActivityIndicator' | 'waveIndicator'
+        color
+        size = {24}
+   />
 )
 ```
 
