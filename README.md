@@ -23,7 +23,27 @@ npm install react-native-ccl
 ```
 
 ## Components
-1. ActivityIndicator
+1. [ActivityIndicator]
+2. [Badge]
+3. [Button]
+4. [Card]
+5. [CheckBox]
+6. [CheckBoxGroup]
+7. [Chip]
+8. [ChipGroup]
+9. [DateTimePicker]
+10. [Icon]
+11. [Modal]
+12. [RadioButton]
+13. [RadioButtonGroup]
+14. [SearchBar]
+15. [SelectBox]
+16. [SnackBar]
+17. [Seperator]
+18. [Switch]
+19. [TapSelector]
+20. [Text]
+21. [TextInput]
 
 ## Usage
 
