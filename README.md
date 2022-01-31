@@ -48,12 +48,15 @@ npm install react-native-ccl
 
 ## Usage
 
+## ActivityIndicator
 ```js
-import { multiply } from "react-native-ccl";
+import { ActivityIndicator } from "react-native-ccl";
 
 // ...
 
-const result = await multiply(3, 7);
+(
+    <ActivityIndicator />
+)
 ```
 
 ## Contributing
