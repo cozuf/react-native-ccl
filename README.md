@@ -23,7 +23,6 @@ npm install react-native-ccl
 ```
 
 ## Components
-Component List
 
 1. [ActivityIndicator](https://www.youtube.com) <br>
 2. [Badge](https://www.youtube.com) <br>
