@@ -26,26 +26,26 @@ npm install react-native-ccl
 Component List
 
 1. [ActivityIndicator](https://www.youtube.com) <br>
-[Badge](https://www.youtube.com) <br>
-[Button](https://www.youtube.com) <br>
-[Card](https://www.youtube.com) <br>
-[CheckBox](https://www.youtube.com) <br>
-[CheckBoxGroup](https://www.youtube.com) <br>
-[Chip](https://www.youtube.com) <br>
-[ChipGroup](https://www.youtube.com) <br>
-[DateTimePicker](https://www.youtube.com) <br>
-[Icon](https://www.youtube.com) <br>
-[Modal](https://www.youtube.com) <br>
-[RadioButton](https://www.youtube.com) <br>
-[RadioButtonGroup](https://www.youtube.com) <br>
-[SearchBar](https://www.youtube.com) <br>
-[SelectBox](https://www.youtube.com) <br>
-[SnackBar](https://www.youtube.com) <br>
-[Seperator](https://www.youtube.com) <br>
-[Switch](https://www.youtube.com) <br>
-[TapSelector](https://www.youtube.com) <br>
-[Text](https://www.youtube.com) <br>
-[TextInput](https://www.youtube.com) <br>
+2. [Badge](https://www.youtube.com) <br>
+3. [Button](https://www.youtube.com) <br>
+4. [Card](https://www.youtube.com) <br>
+5. [CheckBox](https://www.youtube.com) <br>
+6. [CheckBoxGroup](https://www.youtube.com) <br>
+7. [Chip](https://www.youtube.com) <br>
+8. [ChipGroup](https://www.youtube.com) <br>
+9. [DateTimePicker](https://www.youtube.com) <br>
+10. [Icon](https://www.youtube.com) <br>
+11. [Modal](https://www.youtube.com) <br>
+12. [RadioButton](https://www.youtube.com) <br>
+13. [RadioButtonGroup](https://www.youtube.com) <br>
+14. [SearchBar](https://www.youtube.com) <br>
+15. [SelectBox](https://www.youtube.com) <br>
+16. [SnackBar](https://www.youtube.com) <br>
+17. [Seperator](https://www.youtube.com) <br>
+18. [Switch](https://www.youtube.com) <br>
+19. [TapSelector](https://www.youtube.com) <br>
+20. [Text](https://www.youtube.com) <br>
+21. [TextInput](https://www.youtube.com) <br>
 
 ## Usage
 
