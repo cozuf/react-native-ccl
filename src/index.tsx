@@ -82,3 +82,4 @@ export {
 // fucntional component'ta ref kullanmayı SnackBar'dan öğrenebilirsin!
 
 // FIXME: Style'lar theme.style'dan color'lar theme.color'dan çekilmeli - gözden geçir unutma!
+// TODO: Card componentinde icon dışarıdan verilebilir, renk değiştirilebilir
