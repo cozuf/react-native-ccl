@@ -80,6 +80,5 @@ export {
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri inner yap
 // TODO: --ClassComponent için withTheme yap
 // fucntional component'ta ref kullanmayı SnackBar'dan öğrenebilirsin!
-// TODO: PageContainer'ı gözden geçir scroll'da sıkınıt var
 
 // FIXME: Style'lar theme.style'dan color'lar theme.color'dan çekilmeli - gözden geçir unutma!
