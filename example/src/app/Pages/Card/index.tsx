@@ -1,8 +1,11 @@
 import React, { ReactNode } from "react";
-import { FlatList } from "react-native";
+import { FlatList, ListRenderItemInfo } from "react-native";
 import { PageContainer, Card, Text, Seperator } from "react-native-ccl";
 
 const CardPage = () => {
+
+    const ARRAY: Array<number> = new Array(10);
+    ARRAY.fill(0)
     const renderHeader = (): ReactNode => {
         return (
             <Text>
@@ -18,9 +21,15 @@ const CardPage = () => {
         )
     }
 
-    const renderItem = () => {
+    const renderItem = (info: ListRenderItemInfo<any>) => {
+        const { index } = info
         return (
-            <Card expandable={true}
+            <Card
+                expandable={true}
+                isExpanded={index % 2 === 0}
+                icon={index % 2 === 0 ? {
+                    color: "red"
+                } : undefined}
                 headerComponent={renderHeader}
                 footerComponent={renderFooter}>
                 <Text>
@@ -36,7 +45,6 @@ const CardPage = () => {
         )
     }
 
-    const ARRAY = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     return (
         <PageContainer type="default" >

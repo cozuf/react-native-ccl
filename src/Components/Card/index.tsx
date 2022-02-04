@@ -1,6 +1,6 @@
-import React, { FC, ReactNode, useRef, useState } from "react";
+import React, { FC, ReactElement, ReactNode, useRef, useState } from "react";
 import { Animated, View, Omit, Pressable, Easing, ViewStyle } from "react-native";
-import { Icon, } from "..";
+import { Icon, IIconProps, } from "..";
 import { useTheme } from '../../Context/Theme';
 
 export interface ICardProps {
@@ -12,7 +12,17 @@ export interface ICardProps {
     /**
      * 
      */
+    isExpanded?: boolean
+
+    /**
+     * 
+     */
     active?: boolean
+
+    /**
+     * 
+     */
+    icon?: Partial<IIconProps>
 
     /**
      * 
@@ -47,6 +57,12 @@ export interface ICardProps {
 
 const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     active = true,
+    isExpanded = true,
+    icon = {
+        family: "MaterialIcons",
+        name: "keyboard-arrow-down",
+        size: 20
+    },
     headerComponent = () => null,
     footerComponent = () => null,
     containerStyle,
@@ -59,8 +75,8 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     const { colors, styles } = theme
     const { card } = colors
     const { cardStyle } = styles
-    const [open, setOpen] = useState(false);
-    const animatedController = useRef(new Animated.Value(0)).current;
+    const [open, setOpen] = useState(isExpanded);
+    const animatedController = useRef(new Animated.Value(isExpanded ? 1 : 0)).current;
     const [bodySectionHeight, setBodySectionHeight] = useState<number>(0);
 
     const bodyHeight = animatedController.interpolate({
@@ -80,17 +96,28 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
                 toValue: 0,
                 easing: Easing.bezier(0.4, 0.0, 0.2, 1),
                 useNativeDriver: false,
-            }).start();
+            }).start(({ finished }) => {
+                if (finished) {
+                    setOpen(false)
+                }
+            });
         } else {
             Animated.timing(animatedController, {
                 duration: 300,
                 toValue: 1,
                 easing: Easing.bezier(0.4, 0.0, 0.2, 1),
                 useNativeDriver: false,
-            }).start();
+            }).start(({ finished }) => {
+                if (finished) {
+                    setOpen(true)
+                }
+            });
         }
-        setOpen(!open);
     };
+
+    const renderIcon = (): ReactElement | null => {
+        return <Icon family={icon.family || "MaterialIcons"} name={icon.name || "keyboard-arrow-down"} size={icon.size || 20} color={icon?.color || card[active ? "active" : "passive"].border} />
+    }
 
     return (
         <Pressable
@@ -109,7 +136,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
             <View style={[headerContainerStyle, cardStyle?.titleContainer]}>
                 {headerComponent()}
                 <Animated.View style={{ transform: [{ rotateZ: arrowAngle }] }}>
-                    <Icon family="MaterialIcons" name="keyboard-arrow-down" size={20} color={card[active ? "active" : "passive"].border} />
+                    {renderIcon()}
                 </Animated.View>
             </View>
             <Animated.View style={[cardStyle?.bodyBackground, { height: bodyHeight }]}>
