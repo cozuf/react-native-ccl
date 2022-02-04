@@ -105,6 +105,10 @@ const COMPONENTS: ComponentListType[] = [
   //   name: 'ClassGlobalState',
   //   navigation: 'ClassGlobalStatePage',
   // },
+  {
+    name: 'PageContainer',
+    navigation: 'PageContainerPage',
+  },
 ];
 
 const MainPage = () => {

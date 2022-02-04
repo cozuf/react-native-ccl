@@ -95,12 +95,20 @@ const PageContainer: FC<IPageContainerTypes> = ({
       return (
         <ScrollView
           testID={testID}
-          style={[style]}
-          contentContainerStyle={[
-            pageContainerStyle?.contentContainer,
-            { backgroundColor: pageContainer.background },
-            contentContainerStyle,
-          ]}
+          style={
+            [
+              style,
+              { backgroundColor: pageContainer.background }
+            ]
+          }
+          contentContainerStyle={
+            [
+              pageContainerStyle?.contentContainer,
+              { backgroundColor: pageContainer.background }
+              ,
+              contentContainerStyle,
+            ]
+          }
           {...props}
         >
           {children}

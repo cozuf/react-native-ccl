@@ -186,7 +186,6 @@ export const pageContainerStyle: IPageContainerStyle = {
         paddingHorizontal: tokens.page.paddingHorizontal,
     },
     contentContainer: {
-        flex: 1,
         paddingVertical: tokens.page.paddingVertical,
         paddingHorizontal: tokens.page.paddingHorizontal,
     },

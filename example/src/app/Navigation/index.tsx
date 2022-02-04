@@ -42,6 +42,7 @@ import BottomSheetPage from '../Pages/BottomSheet';
 import SnackBarPage from '../Pages/SnackBar';
 import CardPage from '../Pages/Card';
 import ClassGlobalStatePage from '../Pages/ClassGlobalStateContext';
+import PageContainer from '../Pages/PageContainer';
 
 
 //#endregion
@@ -185,6 +186,7 @@ const Router = () => {
       <Stack.Screen name={PAGES_NAMES.SnackBarPage} component={SnackBarPage} />
       <Stack.Screen name={PAGES_NAMES.CardPage} component={CardPage} />
       <Stack.Screen name={PAGES_NAMES.ClassGlobalStatePage} component={ClassGlobalStatePage} />
+      <Stack.Screen name={PAGES_NAMES.PageContainer} component={PageContainer} />
     </Stack.Navigator>
   );
 };
