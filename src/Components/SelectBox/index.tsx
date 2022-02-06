@@ -199,6 +199,9 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         maxChoice={maxChoice}
         onSubmit={(data: any[]) => {
           setDataList(data);
+          if (typeof onSubmit === 'function') {
+            onSubmit(data);
+          }
         }}
       />
     );
@@ -243,6 +246,9 @@ const SelectBox: FC<ISelectBoxTypes> = ({
             onSubmit={(data: any[]) => {
               setDataList(data);
               bottomSheet.close()
+              if (typeof onSubmit === 'function') {
+                onSubmit(data);
+              }
             }}
           />
         )
