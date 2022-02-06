@@ -5,6 +5,7 @@ import { Button, Modal, Text } from '..';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet } from '../../Context/BottomSheet';
 import type { ModalizeProps } from 'react-native-modalize';
+import moment from "moment"
 
 export interface IDateTimePickerProps {
   /**
@@ -58,6 +59,11 @@ export interface IDateTimePickerProps {
   /**
    * 
    */
+  displayFormat?: string
+
+  /**
+   * 
+   */
   containerStyle?: StyleProp<ViewStyle>
 
   /**
@@ -92,6 +98,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   date,
   display = 'modal',
   mode = 'datetime',
+  displayFormat = "DD-MM-YYYY HH:mm:SS",
   onDateChange = () => { },
   onSubmit = () => { },
   containerStyle,
@@ -249,7 +256,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
       </View>
       <View style={[dateTimePickerStyle?.textContainer, textContainerStyle]}>
         <Text style={[dateTimePickerStyle?.text, textStyle]}>
-          {date ? date.toLocaleString() : placeholder}
+          {date ? moment(date).format(displayFormat) : placeholder}
         </Text>
       </View>
       {renderChildren()}
