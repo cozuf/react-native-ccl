@@ -71,6 +71,8 @@ export {
   useModal
 } from "./Context"
 
+// TODO: Modal'ları gözden geçir style olarak
+// TODO: listelemeli komponentlerde key (radiobutton, checkbox)
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
 // TODO: yayınlamadan önce ReadMe düzenle
 // TODO: GlobalState'yi dışarıdan type verilebilir -> global'e yaz
