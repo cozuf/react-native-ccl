@@ -240,7 +240,9 @@ const styles = StyleSheet.create({
     },
     messageContainer: {
         // flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        // backgroundColor: "red",
+        paddingVertical: 8
     },
     message: {
         textAlign: 'center'
