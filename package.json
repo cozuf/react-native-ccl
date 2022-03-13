@@ -29,7 +29,13 @@
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example/ios && pod install --silent",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "bootstrap": "yarn example && yarn && yarn pods",
+    "clear_node_modules": "rm -rf node_modules",
+    "clear_npm": "npm cache clean --force",
+    "clear_package": "rm -rf package-lock.json",
+    "clear_libs": "rm -rf lib",
+    "clear": "yarn clear_node_modules && yarn clear_npm && yarn clear_package && yarn clear_libs",
+    "fresh": "yarn clear && yarn"
   },
   "keywords": [
     "react-native",
