@@ -1,7 +1,6 @@
 import React, { FC, Fragment, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-ccl';
-import { Button, CheckBox, Seperator, RadioButton } from '../..';
+import { Button, Text, CheckBox, Seperator, RadioButton } from '../..';
 import { useTheme } from '../../../Context/Theme';
 
 type SelectBoxBottomSheetTypes<ItemT> = {
@@ -139,7 +138,7 @@ const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
                     {typeof renderItem === "function" ?
                         renderItem({ item: v, index: i })
                         :
-                        < RadioButton
+                        <RadioButton
                             key={i.toString()}
                             active={v.active}
                             selected={v.selected}
