@@ -1,13 +1,12 @@
 import React, { FC, useReducer } from "react";
 import { GlaobalStateContext, GlobalStateDispatchContext } from "./context";
-import type { GlobalStateInterface } from "./types";
 import DEFAULT_GLOBAL_STATE from "./values";
 
 
 const reducer = (
-    state: GlobalStateInterface,
-    newState: Partial<GlobalStateInterface>
-): GlobalStateInterface => {
+    state: RNCCL.GlobalStateInterface,
+    newState: Partial<RNCCL.GlobalStateInterface>
+): RNCCL.GlobalStateInterface => {
     return { ...state, ...newState };
 };
 

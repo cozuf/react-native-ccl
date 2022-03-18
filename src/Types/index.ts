@@ -354,7 +354,15 @@ declare global {
             semibold: string;
             bold: string;
         }
-        
+
+        //#endregion
+
+        //#region GlobalStateType
+
+        export interface GlobalStateInterface {
+            token: string | null
+        }
+
         //#endregion
     }
 }
