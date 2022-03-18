@@ -9,6 +9,15 @@ import {
 import { CheckBox, Button, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
 
+export interface IList {
+  active?: boolean
+  value: any
+  title: string
+  selected: boolean
+}
+
+export type ListType = Required<IList>
+
 export interface ICheckBoxGroupProps<ItemT> {
   /**
    * Array of selectable options.
@@ -63,8 +72,8 @@ export interface ICheckBoxGroupProps<ItemT> {
   unSelectAllTitle?: string;
 }
 
-export type ICheckBoxGroupTypes = ICheckBoxGroupProps<any> &
-  Omit<FlatListProps<any>, 'data' | 'renderItem'>;
+export type ICheckBoxGroupTypes = ICheckBoxGroupProps<ListType> &
+  Omit<FlatListProps<ListType>, 'data' | 'renderItem'>;
 
 const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   data,
@@ -86,38 +95,39 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   useEffect(() => {
     if (maxChoice !== 0) {
-      const selectedDataLength = data.filter((v: any) => v.selected).length;
+      const selectedDataLength = data.filter((v: ListType) => v.selected).length;
       if (selectedDataLength === maxChoice) {
-        setNData(data.map((v: any) => ({ ...v, active: v.selected })));
+        setNData(data.map((v: ListType) => ({ ...v, active: v.selected })));
       } else {
-        setNData(data.map((v: any) => ({ ...v, active: true })));
+        setNData(data.map((v: ListType) => ({ ...v, active: true })));
       }
     } else {
       setNData(
-        data.map((v: any) => ({
+        data.map((v: ListType) => ({
           ...v,
           selected: v.selected || false,
           active: v.active || true,
         }))
       );
     }
+
   }, [data, maxChoice]);
 
   const onButtonSelect = (index: number) => {
-    const tData = nData.map((v: any, i: number) => ({
+    const tData = nData.map((v: ListType, i: number) => ({
       ...v,
       selected: i === index ? !v.selected : v.selected,
     }));
     if (maxChoice !== 0) {
-      const selectedDataLength = tData.filter((v: any) => v.selected).length;
+      const selectedDataLength = tData.filter((v: ListType) => v.selected).length;
       if (selectedDataLength === maxChoice) {
-        const mData = tData.map((v: any) => ({
+        const mData = tData.map((v: ListType) => ({
           ...v,
           active: v.selected,
         }));
         setNData(mData);
       } else {
-        const mData = tData.map((v: any) => ({
+        const mData = tData.map((v: ListType) => ({
           ...v,
           active: true,
         }));
@@ -149,7 +159,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   const isDisabled = (): boolean => {
     if (minChoice !== 0) {
-      const selectedLength = nData.filter((v: any) => v.selected).length;
+      const selectedLength = nData.filter((v: ListType) => v.selected).length;
       return selectedLength < minChoice;
     } else {
       return false;
@@ -167,7 +177,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   };
 
   const customRenderItem = (
-    info: ListRenderItemInfo<any>
+    info: ListRenderItemInfo<ListType>
   ): React.ReactElement | null => {
     const { item, index } = info;
     return (
@@ -193,7 +203,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
           containerStyle={checkBoxGroupStyle?.buttons}
           onPress={() => {
             setNData(
-              nData.map((v: any) => ({ ...v, selected: false, active: true }))
+              nData.map((v: ListType) => ({ ...v, selected: false, active: true }))
             );
           }}
         />
@@ -203,7 +213,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
           type="simplied"
           containerStyle={checkBoxGroupStyle?.buttons}
           onPress={() => {
-            setNData(nData.map((v: any) => ({ ...v, selected: true })));
+            setNData(nData.map((v: ListType) => ({ ...v, selected: true })));
           }}
         />
       </View>
@@ -220,7 +230,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         title={submitTitle}
         disabled={isDisabled()}
         onPress={() => {
-          onSubmit(nData.map((v: any) => ({ ...v })));
+          onSubmit(nData.map((v: ListType) => ({ ...v })));
         }}
       />
     </Fragment>

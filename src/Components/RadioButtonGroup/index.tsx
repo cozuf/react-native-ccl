@@ -7,6 +7,15 @@ import {
 import { RadioButton, Button, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
 
+export interface IList {
+  active?: boolean
+  value: any
+  title: string
+  selected: boolean
+}
+
+export type ListType = Required<IList>
+
 export interface IRadioButtonGroupProps<ItemT> {
   /**
    * Array of selectable options.
@@ -43,8 +52,8 @@ export interface IRadioButtonGroupProps<ItemT> {
   submitTitle?: string;
 }
 
-export type IRadioButtonGroupTypes = IRadioButtonGroupProps<any> &
-  Omit<FlatListProps<any>, 'data' | 'renderItem'>;
+export type IRadioButtonGroupTypes = IRadioButtonGroupProps<ListType> &
+  Omit<FlatListProps<ListType>, 'data' | 'renderItem'>;
 
 const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   data,
@@ -71,7 +80,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   };
 
   useEffect(() => {
-    setNData(data.map((v: any) => ({ ...v, selected: v.selected || false })));
+    setNData(data.map((v: ListType) => ({ ...v, selected: v.selected || false })));
   }, [data]);
 
   /**
@@ -99,7 +108,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   };
 
   const customRenderItem = (
-    info: ListRenderItemInfo<Required<any>>
+    info: ListRenderItemInfo<Required<ListType>>
   ): React.ReactElement | null => {
     const { item, index } = info;
     if (!item.title || !item.value) {
@@ -135,7 +144,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         wrap="no-wrap"
         title={submitTitle}
         onPress={() => {
-          onSubmit(nData.map((v: any) => ({ ...v })));
+          onSubmit(nData.map((v: ListType) => ({ ...v })));
         }}
       />
     </Fragment>
