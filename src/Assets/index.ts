@@ -1,4 +1,4 @@
-const FONTS = {
+const FONTS: RNCCL.FontScheme = {
   light: 'Quicksand-Light',
   regular: 'Quicksand-Regular',
   medium: 'Quicksand-Medium',
