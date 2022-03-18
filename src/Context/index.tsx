@@ -1,8 +1,7 @@
 import { ThemeProvider, useTheme } from './Theme';
 import { BottomSheetProvider, useBottomSheet } from "./BottomSheet";
 import { ModalProvider, useModal } from "./Modal";
-import { GlobalStateProvider, useGlobalState } from './GlobalState/functionalGlobalState';
-// import ClassGlobalStateProvider, { useClassGlobalState } from './GlobalState/ClassGlobalState';
+import { GlobalStateProvider, useGlobalState } from './GlobalState';
 
 export {
     ThemeProvider,
@@ -13,6 +12,4 @@ export {
     useGlobalState,
     ModalProvider,
     useModal,
-    // ClassGlobalStateProvider,
-    // useClassGlobalState,
 };
