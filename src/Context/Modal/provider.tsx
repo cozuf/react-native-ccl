@@ -1,19 +1,26 @@
-import React, { FC, useState } from "react";
+import React, { FC, useReducer, useState } from "react";
 import { Modal } from "../..";
 import { ModalContext, ModalDispatchContext } from "./context";
 import type { IModaContextProps, IModalContextFunctions } from "./types";
 
+const reducer = (
+    state: IModaContextProps,
+    newState: Partial<IModaContextProps>
+): IModaContextProps => {
+    return { ...state, ...newState };
+};
+
 const ModalProvider: FC<any> = ({ children }) => {
     const [visible, setVisible] = useState<boolean>(false)
 
-    const [modalRef] = useState<IModalContextFunctions>({
+    const modalRef: IModalContextFunctions = {
         show: () => {
             setVisible(true)
         },
         close: () => {
             setVisible(false)
         }
-    })
+    }
 
     const initial: IModaContextProps = {
         props: {
@@ -24,7 +31,7 @@ const ModalProvider: FC<any> = ({ children }) => {
         renderChildren: () => null
     }
 
-    const [modalProps, setModalProps] = useState<Partial<IModaContextProps>>(initial)
+    const [modalProps, setModalProps] = useReducer(reducer, initial);
 
     return (
         <ModalContext.Provider value={modalRef} >
@@ -32,7 +39,6 @@ const ModalProvider: FC<any> = ({ children }) => {
                 {children}
                 <Modal
                     visible={visible}
-                    onTouchOutSide={() => { setVisible(false) }}
                     {...modalProps.props}>
                     {typeof modalProps.renderChildren === "function" ? modalProps.renderChildren() : null}
                 </Modal>
