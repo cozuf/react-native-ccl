@@ -14,7 +14,7 @@ import type { NavigationProp } from '@react-navigation/core';
 import type { ParamListBase } from '@react-navigation/routers';
 import SelectBoxModal from './Modal';
 import { useTheme } from '../../Context/Theme';
-import { useBottomSheet } from '../../Context/BottomSheet';
+import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import SelectBoxBottomSheet from './BottomSheet';
 
 export interface ISelectBoxProps<ItemT> {
@@ -165,11 +165,12 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   minChoice,
   containerStyle,
 }) => {
-  const [bottomSheet, setBottomSheet] = useBottomSheet();
+  const bottomSheet = useBottomSheet();
+  const setBottomSheet = useSetBottomSheet();
   const [dataList, setDataList] = useState<any[]>(data as any[]);
   const [value, setValue] = useState<string>(searchText || '');
   const [visible, setVisible] = useState<boolean>(false);
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { colors, styles } = theme;
   const { selectBox, modal } = colors;
   const { selectBoxStyle } = styles

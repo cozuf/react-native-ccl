@@ -62,7 +62,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   onSubmit = () => { },
   submitTitle = 'Tamam',
 }) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { colors, styles } = theme;
   const { radioButtonGroup } = colors;
   const { radioButtonGroupStyle } = styles;

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { Button, PageContainer, Seperator, Text, useBottomSheet } from "react-native-ccl";
+import { Button, PageContainer, Seperator, Text, useBottomSheet, useSetBottomSheet } from "react-native-ccl";
 
 const BottomSheetPage = () => {
-    const [bottomSheet, setBottomSheet] = useBottomSheet();
+    const bottomSheet = useBottomSheet();
+    const setBottomSheet = useSetBottomSheet();
     const [handlePosition, setHandlePosition] = useState<"inside" | "outside">("inside");
     const [adjustToContentHeight, setAdjustToContentHeight] = useState<boolean>(false);
     return (

@@ -3,7 +3,7 @@ import { Dimensions, Omit, StyleProp, TextStyle, TouchableOpacity, View, ViewSty
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
 import { Button, Modal, Text } from '..';
 import { useTheme } from '../../Context/Theme';
-import { useBottomSheet } from '../../Context/BottomSheet';
+import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import type { ModalizeProps } from 'react-native-modalize';
 import moment from "moment"
 
@@ -110,8 +110,9 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [nDate, setNDate] = useState<Date>(date || new Date());
-  const [bottomSheet, setBottomSheet] = useBottomSheet();
-  const [theme] = useTheme();
+  const bottomSheet = useBottomSheet();
+  const setBottomSheet = useSetBottomSheet();
+  const theme = useTheme();
   const { colors, styles } = theme;
   const { dateTimePicker, modal } = colors;
   const { dateTimePickerStyle } = styles
