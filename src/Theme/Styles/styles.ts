@@ -2,31 +2,31 @@ import { Platform } from "react-native";
 import { fonts } from "../Fonts";
 import { tokens } from "../Tokens";
 import type {
-    IBadgeStyle,
-    IButtonStyle,
-    ICardStyle,
-    ICheckBoxStyle,
-    ICheckBoxGroupStyle,
-    IChipStyle,
-    IChipGroupStyle,
-    IDateTimePickerStyle,
-    IModalStyle,
-    IPageContainerStyle,
-    IRadioButtonStyle,
-    IRadioButtonGroupStyle,
-    ISearchBarStyle,
-    ISelectBoxStyle,
-    ISeperatorStyle,
-    ISnackbarStyle,
-    IStateCardStyle,
-    ISwitchStyle,
-    ITapSelectorStyle,
-    ITextStyle,
-    ITextInputStyle,
-    CopmonentsStylesScheme
+    BadgeStyle,
+    ButtonStyle,
+    CardStyle,
+    CheckBoxStyle,
+    CheckBoxGroupStyle,
+    ChipStyle,
+    ChipGroupStyle,
+    DateTimePickerStyle,
+    ModalStyle,
+    PageContainerStyle,
+    RadioButtonStyle,
+    RadioButtonGroupStyle,
+    SearchBarStyle,
+    SelectBoxStyle,
+    SeperatorStyle,
+    SnackbarStyle,
+    StateCardStyle,
+    SwitchStyle,
+    TapSelectorStyle,
+    TextStyle,
+    TextInputStyle,
+    ComponentsStylesScheme
 } from "./types";
 
-export const badgeStyle: IBadgeStyle = {
+export const badgeStyle: BadgeStyle = {
     container: {
         borderWidth: 2,
         alignItems: 'center',
@@ -49,7 +49,7 @@ export const badgeStyle: IBadgeStyle = {
     }
 }
 
-export const buttonStyle: IButtonStyle = {
+export const buttonStyle: ButtonStyle = {
     container: {
         flexDirection: 'row',
         justifyContent: 'center',
@@ -61,7 +61,7 @@ export const buttonStyle: IButtonStyle = {
     }
 }
 
-export const cardStyle: ICardStyle = {
+export const cardStyle: CardStyle = {
     container: {
         borderWidth: 1,
         borderRadius: 8,
@@ -85,7 +85,7 @@ export const cardStyle: ICardStyle = {
     },
 }
 
-export const checkBoxStyle: ICheckBoxStyle = {
+export const checkBoxStyle: CheckBoxStyle = {
     container: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -105,7 +105,7 @@ export const checkBoxStyle: ICheckBoxStyle = {
     },
 }
 
-export const checkBoxGroupStyle: ICheckBoxGroupStyle = {
+export const checkBoxGroupStyle: CheckBoxGroupStyle = {
     seperatorContainer: {
         alignItems: 'center',
         paddingVertical: 4
@@ -120,7 +120,7 @@ export const checkBoxGroupStyle: ICheckBoxGroupStyle = {
     },
 }
 
-export const chipStyle: IChipStyle = {
+export const chipStyle: ChipStyle = {
     container: {
 
     },
@@ -129,7 +129,7 @@ export const chipStyle: IChipStyle = {
     }
 }
 
-export const chipGroupStyle: IChipGroupStyle = {
+export const chipGroupStyle: ChipGroupStyle = {
     container: {
         flexDirection: 'row',
         flexWrap: 'wrap'
@@ -142,7 +142,7 @@ export const chipGroupStyle: IChipGroupStyle = {
     }
 }
 
-export const dateTimePickerStyle: IDateTimePickerStyle = {
+export const dateTimePickerStyle: DateTimePickerStyle = {
     container: {
         borderWidth: 1,
         borderRadius: 8,
@@ -155,7 +155,7 @@ export const dateTimePickerStyle: IDateTimePickerStyle = {
     textContainer: {},
     text: {},
 }
-export const modalStyle: IModalStyle = {
+export const modalStyle: ModalStyle = {
     outside: {
         flex: 1,
         justifyContent: 'center',
@@ -179,7 +179,7 @@ export const modalStyle: IModalStyle = {
     },
 }
 
-export const pageContainerStyle: IPageContainerStyle = {
+export const pageContainerStyle: PageContainerStyle = {
     container: {
         flex: 1,
         paddingVertical: tokens.page.paddingVertical,
@@ -191,7 +191,7 @@ export const pageContainerStyle: IPageContainerStyle = {
     },
 }
 
-export const radioButtonStyle: IRadioButtonStyle = {
+export const radioButtonStyle: RadioButtonStyle = {
     container: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -204,7 +204,7 @@ export const radioButtonStyle: IRadioButtonStyle = {
     title: {},
 }
 
-export const radioButtonGroupStyle: IRadioButtonGroupStyle = {
+export const radioButtonGroupStyle: RadioButtonGroupStyle = {
     container: {},
     seperatorContainer: {
         alignItems: 'center',
@@ -213,7 +213,7 @@ export const radioButtonGroupStyle: IRadioButtonGroupStyle = {
     seperator: {},
 }
 
-export const searchBarStyle: ISearchBarStyle = {
+export const searchBarStyle: SearchBarStyle = {
     container: {},
     titleContainer: {},
     title: {},
@@ -226,7 +226,7 @@ export const searchBarStyle: ISearchBarStyle = {
     cleanContainer: {},
 }
 
-export const selectBoxStyle: ISelectBoxStyle = {
+export const selectBoxStyle: SelectBoxStyle = {
     container: {
         borderWidth: 1,
         borderRadius: 8,
@@ -240,12 +240,12 @@ export const selectBoxStyle: ISelectBoxStyle = {
     text: {},
 }
 
-export const seperatorStyle: ISeperatorStyle = {
+export const seperatorStyle: SeperatorStyle = {
     container: {},
     style: {}
 }
 
-export const snackbarStyle: ISnackbarStyle = {
+export const snackbarStyle: SnackbarStyle = {
     animatedContainer: {
         overflow: "hidden",
         position: "absolute",
@@ -266,11 +266,11 @@ export const snackbarStyle: ISnackbarStyle = {
     }
 }
 
-export const stateCardStyle: IStateCardStyle = {
+export const stateCardStyle: StateCardStyle = {
 
 }
 
-export const switchStyle: ISwitchStyle = {
+export const switchStyle: SwitchStyle = {
     container: {
         flexDirection: 'row',
         borderWidth: tokens.component.borderWidth,
@@ -288,18 +288,18 @@ export const switchStyle: ISwitchStyle = {
     },
 }
 
-export const tapSelectorStyle: ITapSelectorStyle = {
+export const tapSelectorStyle: TapSelectorStyle = {
     container: {},
     title: {},
 }
 
-export const textStyle: ITextStyle = {
+export const textStyle: TextStyle = {
     style: {
 
     }
 }
 
-export const textInputStyle: ITextInputStyle = {
+export const textInputStyle: TextInputStyle = {
     container: {
         borderRadius: 8,
         borderWidth: tokens.component.borderWidth,
@@ -328,7 +328,7 @@ export const textInputStyle: ITextInputStyle = {
     error: {},
 }
 
-export const componentsStyles: CopmonentsStylesScheme = {
+export const componentsStyles: ComponentsStylesScheme = {
     badgeStyle: badgeStyle,
     buttonStyle: buttonStyle,
     cardStyle: cardStyle,

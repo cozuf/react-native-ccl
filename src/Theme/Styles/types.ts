@@ -1,16 +1,16 @@
-import type { StyleProp, TextStyle, ViewStyle } from "react-native";
+import type { StyleProp, TextStyle as RNTextStyle, ViewStyle } from "react-native";
 
-export interface IBadgeStyle {
+export interface BadgeStyle {
     container?: StyleProp<ViewStyle>
-    text?: StyleProp<TextStyle>
+    text?: StyleProp<RNTextStyle>
 }
 
-export interface IButtonStyle {
+export interface ButtonStyle {
     container?: StyleProp<ViewStyle>
-    title?: StyleProp<TextStyle>
+    title?: StyleProp<RNTextStyle>
 }
 
-export interface ICardStyle {
+export interface CardStyle {
     container?: StyleProp<ViewStyle>
     titleContainer?: StyleProp<ViewStyle>
     bodyBackground?: StyleProp<ViewStyle>
@@ -18,52 +18,52 @@ export interface ICardStyle {
     footerContainer?: StyleProp<ViewStyle>
 }
 
-export interface ICheckBoxStyle {
+export interface CheckBoxStyle {
     container?: StyleProp<ViewStyle>
     titleContainer?: StyleProp<ViewStyle>
-    title?: StyleProp<TextStyle>
+    title?: StyleProp<RNTextStyle>
     seperator?: StyleProp<ViewStyle>
     iconContainer?: StyleProp<ViewStyle>
 }
 
-export interface ICheckBoxGroupStyle {
+export interface CheckBoxGroupStyle {
     seperatorContainer?: StyleProp<ViewStyle>
     seperator?: StyleProp<ViewStyle>
     buttonsContainer?: StyleProp<ViewStyle>
     buttons?: StyleProp<ViewStyle>
 }
 
-export interface IChipStyle {
+export interface ChipStyle {
     container?: StyleProp<ViewStyle>
-    title?: StyleProp<TextStyle>
+    title?: StyleProp<RNTextStyle>
 }
 
-export interface IChipGroupStyle {
+export interface ChipGroupStyle {
     container?: StyleProp<ViewStyle>
     chipContainer?: StyleProp<ViewStyle>
     seperator?: StyleProp<ViewStyle>
 }
 
-export interface IDateTimePickerStyle {
+export interface DateTimePickerStyle {
     container?: StyleProp<ViewStyle>
     titleContainer?: StyleProp<ViewStyle>
-    title?: StyleProp<TextStyle>
-    seperator?: StyleProp<TextStyle>
+    title?: StyleProp<RNTextStyle>
+    seperator?: StyleProp<RNTextStyle>
     textContainer?: StyleProp<ViewStyle>
-    text?: StyleProp<TextStyle>
+    text?: StyleProp<RNTextStyle>
 }
 
-export interface IModalStyle {
+export interface ModalStyle {
     outside?: StyleProp<ViewStyle>
     container?: StyleProp<ViewStyle>
 }
 
-export interface IPageContainerStyle {
+export interface PageContainerStyle {
     container?: StyleProp<ViewStyle>
     contentContainer?: StyleProp<ViewStyle>;
 }
 
-export interface IRadioButtonStyle {
+export interface RadioButtonStyle {
     container?: StyleProp<ViewStyle>
     iconContainer?: StyleProp<ViewStyle>
     sperator?: StyleProp<ViewStyle>
@@ -71,100 +71,100 @@ export interface IRadioButtonStyle {
     title?: StyleProp<ViewStyle>
 }
 
-export interface IRadioButtonGroupStyle {
+export interface RadioButtonGroupStyle {
     container?: StyleProp<ViewStyle>
     seperatorContainer?: StyleProp<ViewStyle>
     seperator?: StyleProp<ViewStyle>
 }
 
-export interface ISearchBarStyle {
+export interface SearchBarStyle {
     container?: StyleProp<ViewStyle>
     titleContainer?: StyleProp<ViewStyle>
-    title?: StyleProp<TextStyle>
+    title?: StyleProp<RNTextStyle>
     inputContainer?: StyleProp<ViewStyle>
     iconContainer?: StyleProp<ViewStyle>
     seperatorContainer?: StyleProp<ViewStyle>
     seperator?: StyleProp<ViewStyle>
     nativeInputContainer?: StyleProp<ViewStyle>
-    input?: StyleProp<TextStyle>
+    input?: StyleProp<RNTextStyle>
     cleanContainer?: StyleProp<ViewStyle>
 }
 
-export interface ISelectBoxStyle {
+export interface SelectBoxStyle {
     container?: StyleProp<ViewStyle>
     titleContainer?: StyleProp<ViewStyle>
-    title?: StyleProp<TextStyle>
-    seperator?: StyleProp<TextStyle>
+    title?: StyleProp<RNTextStyle>
+    seperator?: StyleProp<RNTextStyle>
     textContainer?: StyleProp<ViewStyle>
-    text?: StyleProp<TextStyle>
+    text?: StyleProp<RNTextStyle>
 }
 
-export interface ISeperatorStyle {
+export interface SeperatorStyle {
     container?: StyleProp<ViewStyle>
     style?: StyleProp<ViewStyle>
 }
 
-export interface ISnackbarStyle {
+export interface SnackbarStyle {
     animatedContainer?: StyleProp<ViewStyle>
     contentContainer?: StyleProp<ViewStyle>
 }
 
-export interface IStateCardStyle {
+export interface StateCardStyle {
 
 }
 
-export interface ISwitchStyle {
+export interface SwitchStyle {
     container?: StyleProp<ViewStyle>
-    titleContainer?: StyleProp<TextStyle>
-    title?: StyleProp<TextStyle>
+    titleContainer?: StyleProp<RNTextStyle>
+    title?: StyleProp<RNTextStyle>
 }
 
-export interface ITapSelectorStyle {
+export interface TapSelectorStyle {
     container?: StyleProp<ViewStyle>
-    title?: StyleProp<TextStyle>
+    title?: StyleProp<RNTextStyle>
 }
 
-export interface ITextStyle {
-    style?: StyleProp<TextStyle>
+export interface TextStyle {
+    style?: StyleProp<RNTextStyle>
 }
 
-export interface ITextInputStyle {
+export interface TextInputStyle {
     container?: StyleProp<ViewStyle>
     titleContainer?: StyleProp<ViewStyle>
-    title?: StyleProp<TextStyle>
+    title?: StyleProp<RNTextStyle>
     inputContainer?: StyleProp<ViewStyle>
     iconContainer?: StyleProp<ViewStyle>
     seperatorContainer?: StyleProp<ViewStyle>
     seperator?: StyleProp<ViewStyle>
     nativeInputContainer?: StyleProp<ViewStyle>
-    input?: StyleProp<TextStyle>
+    input?: StyleProp<RNTextStyle>
     cleanContainer?: StyleProp<ViewStyle>
     warningContainer?: StyleProp<ViewStyle>
-    warning?: StyleProp<TextStyle>
+    warning?: StyleProp<RNTextStyle>
     errorContainer?: StyleProp<ViewStyle>
-    error?: StyleProp<TextStyle>
+    error?: StyleProp<RNTextStyle>
 }
 
-export interface CopmonentsStylesScheme {
-    badgeStyle?: IBadgeStyle,
-    buttonStyle?: IButtonStyle,
-    cardStyle?: ICardStyle,
-    checkBoxStyle?: ICheckBoxStyle,
-    checkBoxGroupStyle?: ICheckBoxGroupStyle,
-    chipStyle?: IChipStyle,
-    chipGroupStyle?: IChipGroupStyle,
-    dateTimePickerStyle?: IDateTimePickerStyle,
-    modalStyle?: IModalStyle,
-    pageContainerStyle?: IPageContainerStyle,
-    radioButtonStyle?: IRadioButtonStyle,
-    radioButtonGroupStyle?: IRadioButtonGroupStyle,
-    searchBarStyle?: ISearchBarStyle,
-    selectBoxStyle?: ISelectBoxStyle,
-    seperatorStyle?: ISeperatorStyle,
-    snackbarStyle?: ISnackbarStyle,
-    stateCardStyle?: IStateCardStyle,
-    switchStyle?: ISwitchStyle,
-    tapSelectorStyle?: ITapSelectorStyle,
-    textStyle?: ITextStyle,
-    textInputStyle?: ITextInputStyle
+export interface ComponentsStylesScheme {
+    badgeStyle?: BadgeStyle,
+    buttonStyle?: ButtonStyle,
+    cardStyle?: CardStyle,
+    checkBoxStyle?: CheckBoxStyle,
+    checkBoxGroupStyle?: CheckBoxGroupStyle,
+    chipStyle?: ChipStyle,
+    chipGroupStyle?: ChipGroupStyle,
+    dateTimePickerStyle?: DateTimePickerStyle,
+    modalStyle?: ModalStyle,
+    pageContainerStyle?: PageContainerStyle,
+    radioButtonStyle?: RadioButtonStyle,
+    radioButtonGroupStyle?: RadioButtonGroupStyle,
+    searchBarStyle?: SearchBarStyle,
+    selectBoxStyle?: SelectBoxStyle,
+    seperatorStyle?: SeperatorStyle,
+    snackbarStyle?: SnackbarStyle,
+    stateCardStyle?: StateCardStyle,
+    switchStyle?: SwitchStyle,
+    tapSelectorStyle?: TapSelectorStyle,
+    textStyle?: TextStyle,
+    textInputStyle?: TextInputStyle
 }
