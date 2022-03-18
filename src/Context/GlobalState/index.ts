@@ -1,4 +1,4 @@
 import GlobalStateProvider from "./proivder";
-import { useGlobalState, useSetGlobalState } from "./useGlobalState";
+import { useGlobalState, useSetGlobalState } from "./hook";
 
 export { GlobalStateProvider, useGlobalState, useSetGlobalState }
