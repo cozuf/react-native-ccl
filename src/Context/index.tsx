@@ -1,15 +1,19 @@
-import { ThemeProvider, useTheme } from './Theme';
-import { BottomSheetProvider, useBottomSheet } from "./BottomSheet";
-import { ModalProvider, useModal } from "./Modal";
-import { GlobalStateProvider, useGlobalState } from './GlobalState';
+import { ThemeProvider, useTheme, useSetTheme } from './Theme';
+import { BottomSheetProvider, useBottomSheet, useSetBottomSheet } from "./BottomSheet";
+import { ModalProvider, useModal, useSetModal, } from "./Modal";
+import { GlobalStateProvider, useGlobalState, useSetGlobalState } from './GlobalState';
 
 export {
     ThemeProvider,
     useTheme,
+    useSetTheme,
     BottomSheetProvider,
     useBottomSheet,
+    useSetBottomSheet,
     GlobalStateProvider,
     useGlobalState,
+    useSetGlobalState,
     ModalProvider,
     useModal,
+    useSetModal
 };

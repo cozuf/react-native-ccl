@@ -63,12 +63,16 @@ export type {
 export {
   ThemeProvider,
   useTheme,
+  useSetTheme,
   BottomSheetProvider,
   useBottomSheet,
+  useSetBottomSheet,
   GlobalStateProvider,
   useGlobalState,
+  useSetGlobalState,
   ModalProvider,
-  useModal
+  useModal,
+  useSetModal
 } from "./Context"
 
 // FIXME: listelemeli komponentlerde key (radiobutton, checkbox) - Modalize warnings
