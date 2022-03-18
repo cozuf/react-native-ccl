@@ -2,12 +2,5 @@ import { Dispatch, useContext } from "react";
 import type { IBottomSheetFunctions, IBottomSheetProps } from "./types";
 import { BottomSheetContext, BottomSheetDispatchContext } from "./context";
 
-const useBottomSheet = (): [
-    IBottomSheetFunctions,
-    Dispatch<Partial<IBottomSheetProps>>,
-] => [
-        useContext(BottomSheetContext),
-        useContext(BottomSheetDispatchContext)
-    ];
-
-export default useBottomSheet
+export const useBottomSheet = (): IBottomSheetFunctions => useContext(BottomSheetContext)
+export const useSetBottomSheet = (): Dispatch<Partial<IBottomSheetProps>> => useContext(BottomSheetDispatchContext)
