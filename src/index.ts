@@ -74,10 +74,8 @@ export {
 // FIXME: listelemeli komponentlerde key (radiobutton, checkbox) - Modalize warnings
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
 // TODO: yayınlamadan önce ReadMe düzenle
-// TODO: GlobalState'yi dışarıdan type verilebilir -> global'e yaz
 // TODO: Language Context -> global'e yaz
 // TODO: import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
-//  --datetimepicker'a moment ile gösterim eklenecek // EKLEME sadece dışarı Date tipini ver
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri inner yap
 // TODO: --ClassComponent için withTheme yap
 // fucntional component'ta ref kullanmayı SnackBar'dan öğrenebilirsin!
