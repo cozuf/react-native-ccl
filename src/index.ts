@@ -85,5 +85,4 @@ export {
 // fucntional component'ta ref kullanmayı SnackBar'dan öğrenebilirsin!
 
 // FIXME: Style'lar theme.style'dan color'lar theme.color'dan çekilmeli - gözden geçir unutma!
-// TODO: Contextleri hook'unu ayır
 // TODO: RNCCL Context yap diğer contextleri içine koy
