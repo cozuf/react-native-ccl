@@ -45,7 +45,7 @@ const SearchBar: FC<ISearchBarTypes> = ({
   errorStyle,
   ...props
 }) => {
-  const [theme] = useTheme()
+  const theme = useTheme()
   const { styles } = theme;
   const { searchBarStyle } = styles
   return (

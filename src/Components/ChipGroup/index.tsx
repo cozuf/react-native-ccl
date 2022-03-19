@@ -46,7 +46,7 @@ const ChipGroup: FC<IChipGroupTypes> = ({
   containerStyle,
   selectionType = "multiSelect"
 }) => {
-  const [theme] = useTheme()
+  const theme = useTheme()
   const { styles } = theme
   const { chipGroupStyle } = styles
 

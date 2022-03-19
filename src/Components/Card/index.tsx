@@ -71,7 +71,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     footerContainerStyle,
     children
 }) => {
-    const [theme] = useTheme()
+    const theme = useTheme()
     const { colors, styles } = theme
     const { card } = colors
     const { cardStyle } = styles
@@ -164,7 +164,7 @@ const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({
     bodyContainerStyle,
     footerContainerStyle, children
 }) => {
-    const [theme] = useTheme()
+    const theme = useTheme()
     const { colors, styles } = theme
     const { card } = colors
     const { cardStyle } = styles
