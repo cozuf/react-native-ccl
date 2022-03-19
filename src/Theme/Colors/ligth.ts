@@ -18,7 +18,7 @@ import {
   WHITE_PALE,
 } from './palette';
 
-const common: RNCCL.CommonColorScheme = {
+const common: CommonColorScheme = {
   primary: WHITE,
   secondary: BLACK,
   active: OPEN_BLUE,
@@ -27,21 +27,21 @@ const common: RNCCL.CommonColorScheme = {
   componentBackground: GREY_90
 };
 
-const pageContainer: RNCCL.PageContainerColorScheme = {
+const pageContainer: PageContainerColorScheme = {
   background: WHITE,
 };
 
-const text: RNCCL.TextColorScheme = {
+const text: TextColorScheme = {
   active: BLACK,
   passive: BLACK_PALE,
 };
 
-const icon: RNCCL.IconColorScheme = {
+const icon: IconColorScheme = {
   active: OPEN_BLUE,
   passive: OPEN_BLUE_PALE,
 };
 
-const textInput: RNCCL.TextInputColorScheme = {
+const textInput: TextInputColorScheme = {
   active: {
     titleText: BLACK,
     inputText: BLACK,
@@ -65,7 +65,7 @@ const textInput: RNCCL.TextInputColorScheme = {
   },
 };
 
-const button: RNCCL.ButtonColorScheme = {
+const button: ButtonColorScheme = {
   active: {
     normal: {
       filled: {
@@ -140,7 +140,7 @@ const button: RNCCL.ButtonColorScheme = {
   },
 };
 
-const radioButton: RNCCL.RadioButtonColorScheme = {
+const radioButton: RadioButtonColorScheme = {
   active: {
     text: BLACK,
     background: WHITE,
@@ -155,7 +155,7 @@ const radioButton: RNCCL.RadioButtonColorScheme = {
   },
 };
 
-const radioButtonGroup: RNCCL.RadioButtonGroupColorScheme = {
+const radioButtonGroup: RadioButtonGroupColorScheme = {
   active: {
     background: BLACK,
     seperator: GREY_80,
@@ -166,7 +166,7 @@ const radioButtonGroup: RNCCL.RadioButtonGroupColorScheme = {
   },
 };
 
-const checkBox: RNCCL.CheckBoxColorScheme = {
+const checkBox: CheckBoxColorScheme = {
   active: {
     text: BLACK,
     background: WHITE,
@@ -183,7 +183,7 @@ const checkBox: RNCCL.CheckBoxColorScheme = {
   },
 };
 
-const checkBoxGroup: RNCCL.CheckBoxGroupColorScheme = {
+const checkBoxGroup: CheckBoxGroupColorScheme = {
   active: {
     background: WHITE,
     seperator: GREY_80,
@@ -194,7 +194,7 @@ const checkBoxGroup: RNCCL.CheckBoxGroupColorScheme = {
   },
 };
 
-const chip: RNCCL.ChipColorScheme = {
+const chip: ChipColorScheme = {
   active: {
     text: BLACK,
     background: WHITE,
@@ -209,7 +209,7 @@ const chip: RNCCL.ChipColorScheme = {
   },
 };
 
-const chipGroup: RNCCL.ChipGroupColorScheme = {
+const chipGroup: ChipGroupColorScheme = {
   active: {
     background: BLACK,
   },
@@ -218,20 +218,20 @@ const chipGroup: RNCCL.ChipGroupColorScheme = {
   },
 };
 
-const badge: RNCCL.BadgeColorScheme = {
+const badge: BadgeColorScheme = {
   background: WHITE,
   border: BLACK,
   text: OPEN_BLUE,
   shadow: BLACK,
 };
 
-const modal: RNCCL.ModalColorScheme = {
+const modal: ModalColorScheme = {
   outsideBackground: BLACK_20,
   containerBackground: WHITE,
   shadow: BLACK,
 };
 
-const selectBox: RNCCL.SelectBoxColorScheme = {
+const selectBox: SelectBoxColorScheme = {
   active: {
     background: GREY_90,
     border: BLACK,
@@ -248,7 +248,7 @@ const selectBox: RNCCL.SelectBoxColorScheme = {
   },
 };
 
-const dateTimePicker: RNCCL.DateTimePickerColorScheme = {
+const dateTimePicker: DateTimePickerColorScheme = {
   active: {
     background: WHITE,
     border: BLACK,
@@ -266,7 +266,7 @@ const dateTimePicker: RNCCL.DateTimePickerColorScheme = {
   },
 };
 
-const switchColors: RNCCL.SwitchComponentColorScheme = {
+const switchColors: SwitchComponentColorScheme = {
   active: {
     border: BLACK,
     background: GREY_90,
@@ -283,7 +283,7 @@ const switchColors: RNCCL.SwitchComponentColorScheme = {
   },
 };
 
-const card: RNCCL.CardColorScheme = {
+const card: CardColorScheme = {
   active: {
     background: GREY_90,
     border: BLACK,
@@ -296,12 +296,12 @@ const card: RNCCL.CardColorScheme = {
   }
 }
 
-const snackBar: RNCCL.SnackBarColorScheme = {
+const snackBar: SnackBarColorScheme = {
   background: GREY_90,
   shadow: BLACK
 }
 
-const light: RNCCL.ColorScheme = {
+const light: ColorScheme = {
   common,
   pageContainer,
   text,

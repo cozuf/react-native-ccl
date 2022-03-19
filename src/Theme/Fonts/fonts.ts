@@ -1,4 +1,4 @@
-export const fonts: RNCCL.FontScheme = {
+export const fonts: FontScheme = {
   light: 'Quicksand-Light',
   regular: 'Quicksand-Regular',
   medium: 'Quicksand-Medium',

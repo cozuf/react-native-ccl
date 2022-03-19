@@ -4,9 +4,9 @@ import DEFAULT_GLOBAL_STATE from "./values";
 
 
 const reducer = (
-    state: RNCCL.GlobalStateInterface,
-    newState: Partial<RNCCL.GlobalStateInterface>
-): RNCCL.GlobalStateInterface => {
+    state: GlobalStateInterface,
+    newState: Partial<GlobalStateInterface>
+): GlobalStateInterface => {
     return { ...state, ...newState };
 };
 

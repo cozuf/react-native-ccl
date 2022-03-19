@@ -1,4 +1,4 @@
-const DEFAULT_GLOBAL_STATE: RNCCL.GlobalStateInterface = {
+const DEFAULT_GLOBAL_STATE: GlobalStateInterface = {
     token: ""
 }
 

@@ -4,8 +4,8 @@ import type { TokensScheme } from "../..//Theme/Tokens";
 
 export interface ThemeType {
     name: 'Light' | 'Dark'
-    colors: RNCCL.ColorScheme
-    fonts: RNCCL.FontScheme
+    colors: ColorScheme
+    fonts: FontScheme
     styles: ComponentsStylesScheme
     tokens: TokensScheme
     changeTheme?: (name: ThemeType["name"]) => void

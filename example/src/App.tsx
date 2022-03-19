@@ -7,14 +7,12 @@ import {
   ThemeProvider,
   useTheme,
   BottomSheetProvider,
-  // ClassGlobalStateProvider,
   GlobalStateProvider,
   ModalProvider
 } from 'react-native-ccl';
 
 const App = () => {
   return (
-    // <ClassGlobalStateProvider>
     <GlobalStateProvider>
       <ThemeProvider>
         <BottomSheetProvider>
@@ -26,7 +24,6 @@ const App = () => {
         </BottomSheetProvider>
       </ThemeProvider>
     </GlobalStateProvider>
-    // </ClassGlobalStateProvider>
   );
 };
 
