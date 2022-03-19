@@ -86,7 +86,7 @@ const Icon: FC<IIconProps> = ({
   active = true,
   containerStyle
 }) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { icon } = theme.colors;
   const COLOR = color ? color : icon[active ? 'active' : 'passive'];
 

@@ -53,7 +53,7 @@ const Regular: FC<ITextTypes> = ({
   children,
   ...props
 }) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { colors, styles, fonts } = theme;
   const { text } = colors;
   const { textStyle } = styles

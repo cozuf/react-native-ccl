@@ -98,7 +98,7 @@ const Button: FC<IButtonTypes> = ({
   ...props
 }) => {
   const [pressed, setPressed] = useState<boolean>(false);
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { colors, styles } = theme;
   const { button } = colors;
   const { buttonStyle } = styles

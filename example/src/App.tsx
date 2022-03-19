@@ -33,7 +33,7 @@ const App = () => {
 export default App;
 
 const Child = () => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { common } = theme.colors;
 
   return (

@@ -30,7 +30,7 @@ const Seperator: FC<ISperatorProps> = ({
   containerStyle = {},
   style = {}
 }) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { styles } = theme;
   const { seperatorStyle } = styles
 

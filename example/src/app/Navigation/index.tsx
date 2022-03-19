@@ -50,7 +50,7 @@ import PageContainer from '../Pages/PageContainer';
 const Stack = createStackNavigator();
 
 const Router = () => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { common, text, pageContainer } = theme.colors;
 
   const renderHeaderLeft = (

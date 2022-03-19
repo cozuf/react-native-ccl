@@ -52,7 +52,7 @@ const ActivityIndicator: FC<IActivityIndicatorProps> = ({
   color,
   size = 24,
 }) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { common } = theme.colors;
   const COLOR = color ? color : common.active;
   switch (type) {

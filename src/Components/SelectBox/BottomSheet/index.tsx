@@ -72,7 +72,7 @@ const SelectBoxBottomSheet: FC<SelectBoxBottomSheetTypes<any>> = ({
     maxChoice = 0,
     minChoice = 0,
 }) => {
-    const [theme] = useTheme();
+    const theme = useTheme();
     const { checkBoxGroup } = theme.colors;
 
     const [nData, setNData] = useState(data);

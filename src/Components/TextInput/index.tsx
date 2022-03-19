@@ -151,7 +151,7 @@ const NTextInput: FC<ITextInputTypes> = ({
   isRequired,
   ...props
 }) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { colors, styles } = theme;
   const { textInput } = colors;
   const { textInputStyle } = styles;

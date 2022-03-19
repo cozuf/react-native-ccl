@@ -88,7 +88,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
   titleStyle,
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { colors, styles } = theme;
   const { radioButton } = colors;
   const { radioButtonStyle } = styles;

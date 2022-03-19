@@ -75,7 +75,7 @@ const Switch: FC<ISwitchTypes> = ({
   titleStyle,
   ...props
 }) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { colors, styles } = theme;
   const { switchComponent } = colors;
   const { switchStyle } = styles;

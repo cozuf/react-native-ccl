@@ -20,7 +20,7 @@ export interface IBadgeProps {
 }
 
 const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { colors, styles } = theme
   const { badgeStyle } = styles
   const { badge } = colors;

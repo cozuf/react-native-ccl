@@ -34,7 +34,7 @@ export type ITapSelectorTypes = ITapSelectorProps<any> &
   Omit<IButtonProps, 'onPress' | 'title' | "titleStyle" | "containerStyle">;
 
 const TapSelector: FC<ITapSelectorTypes> = ({ testID, data, onTap, titleStyle, containerStyle, ...props }) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { styles } = theme
   const { tapSelectorStyle } = styles
 

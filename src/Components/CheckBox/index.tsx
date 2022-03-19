@@ -71,7 +71,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
   titleStyle
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { colors, styles } = theme
   const { checkBox } = colors;
   const { checkBoxStyle } = styles

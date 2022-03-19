@@ -30,7 +30,7 @@ export interface ISnackBarProps {
 }
 
 const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<SnackBarRef>) => {
-    const [theme] = useTheme();
+    const theme = useTheme();
     const { colors, styles } = theme;
     const { snackBar } = colors;
     const { snackbarStyle } = styles;

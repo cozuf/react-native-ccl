@@ -53,7 +53,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
   loading,
   ...props
 }) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { colors, styles } = theme;
   const { pageContainer } = colors;
   const { pageContainerStyle } = styles;
