@@ -38,7 +38,7 @@ const BottomSheetPage = () => {
                         renderContent: () => {
                             return (
                                 <View style={{ height: 100, }}>
-                                    <Text style={{ textAlign: "center", color: "#000" }}>Yusuf</Text>
+                                    <Text style={{ textAlign: "center", }}>Yusuf</Text>
                                 </View>
                             )
                         }
