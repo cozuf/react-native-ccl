@@ -21,5 +21,9 @@ declare global {
         text: TextColorScheme
         textInput: TextInputColorScheme
     }
+
+    export interface GlobalStateScheme {
+        token?: string
+    }
 }
 export { }

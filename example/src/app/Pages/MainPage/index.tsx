@@ -109,6 +109,10 @@ const COMPONENTS: ComponentListType[] = [
     name: 'PageContainer',
     navigation: 'PageContainerPage',
   },
+  {
+    name: 'ClassExample',
+    navigation: 'ClassExample',
+  },
 ];
 
 const MainPage = () => {
