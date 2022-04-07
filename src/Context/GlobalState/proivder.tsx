@@ -4,9 +4,9 @@ import DEFAULT_GLOBAL_STATE from "./values";
 
 
 const reducer = (
-    state: GlobalStateInterface,
-    newState: Partial<GlobalStateInterface>
-): GlobalStateInterface => {
+    state: GlobalStateScheme,
+    newState: Partial<GlobalStateScheme>
+): GlobalStateScheme => {
     return { ...state, ...newState };
 };
 

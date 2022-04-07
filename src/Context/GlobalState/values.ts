@@ -1,5 +1,3 @@
-const DEFAULT_GLOBAL_STATE: GlobalStateInterface = {
-    token: ""
-}
+const DEFAULT_GLOBAL_STATE: GlobalStateScheme = {}
 
 export default DEFAULT_GLOBAL_STATE

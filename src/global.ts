@@ -1,3 +1,4 @@
+import type { Dispatch } from 'react';
 import type { ColorValue } from 'react-native';
 
 declare global {
@@ -358,10 +359,14 @@ declare global {
 
     //#region GlobalStateType
 
-    export interface GlobalStateInterface {
-        token: string | null
-    }
+    export interface GlobalStateScheme { }
 
+    export type SetGlobalStateScheme = Partial<GlobalStateScheme>
+
+    export interface IGlobalState {
+        globalState: GlobalStateScheme
+        setGlobalState: Dispatch<SetGlobalStateScheme>
+    }
     //#endregion
 
 }

@@ -70,6 +70,7 @@ export {
   GlobalStateProvider,
   useGlobalState,
   useSetGlobalState,
+  withGlobalState,
   ModalProvider,
   useModal,
   useSetModal
@@ -81,7 +82,7 @@ export {
 // TODO: Language Context -> global'e yaz
 // TODO: import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri inner yap
-// TODO: --ClassComponent için withTheme yap
+// ClassComponent için withGlobalState yapıldı
 // fucntional component'ta ref kullanmayı SnackBar'dan öğrenebilirsin!
 
 // FIXME: Style'lar theme.style'dan color'lar theme.color'dan çekilmeli - gözden geçir unutma!
