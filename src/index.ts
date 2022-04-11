@@ -79,15 +79,27 @@ export {
   withModal
 } from "./Context"
 
-// FIXME: listelemeli komponentlerde key (radiobutton, checkbox) - Modalize warnings
-// TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
-// TODO: yayınlamadan önce ReadMe düzenle
-// TODO: Language Context -> global'e yaz
-// --: import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
-// TODO: styles'de bulunan tokens'leri ve fontfamily'leri inner yap
-// TODO: input'ların error'lerini gözden geçir
-// ClassComponent için withGlobalState yapıldı
-// fucntional component'ta ref kullanmayı SnackBar'dan öğrenebilirsin!
+// TODO: global'deki context type'ları gözden geçir ve düzenle
 
-// FIXME: Style'lar theme.style'dan color'lar theme.color'dan çekilmeli - gözden geçir unutma!
-// TODO: RNCCL Context yap diğer contextleri içine koy
+// TODO: inputs ( TextInput, DateTimePicker, SelectBox ) hata ve uyarı'ları düzenle
+// TODO: errorStyle, errorContainerStyle, warningStyle, warningContainerStyle tanımla ( textInout'taki gibi )
+
+// TODO: styles, colors, tokens, fonts theme'den alınmalı
+// TODO: styles'daki token ve fontFamily'leri inner yap context'den kullan
+// TODO: style'dan gönderilen fontWeight vs içeri alma
+
+// TODO: SelectBox için modalize(bottomSheet) listelemelisini düzenle - uyarı vermesin
+// TODO: SelectBox için navigationProps ve navigationParams'ı suggest edilebilir yap
+
+// TODO: Language context yap - hook, with
+// TODO: SnackBar context yap - hook, with
+// TODO: RNCCL context yap diğerlerini içine koy
+
+// TODO: Badge platform farklılıklarını gözden geçir ve onayla bitir
+// TODO: SearchBar onClear ayrılabilir mi bak gerekiyorsa ayır ve bitir
+// TODO: inputs'lar için infoButton yap SnackBar ile
+// TODO: SnackBar çeşitlendir - (arkadan öne - önden arkaya) - (aşağıdan yukarıya - yukarıdan aşağıya) - (soldan sağa - sağdan sola)
+
+
+// TODO: yayınlamadan önce ReadMe düzenle
+// FIXME: import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
