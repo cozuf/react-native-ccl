@@ -1,6 +1,5 @@
 import React, { FC, useReducer } from "react";
 import { useColorScheme } from "react-native";
-import type { ThemeType } from "./types";
 import { light, dark } from "../../Theme/Colors";
 import { fonts } from "../../Theme/Fonts";
 import { componentsStyles } from "../../Theme/Styles";
@@ -8,15 +7,15 @@ import { tokens } from "../../Theme";
 import { ThemeContext, ThemeContextDispatch } from "./context";
 
 const reducer = (
-    theme: ThemeType,
-    newTheme: Partial<ThemeType>
-): ThemeType => {
+    theme: ThemeScheme,
+    newTheme: Partial<ThemeScheme>
+): ThemeScheme => {
     return { ...theme, ...newTheme };
 };
 
 const ThemeProvider: FC<any> = ({ children }) => {
 
-    const changeTheme = (name: ThemeType["name"]) => {
+    const changeTheme = (name: ThemeScheme["name"]) => {
         switch (name) {
             case "Light":
             default:
@@ -29,11 +28,11 @@ const ThemeProvider: FC<any> = ({ children }) => {
         }
     }
 
-    const setCurrentTheme = (n: Partial<ThemeType>) => {
+    const setCurrentTheme = (n: Partial<ThemeScheme>) => {
         setTheme({ ...n });
     };
 
-    const initial: ThemeType = {
+    const initial: ThemeScheme = {
         name: useColorScheme() === 'dark' ? 'Dark' : 'Light',
         colors: useColorScheme() === 'dark' ? dark : light,
         fonts: fonts,

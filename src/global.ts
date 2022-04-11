@@ -2,6 +2,8 @@ import type { Dispatch, ReactNode } from 'react'
 import type { ColorValue } from 'react-native'
 import type { ModalizeProps } from 'react-native-modalize'
 import type { IModalProps } from './Components'
+import type { ComponentsStylesScheme } from './Theme/Styles'
+import type { TokensScheme } from './Theme/Tokens'
 
 declare global {
 
@@ -387,11 +389,11 @@ declare global {
 
     export interface IBottomSheetScheme {
         bottomSheet: BottomSheetScheme
-        setBottomSheet: SetBottomSheetScheme
+        setBottomSheet: Dispatch<Partial<SetBottomSheetScheme>>
     }
     //#endregion
 
-    //#region 
+    //#region Modal
     export interface ModalScheme {
         show: () => void,
         close: () => void,
@@ -404,7 +406,25 @@ declare global {
 
     export interface IModalScheme {
         modal: ModalScheme
-        setModal: SetModalScheme
+        setModal: Dispatch<Partial<SetModalScheme>>
+    }
+    //#endregion
+
+    //#region Tehme
+    export interface ThemeScheme {
+        name: 'Light' | 'Dark'
+        colors: ColorScheme
+        fonts: FontScheme
+        styles: ComponentsStylesScheme
+        tokens: TokensScheme
+        changeTheme?: (name: ThemeScheme["name"]) => void
+    }
+
+    export interface ITheme {
+        theme: ThemeScheme
+        setTheme: Dispatch<Partial<ThemeScheme>>
     }
     //#endregion
 }
+
+// TODO: Düzenle
