@@ -64,6 +64,7 @@ export {
   ThemeProvider,
   useTheme,
   useSetTheme,
+  withTheme,
   BottomSheetProvider,
   useBottomSheet,
   useSetBottomSheet,
@@ -74,14 +75,15 @@ export {
   withGlobalState,
   ModalProvider,
   useModal,
-  useSetModal
+  useSetModal,
+  withModal
 } from "./Context"
 
 // FIXME: listelemeli komponentlerde key (radiobutton, checkbox) - Modalize warnings
 // TODO: SelectBox componentini tekrar gözden geçir navigationProps ile ilgili
 // TODO: yayınlamadan önce ReadMe düzenle
 // TODO: Language Context -> global'e yaz
-// TODO: import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
+// --: import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri inner yap
 // TODO: input'ların error'lerini gözden geçir
 // ClassComponent için withGlobalState yapıldı
