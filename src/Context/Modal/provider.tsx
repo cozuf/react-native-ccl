@@ -1,19 +1,18 @@
 import React, { FC, useReducer, useState } from "react";
 import { Modal } from "../..";
 import { ModalContext, ModalDispatchContext } from "./context";
-import type { IModaContextProps, IModalContextFunctions } from "./types";
 
 const reducer = (
-    state: IModaContextProps,
-    newState: Partial<IModaContextProps>
-): IModaContextProps => {
+    state: SetModalScheme,
+    newState: Partial<SetModalScheme>
+): SetModalScheme => {
     return { ...state, ...newState };
 };
 
 const ModalProvider: FC<any> = ({ children }) => {
     const [visible, setVisible] = useState<boolean>(false)
 
-    const modalRef: IModalContextFunctions = {
+    const modalRef: ModalScheme = {
         show: () => {
             setVisible(true)
         },
@@ -22,7 +21,7 @@ const ModalProvider: FC<any> = ({ children }) => {
         }
     }
 
-    const initial: IModaContextProps = {
+    const initial: SetModalScheme = {
         props: {
             onTouchOutSide: () => {
                 setVisible(false)

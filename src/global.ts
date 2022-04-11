@@ -1,6 +1,7 @@
 import type { Dispatch, ReactNode } from 'react'
 import type { ColorValue } from 'react-native'
 import type { ModalizeProps } from 'react-native-modalize'
+import type { IModalProps } from './Components'
 
 declare global {
 
@@ -383,6 +384,27 @@ declare global {
         props: ModalizeProps,
         renderContent?: () => ReactNode | null
     }
+
+    export interface IBottomSheetScheme {
+        bottomSheet: BottomSheetScheme
+        setBottomSheet: SetBottomSheetScheme
+    }
     //#endregion
 
+    //#region 
+    export interface ModalScheme {
+        show: () => void,
+        close: () => void,
+    }
+
+    export interface SetModalScheme {
+        props: Omit<IModalProps, "visible">,
+        renderChildren?: () => ReactNode | null
+    }
+
+    export interface IModalScheme {
+        modal: ModalScheme
+        setModal: SetModalScheme
+    }
+    //#endregion
 }

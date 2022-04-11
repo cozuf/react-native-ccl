@@ -1,4 +1,5 @@
 import ModalProvider from "./provider";
 import { useModal, useSetModal } from "./hook";
+import { withModal } from "./with";
 
-export { ModalProvider, useModal, useSetModal }
+export { ModalProvider, useModal, useSetModal, withModal }

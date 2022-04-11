@@ -1,6 +1,6 @@
 import { ThemeProvider, useTheme, useSetTheme } from './Theme';
 import { BottomSheetProvider, useBottomSheet, useSetBottomSheet, withBottomSheet } from "./BottomSheet";
-import { ModalProvider, useModal, useSetModal, } from "./Modal";
+import { ModalProvider, useModal, useSetModal, withModal } from "./Modal";
 import { GlobalStateProvider, useGlobalState, useSetGlobalState, withGlobalState } from './GlobalState';
 
 export {
@@ -17,5 +17,6 @@ export {
     withGlobalState,
     ModalProvider,
     useModal,
-    useSetModal
+    useSetModal,
+    withModal
 };
