@@ -1,15 +1,16 @@
-import type { Dispatch } from 'react';
-import type { ColorValue } from 'react-native';
+import type { Dispatch, ReactNode } from 'react'
+import type { ColorValue } from 'react-native'
+import type { ModalizeProps } from 'react-native-modalize'
 
 declare global {
 
     //#region ColorScheme
 
     export interface BadgeColorScheme {
-        border: ColorValue;
-        background: ColorValue;
-        text: ColorValue;
-        shadow: ColorValue;
+        border: ColorValue
+        background: ColorValue
+        text: ColorValue
+        shadow: ColorValue
     }
 
     export interface ButtonColorScheme {
@@ -19,78 +20,78 @@ declare global {
         active: {
             normal: {
                 filled: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
                 outlined: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
                 simplied: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
-            };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
+            }
             pressed: {
                 filled: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
                 outlined: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
                 simplied: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
-            };
-        };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
+            }
+        }
         /**
          * Not pressable
          */
         passive: {
             normal: {
                 filled: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
                 outlined: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
                 simplied: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
-            };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
+            }
             pressed: {
                 filled: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
                 outlined: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
                 simplied: {
-                    background: ColorValue;
-                    text: ColorValue;
-                    border: ColorValue;
-                };
-            };
-        };
+                    background: ColorValue
+                    text: ColorValue
+                    border: ColorValue
+                }
+            }
+        }
     }
 
     export interface CardColorScheme {
@@ -111,33 +112,33 @@ declare global {
          * Pressable
          */
         active: {
-            text: ColorValue;
-            icon: ColorValue;
-            background: ColorValue;
-            border: ColorValue;
-            iconBorder: ColorValue;
-        };
+            text: ColorValue
+            icon: ColorValue
+            background: ColorValue
+            border: ColorValue
+            iconBorder: ColorValue
+        }
         /**
          * Not pressable
          */
         passive: {
-            text: ColorValue;
-            icon: ColorValue;
-            background: ColorValue;
-            border: ColorValue;
-            iconBorder: ColorValue;
-        };
+            text: ColorValue
+            icon: ColorValue
+            background: ColorValue
+            border: ColorValue
+            iconBorder: ColorValue
+        }
     }
 
     export interface CheckBoxGroupColorScheme {
         active: {
-            background: ColorValue;
-            seperator: ColorValue;
-        };
+            background: ColorValue
+            seperator: ColorValue
+        }
         passive: {
-            background: ColorValue;
-            seperator: ColorValue;
-        };
+            background: ColorValue
+            seperator: ColorValue
+        }
     }
 
     export interface ChipColorScheme {
@@ -145,71 +146,74 @@ declare global {
          * Pressable
          */
         active: {
-            text: ColorValue;
-            icon: ColorValue;
-            background: ColorValue;
-            border: ColorValue;
-        };
+            text: ColorValue
+            icon: ColorValue
+            background: ColorValue
+            border: ColorValue
+        }
         /**
          * Not pressable
          */
         passive: {
-            text: ColorValue;
-            icon: ColorValue;
-            background: ColorValue;
-            border: ColorValue;
-        };
+            text: ColorValue
+            icon: ColorValue
+            background: ColorValue
+            border: ColorValue
+        }
     }
 
     export interface ChipGroupColorScheme {
         active: {
-            background: ColorValue;
-        };
+            background: ColorValue
+        }
         passive: {
-            background: ColorValue;
-        };
+            background: ColorValue
+        }
     }
 
     export interface CommonColorScheme {
-        primary: ColorValue;
-        secondary: ColorValue;
-        active: ColorValue;
-        passive: ColorValue;
-        statusbar: ColorValue;
+        primary: ColorValue
+        secondary: ColorValue
+        active: ColorValue
+        passive: ColorValue
+        statusbar: ColorValue
         componentBackground: ColorValue
+        success: ColorValue
+        error: ColorValue
+        warning: ColorValue
     }
 
     export interface DateTimePickerColorScheme {
         active: {
-            background: ColorValue;
-            border: ColorValue;
-            title: ColorValue;
-            placeholder: ColorValue;
-            value: ColorValue;
-            pickerText: ColorValue;
-        };
+            background: ColorValue
+            border: ColorValue
+            title: ColorValue
+            placeholder: ColorValue
+            value: ColorValue
+            pickerText: ColorValue
+        }
         passive: {
-            background: ColorValue;
-            border: ColorValue;
-            title: ColorValue;
-            placeholder: ColorValue;
-            value: ColorValue;
-        };
+            background: ColorValue
+            border: ColorValue
+            title: ColorValue
+            placeholder: ColorValue
+            value: ColorValue
+        }
     }
 
     export interface IconColorScheme {
-        active: ColorValue;
-        passive: ColorValue;
+        active: ColorValue
+        passive: ColorValue
     }
 
     export interface ModalColorScheme {
-        outsideBackground: ColorValue;
-        containerBackground: ColorValue;
-        shadow: ColorValue;
+        outsideBackground: ColorValue
+        containerBackground: ColorValue
+        shadow: ColorValue
     }
 
     export interface PageContainerColorScheme {
-        background: ColorValue;
+        background: ColorValue
     }
 
     export interface RadioButtonColorScheme {
@@ -217,48 +221,48 @@ declare global {
          * Pressable
          */
         active: {
-            text: ColorValue;
-            icon: ColorValue;
-            background: ColorValue;
-            border: ColorValue;
-        };
+            text: ColorValue
+            icon: ColorValue
+            background: ColorValue
+            border: ColorValue
+        }
         /**
          * Not pressable
          */
         passive: {
-            text: ColorValue;
-            icon: ColorValue;
-            background: ColorValue;
-            border: ColorValue;
-        };
+            text: ColorValue
+            icon: ColorValue
+            background: ColorValue
+            border: ColorValue
+        }
     }
 
     export interface RadioButtonGroupColorScheme {
         active: {
-            background: ColorValue;
-            seperator: ColorValue;
-        };
+            background: ColorValue
+            seperator: ColorValue
+        }
         passive: {
-            background: ColorValue;
-            seperator: ColorValue;
-        };
+            background: ColorValue
+            seperator: ColorValue
+        }
     }
 
     export interface SelectBoxColorScheme {
         active: {
-            background: ColorValue;
-            border: ColorValue;
-            title: ColorValue;
-            placeholder: ColorValue;
-            value: ColorValue;
-        };
+            background: ColorValue
+            border: ColorValue
+            title: ColorValue
+            placeholder: ColorValue
+            value: ColorValue
+        }
         passive: {
-            background: ColorValue;
-            border: ColorValue;
-            title: ColorValue;
-            placeholder: ColorValue;
-            value: ColorValue;
-        };
+            background: ColorValue
+            border: ColorValue
+            title: ColorValue
+            placeholder: ColorValue
+            value: ColorValue
+        }
     }
 
     export interface SnackBarColorScheme {
@@ -268,24 +272,24 @@ declare global {
 
     export interface SwitchComponentColorScheme {
         active: {
-            border: ColorValue;
-            background: ColorValue;
-            backgroundOn: ColorValue;
-            backgroundOff: ColorValue;
-            thumb: ColorValue;
-        };
+            border: ColorValue
+            background: ColorValue
+            backgroundOn: ColorValue
+            backgroundOff: ColorValue
+            thumb: ColorValue
+        }
         passive: {
-            border: ColorValue;
-            background: ColorValue;
-            backgroundOn: ColorValue;
-            backgroundOff: ColorValue;
-            thumb: ColorValue;
-        };
+            border: ColorValue
+            background: ColorValue
+            backgroundOn: ColorValue
+            backgroundOff: ColorValue
+            thumb: ColorValue
+        }
     }
 
     export interface TextColorScheme {
-        active: ColorValue;
-        passive: ColorValue;
+        active: ColorValue
+        passive: ColorValue
     }
 
     export interface TextInputColorScheme {
@@ -293,32 +297,32 @@ declare global {
          * Pressable but not focused
          */
         active: {
-            background: ColorValue;
-            border: ColorValue;
-            titleText: ColorValue;
-            inputText: ColorValue;
-            placeholder: ColorValue;
-        };
+            background: ColorValue
+            border: ColorValue
+            titleText: ColorValue
+            inputText: ColorValue
+            placeholder: ColorValue
+        }
         /**
          * Not pressable
          */
         passive: {
-            background: ColorValue;
-            border: ColorValue;
-            titleText: ColorValue;
-            inputText: ColorValue;
-            placeholder: ColorValue;
-        };
+            background: ColorValue
+            border: ColorValue
+            titleText: ColorValue
+            inputText: ColorValue
+            placeholder: ColorValue
+        }
         /**
          * focused
          */
         focused: {
-            background: ColorValue;
-            border: ColorValue;
-            titleText: ColorValue;
-            inputText: ColorValue;
-            selection: ColorValue;
-        };
+            background: ColorValue
+            border: ColorValue
+            titleText: ColorValue
+            inputText: ColorValue
+            selection: ColorValue
+        }
     }
 
     export interface ColorScheme {
@@ -348,11 +352,11 @@ declare global {
     //#region FontScheme
 
     export interface FontScheme {
-        light: string;
-        regular: string;
-        medium: string;
-        semibold: string;
-        bold: string;
+        light: string
+        regular: string
+        medium: string
+        semibold: string
+        bold: string
     }
 
     //#endregion
@@ -366,6 +370,18 @@ declare global {
     export interface IGlobalState {
         globalState: GlobalStateScheme
         setGlobalState: Dispatch<SetGlobalStateScheme>
+    }
+    //#endregion
+
+    //#region BottomSheet
+    export interface BottomSheetScheme {
+        show: () => void,
+        close: () => void,
+    }
+
+    export interface SetBottomSheetScheme {
+        props: ModalizeProps,
+        renderContent?: () => ReactNode | null
     }
     //#endregion
 

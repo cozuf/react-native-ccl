@@ -67,6 +67,7 @@ export {
   BottomSheetProvider,
   useBottomSheet,
   useSetBottomSheet,
+  withBottomSheet,
   GlobalStateProvider,
   useGlobalState,
   useSetGlobalState,
@@ -82,6 +83,7 @@ export {
 // TODO: Language Context -> global'e yaz
 // TODO: import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
 // TODO: styles'de bulunan tokens'leri ve fontfamily'leri inner yap
+// TODO: input'ların error'lerini gözden geçir
 // ClassComponent için withGlobalState yapıldı
 // fucntional component'ta ref kullanmayı SnackBar'dan öğrenebilirsin!
 

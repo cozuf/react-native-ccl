@@ -4,12 +4,11 @@ import type { Modalize } from "react-native-modalize";
 import { Modalize as BottomSheet } from 'react-native-modalize';
 import { useTheme } from "../Theme";
 import { BottomSheetContext, BottomSheetDispatchContext } from "./context";
-import type { IBottomSheetFunctions, IBottomSheetProps } from "./types";
 
 const reducer = (
-    state: IBottomSheetProps,
-    newState: Partial<IBottomSheetProps>
-): IBottomSheetProps => {
+    state: SetBottomSheetScheme,
+    newState: Partial<SetBottomSheetScheme>
+): SetBottomSheetScheme => {
     const props = { ...state.props, ...newState.props }
     const nState = { ...state, ...newState, props }
     return nState
@@ -20,7 +19,7 @@ const BottomSheetProvider: FC<any> = ({ children }) => {
     const theme = useTheme()
     const { modal, common, pageContainer } = theme.colors
 
-    const bottomSheet: IBottomSheetFunctions = {
+    const bottomSheet: BottomSheetScheme = {
         show: () => {
             bottomSheetRef.current?.open()
         },
@@ -29,7 +28,7 @@ const BottomSheetProvider: FC<any> = ({ children }) => {
         }
     }
 
-    const initial = useCallback((): IBottomSheetProps => ({
+    const initial = useCallback((): SetBottomSheetScheme => ({
         props: {
             rootStyle: {
             },
@@ -59,7 +58,7 @@ const BottomSheetProvider: FC<any> = ({ children }) => {
         <BottomSheetContext.Provider
             value={bottomSheet}>
             <BottomSheetDispatchContext.Provider
-                value={(values: Partial<IBottomSheetProps>) => {
+                value={(values: Partial<SetBottomSheetScheme>) => {
                     const props = { ...initial().props, ...values.props }
                     const nState = { ...initial(), ...values, props }
                     setBottomSheetProps({ ...nState })

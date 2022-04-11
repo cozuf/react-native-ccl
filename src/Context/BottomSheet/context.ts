@@ -1,10 +1,8 @@
 import { createContext, Dispatch } from "react";
-import type { IBottomSheetFunctions, IBottomSheetProps } from "./types";
 
-
-export const BottomSheetContext = createContext<IBottomSheetFunctions>({
+export const BottomSheetContext = createContext<BottomSheetScheme>({
     show: () => { },
     close: () => { }
 });
 
-export const BottomSheetDispatchContext = createContext<Dispatch<Partial<IBottomSheetProps>>>(() => { });
+export const BottomSheetDispatchContext = createContext<Dispatch<Partial<SetBottomSheetScheme>>>(() => { });
