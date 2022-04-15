@@ -82,7 +82,7 @@ export {
 // TODO: global'deki context type'ları gözden geçir ve düzenle
 
 // TODO: inputs ( TextInput, DateTimePicker, SelectBox ) hata ve uyarı'ları düzenle
-// TODO: errorStyle, errorContainerStyle, warningStyle, warningContainerStyle tanımla ( textInout'taki gibi )
+// TODO: errorStyle, errorContainerStyle, warningStyle, warningContainerStyle tanımla ( textInput'taki gibi )
 
 // TODO: styles, colors, tokens, fonts theme'den alınmalı
 // TODO: styles'daki token ve fontFamily'leri inner yap context'den kullan
