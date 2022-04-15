@@ -12,6 +12,7 @@ import {
   ORANGE,
   ORANGE_OPPOSITE,
   ORANGE_PALE,
+  RED,
   TRANSPARENT,
   WHITE,
   WHITE_20,
@@ -24,7 +25,10 @@ const common: CommonColorScheme = {
   active: ORANGE,
   passive: ORANGE_PALE,
   statusbar: BLACK,
-  componentBackground: BLACK_90
+  componentBackground: BLACK_90,
+  success: GREEN,
+  error: RED,
+  warning: ORANGE
 };
 
 const pageContainer: PageContainerColorScheme = {

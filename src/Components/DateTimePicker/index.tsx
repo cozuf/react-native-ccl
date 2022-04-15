@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
+import React, { FC, Fragment, ReactNode, useEffect, useState } from 'react';
 import { Dimensions, Omit, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
 import { Button, Modal, Text } from '..';
@@ -85,6 +85,36 @@ export interface IDateTimePickerProps {
    * 
    */
   textStyle?: StyleProp<TextStyle>
+
+  /**
+   *
+   */
+  warning?: string
+
+  /**
+   *
+   */
+  warningStyle?: StyleProp<TextStyle>
+
+  /**
+   *
+   */
+  warningContainerStyle?: StyleProp<TextStyle>
+
+  /**
+   *
+   */
+  error?: string
+
+  /**
+   *
+   */
+  errorStyle?: StyleProp<TextStyle>
+
+  /**
+   *
+   */
+  errorContainerStyle?: StyleProp<TextStyle>
 }
 
 type IDateTimePickerTypes = IDateTimePickerProps &
@@ -106,6 +136,12 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   titleStyle,
   textContainerStyle,
   textStyle,
+  error,
+  errorStyle,
+  errorContainerStyle,
+  warning,
+  warningStyle,
+  warningContainerStyle,
   ...props
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -114,8 +150,10 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const setBottomSheet = useSetBottomSheet();
   const theme = useTheme();
   const { colors, styles } = theme;
-  const { dateTimePicker, modal } = colors;
+  const { dateTimePicker, modal, common } = colors;
   const { dateTimePickerStyle } = styles
+
+  const STATE: keyof ColorScheme["dateTimePicker"] = active ? "active" : "passive";
 
   const renderSubmit = () => {
     return (
@@ -235,34 +273,61 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     }
   };
 
+  const renderWarning = () => {
+    if (warning) {
+      return (
+        <View style={[dateTimePickerStyle?.warningContainer, warningContainerStyle]}>
+          <Text weigth='medium' style={[dateTimePickerStyle?.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
+        </View>
+      )
+    }
+    return null
+  };
+
+  const renderError = () => {
+    if (error) {
+      return (
+        <View style={[dateTimePickerStyle?.errorContainer, errorContainerStyle]}>
+          <Text weigth='medium' style={[dateTimePickerStyle?.error, { color: common.error }, errorStyle]}>{error}</Text>
+        </View>
+      )
+    }
+    return null
+  };
+
   return (
-    <TouchableOpacity
-      testID={testID}
-      disabled={!active}
-      onPress={onPress}
-      style={[
-        containerStyle,
-        {
-          backgroundColor:
-            dateTimePicker[active ? 'active' : 'passive'].background,
-          borderColor: dateTimePicker[active ? 'active' : 'passive'].border,
-        },
-        dateTimePickerStyle?.container,
-      ]}
-    >
-      <View style={[dateTimePickerStyle?.titleContainer, titleContainerStyle]}>
-        <Text style={[dateTimePickerStyle?.title, titleStyle]}>
-          {title}
-        </Text>
-      </View>
-      <View style={[dateTimePickerStyle?.textContainer, textContainerStyle]}>
-        <Text style={[dateTimePickerStyle?.text, textStyle]}>
-          {date ? moment(date).format(displayFormat) : placeholder}
-        </Text>
-      </View>
-      {renderChildren()}
-    </TouchableOpacity>
+    <Fragment>
+      <TouchableOpacity
+        testID={testID}
+        disabled={!active}
+        onPress={onPress}
+        style={[
+          containerStyle,
+          {
+            backgroundColor: dateTimePicker[STATE].background,
+            borderColor: error ? common.error : dateTimePicker[STATE].border,
+          },
+          dateTimePickerStyle?.container,
+        ]}
+      >
+        <View style={[dateTimePickerStyle?.titleContainer, titleContainerStyle]}>
+          <Text style={[dateTimePickerStyle?.title, error ? { color: common.error } : {}, titleStyle]}>
+            {title}
+          </Text>
+        </View>
+        <View style={[dateTimePickerStyle?.textContainer, textContainerStyle]}>
+          <Text style={[dateTimePickerStyle?.text, textStyle]}>
+            {date ? moment(date).format(displayFormat) : placeholder}
+          </Text>
+        </View>
+        {renderChildren()}
+      </TouchableOpacity>
+      {renderWarning()}
+      {renderError()}
+    </Fragment>
   );
 };
 
 export default DateTimePicker;
+
+// TODO: error style eklenecek

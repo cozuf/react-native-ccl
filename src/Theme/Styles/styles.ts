@@ -1,6 +1,5 @@
 import { Platform } from "react-native";
 import { fonts } from "../Fonts";
-import { tokens } from "../Tokens";
 import type {
     BadgeStyle,
     ButtonStyle,
@@ -89,8 +88,8 @@ export const checkBoxStyle: CheckBoxStyle = {
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical: tokens.component.paddingVertical,
-        paddingHorizontal: tokens.component.paddingHorizontal,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
     },
     titleContainer: {},
     title: {},
@@ -144,16 +143,20 @@ export const chipGroupStyle: ChipGroupStyle = {
 
 export const dateTimePickerStyle: DateTimePickerStyle = {
     container: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 8,
         paddingVertical: 8,
-        paddingHorizontal: 16,
+        paddingHorizontal: 16
     },
     titleContainer: {},
     title: {},
     seperator: {},
     textContainer: {},
     text: {},
+    warningContainer: {},
+    warning: {},
+    errorContainer: {},
+    error: {},
 }
 export const modalStyle: ModalStyle = {
     outside: {
@@ -182,12 +185,12 @@ export const modalStyle: ModalStyle = {
 export const pageContainerStyle: PageContainerStyle = {
     container: {
         flex: 1,
-        paddingVertical: tokens.page.paddingVertical,
-        paddingHorizontal: tokens.page.paddingHorizontal,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
     },
     contentContainer: {
-        paddingVertical: tokens.page.paddingVertical,
-        paddingHorizontal: tokens.page.paddingHorizontal,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
     },
 }
 
@@ -195,8 +198,8 @@ export const radioButtonStyle: RadioButtonStyle = {
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical: tokens.component.paddingVertical,
-        paddingHorizontal: tokens.component.paddingHorizontal,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
     },
     iconContainer: {},
     sperator: {},
@@ -228,7 +231,7 @@ export const searchBarStyle: SearchBarStyle = {
 
 export const selectBoxStyle: SelectBoxStyle = {
     container: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 8,
         paddingVertical: 8,
         paddingHorizontal: 16,
@@ -238,6 +241,10 @@ export const selectBoxStyle: SelectBoxStyle = {
     seperator: {},
     textContainer: {},
     text: {},
+    warningContainer: {},
+    warning: {},
+    errorContainer: {},
+    error: {},
 }
 
 export const seperatorStyle: SeperatorStyle = {
@@ -273,9 +280,9 @@ export const stateCardStyle: StateCardStyle = {
 export const switchStyle: SwitchStyle = {
     container: {
         flexDirection: 'row',
-        borderWidth: tokens.component.borderWidth,
+        borderWidth: 2,
         borderRadius: 8,
-        paddingHorizontal: tokens.component.paddingHorizontal,
+        paddingHorizontal: 16,
         paddingVertical: 8,
         alignItems: 'center',
     },
@@ -302,8 +309,8 @@ export const textStyle: TextStyle = {
 export const textInputStyle: TextInputStyle = {
     container: {
         borderRadius: 8,
-        borderWidth: tokens.component.borderWidth,
-        padding: tokens.component.paddingVertical,
+        borderWidth: 2,
+        padding: 8,
     },
     titleContainer: {},
     title: {},
@@ -318,7 +325,6 @@ export const textInputStyle: TextInputStyle = {
         flex: 1
     },
     input: {
-        paddingLeft: 0,
         paddingVertical: 12,
     },
     cleanContainer: {},

@@ -3,7 +3,7 @@ import type { Component, Page, TokensScheme } from "./types";
 const PADDING_VERTICAL = 8;
 const PADDING_HORIZONTAL = 16;
 const BORDER_WIDTH = 2;
-const BORDER_RADIUS = 2;
+const BORDER_RADIUS = 8;
 
 export const page: Page = {
     paddingVertical: PADDING_VERTICAL,

@@ -1,4 +1,4 @@
-import React, { FC, isValidElement, ReactElement, ReactNode, useRef, useState } from 'react';
+import React, { FC, Fragment, isValidElement, ReactElement, ReactNode, useRef, useState } from 'react';
 import {
   TextStyle,
   View,
@@ -153,40 +153,29 @@ const NTextInput: FC<ITextInputTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, styles } = theme;
-  const { textInput } = colors;
+  const { textInput, common } = colors;
   const { textInputStyle } = styles;
 
   const NativeTextInputRef = useRef<TextInput | null>(null);
   const [isFocused, setIsFocused] = useState<boolean>();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
 
-  const containerBackgroundColor = (): ColorValue => {
-    const CONTAINER_BACKGROUND =
-      textInput[active ? (isFocused ? 'focused' : 'active') : 'passive']
-        .background;
+  const STATE: keyof ColorScheme["textInput"] = active ? isFocused ? "focused" : "active" : "passive"
 
-    return CONTAINER_BACKGROUND;
+  const containerBackgroundColor = (): ColorValue => {
+    return textInput[STATE].background;
   };
 
   const containerBorderColor = (): ColorValue => {
-    const CONTAINER_BORDER_COLOR =
-      textInput[active ? (isFocused ? 'focused' : 'active') : 'passive'].border;
-    return CONTAINER_BORDER_COLOR;
+    return error ? common.error : textInput[STATE].border;
   };
 
   const inputTextColor = (): ColorValue => {
-    const INPUT_TEXT_COLOR =
-      textInput[active ? (isFocused ? 'focused' : 'active') : 'passive']
-        .inputText;
-    return INPUT_TEXT_COLOR;
+    return textInput[STATE].inputText;
   };
 
   const titleTextColor = (): ColorValue => {
-    const TITLE_TEXT_COLOR =
-      textInput[active ? (isFocused ? 'focused' : 'active') : 'passive']
-        .titleText;
-
-    return TITLE_TEXT_COLOR;
+    return error ? common.error : textInput[STATE].titleText;
   };
 
   const changeFocus = () => {
@@ -242,7 +231,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (warning) {
       return (
         <View style={[textInputStyle?.warningContainer, warningContainerStyle]}>
-          <Text style={[textInputStyle?.warning, warningStyle]}>{warning}</Text>
+          <Text weigth='medium' style={[textInputStyle?.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
         </View>
       )
     }
@@ -253,7 +242,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (error) {
       return (
         <View style={[textInputStyle?.errorContainer, errorContainerStyle]}>
-          <Text style={[textInputStyle?.error, errorStyle]}>{error}</Text>
+          <Text weigth='medium' style={[textInputStyle?.error, { color: common.error }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -418,27 +407,29 @@ const NTextInput: FC<ITextInputTypes> = ({
   }
 
   return (
-    <Pressable
-      testID={testID}
-      disabled={!active}
-      style={[
-        textInputStyle?.container,
-        containerStyle,
-        {
-          backgroundColor: containerBackgroundColor(),
-          borderColor: containerBorderColor(),
-        },
-      ]}
-      onPress={() => {
-        changeFocus();
-      }}
-    >
-      {renderTitle()}
-      {renderInputContainer()}
+    <Fragment>
+      <Pressable
+        testID={testID}
+        disabled={!active}
+        style={[
+          textInputStyle?.container,
+          containerStyle,
+          {
+            backgroundColor: containerBackgroundColor(),
+            borderColor: containerBorderColor(),
+          },
+        ]}
+        onPress={() => {
+          changeFocus();
+        }}
+      >
+        {renderTitle()}
+        {renderInputContainer()}
+      </Pressable>
       {renderWarning()}
       {renderWarningErrorSeperator()}
       {renderError()}
-    </Pressable>
+    </Fragment>
   );
 };
 

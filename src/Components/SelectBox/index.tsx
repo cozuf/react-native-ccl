@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, Fragment, ReactNode, useState } from 'react';
 import {
   FlatListProps,
   ListRenderItemInfo,
@@ -136,6 +136,36 @@ export interface ISelectBoxProps<ItemT> {
    * 
    */
   containerStyle?: ViewStyle
+
+  /**
+   *
+   */
+  warning?: string
+
+  /**
+   *
+   */
+  warningStyle?: StyleProp<TextStyle>
+
+  /**
+   *
+   */
+  warningContainerStyle?: StyleProp<TextStyle>
+
+  /**
+   *
+   */
+  error?: string
+
+  /**
+   *
+   */
+  errorStyle?: StyleProp<TextStyle>
+
+  /**
+   *
+   */
+  errorContainerStyle?: StyleProp<TextStyle>
 }
 
 export type ISelectBoxTypes = ISelectBoxProps<any> &
@@ -164,6 +194,12 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   maxChoice,
   minChoice,
   containerStyle,
+  error,
+  errorStyle,
+  errorContainerStyle,
+  warning,
+  warningStyle,
+  warningContainerStyle,
 }) => {
   const bottomSheet = useBottomSheet();
   const setBottomSheet = useSetBottomSheet();
@@ -172,8 +208,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const [visible, setVisible] = useState<boolean>(false);
   const theme = useTheme();
   const { colors, styles } = theme;
-  const { selectBox, modal } = colors;
+  const { selectBox, common, modal } = colors;
   const { selectBoxStyle } = styles
+
+  const STATE: keyof ColorScheme["selectBox"] = active ? "active" : "passive";
 
   const renderModal = (): ReactNode => {
     return (
@@ -349,43 +387,71 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     )
   }
 
+  const renderWarning = () => {
+    if (warning) {
+      return (
+        <View style={[selectBoxStyle?.warningContainer, warningContainerStyle]}>
+          <Text weigth='medium' style={[selectBoxStyle?.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
+        </View>
+      )
+    }
+    return null
+  };
+
+  const renderError = () => {
+    if (error) {
+      return (
+        <View style={[selectBoxStyle?.errorContainer, errorContainerStyle]}>
+          <Text weigth='medium' style={[selectBoxStyle?.error, { color: common.error }, errorStyle]}>{error}</Text>
+        </View>
+      )
+    }
+    return null
+  };
+
   return (
-    <TouchableOpacity
-      testID={testID}
-      disabled={!active}
-      onPress={onPress}
-      style={[
-        containerStyle,
-        {
-          backgroundColor: selectBox[active ? 'active' : 'passive'].background,
-          borderColor: selectBox[active ? 'active' : 'passive'].border,
-        },
-        selectBoxStyle?.container,
-      ]}
-    >
-      {renderTitle()}
-      <Seperator type="vertical" size="small" style={[selectBoxStyle?.seperator]} />
-      <View
-        style={[selectBoxStyle?.textContainer, textContainerStyle]}>
-        <Text
-          numberOfLines={1}
-          style={[
-            {
-              color:
-                renderPlaceholder() === placeholder
-                  ? selectBox[active ? 'active' : 'passive'].placeholder
-                  : selectBox[active ? 'active' : 'passive'].value,
-            },
-            selectBoxStyle?.text,
-            textStyle
-          ]}
-        >
-          {renderPlaceholder()}
-        </Text>
-      </View>
-      {renderRest()}
-    </TouchableOpacity>
+    <Fragment>
+      <TouchableOpacity
+        testID={testID}
+        disabled={!active}
+        onPress={onPress}
+        style={[
+          containerStyle,
+          {
+            backgroundColor: selectBox[active ? 'active' : 'passive'].background,
+            borderColor: error ? common.error : selectBox[STATE].border,
+          },
+          selectBoxStyle?.container,
+        ]}
+      >
+        {renderTitle()}
+        <Seperator type="vertical" size="small" style={[selectBoxStyle?.seperator]} />
+        <View
+          style={[selectBoxStyle?.textContainer, textContainerStyle]}>
+          <Text
+            numberOfLines={1}
+            style={[
+              {
+                color:
+                  renderPlaceholder() === placeholder
+                    ? selectBox[active ? 'active' : 'passive'].placeholder
+                    : selectBox[active ? 'active' : 'passive'].value,
+              },
+              selectBoxStyle?.text,
+              textStyle
+            ]}
+          >
+            {renderPlaceholder()}
+          </Text>
+        </View>
+        {renderRest()}
+      </TouchableOpacity>
+      {renderWarning()}
+      {renderError()}
+    </Fragment>
   );
 };
 
 export default SelectBox;
+
+// TODO: error style eklenecek

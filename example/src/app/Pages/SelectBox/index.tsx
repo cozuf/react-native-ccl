@@ -45,21 +45,48 @@ const DATA = [
     value: 7,
   },
 ];
+
 const DISPLAY_TYPE_DATA = [
   { title: 'Modal', value: 'modal' },
   { title: 'BottomSheet', value: 'bottomSheet' },
   { title: 'Page', value: 'page' },
 ];
+
 const SELECT_TYPE_DATA = [
   { title: 'Multi Select', value: 'multiSelect' },
   { title: 'Single Select', value: 'singleSelect' },
 ];
+
+const ERROD_DATA = [
+  {
+    title: 'Hata Yok',
+    value: false,
+  },
+  {
+    title: 'Hata Var',
+    value: true,
+  }
+];
+
+const WARNING_DATA = [
+  {
+    title: 'Uyarı Yok',
+    value: false,
+  },
+  {
+    title: 'Uyarı Var',
+    value: true,
+  }
+];
+
 
 const SelectBoxPage = () => {
   const navigation = useNavigation();
   const [areas, setAreas] = useState<any[]>(DATA);
   const [selectTypeIndex, setSelectTypeIndex] = useState<number>(0);
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
+  const [error, setError] = useState("");
+  const [warning, setWarning] = useState("");
 
   return (
     <PageContainer type="default">
@@ -81,6 +108,8 @@ const SelectBoxPage = () => {
         }}
         minChoice={2}
         maxChoice={4}
+        warning={warning}
+        error={error}
       />
       <View style={{ paddingTop: 16 }}>
         <TapSelector
@@ -95,6 +124,16 @@ const SelectBoxPage = () => {
           onTap={(_: any, index: number) => {
             setDisplayTypeIndex(index);
           }}
+        />
+        <Seperator type="vertical" />
+        <TapSelector
+          data={ERROD_DATA}
+          onTap={() => setError((pValue: string) => pValue.length > 0 ? "" : "Hata Var")}
+        />
+        <Seperator type="vertical" />
+        <TapSelector
+          data={WARNING_DATA}
+          onTap={() => setWarning((pValue: string) => pValue.length > 0 ? "" : "Uyarı Var")}
         />
       </View>
     </PageContainer>

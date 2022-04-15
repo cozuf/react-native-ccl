@@ -51,6 +51,10 @@ export interface DateTimePickerStyle {
     seperator?: StyleProp<RNTextStyle>
     textContainer?: StyleProp<ViewStyle>
     text?: StyleProp<RNTextStyle>
+    warningContainer?: StyleProp<ViewStyle>
+    warning?: StyleProp<RNTextStyle>
+    errorContainer?: StyleProp<ViewStyle>
+    error?: StyleProp<RNTextStyle>
 }
 
 export interface ModalStyle {
@@ -97,6 +101,10 @@ export interface SelectBoxStyle {
     seperator?: StyleProp<RNTextStyle>
     textContainer?: StyleProp<ViewStyle>
     text?: StyleProp<RNTextStyle>
+    warningContainer?: StyleProp<ViewStyle>
+    warning?: StyleProp<RNTextStyle>
+    errorContainer?: StyleProp<ViewStyle>
+    error?: StyleProp<RNTextStyle>
 }
 
 export interface SeperatorStyle {

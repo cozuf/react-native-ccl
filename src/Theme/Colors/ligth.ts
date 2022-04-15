@@ -13,6 +13,8 @@ import {
   OPEN_BLUE,
   OPEN_BLUE_OPPOSITE,
   OPEN_BLUE_PALE,
+  ORANGE,
+  RED,
   TRANSPARENT,
   WHITE,
   WHITE_PALE,
@@ -24,7 +26,10 @@ const common: CommonColorScheme = {
   active: OPEN_BLUE,
   passive: OPEN_BLUE_PALE,
   statusbar: WHITE,
-  componentBackground: GREY_90
+  componentBackground: GREY_90,
+  success: GREEN,
+  error: RED,
+  warning: ORANGE
 };
 
 const pageContainer: PageContainerColorScheme = {
