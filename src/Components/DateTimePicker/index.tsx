@@ -329,5 +329,3 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 };
 
 export default DateTimePicker;
-
-// TODO: error style eklenecek

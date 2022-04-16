@@ -453,5 +453,3 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 };
 
 export default SelectBox;
-
-// TODO: error style eklenecek

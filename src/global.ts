@@ -426,5 +426,3 @@ declare global {
     }
     //#endregion
 }
-
-// TODO: Düzenle

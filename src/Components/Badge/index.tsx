@@ -84,5 +84,3 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
 };
 
 export default Badge;
-
-// TODO:Daha sonra Tekrar bak Platform farklılıkları

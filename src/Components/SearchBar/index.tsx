@@ -74,5 +74,3 @@ const SearchBar: FC<ISearchBarTypes> = ({
 };
 
 export default SearchBar;
-
-// TODO: Belki onClear ayırılabilir

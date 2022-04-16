@@ -434,5 +434,3 @@ const NTextInput: FC<ITextInputTypes> = ({
 };
 
 export default NTextInput;
-
-//  TODO: Info Button oluştur snackbar ile
