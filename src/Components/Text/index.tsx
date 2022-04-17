@@ -19,7 +19,7 @@ export interface ITextProps {
   /**
    * Text Sizes
    */
-  size?: 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
+  size?: 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | number
 
   /**
    *
@@ -74,6 +74,8 @@ const Regular: FC<ITextTypes> = ({
         return 18;
       case 'xxl':
         return 20;
+      default:
+        return size as number
     }
   };
 
