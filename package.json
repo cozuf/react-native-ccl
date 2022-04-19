@@ -35,7 +35,8 @@
     "clear_package": "rm -rf package-lock.json",
     "clear_libs": "rm -rf lib",
     "clear": "yarn clear_node_modules && yarn clear_npm && yarn clear_package && yarn clear_libs",
-    "fresh": "yarn clear && yarn"
+    "fresh": "yarn clear && yarn",
+    "all-fresh": "yarn fresh && yarn example fresh"
   },
   "keywords": [
     "react-native",
