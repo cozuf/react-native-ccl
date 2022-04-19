@@ -79,8 +79,6 @@ export {
   withModal
 } from "./Context"
 
-// FIXME: datetimepicker bottomsheet android de patlıyor!
-
 // TODO: global'deki context type'ları gözden geçir ve düzenle
 
 // TODO: hangisi daha iyi düşün token'leri dışarıdan vermek mi yoksa styles yapmak mı ?
