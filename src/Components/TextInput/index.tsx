@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import { Button, Icon, IIconProps, Text, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
+import type { ITextProps } from '../Text';
 
 export interface ITextInputProps {
   /**
@@ -46,7 +47,7 @@ export interface ITextInputProps {
   /**
    *
    */
-  titleStyle?: StyleProp<TextStyle>;
+  titleStyle?: ITextProps["style"]
 
   /**
    *
@@ -76,7 +77,7 @@ export interface ITextInputProps {
   /**
    *
    */
-  inputStyle?: StyleProp<TextStyle>;
+  inputStyle?: ITextProps["style"]
 
   /**
    *
@@ -86,12 +87,11 @@ export interface ITextInputProps {
   /**
    *
    */
-  warningStyle?: StyleProp<TextStyle>;
-
+  warningStyle?: ITextProps["style"]
   /**
    *
    */
-  warningContainerStyle?: StyleProp<TextStyle>;
+  warningContainerStyle?: StyleProp<ViewStyle>;
 
   /**
    *
@@ -101,12 +101,12 @@ export interface ITextInputProps {
   /**
    *
    */
-  errorStyle?: StyleProp<TextStyle>;
+  errorStyle?: ITextProps["style"]
 
   /**
    *
    */
-  errorContainerStyle?: StyleProp<TextStyle>;
+  errorContainerStyle?: StyleProp<View>;
 
   /**
    *

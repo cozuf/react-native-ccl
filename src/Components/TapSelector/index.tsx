@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
-import { Omit, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { Omit, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { Button, IButtonProps } from '..';
+import type { ITextProps } from '../Text';
 
 export interface ITapSelectorProps<ItemT> {
   /**
@@ -21,7 +22,7 @@ export interface ITapSelectorProps<ItemT> {
   /**
    * 
    */
-  titleStyle?: StyleProp<TextStyle>
+  titleStyle?: ITextProps["style"]
 
   /**
    * 

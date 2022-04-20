@@ -1,7 +1,8 @@
 import React, { FC, isValidElement, ReactNode, useState } from 'react';
-import { View, TouchableOpacity, ViewStyle, StyleProp, TextStyle, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, ViewStyle, StyleProp, StyleSheet } from 'react-native';
 import { Icon, IIconProps, Seperator, Text } from '..';
 import { useTheme } from '../../Context/Theme';
+import type { ITextProps } from '../Text';
 
 export interface IRadionButtonProps {
   /**
@@ -60,7 +61,7 @@ export interface IRadionButtonProps {
   /**
    * 
    */
-  titleStyle?: StyleProp<TextStyle>
+  titleStyle?: ITextProps["style"]
 }
 
 const RadioButton: FC<IRadionButtonProps> = ({

@@ -1,11 +1,12 @@
 import React, { FC, Fragment, ReactNode, useEffect, useState } from 'react';
-import { Dimensions, Omit, StyleProp, StyleSheet, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Dimensions, Omit, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
 import { Button, Modal, Text } from '..';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import type { ModalizeProps } from 'react-native-modalize';
 import moment from "moment"
+import type { ITextProps } from '../Text';
 
 export interface IDateTimePickerProps {
   /**
@@ -74,7 +75,7 @@ export interface IDateTimePickerProps {
   /**
    * 
    */
-  titleStyle?: StyleProp<TextStyle>
+  titleStyle?: ITextProps["style"]
 
   /**
    * 
@@ -84,7 +85,7 @@ export interface IDateTimePickerProps {
   /**
    * 
    */
-  textStyle?: StyleProp<TextStyle>
+  textStyle?: ITextProps["style"]
 
   /**
    *
@@ -94,12 +95,12 @@ export interface IDateTimePickerProps {
   /**
    *
    */
-  warningStyle?: StyleProp<TextStyle>
+  warningStyle?: ITextProps["style"]
 
   /**
    *
    */
-  warningContainerStyle?: StyleProp<TextStyle>
+  warningContainerStyle?: ITextProps["style"]
 
   /**
    *
@@ -109,12 +110,12 @@ export interface IDateTimePickerProps {
   /**
    *
    */
-  errorStyle?: StyleProp<TextStyle>
+  errorStyle?: ITextProps["style"]
 
   /**
    *
    */
-  errorContainerStyle?: StyleProp<TextStyle>
+  errorContainerStyle?: StyleProp<ViewStyle>
 }
 
 type IDateTimePickerTypes = IDateTimePickerProps &

@@ -1,5 +1,6 @@
+import type { ITextProps } from 'lib/typescript/src';
 import React, { FC, useState } from 'react';
-import { StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { Button } from '..';
 
 export interface IChipProps {
@@ -36,7 +37,7 @@ export interface IChipProps {
   /**
    * 
    */
-  titleStyle?: StyleProp<TextStyle>
+  titleStyle?: ITextProps["style"]
 }
 
 const Chip: FC<IChipProps> = ({

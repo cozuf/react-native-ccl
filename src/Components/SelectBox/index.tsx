@@ -5,7 +5,6 @@ import {
   Omit,
   StyleProp,
   StyleSheet,
-  TextStyle,
   TouchableOpacity,
   View,
   ViewStyle,
@@ -17,6 +16,7 @@ import SelectBoxModal from './Modal';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import SelectBoxBottomSheet from './BottomSheet';
+import type { ITextProps } from '../Text';
 
 export interface ISelectBoxProps<ItemT> {
   /**
@@ -48,12 +48,12 @@ export interface ISelectBoxProps<ItemT> {
   /**
    * 
    */
-  titleStyle?: StyleProp<TextStyle>
+  titleStyle?: ITextProps["style"]
 
   /**
    * 
    */
-  titleContainerStyle?: StyleProp<TextStyle>
+  titleContainerStyle?: StyleProp<ViewStyle>
 
   /**
    * @default Placeholder
@@ -63,12 +63,12 @@ export interface ISelectBoxProps<ItemT> {
   /**
    * 
    */
-  textStyle?: StyleProp<TextStyle>
+  textStyle?: ITextProps["style"]
 
   /**
    * 
    */
-  textContainerStyle?: StyleProp<TextStyle>
+  textContainerStyle?: StyleProp<ViewStyle>
 
   /**
    * set true if you want to search in given list
@@ -146,12 +146,12 @@ export interface ISelectBoxProps<ItemT> {
   /**
    *
    */
-  warningStyle?: StyleProp<TextStyle>
+  warningStyle?: ViewStyle
 
   /**
    *
    */
-  warningContainerStyle?: StyleProp<TextStyle>
+  warningContainerStyle?: StyleProp<View>
 
   /**
    *
@@ -161,12 +161,12 @@ export interface ISelectBoxProps<ItemT> {
   /**
    *
    */
-  errorStyle?: StyleProp<TextStyle>
+  errorStyle?: ViewStyle
 
   /**
    *
    */
-  errorContainerStyle?: StyleProp<TextStyle>
+  errorContainerStyle?: StyleProp<View>
 }
 
 export type ISelectBoxTypes = ISelectBoxProps<any> &

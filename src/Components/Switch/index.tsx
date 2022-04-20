@@ -6,11 +6,11 @@ import {
   Omit,
   ViewStyle,
   StyleProp,
-  TextStyle,
   StyleSheet,
 } from 'react-native';
 import { Seperator, Text } from '..';
 import { useTheme } from '../../Context/Theme';
+import type { ITextProps } from '../Text';
 
 export interface ISwitchProps {
   /**
@@ -51,7 +51,7 @@ export interface ISwitchProps {
   /**
    * 
    */
-  titleStyle?: StyleProp<TextStyle>
+  titleStyle?: ITextProps["style"]
 }
 
 export type ISwitchTypes = ISwitchProps &

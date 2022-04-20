@@ -8,7 +8,6 @@ import {
   ViewStyle,
   FlexAlignType,
   ColorValue,
-  TextStyle,
   Omit,
   GestureResponderEvent,
   StyleSheet,
@@ -16,6 +15,7 @@ import {
 import { Icon, IIconProps, Text } from '..';
 import { useTheme } from '../../Context/Theme';
 import { tokens } from '../../Theme';
+import type { ITextProps } from '../Text';
 
 export interface IButtonProps {
   /**
@@ -70,7 +70,7 @@ export interface IButtonProps {
   /**
    * @see https://reactnative.dev/docs/text#style
    */
-  titleStyle?: StyleProp<TextStyle>;
+  titleStyle?: ITextProps["style"]
 
   /**
    *
