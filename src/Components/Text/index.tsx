@@ -24,7 +24,7 @@ export interface ITextProps {
   /**
    *
    */
-  weigth?: 'light' | 'regular' | 'medium' | 'semiBold' | 'bold';
+  weigth?: keyof FontScheme
 
   /**
    * enable or disable
@@ -54,9 +54,10 @@ const Regular: FC<ITextTypes> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const { colors, styles, fonts } = theme;
+  const { colors, fonts } = theme;
   const { text } = colors;
-  const { textStyle } = styles
+
+  const STATE: keyof ColorScheme["text"] = active ? "active" : "passive"
 
   const defineSize = (): number => {
     switch (size) {
@@ -79,31 +80,15 @@ const Regular: FC<ITextTypes> = ({
     }
   };
 
-  const defineFont = (): string => {
-    switch (weigth) {
-      case 'light':
-        return fonts.light;
-      case 'regular':
-        return fonts.regular;
-      case 'medium':
-        return fonts.medium;
-      case 'semiBold':
-        return fonts.semibold;
-      case 'bold':
-        return fonts.bold;
-    }
-  };
-
   return (
     <NativeText
       testID={testID}
       style={[
         {
-          fontFamily: defineFont(),
+          fontFamily: fonts[weigth],
           fontSize: defineSize(),
-          color: text[active ? 'active' : 'passive'],
+          color: text[STATE],
         },
-        textStyle?.style,
         style,
       ]
       }

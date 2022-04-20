@@ -2,13 +2,12 @@ import React, { FC, useReducer } from "react";
 import { useColorScheme } from "react-native";
 import { light, dark } from "../../Theme/Colors";
 import { fonts } from "../../Theme/Fonts";
-import { componentsStyles } from "../../Theme/Styles";
 import { tokens } from "../../Theme";
 import { ThemeContext, ThemeContextDispatch } from "./context";
 
 const reducer = (
     theme: ThemeScheme,
-    newTheme: Partial<ThemeScheme>
+    newTheme: Partial<Omit<ThemeScheme, "changeTheme">>
 ): ThemeScheme => {
     return { ...theme, ...newTheme };
 };
@@ -36,7 +35,6 @@ const ThemeProvider: FC<any> = ({ children }) => {
         name: useColorScheme() === 'dark' ? 'Dark' : 'Light',
         colors: useColorScheme() === 'dark' ? dark : light,
         fonts: fonts,
-        styles: componentsStyles,
         tokens: tokens,
         changeTheme: changeTheme
     }

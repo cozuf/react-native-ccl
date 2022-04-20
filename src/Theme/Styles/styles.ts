@@ -158,6 +158,7 @@ export const dateTimePickerStyle: DateTimePickerStyle = {
     errorContainer: {},
     error: {},
 }
+
 export const modalStyle: ModalStyle = {
     outside: {
         flex: 1,
@@ -357,5 +358,3 @@ export const componentsStyles: ComponentsStylesScheme = {
     textStyle: textStyle,
     textInputStyle: textInputStyle
 }
-
-// TODO: fonts'lar içeriden alınacak

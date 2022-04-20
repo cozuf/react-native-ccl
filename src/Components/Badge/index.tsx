@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Platform, StyleProp, View, ViewStyle } from 'react-native';
+import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { Text } from '..';
 import { useTheme } from '../../Context/Theme';
 export interface IBadgeProps {
@@ -21,8 +21,7 @@ export interface IBadgeProps {
 
 const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
   const theme = useTheme();
-  const { colors, styles } = theme
-  const { badgeStyle } = styles
+  const { colors } = theme
   const { badge } = colors;
 
   const calculateSize = (): number => {
@@ -64,13 +63,14 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
     <View
       testID={testID}
       style={[
-        badgeStyle?.container,
+        styles.container,
         containerStyle,
       ]}
     >
       <Text
+        weigth='semibold'
         style={[
-          badgeStyle?.text,
+          styles.text,
           {
             fontSize: Number(((calculateSize() / 3) * 2).toFixed(0)),
             color: badge.text,
@@ -84,3 +84,25 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
 };
 
 export default Badge;
+
+const styles = StyleSheet.create({
+  container: {
+    borderWidth: 2,
+    alignItems: 'center',
+    ...Platform.select({
+      ios: {
+        justifyContent: 'center',
+      },
+    }),
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 6,
+  },
+  text: {
+    textAlign: 'center',
+  }
+})

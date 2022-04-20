@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
-import type { Omit, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { Omit, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { Button, IButtonProps } from '..';
-import { useTheme } from '../../Context/Theme';
 
 export interface ITapSelectorProps<ItemT> {
   /**
@@ -34,9 +33,6 @@ export type ITapSelectorTypes = ITapSelectorProps<any> &
   Omit<IButtonProps, 'onPress' | 'title' | "titleStyle" | "containerStyle">;
 
 const TapSelector: FC<ITapSelectorTypes> = ({ testID, data, onTap, titleStyle, containerStyle, ...props }) => {
-  const theme = useTheme();
-  const { styles } = theme
-  const { tapSelectorStyle } = styles
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
@@ -61,11 +57,16 @@ const TapSelector: FC<ITapSelectorTypes> = ({ testID, data, onTap, titleStyle, c
       onPress={() => {
         onButtonTap(calculateIndex(selectedIndex + 1));
       }}
-      containerStyle={[tapSelectorStyle?.container, containerStyle]}
-      titleStyle={[tapSelectorStyle?.title, titleStyle]}
+      containerStyle={[styles.container, containerStyle]}
+      titleStyle={[styles.title, titleStyle]}
       {...props}
     />
   );
 };
 
 export default TapSelector;
+
+const styles = StyleSheet.create({
+  container: {},
+  title: {},
+})

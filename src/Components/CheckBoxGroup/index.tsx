@@ -4,6 +4,7 @@ import {
   FlatListProps,
   ListRenderItemInfo,
   Omit,
+  StyleSheet,
   View,
 } from 'react-native';
 import { CheckBox, Button, Seperator } from '..';
@@ -87,9 +88,9 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   unSelectAllTitle = 'Tümünü Kaldır',
 }) => {
   const theme = useTheme();
-  const { colors, styles } = theme
+  const { colors, tokens } = theme
   const { checkBoxGroup } = colors
-  const { checkBoxGroupStyle } = styles
+  const { component } = tokens
 
   const [nData, setNData] = useState(data);
 
@@ -172,7 +173,14 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         type="vertical"
         size={1}
         style={{ width: "96%", backgroundColor: checkBoxGroup.active.seperator }}
-        containerStyle={checkBoxGroupStyle?.seperatorContainer} />
+        containerStyle={
+          [
+            styles.seperatorContainer,
+            {
+              paddingVertical: component.semiVertical
+            }
+          ]
+        } />
     );
   };
 
@@ -195,12 +203,12 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   return (
     <Fragment>
-      <View style={checkBoxGroupStyle?.buttonsContainer}>
+      <View style={styles.buttonsContainer}>
         <Button
           wrap={'wrap'}
           title={unSelectAllTitle}
           type="simplied"
-          containerStyle={checkBoxGroupStyle?.buttons}
+          containerStyle={styles.buttons}
           onPress={() => {
             setNData(
               nData.map((v: ListType) => ({ ...v, selected: false, active: true }))
@@ -211,7 +219,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
           wrap={'wrap'}
           title={selectAllTitle}
           type="simplied"
-          containerStyle={checkBoxGroupStyle?.buttons}
+          containerStyle={styles.buttons}
           onPress={() => {
             setNData(nData.map((v: ListType) => ({ ...v, selected: true })));
           }}
@@ -238,3 +246,17 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 };
 
 export default memo(CheckBoxGroup);
+
+const styles = StyleSheet.create({
+  seperatorContainer: {
+    alignItems: 'center',
+  },
+  seperator: {},
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  buttons: {
+    paddingHorizontal: 0
+  },
+})

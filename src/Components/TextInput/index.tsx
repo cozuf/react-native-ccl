@@ -5,7 +5,6 @@ import {
   TextInput,
   TextInputProps,
   ViewStyle,
-  ColorValue,
   NativeSyntheticEvent,
   TextInputFocusEventData,
   Platform,
@@ -13,6 +12,7 @@ import {
   Omit,
   KeyboardTypeOptions,
   StyleProp,
+  StyleSheet,
 } from 'react-native';
 import { Button, Icon, IIconProps, Text, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
@@ -152,31 +152,15 @@ const NTextInput: FC<ITextInputTypes> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const { colors, styles } = theme;
+  const { colors, tokens } = theme;
   const { textInput, common } = colors;
-  const { textInputStyle } = styles;
+  const { component } = tokens;
 
   const NativeTextInputRef = useRef<TextInput | null>(null);
   const [isFocused, setIsFocused] = useState<boolean>();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
 
   const STATE: keyof ColorScheme["textInput"] = active ? isFocused ? "focused" : "active" : "passive"
-
-  const containerBackgroundColor = (): ColorValue => {
-    return textInput[STATE].background;
-  };
-
-  const containerBorderColor = (): ColorValue => {
-    return error ? common.error : textInput[STATE].border;
-  };
-
-  const inputTextColor = (): ColorValue => {
-    return textInput[STATE].inputText;
-  };
-
-  const titleTextColor = (): ColorValue => {
-    return error ? common.error : textInput[STATE].titleText;
-  };
 
   const changeFocus = () => {
     if (NativeTextInputRef.current?.isFocused()) {
@@ -212,7 +196,7 @@ const NTextInput: FC<ITextInputTypes> = ({
             family={CoreIcon.family}
             name={CoreIcon.name}
             size={CoreIcon.size}
-            color={CoreIcon.color || titleTextColor()}
+            color={CoreIcon.color || error ? common.error : textInput[STATE].titleText}
           />
         );
       }
@@ -230,8 +214,8 @@ const NTextInput: FC<ITextInputTypes> = ({
   const renderWarning = () => {
     if (warning) {
       return (
-        <View style={[textInputStyle?.warningContainer, warningContainerStyle]}>
-          <Text weigth='medium' style={[textInputStyle?.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
+        <View style={[styles.warningContainer, warningContainerStyle]}>
+          <Text weigth='medium' style={[styles.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
         </View>
       )
     }
@@ -241,8 +225,8 @@ const NTextInput: FC<ITextInputTypes> = ({
   const renderError = () => {
     if (error) {
       return (
-        <View style={[textInputStyle?.errorContainer, errorContainerStyle]}>
-          <Text weigth='medium' style={[textInputStyle?.error, { color: common.error }, errorStyle]}>{error}</Text>
+        <View style={[styles.errorContainer, errorContainerStyle]}>
+          <Text weigth='medium' style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -268,7 +252,7 @@ const NTextInput: FC<ITextInputTypes> = ({
               family: 'Ionicons',
               name: 'close',
               size: 20,
-              color: inputTextColor(),
+              color: textInput[STATE].inputText,
             }}
             onPress={() => {
               NativeTextInputRef.current?.clear();
@@ -294,7 +278,7 @@ const NTextInput: FC<ITextInputTypes> = ({
                 family: 'Entypo',
                 name: 'eye',
                 size: 20,
-                color: inputTextColor(),
+                color: textInput[STATE].inputText,
               }}
               onPress={() => {
                 setPasswordVisible(false)
@@ -315,7 +299,7 @@ const NTextInput: FC<ITextInputTypes> = ({
                 family: 'Entypo',
                 name: 'eye-with-line',
                 size: 20,
-                color: inputTextColor(),
+                color: textInput[STATE].inputText,
               }}
               onPress={() => {
                 setPasswordVisible(true)
@@ -333,8 +317,8 @@ const NTextInput: FC<ITextInputTypes> = ({
   const renderTitle = (): ReactElement | null => {
     if (title) {
       return (
-        <View style={[textInputStyle?.titleContainer, titleContainerStyle]}>
-          <Text style={[textInputStyle?.title, titleStyle, { color: titleTextColor() }]}>
+        <View style={[styles.titleContainer, titleContainerStyle]}>
+          <Text style={[styles.title, titleStyle, { color: error ? common.error : textInput[STATE].titleText }]}>
             {isRequired ? `* ${title}` : title}
           </Text>
         </View>
@@ -345,11 +329,11 @@ const NTextInput: FC<ITextInputTypes> = ({
 
   const renderInputContainer = (): ReactElement | null => {
     return (
-      <View style={[textInputStyle?.inputContainer]}>
+      <View style={[styles.inputContainer]}>
         {renderIcon()}
         {renderSeperator()}
         {
-          <View style={textInputStyle?.nativeInputContainer}>
+          <View style={styles.nativeInputContainer}>
             <TextInput
               ref={(ref) => {
                 NativeTextInputRef.current = ref;
@@ -358,7 +342,7 @@ const NTextInput: FC<ITextInputTypes> = ({
               value={value}
               onChangeText={onChangeText}
               style={[
-                textInputStyle?.input,
+                styles.input,
                 inputStyle,
                 {
                   ...Platform.select({
@@ -376,7 +360,7 @@ const NTextInput: FC<ITextInputTypes> = ({
                     },
                   }),
                 },
-                { color: inputTextColor() },
+                { color: textInput[STATE].inputText },
               ]}
               keyboardType={keyboardType()}
               secureTextEntry={type === 'password' && !passwordVisible}
@@ -412,11 +396,14 @@ const NTextInput: FC<ITextInputTypes> = ({
         testID={testID}
         disabled={!active}
         style={[
-          textInputStyle?.container,
+          styles.container,
           containerStyle,
           {
-            backgroundColor: containerBackgroundColor(),
-            borderColor: containerBorderColor(),
+            padding: component.vertical,
+            borderRadius: component.radius,
+            borderWidth: component.border,
+            backgroundColor: textInput[STATE].background,
+            borderColor: error ? common.error : textInput[STATE].border,
           },
         ]}
         onPress={() => {
@@ -434,3 +421,28 @@ const NTextInput: FC<ITextInputTypes> = ({
 };
 
 export default NTextInput;
+
+const styles = StyleSheet.create({
+  container: {
+  },
+  titleContainer: {},
+  title: {},
+  inputContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  iconContainer: {},
+  seperatorContainer: {},
+  seperator: {},
+  nativeInputContainer: {
+    flex: 1
+  },
+  input: {
+    paddingVertical: 12,
+  },
+  cleanContainer: {},
+  warningContainer: {},
+  warning: {},
+  errorContainer: {},
+  error: {},
+})

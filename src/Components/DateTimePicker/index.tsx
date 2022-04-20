@@ -1,5 +1,5 @@
 import React, { FC, Fragment, ReactNode, useEffect, useState } from 'react';
-import { Dimensions, Omit, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Dimensions, Omit, StyleProp, StyleSheet, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
 import { Button, Modal, Text } from '..';
 import { useTheme } from '../../Context/Theme';
@@ -149,9 +149,9 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const bottomSheet = useBottomSheet();
   const setBottomSheet = useSetBottomSheet();
   const theme = useTheme();
-  const { colors, styles } = theme;
+  const { colors, tokens } = theme;
   const { dateTimePicker, modal, common } = colors;
-  const { dateTimePickerStyle } = styles
+  const { component } = tokens
 
   const STATE: keyof ColorScheme["dateTimePicker"] = active ? "active" : "passive";
 
@@ -276,8 +276,8 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const renderWarning = () => {
     if (warning) {
       return (
-        <View style={[dateTimePickerStyle?.warningContainer, warningContainerStyle]}>
-          <Text weigth='medium' style={[dateTimePickerStyle?.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
+        <View style={[styles.warningContainer, warningContainerStyle]}>
+          <Text weigth='medium' style={[styles.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
         </View>
       )
     }
@@ -287,8 +287,8 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const renderError = () => {
     if (error) {
       return (
-        <View style={[dateTimePickerStyle?.errorContainer, errorContainerStyle]}>
-          <Text weigth='medium' style={[dateTimePickerStyle?.error, { color: common.error }, errorStyle]}>{error}</Text>
+        <View style={[styles.errorContainer, errorContainerStyle]}>
+          <Text weigth='medium' style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -304,19 +304,22 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         style={[
           containerStyle,
           {
+            borderWidth: component.border,
+            borderRadius: component.radius,
+            paddingVertical: component.vertical,
+            paddingHorizontal: component.horizontal,
             backgroundColor: dateTimePicker[STATE].background,
             borderColor: error ? common.error : dateTimePicker[STATE].border,
-          },
-          dateTimePickerStyle?.container,
+          }
         ]}
       >
-        <View style={[dateTimePickerStyle?.titleContainer, titleContainerStyle]}>
-          <Text style={[dateTimePickerStyle?.title, error ? { color: common.error } : {}, titleStyle]}>
+        <View style={[styles.titleContainer, titleContainerStyle]}>
+          <Text style={[styles.title, error ? { color: common.error } : {}, titleStyle]}>
             {title}
           </Text>
         </View>
-        <View style={[dateTimePickerStyle?.textContainer, textContainerStyle]}>
-          <Text style={[dateTimePickerStyle?.text, textStyle]}>
+        <View style={[styles.textContainer, textContainerStyle]}>
+          <Text style={[styles.text, textStyle]}>
             {date ? moment(date).format(displayFormat) : placeholder}
           </Text>
         </View>
@@ -329,3 +332,15 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 };
 
 export default DateTimePicker;
+
+const styles = StyleSheet.create({
+  titleContainer: {},
+  title: {},
+  seperator: {},
+  textContainer: {},
+  text: {},
+  warningContainer: {},
+  warning: {},
+  errorContainer: {},
+  error: {},
+})

@@ -7,6 +7,7 @@ import {
   Omit,
   ScrollView,
   SafeAreaView,
+  StyleSheet,
 } from 'react-native';
 import { ActivityIndicator } from '..';
 import { useTheme } from '../../Context/Theme';
@@ -54,18 +55,23 @@ const PageContainer: FC<IPageContainerTypes> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const { colors, styles } = theme;
+  const { colors, tokens } = theme;
   const { pageContainer } = colors;
-  const { pageContainerStyle } = styles;
+  const { page } = tokens;
 
   if (loading) {
     return (
       <View
         testID={testID}
         style={[
-          pageContainerStyle?.container,
-          { backgroundColor: pageContainer.background },
-          { alignItems: "center", justifyContent: "center" },
+          styles.container,
+          {
+            backgroundColor: pageContainer.background,
+            paddingVertical: page.vertical,
+            paddingHorizontal: page.horizontal,
+            alignItems: "center",
+            justifyContent: "center"
+          },
           style,
         ]}
         {...props}
@@ -81,8 +87,12 @@ const PageContainer: FC<IPageContainerTypes> = ({
         <SafeAreaView
           testID={testID}
           style={[
-            pageContainerStyle?.container,
-            { backgroundColor: pageContainer.background },
+            styles.container,
+            {
+              backgroundColor: pageContainer.background,
+              paddingVertical: page.vertical,
+              paddingHorizontal: page.horizontal,
+            },
             style,
           ]}
           {...props}
@@ -98,13 +108,19 @@ const PageContainer: FC<IPageContainerTypes> = ({
           style={
             [
               style,
-              { backgroundColor: pageContainer.background }
+              {
+                backgroundColor: pageContainer.background,
+              }
             ]
           }
           contentContainerStyle={
             [
-              pageContainerStyle?.contentContainer,
-              { backgroundColor: pageContainer.background }
+              styles?.contentContainer,
+              {
+                backgroundColor: pageContainer.background,
+                paddingVertical: page.vertical,
+                paddingHorizontal: page.horizontal,
+              }
               ,
               contentContainerStyle,
             ]
@@ -121,8 +137,12 @@ const PageContainer: FC<IPageContainerTypes> = ({
         <View
           testID={testID}
           style={[
-            pageContainerStyle?.container,
-            { backgroundColor: pageContainer.background },
+            styles.container,
+            {
+              backgroundColor: pageContainer.background,
+              paddingVertical: page.vertical,
+              paddingHorizontal: page.horizontal,
+            },
             style,
           ]}
           {...props}
@@ -134,3 +154,13 @@ const PageContainer: FC<IPageContainerTypes> = ({
 };
 
 export default PageContainer;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+  },
+})

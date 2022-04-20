@@ -1,5 +1,5 @@
 import React, { FC, isValidElement, memo, useEffect, useState } from 'react';
-import { TouchableOpacity, View, ViewStyle } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Icon, IIconProps, Text, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
 
@@ -72,9 +72,11 @@ const CheckBox: FC<ICheckBoxProps> = ({
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   const theme = useTheme();
-  const { colors, styles } = theme
-  const { checkBox } = colors;
-  const { checkBoxStyle } = styles
+  const { colors, tokens } = theme
+  const { checkBox } = colors
+  const { component } = tokens
+
+  const STATE: keyof ColorScheme["checkBox"] = active ? "active" : "passive"
 
   useEffect(() => {
     setIsSelected(selected);
@@ -101,11 +103,13 @@ const CheckBox: FC<ICheckBoxProps> = ({
       return (
         <View
           style={[
-            checkBoxStyle?.iconContainer,
+            styles.iconContainer,
             {
-              borderColor: checkBox[active ? 'active' : 'passive'].iconBorder,
+              borderWidth: component.border,
+              borderRadius: component.semiRadius,
+              borderColor: checkBox[STATE].iconBorder,
               backgroundColor: isSelected
-                ? checkBox[active ? 'active' : 'passive'].iconBorder
+                ? checkBox[STATE].iconBorder
                 : 'transparent',
             },
           ]}
@@ -115,7 +119,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
               family="Feather"
               name="check"
               size={16}
-              color={checkBox[active ? 'active' : 'passive'].icon}
+              color={checkBox[STATE].icon}
             />
           ) : null}
         </View>
@@ -130,8 +134,8 @@ const CheckBox: FC<ICheckBoxProps> = ({
   const renderTitle = (): React.ReactElement | null => {
     if (title) {
       return (
-        <View style={[checkBoxStyle?.titleContainer, titleContainerStyle]}>
-          <Text style={[checkBoxStyle?.title, titleStyle]}>
+        <View style={[styles.titleContainer, titleContainerStyle]}>
+          <Text style={[styles.title, titleStyle]}>
             {title}
           </Text>
         </View>
@@ -145,7 +149,16 @@ const CheckBox: FC<ICheckBoxProps> = ({
       testID={testID}
       key={value}
       disabled={!active}
-      style={[containerStyle, checkBoxStyle?.container]}
+      style={
+        [
+          styles.container,
+          {
+            paddingVertical: component.vertical,
+            paddingHorizontal: component.horizontal,
+          },
+          containerStyle,
+        ]
+      }
       onPress={() => {
         setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {
@@ -161,3 +174,21 @@ const CheckBox: FC<ICheckBoxProps> = ({
 };
 
 export default memo(CheckBox);
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  titleContainer: {},
+  title: {},
+  seperator: {},
+  iconContainer: {
+    minHeight: 24,
+    minWidth: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})
+
+// FIXME: Text font weight düzeltilmeli

@@ -2,8 +2,6 @@ import type { Dispatch, ReactNode } from 'react'
 import type { ColorValue } from 'react-native'
 import type { ModalizeProps } from 'react-native-modalize'
 import type { IModalProps } from './Components'
-import type { ComponentsStylesScheme } from './Theme/Styles'
-import type { TokensScheme } from './Theme/Tokens'
 
 declare global {
 
@@ -352,18 +350,6 @@ declare global {
 
     //#endregion
 
-    //#region FontScheme
-
-    export interface FontScheme {
-        light: string
-        regular: string
-        medium: string
-        semibold: string
-        bold: string
-    }
-
-    //#endregion
-
     //#region GlobalStateType
 
     export interface GlobalStateScheme { }
@@ -410,12 +396,60 @@ declare global {
     }
     //#endregion
 
-    //#region Tehme
+    //#region FontScheme
+
+    export interface FontScheme {
+        light: string
+        regular: string
+        medium: string
+        semibold: string
+        bold: string
+    }
+
+    //#endregion
+
+    //#region Tokens
+    export interface Page {
+        vertical: number
+        semiVertical: number
+        quarterVertical: number
+        doubleVertical: number
+        horizontal: number
+        semiHorizontal: number
+        quarterHorizontal: number
+        doubleHorizontal: number
+    }
+
+    export interface Component {
+        vertical: number
+        semiVertical: number
+        quarterVertical: number
+        doubleVertical: number
+        horizontal: number
+        semiHorizontal: number
+        quarterHorizontal: number
+        doubleHorizontal: number
+        radius: number
+        semiRadius: number
+        quarterRadius: number
+        doubleRadius: number
+        border: number
+        semiBorder: number
+        quarterBorder: number
+        doubleBorder: number
+    }
+
+    export interface TokensScheme {
+        page: Page,
+        component: Component
+    }
+    //#endregion
+
+    //#region Theme
     export interface ThemeScheme {
         name: 'Light' | 'Dark'
         colors: ColorScheme
         fonts: FontScheme
-        styles: ComponentsStylesScheme
         tokens: TokensScheme
         changeTheme?: (name: ThemeScheme["name"]) => void
     }

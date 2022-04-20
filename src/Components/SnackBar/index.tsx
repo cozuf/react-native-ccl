@@ -1,5 +1,5 @@
 import React, { useEffect, useImperativeHandle, useState, forwardRef, Ref, PropsWithChildren, useRef } from "react";
-import { Animated, Dimensions, Easing, StyleProp, View, ViewStyle } from "react-native";
+import { Animated, Dimensions, Easing, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { useTheme } from "../../Context";
 
 const SHORT_DURATION = 1000
@@ -31,15 +31,16 @@ export interface ISnackBarProps {
 
 const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<SnackBarRef>) => {
     const theme = useTheme();
-    const { colors, styles } = theme;
+    const { colors, tokens } = theme;
     const { snackBar } = colors;
-    const { snackbarStyle } = styles;
+    const { component } = tokens;
 
     const { duration, containerStyle, children } = props
     const opacity = useRef(new Animated.Value(0)).current
     const zIndex = useRef(new Animated.Value(-1)).current
     const scale = useRef(new Animated.Value(0)).current
     const [visible, setVisible] = useState<boolean>(false)
+
     useImperativeHandle(ref, () => ({
         show: show,
         close: close
@@ -155,8 +156,10 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
         <Animated.View
             style={
                 [
-                    snackbarStyle?.animatedContainer,
+                    styles.animatedContainer,
                     {
+                        paddingVertical: component.vertical,
+                        paddingHorizontal: component.horizontal,
                         width: WIDTH,
                         zIndex: zIndex,
                         opacity: opacity,
@@ -167,9 +170,14 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
         >
             <View
                 style={
-                    [snackbarStyle?.contentContainer,
+                    [
+                        styles.contentContainer,
                         containerStyle,
-                    { backgroundColor: snackBar.background, shadowColor: snackBar.shadow }
+                        {
+                            borderRadius: component.semiRadius,
+                            backgroundColor: snackBar.background,
+                            shadowColor: snackBar.shadow
+                        }
                     ]
                 }
             >
@@ -180,3 +188,22 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
 })
 
 export default SnackBar
+
+const styles = StyleSheet.create({
+    animatedContainer: {
+        overflow: "hidden",
+        position: "absolute",
+        bottom: 0,
+        height: 66,
+    },
+    contentContainer: {
+        flex: 1,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    }
+})

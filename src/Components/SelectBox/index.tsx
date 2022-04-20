@@ -4,6 +4,7 @@ import {
   ListRenderItemInfo,
   Omit,
   StyleProp,
+  StyleSheet,
   TextStyle,
   TouchableOpacity,
   View,
@@ -207,9 +208,9 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const [value, setValue] = useState<string>(searchText || '');
   const [visible, setVisible] = useState<boolean>(false);
   const theme = useTheme();
-  const { colors, styles } = theme;
+  const { colors, tokens } = theme;
   const { selectBox, common, modal } = colors;
-  const { selectBoxStyle } = styles
+  const { component } = tokens
 
   const STATE: keyof ColorScheme["selectBox"] = active ? "active" : "passive";
 
@@ -369,14 +370,14 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   const renderTitle = () => {
     return (
-      <View style={[selectBoxStyle?.titleContainer, titleContainerStyle]}>
+      <View style={[styles.titleContainer, titleContainerStyle]}>
         <Text
           style={
             [
               {
-                color: selectBox[active ? 'active' : 'passive'].title,
+                color: selectBox[STATE].title,
               },
-              selectBoxStyle?.title,
+              styles.title,
               titleStyle
             ]
           }
@@ -390,8 +391,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderWarning = () => {
     if (warning) {
       return (
-        <View style={[selectBoxStyle?.warningContainer, warningContainerStyle]}>
-          <Text weigth='medium' style={[selectBoxStyle?.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
+        <View style={[styles.warningContainer, warningContainerStyle]}>
+          <Text weigth='medium' style={[styles.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
         </View>
       )
     }
@@ -401,8 +402,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderError = () => {
     if (error) {
       return (
-        <View style={[selectBoxStyle?.errorContainer, errorContainerStyle]}>
-          <Text weigth='medium' style={[selectBoxStyle?.error, { color: common.error }, errorStyle]}>{error}</Text>
+        <View style={[styles.errorContainer, errorContainerStyle]}>
+          <Text weigth='medium' style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -418,26 +419,30 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         style={[
           containerStyle,
           {
-            backgroundColor: selectBox[active ? 'active' : 'passive'].background,
+            borderWidth: component.border,
+            borderRadius: component.radius,
+            paddingVertical: component.vertical,
+            paddingHorizontal: component.horizontal,
+            backgroundColor: selectBox[STATE].background,
             borderColor: error ? common.error : selectBox[STATE].border,
           },
-          selectBoxStyle?.container,
+          styles.container,
         ]}
       >
         {renderTitle()}
-        <Seperator type="vertical" size="small" style={[selectBoxStyle?.seperator]} />
+        <Seperator type="vertical" size="small" style={[styles.seperator]} />
         <View
-          style={[selectBoxStyle?.textContainer, textContainerStyle]}>
+          style={[styles.textContainer, textContainerStyle]}>
           <Text
             numberOfLines={1}
             style={[
               {
                 color:
                   renderPlaceholder() === placeholder
-                    ? selectBox[active ? 'active' : 'passive'].placeholder
-                    : selectBox[active ? 'active' : 'passive'].value,
+                    ? selectBox[STATE].placeholder
+                    : selectBox[STATE].value,
               },
-              selectBoxStyle?.text,
+              styles.text,
               textStyle
             ]}
           >
@@ -453,3 +458,21 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 };
 
 export default SelectBox;
+
+const styles = StyleSheet.create({
+  container: {
+    borderWidth: 2,
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+  },
+  titleContainer: {},
+  title: {},
+  seperator: {},
+  textContainer: {},
+  text: {},
+  warningContainer: {},
+  warning: {},
+  errorContainer: {},
+  error: {},
+})

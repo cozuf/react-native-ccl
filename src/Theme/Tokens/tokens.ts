@@ -1,22 +1,58 @@
-import type { Component, Page, TokensScheme } from "./types";
+const VERTICAL = {
+    full: 8,
+    semi: 4,
+    quarter: 2,
+    double: 16
+}
+const HORIZONTAL = {
+    full: 16,
+    semi: 8,
+    quarter: 4,
+    double: 32
+}
 
-const PADDING_VERTICAL = 8;
-const PADDING_HORIZONTAL = 16;
-const BORDER_WIDTH = 2;
-const BORDER_RADIUS = 8;
+const BORDER = {
+    full: 2,
+    semi: 1,
+    quarter: 0.5,
+    double: 4
+}
+const RADIUS = {
+    full: 8,
+    semi: 4,
+    quarter: 2,
+    double: 16
+}
 
 export const page: Page = {
-    paddingVertical: PADDING_VERTICAL,
-    paddingHorizontal: PADDING_HORIZONTAL
+    vertical: VERTICAL.full,
+    semiVertical: VERTICAL.semi,
+    quarterVertical: VERTICAL.quarter,
+    doubleVertical: VERTICAL.double,
+    horizontal: HORIZONTAL.full,
+    semiHorizontal: HORIZONTAL.semi,
+    quarterHorizontal: HORIZONTAL.quarter,
+    doubleHorizontal: HORIZONTAL.double
 }
 
 export const component: Component = {
-    paddingVertical: PADDING_VERTICAL,
-    paddingHorizontal: PADDING_HORIZONTAL,
-    borderRadius: BORDER_RADIUS,
-    borderWidth: BORDER_WIDTH,
+    vertical: VERTICAL.full,
+    semiVertical: VERTICAL.semi,
+    quarterVertical: VERTICAL.quarter,
+    doubleVertical: VERTICAL.double,
+    horizontal: HORIZONTAL.full,
+    semiHorizontal: HORIZONTAL.semi,
+    quarterHorizontal: HORIZONTAL.quarter,
+    doubleHorizontal: HORIZONTAL.double,
+    radius: RADIUS.full,
+    semiRadius: RADIUS.semi,
+    quarterRadius: RADIUS.quarter,
+    doubleRadius: RADIUS.double,
+    border: BORDER.full,
+    semiBorder: BORDER.semi,
+    quarterBorder: BORDER.quarter,
+    doubleBorder: BORDER.double
 }
-
 
 export const tokens: TokensScheme = {
     page,

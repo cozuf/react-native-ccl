@@ -1,5 +1,5 @@
 import React, { FC, isValidElement, ReactNode, useState } from 'react';
-import { View, TouchableOpacity, ViewStyle, StyleProp, TextStyle } from 'react-native';
+import { View, TouchableOpacity, ViewStyle, StyleProp, TextStyle, StyleSheet } from 'react-native';
 import { Icon, IIconProps, Seperator, Text } from '..';
 import { useTheme } from '../../Context/Theme';
 
@@ -89,9 +89,9 @@ const RadioButton: FC<IRadionButtonProps> = ({
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   const theme = useTheme();
-  const { colors, styles } = theme;
+  const { colors, tokens } = theme;
   const { radioButton } = colors;
-  const { radioButtonStyle } = styles;
+  const { component } = tokens;
 
   const renderIcon = (): React.ReactElement | null => {
     if (iconSet) {
@@ -102,7 +102,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
           const coreIcon = iconSet.selected as IIconProps;
           const ICON_COLOR = radioButton[active ? 'active' : 'passive'].icon;
           return (
-            <View style={[radioButtonStyle?.iconContainer, iconContainerStyle]}>
+            <View style={[styles.iconContainer, iconContainerStyle]}>
               <Icon {...coreIcon} color={ICON_COLOR} />
             </View>
           )
@@ -114,7 +114,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
           const coreIcon = iconSet.notSelected as IIconProps;
           const ICON_COLOR = radioButton[active ? 'active' : 'passive'].icon;
           return (
-            <View style={[radioButtonStyle?.iconContainer, iconContainerStyle]}>
+            <View style={[styles.iconContainer, iconContainerStyle]}>
               <Icon {...coreIcon} color={ICON_COLOR} />
             </View>
           )
@@ -129,8 +129,8 @@ const RadioButton: FC<IRadionButtonProps> = ({
     if (title) {
       const TEXT_COLOR = radioButton[active ? 'active' : 'passive'].text;
       return (
-        <View style={[radioButtonStyle?.titleContainer, titleContainerStyle]}>
-          <Text style={[{ color: TEXT_COLOR }, radioButtonStyle?.title, titleStyle]}>{title}</Text>
+        <View style={[styles.titleContainer, titleContainerStyle]}>
+          <Text style={[{ color: TEXT_COLOR }, styles.title, titleStyle]}>{title}</Text>
         </View>
       )
     }
@@ -147,7 +147,14 @@ const RadioButton: FC<IRadionButtonProps> = ({
       testID={testID}
       disabled={!active}
       key={value}
-      style={[radioButtonStyle?.container, containerStyle]}
+      style={[
+        styles.container,
+        {
+          paddingVertical: component.vertical,
+          paddingHorizontal: component.horizontal,
+        },
+        containerStyle
+      ]}
       onPress={() => {
         setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {
@@ -163,3 +170,14 @@ const RadioButton: FC<IRadionButtonProps> = ({
 };
 
 export default RadioButton;
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconContainer: {},
+  sperator: {},
+  titleContainer: {},
+  title: {},
+})

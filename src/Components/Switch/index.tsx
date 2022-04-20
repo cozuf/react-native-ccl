@@ -7,6 +7,7 @@ import {
   ViewStyle,
   StyleProp,
   TextStyle,
+  StyleSheet,
 } from 'react-native';
 import { Seperator, Text } from '..';
 import { useTheme } from '../../Context/Theme';
@@ -76,23 +77,29 @@ const Switch: FC<ISwitchTypes> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const { colors, styles } = theme;
+  const { colors, tokens } = theme;
   const { switchComponent } = colors;
-  const { switchStyle } = styles;
+  const { component } = tokens;
+
+  const STATE: keyof ColorScheme["switchComponent"] = active ? "active" : "passive"
+
   return (
     <View
       style={[
-        switchStyle?.container,
+        styles.container,
         containerStyle,
         {
-          backgroundColor:
-            switchComponent[active ? 'active' : 'passive'].background,
-          borderColor: switchComponent[active ? 'active' : 'passive'].border,
+          borderWidth: component.border,
+          borderRadius: component.radius,
+          paddingVertical: component.semiVertical,
+          paddingHorizontal: component.semiHorizontal,
+          backgroundColor: switchComponent[STATE].background,
+          borderColor: switchComponent[STATE].border,
         },
       ]}
     >
-      <View style={[switchStyle?.titleContainer, titleContainerStyle]}>
-        <Text active={active} style={[switchStyle?.title, titleStyle]}>
+      <View style={[styles.titleContainer, titleContainerStyle]}>
+        <Text active={active} style={[styles.title, titleStyle]}>
           {title}
         </Text>
       </View>
@@ -103,12 +110,12 @@ const Switch: FC<ISwitchTypes> = ({
         value={value}
         onValueChange={onValueChange}
         ios_backgroundColor={
-          switchComponent[active ? 'active' : 'passive'].backgroundOff
+          switchComponent[STATE].backgroundOff
         }
-        thumbColor={switchComponent[active ? 'active' : 'passive'].thumb}
+        thumbColor={switchComponent[STATE].thumb}
         trackColor={{
-          false: switchComponent[active ? 'active' : 'passive'].backgroundOff,
-          true: switchComponent[active ? 'active' : 'passive'].backgroundOn,
+          false: switchComponent[STATE].backgroundOff,
+          true: switchComponent[STATE].backgroundOn,
         }}
         {...props}
       />
@@ -117,3 +124,17 @@ const Switch: FC<ISwitchTypes> = ({
 };
 
 export default Switch;
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  titleContainer: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  title: {
+
+  },
+})

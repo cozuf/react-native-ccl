@@ -48,7 +48,7 @@ const WEIGHTS = [
   },
   {
     title: 'SemiBold',
-    weight: 'semiBold',
+    weight: 'semibold',
   },
   {
     title: 'Bold',
@@ -103,7 +103,7 @@ const TextPage = () => {
             | 'light'
             | 'regular'
             | 'medium'
-            | 'semiBold'
+            | 'semibold'
             | 'bold'
           }
         >

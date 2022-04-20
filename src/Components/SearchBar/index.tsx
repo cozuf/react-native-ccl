@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import type { Omit } from 'react-native';
+import { Omit, StyleSheet } from 'react-native';
 import { ITextInputTypes, TextInput } from '..';
-import { useTheme } from '../../Context/Theme';
 
 export interface ISearchBarProps {
   /**
@@ -45,9 +44,7 @@ const SearchBar: FC<ISearchBarTypes> = ({
   errorStyle,
   ...props
 }) => {
-  const theme = useTheme()
-  const { styles } = theme;
-  const { searchBarStyle } = styles
+
   return (
     <TextInput
       testID={testID}
@@ -64,13 +61,26 @@ const SearchBar: FC<ISearchBarTypes> = ({
         size: 24,
       }}
       cleanable={true}
-      containerStyle={[searchBarStyle?.container, containerStyle]}
-      titleContainerStyle={[searchBarStyle?.titleContainer, titleContainerStyle]}
-      titleStyle={[searchBarStyle?.title, titleStyle]}
-      inputStyle={[searchBarStyle?.input, inputStyle]}
+      containerStyle={[styles.container, containerStyle]}
+      titleContainerStyle={[styles.titleContainer, titleContainerStyle]}
+      titleStyle={[styles.title, titleStyle]}
+      inputStyle={[styles.input, inputStyle]}
       {...props}
     />
   );
 };
 
 export default SearchBar;
+
+const styles = StyleSheet.create({
+  container: {},
+  titleContainer: {},
+  title: {},
+  inputContainer: {},
+  iconContainer: {},
+  seperatorContainer: {},
+  seperator: {},
+  nativeInputContainer: {},
+  input: {},
+  cleanContainer: {},
+})

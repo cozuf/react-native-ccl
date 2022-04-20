@@ -1,5 +1,5 @@
 import React, { FC, Fragment, ReactNode, useEffect, useRef, useState } from "react";
-import { Modal as NativeModal, Pressable, StyleSheet, View } from "react-native";
+import { Modal as NativeModal, Platform, Pressable, StyleSheet, View } from "react-native";
 import type { ModalProps, Omit, StyleProp, ViewStyle } from "react-native";
 import { ActivityIndicator, Button, IActivityIndicatorProps, Icon, Seperator, Text } from "..";
 import { useTheme } from "../../Context";
@@ -95,9 +95,9 @@ const Modal: FC<CCLModalProps> = ({
     const ModalRef = useRef<NativeModal | null>(null);
     const [isVisible, setIsVisible] = useState<boolean>(visible);
     const theme = useTheme();
-    const { colors, styles } = theme;
+    const { colors, tokens } = theme;
     const { modal } = colors;
-    const { modalStyle } = styles;
+    const { page, component } = tokens
 
     useEffect(() => {
         setIsVisible(visible);
@@ -108,23 +108,23 @@ const Modal: FC<CCLModalProps> = ({
             case "default":
             default:
                 return {
-                    paddingHorizontal: 32,
-                    paddingVertical: 32,
+                    paddingVertical: page.doubleHorizontal,
+                    paddingHorizontal: page.doubleHorizontal
                 }
             case "fault":
             case "warning":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: 32,
+                    paddingHorizontal: page.doubleHorizontal
                 }
             case "loading":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: 32,
+                    paddingHorizontal: page.doubleHorizontal
                 }
             case "selective":
                 return {
-                    paddingHorizontal: 32,
+                    paddingHorizontal: page.doubleHorizontal
                 }
         }
     }
@@ -188,7 +188,7 @@ const Modal: FC<CCLModalProps> = ({
             <Pressable
                 style={
                     [
-                        modalStyle?.outside,
+                        styles.outside,
                         defineOutSideStyle(),
                         {
                             backgroundColor: modal.outsideBackground,
@@ -206,9 +206,11 @@ const Modal: FC<CCLModalProps> = ({
                 <Pressable
                     style={
                         [
-                            modalStyle?.container,
+                            styles.container,
                             defineContainerStyle(),
                             {
+                                padding: page.horizontal,
+                                borderRadius: component.doubleRadius,
                                 backgroundColor: modal.containerBackground,
                                 shadowColor: modal.shadow,
                             },
@@ -226,8 +228,25 @@ const Modal: FC<CCLModalProps> = ({
 export default Modal
 
 const styles = StyleSheet.create({
-    outside: {},
-    container: {},
+    outside: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    container: {
+        ...Platform.select({
+            ios: {
+                shadowOffset: {
+                    width: 0,
+                    height: 3,
+                },
+                shadowOpacity: 0.5,
+                shadowRadius: 4.65,
+            },
+            android: {
+                elevation: 6,
+            },
+        }),
+    },
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -239,9 +258,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     messageContainer: {
-        // flex: 1,
         justifyContent: 'center',
-        // backgroundColor: "red",
         paddingVertical: 8
     },
     message: {

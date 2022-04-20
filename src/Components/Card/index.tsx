@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, ReactNode, useRef, useState } from "react";
-import { Animated, View, Omit, Pressable, Easing, ViewStyle } from "react-native";
+import { Animated, View, Omit, Pressable, Easing, ViewStyle, StyleSheet } from "react-native";
 import { Icon, IIconProps, } from "..";
 import { useTheme } from '../../Context/Theme';
 
@@ -72,12 +72,14 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     children
 }) => {
     const theme = useTheme()
-    const { colors, styles } = theme
+    const { colors, tokens } = theme
     const { card } = colors
-    const { cardStyle } = styles
+    const { component } = tokens
     const [open, setOpen] = useState(isExpanded);
     const animatedController = useRef(new Animated.Value(isExpanded ? 1 : 0)).current;
     const [bodySectionHeight, setBodySectionHeight] = useState<number>(0);
+
+    const STATE: keyof ColorScheme["card"] = active ? "active" : "passive"
 
     const bodyHeight = animatedController.interpolate({
         inputRange: [0, 1],
@@ -116,7 +118,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     };
 
     const renderIcon = (): ReactElement | null => {
-        return <Icon family={icon.family || "MaterialIcons"} name={icon.name || "keyboard-arrow-down"} size={icon.size || 20} color={icon?.color || card[active ? "active" : "passive"].border} />
+        return <Icon family={icon.family || "MaterialIcons"} name={icon.name || "keyboard-arrow-down"} size={icon.size || 20} color={icon?.color || card[STATE].border} />
     }
 
     return (
@@ -124,31 +126,34 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
             onPress={() => toggleListItem()}
             style={
                 [
-                    cardStyle?.container,
                     {
-                        borderColor: card[active ? "active" : "passive"].border,
-                        backgroundColor: card[active ? "active" : "passive"].background,
+                        borderWidth: component.border,
+                        borderRadius: component.radius,
+                        paddingVertical: component.vertical,
+                        paddingHorizontal: component.horizontal,
+                        borderColor: card[STATE].border,
+                        backgroundColor: card[STATE].background,
                     },
                     containerStyle
                 ]
             }
         >
-            <View style={[headerContainerStyle, cardStyle?.titleContainer]}>
+            <View style={[headerContainerStyle, styles.titleContainer]}>
                 {headerComponent()}
                 <Animated.View style={{ transform: [{ rotateZ: arrowAngle }] }}>
                     {renderIcon()}
                 </Animated.View>
             </View>
-            <Animated.View style={[cardStyle?.bodyBackground, { height: bodyHeight }]}>
+            <Animated.View style={[styles.bodyBackground, { height: bodyHeight }]}>
                 <View
-                    style={[bodyContainerStyle, cardStyle?.bodyContainer]}
+                    style={[bodyContainerStyle, styles.bodyContainer]}
                     onLayout={event =>
                         setBodySectionHeight(event.nativeEvent.layout.height)
                     }>
                     {children}
                 </View>
             </Animated.View>
-            <View style={[footerContainerStyle, cardStyle?.footerContainer]}>
+            <View style={[footerContainerStyle, styles.footerContainer]}>
                 {footerComponent()}
             </View>
         </Pressable>
@@ -165,29 +170,34 @@ const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({
     footerContainerStyle, children
 }) => {
     const theme = useTheme()
-    const { colors, styles } = theme
+    const { colors, tokens } = theme
     const { card } = colors
-    const { cardStyle } = styles
+    const { component } = tokens
+
+    const STATE: keyof ColorScheme["card"] = active ? "active" : "passive"
 
     return (
         <View
             style={
                 [
-                    cardStyle?.container,
                     {
-                        borderColor: card[active ? "active" : "passive"].border,
-                        backgroundColor: card[active ? "active" : "passive"].background,
+                        borderWidth: component.border,
+                        borderRadius: component.radius,
+                        paddingVertical: component.vertical,
+                        paddingHorizontal: component.horizontal,
+                        borderColor: card[STATE].border,
+                        backgroundColor: card[STATE].background,
                     },
                     containerStyle
                 ]
             }>
-            <View style={[headerContainerStyle, cardStyle?.titleContainer]}>
+            <View style={[headerContainerStyle, styles.titleContainer]}>
                 {headerComponent()}
             </View>
-            <View style={[bodyContainerStyle, cardStyle?.bodyContainer]}>
+            <View style={[bodyContainerStyle, styles.bodyContainer]}>
                 {children}
             </View>
-            <View style={[footerContainerStyle, cardStyle?.footerContainer]}>
+            <View style={[footerContainerStyle, styles.footerContainer]}>
                 {footerComponent()}
             </View>
         </View>
@@ -202,5 +212,22 @@ const Card: FC<ICardProps> = ({ expandable = false, ...props }) => {
     }
 }
 
-
 export default Card;
+
+const styles = StyleSheet.create({
+    titleContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    bodyBackground: {
+        overflow: 'hidden',
+    },
+    bodyContainer: {
+        position: 'absolute',
+        bottom: 0,
+    },
+    footerContainer: {
+
+    },
+})
