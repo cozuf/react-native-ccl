@@ -1,7 +1,6 @@
-import type { ITextProps } from 'lib/typescript/src';
 import React, { FC, useState } from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
-import { Button } from '..';
+import { Button, ITextProps } from '..';
 
 export interface IChipProps {
   /**

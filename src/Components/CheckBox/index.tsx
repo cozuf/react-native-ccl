@@ -1,7 +1,6 @@
-import type { ITextProps } from 'lib/typescript/src';
 import React, { FC, isValidElement, memo, useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { Icon, IIconProps, Text, Seperator } from '..';
+import { Icon, IIconProps, ITextProps, Text, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
 
 export interface ICheckBoxProps {
