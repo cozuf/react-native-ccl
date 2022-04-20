@@ -87,7 +87,6 @@ const Switch: FC<ISwitchTypes> = ({
     <View
       style={[
         styles.container,
-        containerStyle,
         {
           borderWidth: component.border,
           borderRadius: component.radius,
@@ -96,6 +95,7 @@ const Switch: FC<ISwitchTypes> = ({
           backgroundColor: switchComponent[STATE].background,
           borderColor: switchComponent[STATE].border,
         },
+        containerStyle
       ]}
     >
       <View style={[styles.titleContainer, titleContainerStyle]}>

@@ -302,7 +302,6 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         disabled={!active}
         onPress={onPress}
         style={[
-          containerStyle,
           {
             borderWidth: component.border,
             borderRadius: component.radius,
@@ -310,7 +309,8 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
             paddingHorizontal: component.horizontal,
             backgroundColor: dateTimePicker[STATE].background,
             borderColor: error ? common.error : dateTimePicker[STATE].border,
-          }
+          },
+          containerStyle
         ]}
       >
         <View style={[styles.titleContainer, titleContainerStyle]}>

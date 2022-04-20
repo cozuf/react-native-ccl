@@ -38,10 +38,6 @@ const SearchBar: FC<ISearchBarTypes> = ({
   titleContainerStyle,
   titleStyle,
   inputStyle,
-  warningContainerStyle,
-  warningStyle,
-  errorContainerStyle,
-  errorStyle,
   ...props
 }) => {
 

@@ -172,12 +172,12 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
                 style={
                     [
                         styles.contentContainer,
-                        containerStyle,
                         {
                             borderRadius: component.semiRadius,
                             backgroundColor: snackBar.background,
                             shadowColor: snackBar.shadow
-                        }
+                        },
+                        containerStyle
                     ]
                 }
             >

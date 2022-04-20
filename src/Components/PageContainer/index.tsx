@@ -107,10 +107,10 @@ const PageContainer: FC<IPageContainerTypes> = ({
           testID={testID}
           style={
             [
-              style,
               {
                 backgroundColor: pageContainer.background,
-              }
+              },
+              style
             ]
           }
           contentContainerStyle={

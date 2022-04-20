@@ -215,7 +215,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (warning) {
       return (
         <View style={[styles.warningContainer, warningContainerStyle]}>
-          <Text weigth='medium' style={[styles.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
+          <Text weigth='medium' style={[styles.warning, { color: common.warning }, warningStyle,]}>{warning}</Text>
         </View>
       )
     }
@@ -397,7 +397,6 @@ const NTextInput: FC<ITextInputTypes> = ({
         disabled={!active}
         style={[
           styles.container,
-          containerStyle,
           {
             padding: component.vertical,
             borderRadius: component.radius,
@@ -405,6 +404,7 @@ const NTextInput: FC<ITextInputTypes> = ({
             backgroundColor: textInput[STATE].background,
             borderColor: error ? common.error : textInput[STATE].border,
           },
+          containerStyle
         ]}
         onPress={() => {
           changeFocus();

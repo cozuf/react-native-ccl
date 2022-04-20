@@ -417,7 +417,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         disabled={!active}
         onPress={onPress}
         style={[
-          containerStyle,
           {
             borderWidth: component.border,
             borderRadius: component.radius,
@@ -427,6 +426,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
             borderColor: error ? common.error : selectBox[STATE].border,
           },
           styles.container,
+          containerStyle
         ]}
       >
         {renderTitle()}
