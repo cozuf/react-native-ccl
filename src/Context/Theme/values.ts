@@ -7,5 +7,4 @@ export const Theme: ThemeScheme = {
     colors: light,
     fonts: fonts,
     tokens: tokens,
-    changeTheme: () => { }
 }

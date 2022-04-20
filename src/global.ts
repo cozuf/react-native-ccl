@@ -439,7 +439,7 @@ declare global {
         doubleBorder: number
     }
 
-    export interface TokensScheme {
+    export interface TokenScheme {
         page: Page,
         component: Component
     }
@@ -450,8 +450,7 @@ declare global {
         name: 'Light' | 'Dark'
         colors: ColorScheme
         fonts: FontScheme
-        tokens: TokensScheme
-        changeTheme?: (name: ThemeScheme["name"]) => void
+        tokens: TokenScheme
     }
 
     export interface ITheme {

@@ -81,12 +81,11 @@ export {
 
 // TODO: global'deki context type'ları gözden geçir ve düzenle
 
-// TODO: hangisi daha iyi düşün token'leri dışarıdan vermek mi yoksa styles yapmak mı ?
-// TODO: styles, colors, tokens, fonts theme'den alınmalı
-// TODO: styles'daki token ve fontFamily'leri inner yap context'den kullan
 // TODO: style'dan gönderilen fontWeight vs içeri alma
 
 // TODO: Context'ler dışarıdan initalize edilebilsin araştır
+
+// TODO: Tüm Componentler için varyant'ları oluştur örnek teşkil et
 
 // TODO: SelectBox için modalize(bottomSheet) listelemelisini düzenle - uyarı vermesin
 // TODO: SelectBox için navigationProps ve navigationParams'ı suggest edilebilir yap

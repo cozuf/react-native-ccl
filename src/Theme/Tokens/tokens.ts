@@ -54,7 +54,7 @@ export const component: Component = {
     doubleBorder: BORDER.double
 }
 
-export const tokens: TokensScheme = {
+export const tokens: TokenScheme = {
     page,
     component
 }

@@ -14,6 +14,7 @@ import {
   useTheme,
   FONTS,
   SelectPage as SelectBoxSelectPage,
+  useSetTheme
 } from 'react-native-ccl';
 
 //#region Pages
@@ -44,14 +45,13 @@ import CardPage from '../Pages/Card';
 import ClassGlobalStatePage from '../Pages/ClassGlobalStateContext';
 import PageContainer from '../Pages/PageContainer';
 import ClassExample from '../Pages/ClassExample';
-
-
 //#endregion
 
 const Stack = createStackNavigator();
 
 const Router = () => {
   const theme = useTheme();
+  const setTheme = useSetTheme()
   const { common, text, pageContainer } = theme.colors;
 
   const renderHeaderLeft = (
@@ -110,16 +110,12 @@ const Router = () => {
               value={theme.name === 'Dark'}
               onValueChange={(v) => {
                 if (v) {
-                  // setTheme({ name: 'Dark', colors: dark });
-                  // @ts-ignore
-                  theme.changeTheme("Dark")
+                  setTheme({ name: "Dark" })
                 } else {
-                  // setTheme({ name: 'Light', colors: light });
-                  // @ts-ignore
-                  theme.changeTheme("Light")
+                  setTheme({ name: "Light" })
                 }
               }}
-              containerStyle={{ paddingVertical: 2 }}
+              containerStyle={{ paddingVertical: 2, marginRight: 16 }}
             />
           );
         },
