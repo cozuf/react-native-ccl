@@ -12,7 +12,7 @@ import {
 import { ActivityIndicator } from '..';
 import { useTheme } from '../../Context/Theme';
 
-interface IPageContainerProps {
+export interface IPageContainerProps {
   /**
    * 
    */
@@ -39,11 +39,7 @@ interface IPageContainerProps {
   loading?: boolean
 }
 
-type IPageContainerTypes = IPageContainerProps &
-  (
-    | Omit<ViewProps, 'style'>
-    | Omit<ScrollViewProps, 'style' | 'contentContainerStyle'>
-  );
+export interface IPageContainerTypes extends IPageContainerProps, Omit<ViewProps, 'style'>, Omit<ScrollViewProps, 'style' | 'contentContainerStyle'> { }
 
 const PageContainer: FC<IPageContainerTypes> = ({
   testID,

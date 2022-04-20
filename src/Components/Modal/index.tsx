@@ -71,7 +71,7 @@ export interface IModalProps {
     onRejectButtonPress?: () => void
 }
 
-type CCLModalProps = IModalProps & Omit<ModalProps, "testID" | "visible">
+export interface CCLModalProps extends IModalProps, Omit<ModalProps, "testID" | "visible"> { }
 
 const Modal: FC<CCLModalProps> = ({
     testID,

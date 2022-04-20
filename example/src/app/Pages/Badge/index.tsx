@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Badge, PageContainer, TapSelector } from 'react-native-ccl';
+import { Badge, IBadgeProps, PageContainer, TapSelector } from 'react-native-ccl';
 
 const SIZES = [{ title: 'small' }, { title: 'medium' }, { title: 'large' }];
 const VALUES = [{ title: 5 }, { title: 10 }];
@@ -11,7 +11,7 @@ const BadgePage = () => {
     <PageContainer type="default">
       <View style={{ alignItems: 'center' }}>
         <Badge
-          size={SIZES[sizeIndex].title as 'small' | 'medium' | 'large'}
+          size={SIZES[sizeIndex].title as IBadgeProps["size"]}
           value={VALUES[valueIndex].title}
         />
       </View>

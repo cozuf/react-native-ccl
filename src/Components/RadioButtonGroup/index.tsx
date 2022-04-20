@@ -53,8 +53,7 @@ export interface IRadioButtonGroupProps<ItemT> {
   submitTitle?: string;
 }
 
-export type IRadioButtonGroupTypes = IRadioButtonGroupProps<ListType> &
-  Omit<FlatListProps<ListType>, 'data' | 'renderItem'>;
+export interface IRadioButtonGroupTypes extends IRadioButtonGroupProps<ListType>, Omit<FlatListProps<ListType>, 'data' | 'renderItem'> { }
 
 const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   data,

@@ -169,8 +169,7 @@ export interface ISelectBoxProps<ItemT> {
   errorContainerStyle?: StyleProp<View>
 }
 
-export type ISelectBoxTypes = ISelectBoxProps<any> &
-  Omit<FlatListProps<any>, 'data' | 'renderItem'>;
+export interface ISelectBoxTypes extends ISelectBoxProps<any>, Omit<FlatListProps<any>, 'data' | 'renderItem'> { }
 
 const SelectBox: FC<ISelectBoxTypes> = ({
   testID,

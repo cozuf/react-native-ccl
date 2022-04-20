@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Button, PageContainer, TapSelector } from 'react-native-ccl';
+import { Button, IButtonProps, PageContainer, TapSelector } from 'react-native-ccl';
 
 const ACTIVE_DATA = [
   {
@@ -31,19 +31,15 @@ const ButtonPage = () => {
     <PageContainer type="default">
       <Button
         disabled={!active}
-        childType={
-          CHILD_TYPES[childTypeIndex].title as 'text' | 'icon' | 'both'
-        }
-        clickType={
-          CLICK_TYPES[clickTypeIndex].title as 'opacity' | 'changeable'
-        }
+        childType={CHILD_TYPES[childTypeIndex].title as IButtonProps["childType"]}
+        clickType={CLICK_TYPES[clickTypeIndex].title as IButtonProps["clickType"]}
         icon={{
           family: 'Ionicons',
           name: 'close',
           size: 20,
         }}
-        type={TYPES[typeIndex].title as 'filled' | 'outlined' | 'simplied'}
-        wrap={WRAP_TYPES[wrapIndex].title as 'wrap' | 'no-wrap' | 'free'}
+        type={TYPES[typeIndex].title as IButtonProps["type"]}
+        wrap={WRAP_TYPES[wrapIndex].title as IButtonProps["wrap"]}
         onPress={() => { }}
       />
       <View style={{ paddingVertical: 16 }}>

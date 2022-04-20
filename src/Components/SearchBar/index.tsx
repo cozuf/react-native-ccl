@@ -25,8 +25,7 @@ export interface ISearchBarProps {
   onSearch: (text: string) => void;
 }
 
-export type ISearchBarTypes = ISearchBarProps &
-  Omit<ITextInputTypes, 'value' | 'onChangeText'>;
+export interface ISearchBarTypes extends ISearchBarProps, Omit<ITextInputTypes, 'value' | 'onChangeText'> { }
 
 const SearchBar: FC<ISearchBarTypes> = ({
   testID,

@@ -41,7 +41,7 @@ export interface ITextProps {
   onLongPress?: () => void;
 }
 
-export type ITextTypes = ITextProps & Omit<NativeTextProps, 'style' | 'onPress' | 'onLongPress'>;
+export interface ITextTypes extends ITextProps, Omit<NativeTextProps, 'style' | 'onPress' | 'onLongPress'> { }
 
 const Regular: FC<ITextTypes> = ({
   testID,

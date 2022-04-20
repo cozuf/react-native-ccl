@@ -54,16 +54,16 @@ export interface ISwitchProps {
   titleStyle?: ITextProps["style"]
 }
 
-export type ISwitchTypes = ISwitchProps &
+export interface ISwitchTypes extends ISwitchProps,
   Omit<
-    SwitchProps,
-    | 'value'
-    | 'onValueChange'
-    | 'disabled'
-    | 'thumbColor'
-    | 'ios_backgroundColor'
-    | 'trackColor'
-  >;
+  SwitchProps,
+  | 'value'
+  | 'onValueChange'
+  | 'disabled'
+  | 'thumbColor'
+  | 'ios_backgroundColor'
+  | 'trackColor'
+  > { }
 
 const Switch: FC<ISwitchTypes> = ({
   testID,

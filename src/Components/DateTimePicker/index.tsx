@@ -118,8 +118,7 @@ export interface IDateTimePickerProps {
   errorContainerStyle?: StyleProp<ViewStyle>
 }
 
-type IDateTimePickerTypes = IDateTimePickerProps &
-  Omit<DatePickerProps, 'date' | 'mode' | 'onDateChange'>;
+export interface IDateTimePickerTypes extends IDateTimePickerProps, Omit<DatePickerProps, 'date' | 'mode' | 'onDateChange'> { }
 
 const DateTimePicker: FC<IDateTimePickerTypes> = ({
   testID,

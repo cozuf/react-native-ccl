@@ -30,8 +30,7 @@ export interface ITapSelectorProps<ItemT> {
   containerStyle?: StyleProp<ViewStyle>
 }
 
-export type ITapSelectorTypes = ITapSelectorProps<any> &
-  Omit<IButtonProps, 'onPress' | 'title' | "titleStyle" | "containerStyle">;
+export interface ITapSelectorTypes extends ITapSelectorProps<any>, Omit<IButtonProps, 'onPress' | 'title' | "titleStyle" | "containerStyle"> { }
 
 const TapSelector: FC<ITapSelectorTypes> = ({ testID, data, onTap, titleStyle, containerStyle, ...props }) => {
 
