@@ -12,7 +12,6 @@ import {
   Button,
   Switch,
   useTheme,
-  FONTS,
   SelectPage as SelectBoxSelectPage,
   useSetTheme
 } from 'react-native-ccl';
@@ -52,7 +51,8 @@ const Stack = createStackNavigator();
 const Router = () => {
   const theme = useTheme();
   const setTheme = useSetTheme()
-  const { common, text, pageContainer } = theme.colors;
+  const { colors, fonts } = theme
+  const { common, text, pageContainer } = colors;
 
   const renderHeaderLeft = (
     props: StackHeaderLeftButtonProps,
@@ -85,7 +85,7 @@ const Router = () => {
         ...TransitionPresets.SlideFromRightIOS,
         headerTitleAlign: 'center',
         headerTitleStyle: {
-          fontFamily: FONTS.semibold,
+          fontFamily: fonts.semibold,
           fontWeight: undefined,
           color: text.active,
         },

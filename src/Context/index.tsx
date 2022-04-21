@@ -2,6 +2,7 @@ import { ThemeProvider, useTheme, useSetTheme, withTheme } from './Theme';
 import { BottomSheetProvider, useBottomSheet, useSetBottomSheet, withBottomSheet } from "./BottomSheet";
 import { ModalProvider, useModal, useSetModal, withModal } from "./Modal";
 import { GlobalStateProvider, useGlobalState, useSetGlobalState, withGlobalState } from './GlobalState';
+import { RNCCLProvider } from "./RNCCL";
 
 export {
     ThemeProvider,
@@ -19,5 +20,6 @@ export {
     ModalProvider,
     useModal,
     useSetModal,
-    withModal
+    withModal,
+    RNCCLProvider
 };

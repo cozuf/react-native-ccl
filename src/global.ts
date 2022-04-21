@@ -350,7 +350,7 @@ declare global {
 
     //#endregion
 
-    //#region GlobalStateType
+    //#region GlobalStateScheme
 
     export interface GlobalStateScheme { }
 
@@ -362,7 +362,7 @@ declare global {
     }
     //#endregion
 
-    //#region BottomSheet
+    //#region BottomSheetScheme
     export interface BottomSheetScheme {
         show: () => void,
         close: () => void,
@@ -379,7 +379,7 @@ declare global {
     }
     //#endregion
 
-    //#region Modal
+    //#region ModalScheme
     export interface ModalScheme {
         show: () => void,
         close: () => void,
@@ -408,7 +408,7 @@ declare global {
 
     //#endregion
 
-    //#region Tokens
+    //#region TokenScheme
     export interface Page {
         vertical: number
         semiVertical: number
@@ -456,6 +456,13 @@ declare global {
     export interface ITheme {
         theme: ThemeScheme
         setTheme: Dispatch<Partial<ThemeScheme>>
+    }
+    //#endregion
+
+    //#region RNCCLScheme
+    export interface RNCCLScheme {
+        theme: ThemeScheme,
+        globalState: GlobalStateScheme
     }
     //#endregion
 }

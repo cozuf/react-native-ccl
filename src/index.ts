@@ -24,8 +24,7 @@ export {
 } from "./Components";
 
 export { SelectPage } from "./Components/SelectBox/Page"
-export { FONTS } from './Assets';
-export { dark, light } from './Theme/Colors';
+export { dark, light, fonts, tokens } from './Theme';
 
 export type {
   ITextProps,
@@ -81,12 +80,14 @@ export {
   ModalProvider,
   useModal,
   useSetModal,
-  withModal
+  withModal,
+  RNCCLProvider
 } from "./Context"
 
 // TODO: global'deki context type'ları gözden geçir ve düzenle
 
 // TODO: style'dan gönderilen fontWeight vs içeri alma
+// TODO: Text içeren komponentlerde weight ve size setlenebilmeli
 
 // TODO: Context'ler dışarıdan initalize edilebilsin araştır
 

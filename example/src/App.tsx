@@ -1,29 +1,28 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Router from './app/Navigation';
 import {
-  ThemeProvider,
   useTheme,
-  BottomSheetProvider,
-  GlobalStateProvider,
-  ModalProvider
+  RNCCLProvider,
+  light,
+  fonts,
+  tokens,
+  dark
 } from 'react-native-ccl';
 
 const App = () => {
+  const isDarkTheme = useColorScheme() === "dark"
   return (
-    <GlobalStateProvider>
-      <ThemeProvider>
-        <BottomSheetProvider>
-          <ModalProvider>
-            <NavigationContainer>
-              <Child />
-            </NavigationContainer>
-          </ModalProvider>
-        </BottomSheetProvider>
-      </ThemeProvider>
-    </GlobalStateProvider>
+    <RNCCLProvider
+      globalState={{}}
+      theme={{ name: isDarkTheme ? "Dark" : "Light", colors: isDarkTheme ? dark : light, fonts: fonts, tokens: tokens }}
+    >
+      <NavigationContainer>
+        <Child />
+      </NavigationContainer>
+    </RNCCLProvider>
   );
 };
 
