@@ -90,8 +90,6 @@ export {
 
 // TODO: Context'ler dışarıdan initalize edilebilsin araştır (GlobalState, Theme, Language)
 
-// TODO: Tüm Componentler için varyant'ları oluştur örnek teşkil et
-
 // TODO: SelectBox için modalize(bottomSheet) listelemelisini düzenle - uyarı vermesin
 // TODO: SelectBox için navigationProps ve navigationParams'ı suggest edilebilir yap
 
