@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { PageContainer, Seperator, TapSelector, Text } from 'react-native-ccl';
+import { ITextTypes, PageContainer, Seperator, TapSelector, Text } from 'react-native-ccl';
 
 const SIZES = [
   {
@@ -86,26 +86,10 @@ const TextPage = () => {
         <Text
           onPress={onPress}
           onLongPress={onLongPress}
-          size={
-            SIZES[sizeIndex].size as
-            | 'xxs'
-            | 'xs'
-            | 's'
-            | 'm'
-            | 'l'
-            | 'xl'
-            | 'xxl'
-          }
+          size={SIZES[sizeIndex].size as ITextTypes["size"]}
           active={ACTIVE_DATA[activeIndex].value}
           style={[styles.common]}
-          weigth={
-            WEIGHTS[weightIndex].weight as
-            | 'light'
-            | 'regular'
-            | 'medium'
-            | 'semibold'
-            | 'bold'
-          }
+          weigth={WEIGHTS[weightIndex].weight as ITextTypes["weigth"]}
         >
           {WEIGHTS[weightIndex].title}
         </Text>
@@ -139,6 +123,7 @@ const TextPage = () => {
 const styles = StyleSheet.create({
   common: {
     textAlign: 'center',
+    fontWeight: "100"
   },
 });
 

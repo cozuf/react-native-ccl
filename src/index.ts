@@ -86,10 +86,9 @@ export {
 
 // TODO: global'deki context type'ları gözden geçir ve düzenle
 
-// TODO: style'dan gönderilen fontWeight vs içeri alma
 // TODO: Text içeren komponentlerde weight ve size setlenebilmeli
 
-// TODO: Context'ler dışarıdan initalize edilebilsin araştır
+// TODO: Context'ler dışarıdan initalize edilebilsin araştır (GlobalState, Theme, Language)
 
 // TODO: Tüm Componentler için varyant'ları oluştur örnek teşkil et
 

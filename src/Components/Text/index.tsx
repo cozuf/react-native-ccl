@@ -79,6 +79,31 @@ const Regular: FC<ITextTypes> = ({
     }
   };
 
+  const defineStyle = (coming: any): any => {
+    if (Array.isArray(coming)) {
+      const n: any[] = new Array();
+      for (let i = 0; i < coming.length; i++) {
+        const element = coming[i];
+        n[i] = defineStyle(element)
+      }
+      return n
+    } else {
+      let newComing: any = { ...coming };
+      if (typeof coming === "object") {
+        if (coming.hasOwnProperty("fontWeight")) {
+          delete newComing["fontWeight"]
+          console.warn("use 'weight' prop instead of 'fontWeight' ")
+        } else if (coming.hasOwnProperty("fontFamily")) {
+          console.warn("use theme fonts insteade of 'fontFamily' ")
+          delete newComing["fontFamily"]
+        } else {
+          newComing = coming
+        }
+      }
+      return newComing
+    }
+  }
+
   return (
     <NativeText
       testID={testID}
@@ -88,7 +113,7 @@ const Regular: FC<ITextTypes> = ({
           fontSize: defineSize(),
           color: text[STATE],
         },
-        style
+        defineStyle(style)
       ]
       }
       {...props}
