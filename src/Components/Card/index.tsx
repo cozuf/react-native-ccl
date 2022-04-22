@@ -194,7 +194,7 @@ const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({
             <View style={[headerContainerStyle, styles.titleContainer]}>
                 {headerComponent()}
             </View>
-            <View style={[bodyContainerStyle, styles.bodyContainer]}>
+            <View style={[bodyContainerStyle]}>
                 {children}
             </View>
             <View style={[footerContainerStyle, styles.footerContainer]}>

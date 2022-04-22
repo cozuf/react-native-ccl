@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Omit, StyleProp, StyleSheet, ViewStyle } from 'react-native';
-import { Button, IButtonProps } from '..';
+import { Button, IButtonTypes } from '..';
 import type { ITextProps } from '../Text';
 
 export interface ITapSelectorProps<ItemT> {
@@ -30,7 +30,7 @@ export interface ITapSelectorProps<ItemT> {
   containerStyle?: StyleProp<ViewStyle>
 }
 
-export interface ITapSelectorTypes extends ITapSelectorProps<any>, Omit<IButtonProps, 'onPress' | 'title' | "titleStyle" | "containerStyle"> { }
+export interface ITapSelectorTypes extends ITapSelectorProps<any>, Omit<IButtonTypes, 'onPress' | 'title' | "titleStyle" | "containerStyle"> { }
 
 const TapSelector: FC<ITapSelectorTypes> = ({ testID, data, onTap, titleStyle, containerStyle, ...props }) => {
 

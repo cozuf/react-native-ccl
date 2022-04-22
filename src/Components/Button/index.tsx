@@ -7,15 +7,13 @@ import {
   StyleProp,
   ViewStyle,
   FlexAlignType,
-  ColorValue,
   Omit,
   GestureResponderEvent,
   StyleSheet,
 } from 'react-native';
-import { Icon, IIconProps, Text } from '..';
+import { Icon, IIconProps, Text, ITextProps } from '..';
 import { useTheme } from '../../Context/Theme';
 import { tokens } from '../../Theme';
-import type { ITextProps } from '../Text';
 
 export interface IButtonProps {
   /**
@@ -39,7 +37,7 @@ export interface IButtonProps {
    * @enum 'filled' | 'outlined' | 'simplied'
    * @default filled
    */
-  type?: 'filled' | 'outlined' | 'simplied'
+  type?: keyof ColorScheme["button"]["active"]["normal"]
 
   /**
    * @enum 'wrap' | 'no-wrap' | 'free'
@@ -106,39 +104,6 @@ const Button: FC<IButtonTypes> = ({
   const STATE: keyof ColorScheme["button"] = props.disabled ? "passive" : "active"
   const PRESSED_STATE: keyof ColorScheme["button"]["active"] = pressed ? "pressed" : "normal"
 
-  const backgroundColor = (): ColorValue => {
-    switch (type) {
-      case 'filled':
-        return button[STATE][PRESSED_STATE].filled.background;
-      case 'outlined':
-        return button[STATE][PRESSED_STATE].outlined.background;
-      case 'simplied':
-        return button[STATE][PRESSED_STATE].simplied.background;
-    }
-  };
-
-  const borderColor = (): ColorValue => {
-    switch (type) {
-      case 'filled':
-        return button[STATE][PRESSED_STATE].filled.border;
-      case 'outlined':
-        return button[STATE][PRESSED_STATE].outlined.border;
-      case 'simplied':
-        return button[STATE][PRESSED_STATE].simplied.border;
-    }
-  };
-
-  const titleColor = (): ColorValue => {
-    switch (type) {
-      case 'filled':
-        return button[STATE][PRESSED_STATE].filled.text;
-      case 'outlined':
-        return button[STATE][PRESSED_STATE].outlined.text;
-      case 'simplied':
-        return button[STATE][PRESSED_STATE].simplied.text;
-    }
-  };
-
   const wrappableStyle = (): FlexAlignType | undefined => {
     switch (wrap) {
       case 'wrap':
@@ -153,10 +118,10 @@ const Button: FC<IButtonTypes> = ({
 
   const renderContainerStyle = (): StyleProp<ViewStyle> => {
     return {
-      backgroundColor: backgroundColor(),
+      backgroundColor: button[STATE][PRESSED_STATE][type].background,
       borderRadius: tokens.component.radius,
       borderWidth: tokens.component.border,
-      borderColor: borderColor(),
+      borderColor: button[STATE][PRESSED_STATE][type].border,
       alignSelf: wrappableStyle(),
     };
   };
@@ -169,7 +134,7 @@ const Button: FC<IButtonTypes> = ({
       return (
         <Icon
           {...CoreIcon}
-          color={CoreIcon.color ? CoreIcon.color : titleColor()}
+          color={CoreIcon.color ? CoreIcon.color : button[STATE][PRESSED_STATE][type].text}
         />
       );
     }
@@ -181,7 +146,7 @@ const Button: FC<IButtonTypes> = ({
         weigth="semibold"
         style={
           [
-            { color: titleColor() },
+            { color: button[STATE][PRESSED_STATE][type].text },
             styles.title,
             titleStyle
           ]
