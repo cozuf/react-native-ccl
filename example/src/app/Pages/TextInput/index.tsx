@@ -62,6 +62,11 @@ const TextInputPage = () => {
         type={showPassword ? "password" : "default"}
         warning={warning}
         error={error}
+        icon={{
+          family: "AntDesign",
+          name: "edit",
+          size: 16
+        }}
       />
 
       <View style={{ paddingVertical: 16 }}>

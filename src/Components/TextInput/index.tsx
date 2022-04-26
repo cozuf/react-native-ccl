@@ -45,6 +45,16 @@ export interface ITextInputProps {
   title?: string;
 
   /**
+   *  
+   */
+  titleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  titleSize?: ITextProps["size"]
+
+  /**
    *
    */
   titleStyle?: ITextProps["style"]
@@ -58,6 +68,16 @@ export interface ITextInputProps {
    *
    */
   value: string;
+
+  /**
+   *  
+   */
+  valueWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  valueSize?: ITextProps["size"]
 
   /**
    *
@@ -85,6 +105,16 @@ export interface ITextInputProps {
   warning?: string;
 
   /**
+   *  
+   */
+  warningWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  warningSize?: ITextProps["size"]
+
+  /**
    *
    */
   warningStyle?: ITextProps["style"]
@@ -97,6 +127,16 @@ export interface ITextInputProps {
    *
    */
   error?: string;
+
+  /**
+   *  
+   */
+  errorWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  errorSize?: ITextProps["size"]
 
   /**
    *
@@ -131,16 +171,24 @@ const NTextInput: FC<ITextInputTypes> = ({
   active = true,
   type = 'default',
   title = 'Başlık',
+  titleSize = "m",
+  titleWeight = "regular",
   titleStyle,
   titleContainerStyle,
   icon,
   value,
+  valueWeight = "medium",
+  valueSize = "m",
   inputStyle,
   onChangeText,
   warning,
+  warningSize = "m",
+  warningWeight = "regular",
   warningStyle,
   warningContainerStyle,
   error,
+  errorSize = "m",
+  errorWeight = "regular",
   errorStyle,
   errorContainerStyle,
   containerStyle,
@@ -151,7 +199,7 @@ const NTextInput: FC<ITextInputTypes> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const { colors, tokens } = theme;
+  const { colors, fonts, tokens } = theme;
   const { textInput, common } = colors;
   const { component } = tokens;
 
@@ -160,6 +208,27 @@ const NTextInput: FC<ITextInputTypes> = ({
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
 
   const STATE: keyof ColorScheme["textInput"] = active ? isFocused ? "focused" : "active" : "passive"
+
+  const defineSize = (): number => {
+    switch (valueSize) {
+      case 'xxs':
+        return 8;
+      case 'xs':
+        return 10;
+      case 's':
+        return 12;
+      case 'm':
+        return 14;
+      case 'l':
+        return 16;
+      case 'xl':
+        return 18;
+      case 'xxl':
+        return 20;
+      default:
+        return valueSize as number
+    }
+  };
 
   const changeFocus = () => {
     if (NativeTextInputRef.current?.isFocused()) {
@@ -205,7 +274,7 @@ const NTextInput: FC<ITextInputTypes> = ({
 
   const renderSeperator = () => {
     if (icon) {
-      return <Seperator type="horizontal" />
+      return <Seperator type="horizontal" size={"medium"} />
     }
     return null
   };
@@ -214,7 +283,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (warning) {
       return (
         <View style={[styles.warningContainer, warningContainerStyle]}>
-          <Text weigth='medium' style={[styles.warning, { color: common.warning }, warningStyle,]}>{warning}</Text>
+          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: common.warning }, warningStyle,]}>{warning}</Text>
         </View>
       )
     }
@@ -225,7 +294,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (error) {
       return (
         <View style={[styles.errorContainer, errorContainerStyle]}>
-          <Text weigth='medium' style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
+          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -239,7 +308,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     return null
   };
 
-  const renderClean = () => {
+  const renderClear = () => {
     if (type !== 'password' && cleanable && value.length > 0 && active) {
       return (
         <View>
@@ -317,7 +386,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (title) {
       return (
         <View style={[styles.titleContainer, titleContainerStyle]}>
-          <Text style={[styles.title, titleStyle, { color: error ? common.error : textInput[STATE].titleText }]}>
+          <Text weigth={titleWeight} size={titleSize} style={[styles.title, titleStyle, { color: error ? common.error : textInput[STATE].titleText }]}>
             {isRequired ? `* ${title}` : title}
           </Text>
         </View>
@@ -344,6 +413,8 @@ const NTextInput: FC<ITextInputTypes> = ({
                 styles.input,
                 inputStyle,
                 {
+                  fontFamily: fonts[valueWeight],
+                  fontSize: defineSize(),
                   ...Platform.select({
                     ios: {
                       paddingVertical:
@@ -383,7 +454,7 @@ const NTextInput: FC<ITextInputTypes> = ({
             />
           </View>
         }
-        {renderClean()}
+        {renderClear()}
         {renderPasswordVisible()}
       </View>
     )
