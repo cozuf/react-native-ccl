@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useTheme } from '../../Context/Theme';
 
-type TextStyle = Omit<NativeTextStyle, 'fontFamily' | 'fontWeight'>;
+type TextStyle = Omit<NativeTextStyle, 'fontFamily' | 'fontWeight' | 'fontSize'>
 
 export interface ITextProps {
   /**
@@ -35,10 +35,17 @@ export interface ITextProps {
   /**
    * @see https://reactnative.dev/docs/text#style
    */
-  style?: StyleProp<TextStyle>;
+  style?: StyleProp<TextStyle>
 
-  onPress?: () => void;
-  onLongPress?: () => void;
+  /**
+   * 
+   */
+  onPress?: () => void
+
+  /**
+   * 
+   */
+  onLongPress?: () => void
 }
 
 export interface ITextTypes extends ITextProps, Omit<NativeTextProps, 'style' | 'onPress' | 'onLongPress'> { }
@@ -53,8 +60,8 @@ const Regular: FC<ITextTypes> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const { colors, fonts } = theme;
-  const { text } = colors;
+  const { colors, fonts } = theme
+  const { text } = colors
 
   const STATE: keyof ColorScheme["text"] = active ? "active" : "passive"
 
@@ -81,9 +88,9 @@ const Regular: FC<ITextTypes> = ({
 
   const defineStyle = (coming: any): any => {
     if (Array.isArray(coming)) {
-      const n: any[] = new Array();
+      const n: any[] = new Array()
       for (let i = 0; i < coming.length; i++) {
-        const element = coming[i];
+        const element = coming[i]
         n[i] = defineStyle(element)
       }
       return n
@@ -93,11 +100,14 @@ const Regular: FC<ITextTypes> = ({
         if (coming.hasOwnProperty("fontWeight")) {
           delete newComing["fontWeight"]
           console.warn("use 'weight' prop instead of 'fontWeight' ")
-        } else if (coming.hasOwnProperty("fontFamily")) {
-          console.warn("use theme fonts insteade of 'fontFamily' ")
+        }
+        if (coming.hasOwnProperty("fontFamily")) {
+          console.warn("use theme fonts instead of 'fontFamily' ")
           delete newComing["fontFamily"]
-        } else {
-          newComing = coming
+        }
+        if (coming.hasOwnProperty("fontSize")) {
+          console.warn("use 'size' prop instead of 'fontSize' ")
+          delete newComing["fontSize"]
         }
       }
       return newComing
@@ -123,6 +133,6 @@ const Regular: FC<ITextTypes> = ({
   );
 };
 
-export default Regular;
+export default Regular
 
 // TODO: pasif durum için tıklanmayı engelle
