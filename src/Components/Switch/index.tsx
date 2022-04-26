@@ -52,6 +52,16 @@ export interface ISwitchProps {
    * 
    */
   titleStyle?: ITextProps["style"]
+
+  /**
+   *  
+   */
+  titleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  titleSize?: ITextProps["size"]
 }
 
 export interface ISwitchTypes extends ISwitchProps,
@@ -74,6 +84,8 @@ const Switch: FC<ISwitchTypes> = ({
   containerStyle,
   titleContainerStyle,
   titleStyle,
+  titleSize = "m",
+  titleWeight = "regular",
   ...props
 }) => {
   const theme = useTheme();
@@ -99,7 +111,10 @@ const Switch: FC<ISwitchTypes> = ({
       ]}
     >
       <View style={[styles.titleContainer, titleContainerStyle]}>
-        <Text active={active} style={[styles.title, titleStyle]}>
+        <Text active={active}
+          size={titleSize}
+          weigth={titleWeight}
+          style={[styles.title, titleStyle]}>
           {title}
         </Text>
       </View>

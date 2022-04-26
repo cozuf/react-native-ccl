@@ -56,6 +56,16 @@ export interface ICheckBoxProps {
    * 
    */
   titleStyle?: ITextProps["style"]
+
+  /**
+   *  
+   */
+  titleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  titleSize?: ITextProps["size"]
 }
 
 const CheckBox: FC<ICheckBoxProps> = ({
@@ -68,7 +78,9 @@ const CheckBox: FC<ICheckBoxProps> = ({
   onSelect,
   containerStyle,
   titleContainerStyle,
-  titleStyle
+  titleStyle,
+  titleSize = "m",
+  titleWeight = "regular"
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   const theme = useTheme();
@@ -135,7 +147,10 @@ const CheckBox: FC<ICheckBoxProps> = ({
     if (title) {
       return (
         <View style={[styles.titleContainer, titleContainerStyle]}>
-          <Text style={[styles.title, titleStyle]}>
+          <Text
+            size={titleSize}
+            weigth={titleWeight}
+            style={[styles.title, titleStyle]}>
             {title}
           </Text>
         </View>

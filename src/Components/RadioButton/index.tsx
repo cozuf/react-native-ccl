@@ -62,6 +62,16 @@ export interface IRadionButtonProps {
    * 
    */
   titleStyle?: ITextProps["style"]
+
+  /**
+   *  
+   */
+  titleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  titleSize?: ITextProps["size"]
 }
 
 const RadioButton: FC<IRadionButtonProps> = ({
@@ -87,6 +97,8 @@ const RadioButton: FC<IRadionButtonProps> = ({
   iconContainerStyle,
   titleContainerStyle,
   titleStyle,
+  titleSize = "m",
+  titleWeight = "regular"
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
   const theme = useTheme();
@@ -131,7 +143,12 @@ const RadioButton: FC<IRadionButtonProps> = ({
       const TEXT_COLOR = radioButton[active ? 'active' : 'passive'].text;
       return (
         <View style={[styles.titleContainer, titleContainerStyle]}>
-          <Text style={[{ color: TEXT_COLOR }, styles.title, titleStyle]}>{title}</Text>
+          <Text
+            size={titleSize}
+            weigth={titleWeight}
+            style={[{ color: TEXT_COLOR }, styles.title, titleStyle]}>
+            {title}
+          </Text>
         </View>
       )
     }
