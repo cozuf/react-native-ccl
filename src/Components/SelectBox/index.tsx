@@ -46,6 +46,16 @@ export interface ISelectBoxProps<ItemT> {
   title?: string;
 
   /**
+   *  
+   */
+  titleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  titleSize?: ITextProps["size"]
+
+  /**
    * 
    */
   titleStyle?: ITextProps["style"]
@@ -61,14 +71,24 @@ export interface ISelectBoxProps<ItemT> {
   placeholder?: string;
 
   /**
-   * 
+   *  
    */
-  textStyle?: ITextProps["style"]
+  valueWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  valueSize?: ITextProps["size"]
 
   /**
    * 
    */
-  textContainerStyle?: StyleProp<ViewStyle>
+  valueStyle?: ITextProps["style"]
+
+  /**
+   * 
+   */
+  valueContainerStyle?: StyleProp<ViewStyle>
 
   /**
    * set true if you want to search in given list
@@ -144,6 +164,16 @@ export interface ISelectBoxProps<ItemT> {
   warning?: string
 
   /**
+   *  
+   */
+  warningWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  warningSize?: ITextProps["size"]
+
+  /**
    *
    */
   warningStyle?: ViewStyle
@@ -157,6 +187,16 @@ export interface ISelectBoxProps<ItemT> {
    *
    */
   error?: string
+
+  /**
+   *  
+   */
+  errorWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  errorSize?: ITextProps["size"]
 
   /**
    *
@@ -177,11 +217,15 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   displayType = 'modal',
   selectionType = 'singleSelect',
   title = 'Başlık',
+  titleSize = "m",
+  titleWeight = "regular",
   titleStyle,
   titleContainerStyle,
   placeholder = 'Placeholder',
-  textStyle,
-  textContainerStyle,
+  valueSize = "m",
+  valueWeight = "regular",
+  valueStyle,
+  valueContainerStyle,
   searchable = false,
   searchText,
   // onSearch,
@@ -195,9 +239,13 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   minChoice,
   containerStyle,
   error,
+  errorSize = "m",
+  errorWeight = "regular",
   errorStyle,
   errorContainerStyle,
   warning,
+  warningSize = "m",
+  warningWeight = "regular",
   warningStyle,
   warningContainerStyle,
 }) => {
@@ -371,6 +419,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     return (
       <View style={[styles.titleContainer, titleContainerStyle]}>
         <Text
+          size={titleSize}
+          weigth={titleWeight}
           style={
             [
               {
@@ -391,7 +441,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     if (warning) {
       return (
         <View style={[styles.warningContainer, warningContainerStyle]}>
-          <Text weigth='medium' style={[styles.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
+          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
         </View>
       )
     }
@@ -402,7 +452,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     if (error) {
       return (
         <View style={[styles.errorContainer, errorContainerStyle]}>
-          <Text weigth='medium' style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
+          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -431,9 +481,11 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         {renderTitle()}
         <Seperator type="vertical" size="small" style={[styles.seperator]} />
         <View
-          style={[styles.textContainer, textContainerStyle]}>
+          style={[styles.valueContainer, valueContainerStyle]}>
           <Text
             numberOfLines={1}
+            size={valueSize}
+            weigth={valueWeight}
             style={[
               {
                 color:
@@ -441,8 +493,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
                     ? selectBox[STATE].placeholder
                     : selectBox[STATE].value,
               },
-              styles.text,
-              textStyle
+              styles.value,
+              valueStyle
             ]}
           >
             {renderPlaceholder()}
@@ -468,8 +520,8 @@ const styles = StyleSheet.create({
   titleContainer: {},
   title: {},
   seperator: {},
-  textContainer: {},
-  text: {},
+  valueContainer: {},
+  value: {},
   warningContainer: {},
   warning: {},
   errorContainer: {},

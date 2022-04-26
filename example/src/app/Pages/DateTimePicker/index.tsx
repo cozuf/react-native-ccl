@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { DateTimePicker, PageContainer, Seperator, TapSelector } from 'react-native-ccl';
+import { DateTimePicker, IDateTimePickerProps, PageContainer, Seperator, TapSelector } from 'react-native-ccl';
 
 const DISPLAY_TYPE_DATA = [
   { title: 'Modal', value: 'modal' },
@@ -39,9 +39,7 @@ const DateTimePickerPage = () => {
     <PageContainer type="default">
       <DateTimePicker
         date={date}
-        display={
-          DISPLAY_TYPE_DATA[displayTypeIndex].value as 'modal' | "bottomSheet"
-        }
+        display={DISPLAY_TYPE_DATA[displayTypeIndex].value as IDateTimePickerProps["display"]}
         // onDateChange={setDate}
         androidVariant="iosClone"
         mode={'date'}

@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/core';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import {
+  ISelectBoxProps,
   PageContainer,
   SelectBox,
   Seperator,
@@ -91,14 +92,8 @@ const SelectBoxPage = () => {
   return (
     <PageContainer type="default">
       <SelectBox
-        selectionType={
-          SELECT_TYPE_DATA[selectTypeIndex].value as
-          | 'singleSelect'
-          | 'multiSelect'
-        }
-        displayType={
-          DISPLAY_TYPE_DATA[displayTypeIndex].value as 'modal' | "bottomSheet" | 'page'
-        }
+        selectionType={SELECT_TYPE_DATA[selectTypeIndex].value as ISelectBoxProps<any>["selectionType"]}
+        displayType={DISPLAY_TYPE_DATA[displayTypeIndex].value as ISelectBoxProps<any>["displayType"]}
         data={areas}
         title="Bölge"
         searchable={true}

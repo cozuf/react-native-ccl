@@ -78,14 +78,34 @@ export interface IDateTimePickerProps {
   titleStyle?: ITextProps["style"]
 
   /**
-   * 
+   *  
    */
-  textContainerStyle?: StyleProp<ViewStyle>
+  titleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  titleSize?: ITextProps["size"]
 
   /**
    * 
    */
-  textStyle?: ITextProps["style"]
+  valueContainerStyle?: StyleProp<ViewStyle>
+
+  /**
+   * 
+   */
+  valueStyle?: ITextProps["style"]
+
+  /**
+   *  
+   */
+  valueWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  valueSize?: ITextProps["size"]
 
   /**
    *
@@ -96,6 +116,16 @@ export interface IDateTimePickerProps {
    *
    */
   warningStyle?: ITextProps["style"]
+
+  /**
+   *  
+   */
+  warningWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  warningSize?: ITextProps["size"]
 
   /**
    *
@@ -113,6 +143,16 @@ export interface IDateTimePickerProps {
   errorStyle?: ITextProps["style"]
 
   /**
+   *  
+   */
+  errorWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  errorSize?: ITextProps["size"]
+
+  /**
    *
    */
   errorContainerStyle?: StyleProp<ViewStyle>
@@ -124,6 +164,8 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   testID,
   active = true,
   title = 'Başlık',
+  titleSize = "m",
+  titleWeight = "regular",
   placeholder = 'Placeholder',
   date,
   display = 'modal',
@@ -134,13 +176,19 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   containerStyle,
   titleContainerStyle,
   titleStyle,
-  textContainerStyle,
-  textStyle,
+  valueContainerStyle,
+  valueStyle,
+  valueSize = "m",
+  valueWeight = "regular",
   error,
   errorStyle,
+  errorSize = "m",
+  errorWeight = "regular",
   errorContainerStyle,
   warning,
   warningStyle,
+  warningSize = "m",
+  warningWeight = "regular",
   warningContainerStyle,
   ...props
 }) => {
@@ -277,7 +325,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     if (warning) {
       return (
         <View style={[styles.warningContainer, warningContainerStyle]}>
-          <Text weigth='medium' style={[styles.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
+          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
         </View>
       )
     }
@@ -288,7 +336,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     if (error) {
       return (
         <View style={[styles.errorContainer, errorContainerStyle]}>
-          <Text weigth='medium' style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
+          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -314,12 +362,12 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         ]}
       >
         <View style={[styles.titleContainer, titleContainerStyle]}>
-          <Text style={[styles.title, error ? { color: common.error } : {}, titleStyle]}>
+          <Text size={titleSize} weigth={titleWeight} style={[styles.title, error ? { color: common.error } : {}, titleStyle]}>
             {title}
           </Text>
         </View>
-        <View style={[styles.textContainer, textContainerStyle]}>
-          <Text style={[styles.text, textStyle]}>
+        <View style={[styles.valueContainer, valueContainerStyle]}>
+          <Text size={valueSize} weigth={valueWeight} style={[styles.value, valueStyle]}>
             {date ? moment(date).format(displayFormat) : placeholder}
           </Text>
         </View>
@@ -337,8 +385,8 @@ const styles = StyleSheet.create({
   titleContainer: {},
   title: {},
   seperator: {},
-  textContainer: {},
-  text: {},
+  valueContainer: {},
+  value: {},
   warningContainer: {},
   warning: {},
   errorContainer: {},
