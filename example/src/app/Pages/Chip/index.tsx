@@ -9,6 +9,8 @@ const ChipPage = () => {
         selected={selected}
         title={`Chip ${selected}`}
         active={true}
+        titleSize="xxl"
+        titleWeight='regular'
         onSelect={() => {
           setSelected(!selected);
         }}

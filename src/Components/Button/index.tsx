@@ -25,7 +25,7 @@ export interface IButtonProps {
    * @enum 'opacity' | 'changeable'
    * @default opacity
    */
-  clickType?: 'opacity' | 'changeable';
+  clickType?: 'opacity' | 'changeable'
 
   /**
    * @enum 'text' | 'icon' | 'both'
@@ -43,7 +43,7 @@ export interface IButtonProps {
    * @enum 'wrap' | 'no-wrap' | 'free'
    * @default no-wrap
    */
-  wrap?: 'wrap' | 'no-wrap' | 'free';
+  wrap?: 'wrap' | 'no-wrap' | 'free'
 
   /**
    * invokes when press
@@ -53,17 +53,27 @@ export interface IButtonProps {
   /**
    * invokes when long press
    */
-  onLongPress?: () => void;
+  onLongPress?: () => void
 
   /**
    *
    */
-  icon?: IIconProps | ReactNode;
+  icon?: IIconProps | ReactNode
 
   /**
    * @default Button
    */
-  title?: string;
+  title?: string
+
+  /**
+   *  
+   */
+  titleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  titleSize?: ITextProps["size"]
 
   /**
    * @see https://reactnative.dev/docs/text#style
@@ -91,6 +101,8 @@ const Button: FC<IButtonTypes> = ({
   title = 'Button',
   icon,
   titleStyle,
+  titleSize = "l",
+  titleWeight = "semibold",
   containerStyle,
   onPress = () => { },
   onLongPress = () => { },
@@ -141,12 +153,16 @@ const Button: FC<IButtonTypes> = ({
   };
 
   const renderTitle = (): ReactNode => {
+
     return (
       <Text
-        weigth="semibold"
+        weigth={titleWeight}
+        size={titleSize}
         style={
           [
-            { color: button[STATE][PRESSED_STATE][type].text },
+            {
+              color: button[STATE][PRESSED_STATE][type].text
+            },
             styles.title,
             titleStyle
           ]
@@ -252,6 +268,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 16,
   }
 })

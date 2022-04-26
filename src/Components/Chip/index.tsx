@@ -37,6 +37,16 @@ export interface IChipProps {
    * 
    */
   titleStyle?: ITextProps["style"]
+
+  /**
+   *  
+   */
+  titleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  titleSize?: ITextProps["size"]
 }
 
 const Chip: FC<IChipProps> = ({
@@ -46,7 +56,9 @@ const Chip: FC<IChipProps> = ({
   active = true,
   onSelect = () => { },
   containerStyle = {},
-  titleStyle = {}
+  titleStyle = {},
+  titleWeight = "semibold",
+  titleSize = "l"
 }) => {
   const [isSelected, setIsSelected] = useState<boolean>(selected);
 
@@ -58,6 +70,8 @@ const Chip: FC<IChipProps> = ({
       wrap={'wrap'}
       type={selected ? 'filled' : 'outlined'}
       title={title}
+      titleSize={titleSize}
+      titleWeight={titleWeight}
       titleStyle={[styles.title, titleStyle]}
       onPress={() => {
         setIsSelected(!isSelected);

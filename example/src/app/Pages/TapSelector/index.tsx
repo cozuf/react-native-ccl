@@ -24,6 +24,8 @@ const TapSelectorPage = () => {
           onTap={(_: any, index: number) => {
             setSelectedIndex(index);
           }}
+          titleSize={"xxl"}
+          titleWeight={"medium"}
         />
       </View>
     </PageContainer>

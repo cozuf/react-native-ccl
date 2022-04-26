@@ -12,14 +12,12 @@ const ACTIVE_DATA = [
     value: false,
   },
 ];
+const TYPES = [{ title: 'filled' }, { title: 'outlined' }, { title: 'simplied' }];
 const CLICK_TYPES = [{ title: 'opacity' }, { title: 'changeable' }];
 const CHILD_TYPES = [{ title: 'text' }, { title: 'icon' }, { title: 'both' }];
-const TYPES = [
-  { title: 'filled' },
-  { title: 'outlined' },
-  { title: 'simplied' },
-];
 const WRAP_TYPES = [{ title: 'wrap' }, { title: 'no-wrap' }, { title: 'free' }];
+const TITLE_WEIGHT_TYPES = [{ title: 'light' }, { title: 'regular' }, { title: 'medium' }, { title: 'semibold' }, { title: 'bold' }];
+const TITLE_SIZE_TYPES = [{ title: 'xxs' }, { title: 'xs' }, { title: 's' }, { title: 'm' }, { title: 'l' }, { title: 'xl' }, { title: 'xxl' }];
 
 const ButtonPage = () => {
   const [active, setActive] = useState<boolean>(true);
@@ -27,6 +25,9 @@ const ButtonPage = () => {
   const [childTypeIndex, setChildTypeIndex] = useState<number>(0);
   const [typeIndex, setTypeIndex] = useState<number>(0);
   const [wrapIndex, setWrapIndex] = useState<number>(0);
+  const [titleWeightIndex, setTitleWeightIndex] = useState<number>(0);
+  const [titleSizeIndex, setTitleSizeIndex] = useState<number>(0);
+
   return (
     <PageContainer type="default">
       <Button
@@ -40,6 +41,8 @@ const ButtonPage = () => {
         }}
         type={TYPES[typeIndex].title as IButtonProps["type"]}
         wrap={WRAP_TYPES[wrapIndex].title as IButtonProps["wrap"]}
+        titleSize={TITLE_SIZE_TYPES[titleSizeIndex].title as IButtonProps["titleSize"]}
+        titleWeight={TITLE_WEIGHT_TYPES[titleWeightIndex].title as IButtonProps["titleWeight"]}
         onPress={() => { }}
       />
       <View style={{ paddingVertical: 16 }}>
@@ -75,6 +78,20 @@ const ButtonPage = () => {
           data={WRAP_TYPES}
           onTap={(_: any, index: number) => {
             setWrapIndex(index);
+          }}
+        />
+        <View style={{ paddingVertical: 8 }} />
+        <TapSelector
+          data={TITLE_WEIGHT_TYPES}
+          onTap={(_: any, index: number) => {
+            setTitleWeightIndex(index);
+          }}
+        />
+        <View style={{ paddingVertical: 8 }} />
+        <TapSelector
+          data={TITLE_SIZE_TYPES}
+          onTap={(_: any, index: number) => {
+            setTitleSizeIndex(index);
           }}
         />
       </View>
