@@ -14,10 +14,16 @@ import {
 
 const App = () => {
   const isDarkTheme = useColorScheme() === "dark"
+
   return (
     <RNCCLProvider
       globalState={{}}
-      theme={{ name: isDarkTheme ? "Dark" : "Light", colors: isDarkTheme ? dark : light, fonts: fonts, tokens: tokens }}
+      theme={{
+        name: isDarkTheme ? "Dark" : "Light",
+        colors: isDarkTheme ? dark : light,
+        fonts: fonts,
+        tokens: tokens
+      }}
     >
       <NavigationContainer>
         <Child />

@@ -18,14 +18,14 @@ const reducer = (
 };
 
 interface IThemeProvider {
-    name?: string
+    name?: ThemeScheme["name"]
     colors?: Partial<ColorScheme>
     fonts?: FontScheme
     tokens?: TokenScheme
 }
 
 const ThemeProvider: FC<IThemeProvider> = ({ name, colors, fonts, tokens, children }) => {
-    const DEFINED_NAME = name || useColorScheme() === 'dark' ? 'Dark' : 'Light'
+    const DEFINED_NAME = name ? name : useColorScheme() === 'dark' ? 'Dark' : 'Light'
 
     const initial: ThemeScheme = {
         name: DEFINED_NAME,
