@@ -69,10 +69,10 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
     >
       <Text
         weigth='semibold'
+        size={Number(((calculateSize() / 3) * 2).toFixed(0))}
         style={[
           styles.text,
           {
-            fontSize: Number(((calculateSize() / 3) * 2).toFixed(0)),
             color: badge.text,
           },
         ]}
