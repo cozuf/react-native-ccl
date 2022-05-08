@@ -101,6 +101,11 @@ const SelectBoxPage = () => {
         onSubmit={(data: any) => {
           setAreas(data);
         }}
+        icon={{
+          family: "Entypo",
+          name: "location",
+          size: 20
+        }}
         minChoice={2}
         maxChoice={4}
         warning={warning}

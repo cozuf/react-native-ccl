@@ -1,4 +1,4 @@
-import React, { FC, Fragment, ReactNode, useState } from 'react';
+import React, { FC, Fragment, isValidElement, ReactNode, useState } from 'react';
 import {
   FlatListProps,
   ListRenderItemInfo,
@@ -17,6 +17,8 @@ import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import SelectBoxBottomSheet from './BottomSheet';
 import type { ITextProps } from '../Text';
+import type { IIconProps } from '../Icon';
+import Icon from '../Icon';
 
 export interface ISelectBoxProps<ItemT> {
   /**
@@ -39,6 +41,11 @@ export interface ISelectBoxProps<ItemT> {
    * @default SingleSelect
    */
   selectionType: 'singleSelect' | 'multiSelect';
+
+  /**
+   *
+   */
+  icon?: IIconProps | ReactNode;
 
   /**
    * @default Başlık
@@ -216,6 +223,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   active = true,
   displayType = 'modal',
   selectionType = 'singleSelect',
+  icon,
   title = 'Başlık',
   titleSize = "m",
   titleWeight = "regular",
@@ -402,6 +410,25 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     }
   };
 
+  const renderIcon = () => {
+    if (icon) {
+      if (isValidElement(icon)) {
+        return icon;
+      } else {
+        const CoreIcon = icon as IIconProps;
+        return (
+          <Icon
+            family={CoreIcon.family}
+            name={CoreIcon.name}
+            size={CoreIcon.size}
+            color={CoreIcon.color || error ? common.error : selectBox[STATE].title}
+          />
+        );
+      }
+    }
+    return null
+  };
+
   const renderPlaceholder = () => {
     const selectedData = dataList.filter((v) => v.selected);
     if (selectedData.length > 0) {
@@ -478,27 +505,33 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           containerStyle
         ]}
       >
-        {renderTitle()}
-        <Seperator type="vertical" size="small" style={[styles.seperator]} />
-        <View
-          style={[styles.valueContainer, valueContainerStyle]}>
-          <Text
-            numberOfLines={1}
-            size={valueSize}
-            weigth={valueWeight}
-            style={[
-              {
-                color:
-                  renderPlaceholder() === placeholder
-                    ? selectBox[STATE].placeholder
-                    : selectBox[STATE].value,
-              },
-              styles.value,
-              valueStyle
-            ]}
-          >
-            {renderPlaceholder()}
-          </Text>
+        <View style={styles.iconContainer}>
+          {renderIcon()}
+        </View>
+        <Seperator type='horizontal' size={"medium"} />
+        <View>
+          {renderTitle()}
+          <Seperator type="vertical" size="small" style={[styles.seperator]} />
+          <View
+            style={[styles.valueContainer, valueContainerStyle]}>
+            <Text
+              numberOfLines={1}
+              size={valueSize}
+              weigth={valueWeight}
+              style={[
+                {
+                  color:
+                    renderPlaceholder() === placeholder
+                      ? selectBox[STATE].placeholder
+                      : selectBox[STATE].value,
+                },
+                styles.value,
+                valueStyle
+              ]}
+            >
+              {renderPlaceholder()}
+            </Text>
+          </View>
         </View>
         {renderRest()}
       </TouchableOpacity>
@@ -512,10 +545,11 @@ export default SelectBox;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 2,
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    flexDirection: "row"
+  },
+  iconContainer: {
+    alignItems: "center",
+    justifyContent: "center"
   },
   titleContainer: {},
   title: {},
