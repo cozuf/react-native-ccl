@@ -417,17 +417,28 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       } else {
         const CoreIcon = icon as IIconProps;
         return (
-          <Icon
-            family={CoreIcon.family}
-            name={CoreIcon.name}
-            size={CoreIcon.size}
-            color={CoreIcon.color || error ? common.error : selectBox[STATE].title}
-          />
+          <View style={styles.iconContainer}>
+            <Icon
+              family={CoreIcon.family}
+              name={CoreIcon.name}
+              size={CoreIcon.size}
+              color={CoreIcon.color || error ? common.error : selectBox[STATE].title}
+            />
+          </View>
         );
       }
     }
     return null
   };
+
+  const renderSeperator = () => {
+    if (icon) {
+      return (
+        <Seperator type='horizontal' size={"medium"} />
+      )
+    }
+    return null
+  }
 
   const renderPlaceholder = () => {
     const selectedData = dataList.filter((v) => v.selected);
@@ -460,6 +471,41 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         >
           {title}
         </Text>
+      </View>
+    )
+  }
+
+  const renderValue = () => {
+    return (
+      <View
+        style={[styles.valueContainer, valueContainerStyle]}>
+        <Text
+          numberOfLines={1}
+          size={valueSize}
+          weigth={valueWeight}
+          style={[
+            {
+              color:
+                renderPlaceholder() === placeholder
+                  ? selectBox[STATE].placeholder
+                  : selectBox[STATE].value,
+            },
+            styles.value,
+            valueStyle
+          ]}
+        >
+          {renderPlaceholder()}
+        </Text>
+      </View>
+    )
+  }
+
+  const renderTitleAndValue = () => {
+    return (
+      <View>
+        {renderTitle()}
+        <Seperator type="vertical" size="small" style={[styles.seperator]} />
+        {renderValue()}
       </View>
     )
   }
@@ -505,38 +551,13 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           containerStyle
         ]}
       >
-        <View style={styles.iconContainer}>
-          {renderIcon()}
-        </View>
-        <Seperator type='horizontal' size={"medium"} />
-        <View>
-          {renderTitle()}
-          <Seperator type="vertical" size="small" style={[styles.seperator]} />
-          <View
-            style={[styles.valueContainer, valueContainerStyle]}>
-            <Text
-              numberOfLines={1}
-              size={valueSize}
-              weigth={valueWeight}
-              style={[
-                {
-                  color:
-                    renderPlaceholder() === placeholder
-                      ? selectBox[STATE].placeholder
-                      : selectBox[STATE].value,
-                },
-                styles.value,
-                valueStyle
-              ]}
-            >
-              {renderPlaceholder()}
-            </Text>
-          </View>
-        </View>
-        {renderRest()}
+        {renderIcon()}
+        {renderSeperator()}
+        {renderTitleAndValue()}
       </TouchableOpacity>
       {renderWarning()}
       {renderError()}
+      {renderRest()}
     </Fragment>
   );
 };
