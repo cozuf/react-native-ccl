@@ -65,7 +65,7 @@ const TextInputPage = () => {
         icon={{
           family: "AntDesign",
           name: "edit",
-          size: 16
+          size: 24
         }}
       />
 

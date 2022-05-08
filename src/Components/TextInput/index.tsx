@@ -398,62 +398,60 @@ const NTextInput: FC<ITextInputTypes> = ({
   const renderInputContainer = (): ReactElement | null => {
     return (
       <View style={[styles.inputContainer]}>
-        {renderIcon()}
-        {renderSeperator()}
-        {
-          <View style={styles.nativeInputContainer}>
-            <TextInput
-              ref={(ref) => {
-                NativeTextInputRef.current = ref;
-              }}
-              editable={active}
-              value={value}
-              onChangeText={onChangeText}
-              style={[
-                styles.input,
-                inputStyle,
-                {
-                  fontFamily: fonts[valueWeight],
-                  fontSize: defineSize(),
-                  ...Platform.select({
-                    ios: {
-                      paddingVertical:
-                        inputStyle && (inputStyle as TextStyle).paddingVertical
-                          ? Number((inputStyle as TextStyle)?.paddingVertical) + 6.5
-                          : 6.5,
-                    },
-                    android: {
-                      paddingVertical:
-                        inputStyle && (inputStyle as TextStyle).paddingVertical
-                          ? Number((inputStyle as TextStyle)?.paddingVertical)
-                          : 0,
-                    },
-                  }),
-                },
-                { color: textInput[STATE].inputText },
-              ]}
-              keyboardType={keyboardType()}
-              secureTextEntry={type === 'password' && !passwordVisible}
-              onFocus={(e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-                setIsFocused(true);
-                if (typeof onFocus === 'function') {
-                  onFocus(e);
-                }
-              }}
-              onBlur={(e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-                setIsFocused(false);
-                if (typeof onBlur === 'function') {
-                  onBlur(e);
-                }
-              }}
-              selectionColor={textInput.focused.selection}
-              placeholderTextColor={
-                textInput[active ? 'active' : 'passive'].placeholder
+
+        <View style={styles.nativeInputContainer}>
+          <TextInput
+            ref={(ref) => {
+              NativeTextInputRef.current = ref;
+            }}
+            editable={active}
+            value={value}
+            onChangeText={onChangeText}
+            style={[
+              styles.input,
+              inputStyle,
+              {
+                fontFamily: fonts[valueWeight],
+                fontSize: defineSize(),
+                ...Platform.select({
+                  ios: {
+                    paddingVertical:
+                      inputStyle && (inputStyle as TextStyle).paddingVertical
+                        ? Number((inputStyle as TextStyle)?.paddingVertical) + 6.5
+                        : 6.5,
+                  },
+                  android: {
+                    paddingVertical:
+                      inputStyle && (inputStyle as TextStyle).paddingVertical
+                        ? Number((inputStyle as TextStyle)?.paddingVertical)
+                        : 0,
+                  },
+                }),
+              },
+              { color: textInput[STATE].inputText },
+            ]}
+            keyboardType={keyboardType()}
+            secureTextEntry={type === 'password' && !passwordVisible}
+            onFocus={(e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+              setIsFocused(true);
+              if (typeof onFocus === 'function') {
+                onFocus(e);
               }
-              {...props}
-            />
-          </View>
-        }
+            }}
+            onBlur={(e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+              setIsFocused(false);
+              if (typeof onBlur === 'function') {
+                onBlur(e);
+              }
+            }}
+            selectionColor={textInput.focused.selection}
+            placeholderTextColor={
+              textInput[active ? 'active' : 'passive'].placeholder
+            }
+            {...props}
+          />
+        </View>
+
         {renderClear()}
         {renderPasswordVisible()}
       </View>
@@ -480,9 +478,16 @@ const NTextInput: FC<ITextInputTypes> = ({
           changeFocus();
         }}
       >
-        {renderTitle()}
-        {renderInputContainer()}
+        <View style={styles.iconContainer}>
+          {renderIcon()}
+        </View>
+        {renderSeperator()}
+        <View style={{ flex: 1 }}>
+          {renderTitle()}
+          {renderInputContainer()}
+        </View>
       </Pressable>
+      <Seperator type='vertical' />
       {renderWarning()}
       {renderWarningErrorSeperator()}
       {renderError()}
@@ -494,21 +499,25 @@ export default NTextInput;
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
   },
   titleContainer: {},
   title: {},
   inputContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: 'row'
   },
-  iconContainer: {},
+  iconContainer: {
+    alignItems: "center",
+    justifyContent: "center"
+  },
   seperatorContainer: {},
   seperator: {},
   nativeInputContainer: {
-    flex: 1
+    flex: 1,
   },
   input: {
-    paddingVertical: 12,
+    // paddingVertical: 12,
   },
   cleanContainer: {},
   warningContainer: {},
