@@ -197,7 +197,9 @@ const Modal: FC<CCLModalProps> = ({
                     ]
                 }
                 onPress={() => {
-                    setIsVisible(!isVisible);
+                    if (type !== "loading") {
+                        setIsVisible(!isVisible);
+                    }
                     if (typeof onTouchOutSide === 'function') {
                         onTouchOutSide(!isVisible);
                     }
