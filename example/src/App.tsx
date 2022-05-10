@@ -8,9 +8,9 @@ import {
   RNCCLProvider,
   light,
   fonts,
-  tokens,
   dark
 } from 'react-native-ccl';
+import { tokens } from './theme';
 
 const App = () => {
   const isDarkTheme = useColorScheme() === "dark"
