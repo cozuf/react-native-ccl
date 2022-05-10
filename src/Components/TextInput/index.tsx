@@ -260,12 +260,14 @@ const NTextInput: FC<ITextInputTypes> = ({
       } else {
         const CoreIcon = icon as IIconProps;
         return (
-          <Icon
-            family={CoreIcon.family}
-            name={CoreIcon.name}
-            size={CoreIcon.size}
-            color={CoreIcon.color || error ? common.error : textInput[STATE].titleText}
-          />
+          <View style={styles.iconContainer}>
+            <Icon
+              family={CoreIcon.family}
+              name={CoreIcon.name}
+              size={CoreIcon.size}
+              color={CoreIcon.color || error ? common.error : textInput[STATE].titleText}
+            />
+          </View>
         );
       }
     }
@@ -458,6 +460,15 @@ const NTextInput: FC<ITextInputTypes> = ({
     )
   }
 
+  const renderTitleAndInput = () => {
+    return (
+      <View style={{ flex: 1 }}>
+        {renderTitle()}
+        {renderInputContainer()}
+      </View>
+    )
+  }
+
   return (
     <Fragment>
       <Pressable
@@ -478,14 +489,9 @@ const NTextInput: FC<ITextInputTypes> = ({
           changeFocus();
         }}
       >
-        <View style={styles.iconContainer}>
-          {renderIcon()}
-        </View>
+        {renderIcon()}
         {renderSeperator()}
-        <View style={{ flex: 1 }}>
-          {renderTitle()}
-          {renderInputContainer()}
-        </View>
+        {renderTitleAndInput()}
       </Pressable>
       <Seperator type='vertical' />
       {renderWarning()}
