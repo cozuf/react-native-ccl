@@ -25,6 +25,7 @@ export {
 
 export { SelectPage } from "./Components/SelectBox/Page"
 export { dark, light, fonts, tokens } from './Theme';
+export { isIphoneX, ifIphoneX, getStatusBarHeight, getBottomSpace } from "./Utils"
 
 export type {
   ITextProps,
