@@ -1,4 +1,3 @@
-import type { ListType } from 'lib/typescript/src/Components/RadioButtonGroup';
 import React, { FC, Fragment, memo, ReactElement, useEffect, useState } from 'react';
 import {
   FlatList,
@@ -252,7 +251,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         titleStyle={submitTitleStyle}
         disabled={isDisabled()}
         onPress={() => {
-          onSubmit(dataList as ListType[]);
+          onSubmit(dataList as ListItemType[]);
         }}
       />
     </Fragment>

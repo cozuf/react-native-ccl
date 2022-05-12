@@ -7,6 +7,7 @@ const CheckBoxPage = () => {
     <PageContainer type="default">
       <CheckBox
         selected={selected}
+        value={`${selected}`}
         onSelect={(v: boolean) => {
           setSelected(v);
         }}
