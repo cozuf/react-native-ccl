@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import {
   ISelectBoxProps,
@@ -88,6 +88,20 @@ const SelectBoxPage = () => {
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
   const [error, setError] = useState("");
   const [warning, setWarning] = useState("");
+
+  useEffect(() => {
+    fetch("http://app.mobilitre.com/main/country_list")
+      .then(response => response.json())
+      .then(data => {
+        const newData = data.data.map((v: any) => ({
+          title: v.country,
+          value: v.countryID,
+          selected: false,
+          active: true
+        }))
+        setAreas(newData)
+      });
+  }, [])
 
   return (
     <PageContainer type="default">
