@@ -1,4 +1,5 @@
-import React, { FC, Fragment, memo, useEffect, useState } from 'react';
+import type { ListType } from 'lib/typescript/src/Components/RadioButtonGroup';
+import React, { FC, Fragment, memo, ReactElement, useEffect, useState } from 'react';
 import {
   FlatList,
   FlatListProps,
@@ -10,14 +11,14 @@ import {
 import { CheckBox, Button, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
 
-export interface IList {
+export interface IListItem {
   active?: boolean
   value: any
   title: string
   selected: boolean
 }
 
-export type ListType = Required<IList>
+export type ListItemType = Required<IListItem>
 
 export interface ICheckBoxGroupProps<ItemT> {
   /**
@@ -40,7 +41,7 @@ export interface ICheckBoxGroupProps<ItemT> {
   /**
    * callback if you want render custom item
    */
-  renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
+  renderItem?: (info: ListRenderItemInfo<ItemT>) => ReactElement | null;
 
   /**
    *
@@ -73,8 +74,7 @@ export interface ICheckBoxGroupProps<ItemT> {
   unSelectAllTitle?: string;
 }
 
-export type ICheckBoxGroupTypes = ICheckBoxGroupProps<ListType> &
-  Omit<FlatListProps<ListType>, 'data' | 'renderItem'>;
+export type ICheckBoxGroupTypes = ICheckBoxGroupProps<ListItemType> & Omit<FlatListProps<ListItemType>, 'data' | 'renderItem'>;
 
 const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   data,
@@ -92,19 +92,19 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   const { checkBoxGroup } = colors
   const { component } = tokens
 
-  const [nData, setNData] = useState(data);
+  const [dataList, setDataList] = useState(data);
 
   useEffect(() => {
     if (maxChoice !== 0) {
-      const selectedDataLength = data.filter((v: ListType) => v.selected).length;
+      const selectedDataLength = data.filter((v: ListItemType) => v.selected).length;
       if (selectedDataLength === maxChoice) {
-        setNData(data.map((v: ListType) => ({ ...v, active: v.selected })));
+        setDataList(data.map((v: ListItemType) => ({ ...v, active: v.selected })));
       } else {
-        setNData(data.map((v: ListType) => ({ ...v, active: true })));
+        setDataList(data.map((v: ListItemType) => ({ ...v, active: true })));
       }
     } else {
-      setNData(
-        data.map((v: ListType) => ({
+      setDataList(
+        data.map((v: ListItemType) => ({
           ...v,
           selected: v.selected || false,
           active: v.active || true,
@@ -114,31 +114,24 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   }, [data, maxChoice]);
 
-  const onButtonSelect = (index: number) => {
-    const tData = nData.map((v: ListType, i: number) => ({
-      ...v,
-      selected: i === index ? !v.selected : v.selected,
-    }));
+  const onButtonSelect = (selectedValue: IListItem["value"], selected: IListItem["selected"]) => {
+    const newData = dataList.map((v: ListItemType) => ({ ...v, selected: v.value === selectedValue ? selected : v.selected, }));
     if (maxChoice !== 0) {
-      const selectedDataLength = tData.filter((v: ListType) => v.selected).length;
+      const selectedDataLength = newData.filter((v: ListItemType) => v.selected).length;
       if (selectedDataLength === maxChoice) {
-        const mData = tData.map((v: ListType) => ({
-          ...v,
-          active: v.selected,
-        }));
-        setNData(mData);
+        const modificateData = newData.map((v: ListItemType) => ({ ...v, active: v.selected, }));
+        setDataList(modificateData);
       } else {
-        const mData = tData.map((v: ListType) => ({
-          ...v,
-          active: true,
-        }));
-        setNData(mData);
+        const modificateData = newData.map((v: ListItemType) => ({ ...v, active: true, }));
+        setDataList(modificateData);
       }
     } else {
-      setNData(tData);
+      setDataList(newData);
     }
     if (typeof onSelect === 'function') {
-      onSelect(nData[index], index);
+      const selectedItem = newData.find((v) => v.value === selectedValue)
+      const selectedIndex = newData.findIndex((v) => v.value === selectedValue)
+      onSelect(selectedItem as ListItemType, selectedIndex);
     } else {
       console.error("'onSelect' is undefined");
     }
@@ -151,7 +144,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     if (data.some((v) => v.active === undefined)) {
       console.warn("It would be good if items of data contain 'active' key");
     }
-    if (data.some((v) => v.active === undefined)) {
+    if (data.some((v) => v.selected === undefined)) {
       console.warn(
         'It would be good to define selected item at the begining, to show them.'
       );
@@ -160,7 +153,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   const isDisabled = (): boolean => {
     if (minChoice !== 0) {
-      const selectedLength = nData.filter((v: ListType) => v.selected).length;
+      const selectedLength = dataList.filter((v: ListItemType) => v.selected).length;
       return selectedLength < minChoice;
     } else {
       return false;
@@ -184,18 +177,17 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     );
   };
 
-  const customRenderItem = (
-    info: ListRenderItemInfo<ListType>
-  ): React.ReactElement | null => {
+  const customRenderItem = (info: ListRenderItemInfo<ListItemType>): ReactElement | null => {
     const { item, index } = info;
     return (
       <CheckBox
-        key={index.toString()}
+        key={`${index}`}
         active={item.active}
         selected={item.selected}
         title={item.title}
-        onSelect={() => {
-          onButtonSelect(index);
+        value={item.value}
+        onSelect={(selectedValue, selected) => {
+          onButtonSelect(selectedValue, selected);
         }}
       />
     );
@@ -207,28 +199,28 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         <Button
           wrap={'wrap'}
           title={unSelectAllTitle}
+          disabled={!dataList.some((v) => v.selected)}
           type="simplied"
           containerStyle={styles.buttons}
           onPress={() => {
-            setNData(
-              nData.map((v: ListType) => ({ ...v, selected: false, active: true }))
-            );
+            setDataList((oldDataList) => oldDataList.map((v: ListItemType) => ({ ...v, selected: false, active: true })));
           }}
         />
         <Button
           wrap={'wrap'}
           title={selectAllTitle}
+          disabled={maxChoice !== 0 || !dataList.some((v) => !v.selected)}
           type="simplied"
           containerStyle={styles.buttons}
           onPress={() => {
-            setNData(nData.map((v: ListType) => ({ ...v, selected: true })));
+            setDataList((oldDataList) => oldDataList.map((v: ListItemType) => ({ ...v, selected: true })));
           }}
         />
       </View>
 
       <FlatList
-        keyExtractor={(_, index) => index.toString()}
-        data={nData}
+        keyExtractor={(_, index) => `${index}`}
+        data={dataList}
         renderItem={renderItem || customRenderItem}
         ItemSeparatorComponent={renderSeperator}
       />
@@ -238,7 +230,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         title={submitTitle}
         disabled={isDisabled()}
         onPress={() => {
-          onSubmit(nData.map((v: ListType) => ({ ...v })));
+          onSubmit(dataList as ListType[]);
         }}
       />
     </Fragment>

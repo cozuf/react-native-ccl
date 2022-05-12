@@ -1,4 +1,4 @@
-import React, { FC, isValidElement, memo, useEffect, useState } from 'react';
+import React, { FC, isValidElement, memo, ReactElement, ReactNode } from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Icon, IIconProps, ITextProps, Text, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
@@ -27,20 +27,20 @@ export interface ICheckBoxProps {
   /**
    * unique value
    */
-  value?: any;
+  value: any;
 
   /**
    *
    */
   iconSet?: {
-    selected: IIconProps | React.ReactNode;
-    notSelected: IIconProps | React.ReactNode;
+    selected: IIconProps | ReactNode;
+    notSelected: IIconProps | ReactNode;
   };
 
   /**
    * invokes select item
    */
-  onSelect?: (selected: boolean) => void;
+  onSelect?: (selectedValue: any, selected: boolean) => void;
 
   /**
    * 
@@ -82,7 +82,6 @@ const CheckBox: FC<ICheckBoxProps> = ({
   titleSize = "m",
   titleWeight = "regular"
 }) => {
-  const [isSelected, setIsSelected] = useState<boolean>(selected);
   const theme = useTheme();
   const { colors, tokens } = theme
   const { checkBox } = colors
@@ -90,11 +89,8 @@ const CheckBox: FC<ICheckBoxProps> = ({
 
   const STATE: keyof ColorScheme["checkBox"] = active ? "active" : "passive"
 
-  useEffect(() => {
-    setIsSelected(selected);
-  }, [selected]);
 
-  const renderIcon = (): React.ReactElement | null => {
+  const renderIcon = (): ReactElement | null => {
     if (iconSet) {
       if (selected) {
         if (isValidElement(iconSet.selected)) {
@@ -117,16 +113,16 @@ const CheckBox: FC<ICheckBoxProps> = ({
           style={[
             styles.iconContainer,
             {
-              borderWidth: component.border,
-              borderRadius: component.semiRadius,
+              borderWidth: 2,
+              borderRadius: 4,
               borderColor: checkBox[STATE].iconBorder,
-              backgroundColor: isSelected
+              backgroundColor: selected
                 ? checkBox[STATE].iconBorder
                 : 'transparent',
             },
           ]}
         >
-          {isSelected ? (
+          {selected ? (
             <Icon
               family="Feather"
               name="check"
@@ -139,11 +135,11 @@ const CheckBox: FC<ICheckBoxProps> = ({
     }
   };
 
-  const renderSeperator = (): React.ReactElement => {
+  const renderSeperator = (): ReactElement => {
     return <Seperator type="horizontal" size="large" />
   }
 
-  const renderTitle = (): React.ReactElement | null => {
+  const renderTitle = (): ReactElement | null => {
     if (title) {
       return (
         <View style={[styles.titleContainer, titleContainerStyle]}>
@@ -175,9 +171,8 @@ const CheckBox: FC<ICheckBoxProps> = ({
         ]
       }
       onPress={() => {
-        setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {
-          onSelect(!isSelected);
+          onSelect(value, !selected);
         }
       }}
     >
