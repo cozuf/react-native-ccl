@@ -1,5 +1,6 @@
-import React, { FC, Fragment, isValidElement, ReactNode, useState } from 'react';
+import React, { FC, Fragment, isValidElement, ReactNode, useEffect, useState } from 'react';
 import {
+  Animated,
   FlatListProps,
   ListRenderItemInfo,
   Omit,
@@ -9,16 +10,16 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { Seperator, Text } from '..';
+import { Seperator, Text, CheckBoxGroup, RadioButtonGroup } from '..';
 import type { NavigationProp } from '@react-navigation/core';
 import type { ParamListBase } from '@react-navigation/routers';
 import SelectBoxModal from './Modal';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
-import SelectBoxBottomSheet from './BottomSheet';
 import type { ITextProps } from '../Text';
 import type { IIconProps } from '../Icon';
 import Icon from '../Icon';
+import { getBottomSpace } from '../../Utils';
 
 export interface ISelectBoxProps<ItemT> {
   /**
@@ -131,6 +132,26 @@ export interface ISelectBoxProps<ItemT> {
   onSelect?: (item: ItemT, index: number) => void;
 
   /**
+   * @default Başlık
+   */
+  onSubmitTitle?: string;
+
+  /**
+   *  
+   */
+  onSubmitTitleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  onSubmitTitleSize?: ITextProps["size"]
+
+  /**
+   * 
+   */
+  onSubmitTitleStyle?: ITextProps["style"]
+
+  /**
    * invokes when selection complete and press submit button
    */
   onSubmit?: (data: ReadonlyArray<ItemT>) => void;
@@ -239,6 +260,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   // onSearch,
   data,
   // onSelect,
+  onSubmitTitle,
+  onSubmitTitleSize,
+  onSubmitTitleWeight,
+  onSubmitTitleStyle,
   onSubmit,
   renderItem,
   navigation,
@@ -268,6 +293,11 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const { component } = tokens
 
   const STATE: keyof ColorScheme["selectBox"] = active ? "active" : "passive";
+
+  // TODO: gözden geçir
+  useEffect(() => {
+    setDataList(data as any[])
+  }, [data])
 
   const renderModal = (): ReactNode => {
     return (
@@ -315,6 +345,52 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     setVisible(true);
   };
 
+  const onSubmitSelection = (data: any) => {
+    if (typeof onSubmit === 'function') {
+      onSubmit(data);
+    }
+    switch (displayType) {
+      case "bottomSheet":
+        return bottomSheet.close()
+      case "modal":
+        return setVisible(false);
+      case "page":
+        navigation?.goBack();
+    }
+  }
+
+  const renderBottomSheetContent = () => {
+    if (selectionType === "singleSelect") {
+      return (
+        <RadioButtonGroup
+          data={dataList}
+          onSelect={() => { }}
+          submitTitle={onSubmitTitle}
+          submitTitleSize={onSubmitTitleSize}
+          submitTitleWeight={onSubmitTitleWeight}
+          submitTitleStyle={onSubmitTitleStyle}
+          onSubmit={onSubmitSelection}
+        />
+      )
+    }
+    if (selectionType === "multiSelect") {
+      return (
+        <CheckBoxGroup
+          data={dataList}
+          onSelect={() => { }}
+          minChoice={minChoice}
+          maxChoice={maxChoice}
+          submitTitle={onSubmitTitle}
+          submitTitleSize={onSubmitTitleSize}
+          submitTitleWeight={onSubmitTitleWeight}
+          submitTitleStyle={onSubmitTitleStyle}
+          onSubmit={onSubmitSelection}
+        />
+      )
+    }
+    return null
+  }
+
   const openBottomSheet = () => {
     setBottomSheet({
       props: {
@@ -327,26 +403,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         },
         handlePosition: "inside",
         childrenStyle: {
-          padding: 8
         },
-      },
-      renderContent: () => {
-        return (
-          <SelectBoxBottomSheet
-            title={title}
-            data={dataList}
-            selectionType={selectionType}
-            minChoice={minChoice}
-            maxChoice={maxChoice}
-            onSubmit={(data: any[]) => {
-              setDataList(data);
-              bottomSheet.close()
-              if (typeof onSubmit === 'function') {
-                onSubmit(data);
-              }
-            }}
-          />
-        )
+        disableScrollIfPossible: false,
+        customRenderer: (
+          <Animated.View style={{ height: "100%" }}>
+            {renderBottomSheetContent()}
+          </Animated.View >
+        ),
+        HeaderComponent: () => (
+          <Text size={"l"} style={{ marginTop: 12, textAlign: "center" }}>{title}</Text>
+        ),
+        FooterComponent: <View style={{ height: getBottomSpace() }} />
       }
     })
     bottomSheet.show();
@@ -409,6 +476,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         break;
     }
   };
+
+  //#region Render Funcrions
 
   const renderIcon = () => {
     if (icon) {
@@ -531,6 +600,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     }
     return null
   };
+
+  //#endregion
 
   return (
     <Fragment>
