@@ -22,6 +22,7 @@
     "fresh": "yarn clear && yarn && yarn pods && npx jetifier",
     "androidRelease": "npx react-native run-android --variant=release",
     "iosRelease": "npx react-native run-ios --configuration Release",
+    "iphoneSE1": "npx react-native run-ios --simulator='iPhone SE (1st generation)'",
     "iphone7plus": "npx react-native run-ios --simulator='iPhone 7 Plus'",
     "iphoneXsMax": "npx react-native run-ios --simulator='iPhone Xs Max'"
   },
