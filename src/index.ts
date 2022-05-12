@@ -89,9 +89,8 @@ export {
 
 // TODO: Text içeren komponentlerde weight ve size setlenebilmeli
 
-// TODO: Context'ler dışarıdan initalize edilebilsin araştır (GlobalState, Theme, Language)
+// TODO: Context'ler dışarıdan initalize edilebilsin araştır ( Language)
 
-// TODO: SelectBox için modalize(bottomSheet) listelemelisini düzenle - uyarı vermesin
 // TODO: SelectBox için navigationProps ve navigationParams'ı suggest edilebilir yap
 
 // TODO: Language context yap - hook, with

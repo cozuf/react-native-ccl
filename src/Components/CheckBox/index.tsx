@@ -201,4 +201,4 @@ const styles = StyleSheet.create({
   },
 })
 
-// FIXME: Text font weight düzeltilmeli
+// FIXME: Text font weight düzeltilmeli (style içindeki)
