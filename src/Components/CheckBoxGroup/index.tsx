@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { CheckBox, Button, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
+import type { ITextProps } from '../Text';
 
 export interface IListItem {
   active?: boolean
@@ -54,6 +55,21 @@ export interface ICheckBoxGroupProps<ItemT> {
   submitTitle?: string;
 
   /**
+   *  
+   */
+  submitTitleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  submitTitleSize?: ITextProps["size"]
+
+  /**
+   * 
+   */
+  submitTitleStyle?: ITextProps["style"]
+
+  /**
    *
    */
   minChoice?: number;
@@ -82,6 +98,9 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   renderItem,
   onSubmit = () => { },
   submitTitle = 'Tamam',
+  submitTitleWeight,
+  submitTitleSize,
+  submitTitleStyle,
   minChoice = 0,
   maxChoice = 0,
   selectAllTitle = 'Tümünü Seç',
@@ -228,6 +247,9 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
       <Button
         wrap="no-wrap"
         title={submitTitle}
+        titleSize={submitTitleSize}
+        titleWeight={submitTitleWeight}
+        titleStyle={submitTitleStyle}
         disabled={isDisabled()}
         onPress={() => {
           onSubmit(dataList as ListType[]);
