@@ -13,13 +13,13 @@ import {
 import { Seperator, Text, CheckBoxGroup, RadioButtonGroup } from '..';
 import type { NavigationProp } from '@react-navigation/core';
 import type { ParamListBase } from '@react-navigation/routers';
-import SelectBoxModal from './Modal';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import type { ITextProps } from '../Text';
 import type { IIconProps } from '../Icon';
 import Icon from '../Icon';
 import { getBottomSpace } from '../../Utils';
+import { useModal, useSetModal } from '../../Context/Modal';
 
 export interface ISelectBoxProps<ItemT> {
   /**
@@ -284,13 +284,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 }) => {
   const bottomSheet = useBottomSheet();
   const setBottomSheet = useSetBottomSheet();
-  const [dataList, setDataList] = useState<any[]>(data as any[]);
-  const [value, setValue] = useState<string>(searchText || '');
-  const [visible, setVisible] = useState<boolean>(false);
+
+  const Modal = useModal();
+  const setModal = useSetModal()
+  
   const theme = useTheme();
   const { colors, tokens } = theme;
   const { selectBox, common, modal } = colors;
   const { component } = tokens
+
+  const [dataList, setDataList] = useState<any[]>(data as any[]);
+  // const [value, setValue] = useState<string>(searchText || '');
 
   const STATE: keyof ColorScheme["selectBox"] = active ? "active" : "passive";
 
@@ -298,52 +302,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   useEffect(() => {
     setDataList(data as any[])
   }, [data])
-
-  const renderModal = (): ReactNode => {
-    return (
-      <SelectBoxModal
-        visible={visible}
-        setVisible={setVisible}
-        searchable={searchable}
-        value={value}
-        setValue={setValue}
-        onSearch={(text) => {
-          setValue(text);
-          if (text.length > 0) {
-            const nDataList = data.filter((v) =>
-              v.title?.toLowerCase().includes(text.toLowerCase())
-            );
-            setDataList(nDataList);
-          } else {
-            setDataList(data as any[]);
-          }
-        }}
-        data={dataList}
-        selectionType={selectionType}
-        minChoice={minChoice}
-        maxChoice={maxChoice}
-        onSubmit={(data: any[]) => {
-          setDataList(data);
-          if (typeof onSubmit === 'function') {
-            onSubmit(data);
-          }
-        }}
-      />
-    );
-  };
-
-  const renderRest = (): ReactNode | null => {
-    switch (displayType) {
-      case 'modal':
-        return renderModal();
-      default:
-        return null;
-    }
-  };
-
-  const openModal = () => {
-    setVisible(true);
-  };
 
   const onSubmitSelection = (data: any) => {
     if (typeof onSubmit === 'function') {
@@ -353,13 +311,13 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       case "bottomSheet":
         return bottomSheet.close()
       case "modal":
-        return setVisible(false);
+        return Modal.close();
       case "page":
         navigation?.goBack();
     }
   }
 
-  const renderBottomSheetContent = () => {
+  const renderContent = () => {
     if (selectionType === "singleSelect") {
       return (
         <RadioButtonGroup
@@ -391,6 +349,16 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     return null
   }
 
+  const openModal = () => {
+    setModal({
+      props: {
+        onTouchOutSide: () => Modal.close()
+      },
+      renderChildren: renderContent
+    })
+    Modal.show()
+  };
+
   const openBottomSheet = () => {
     setBottomSheet({
       props: {
@@ -407,7 +375,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         disableScrollIfPossible: false,
         customRenderer: (
           <Animated.View style={{ height: "100%" }}>
-            {renderBottomSheetContent()}
+            {renderContent()}
           </Animated.View >
         ),
         HeaderComponent: () => (
@@ -437,7 +405,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       searchable,
       searchText,
       onSearch: (_navigation: NavigationProp<ParamListBase>, text: string) => {
-        setValue(text);
+        // setValue(text);
         let nData;
         if (text.length > 0) {
           const nDataList = data.filter((v) =>
@@ -628,7 +596,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       </TouchableOpacity>
       {renderWarning()}
       {renderError()}
-      {renderRest()}
+      {/* {renderRest()} */}
     </Fragment>
   );
 };
