@@ -1,5 +1,4 @@
 import React, { FC, useReducer, useRef, useCallback } from "react";
-import { View } from "react-native";
 import type { Modalize } from "react-native-modalize";
 import { Modalize as BottomSheet } from 'react-native-modalize';
 import { useTheme } from "../Theme";
@@ -46,9 +45,10 @@ const BottomSheetProvider: FC<any> = ({ children }) => {
             },
             onClosed: () => {
                 setBottomSheetProps(initial())
-            }
+            },
+            
         },
-        renderContent: () => <View />
+        renderContent: () => null
     }), [theme])
 
 
