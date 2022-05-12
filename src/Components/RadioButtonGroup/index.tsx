@@ -8,14 +8,14 @@ import {
 import { RadioButton, Button, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
 
-export interface IList {
+export interface IListItem {
   active?: boolean
   value: any
   title: string
   selected: boolean
 }
 
-export type ListType = Required<IList>
+export type ListItemType = Required<IListItem>
 
 export interface IRadioButtonGroupProps<ItemT> {
   /**
@@ -53,7 +53,7 @@ export interface IRadioButtonGroupProps<ItemT> {
   submitTitle?: string;
 }
 
-export interface IRadioButtonGroupTypes extends IRadioButtonGroupProps<ListType>, Omit<FlatListProps<ListType>, 'data' | 'renderItem'> { }
+export interface IRadioButtonGroupTypes extends IRadioButtonGroupProps<ListItemType>, Omit<FlatListProps<ListItemType>, 'data' | 'renderItem'> { }
 
 const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   data,
@@ -69,20 +69,20 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
 
   const [dataList, setDataList] = useState(data);
 
-  const onButtonSelect = (selectedValue: IList["value"]) => {
+  const onButtonSelect = (selectedValue: IListItem["value"]) => {
     const newData = dataList.map((v) => ({ ...v, selected: v.value === selectedValue }));
     const selectedItem = newData.find((v) => v.selected)
     const selectedIndex = newData.findIndex((v) => v.selected)
     setDataList(newData);
     if (typeof onSelect === 'function') {
-      onSelect(selectedItem as Required<IList>, selectedIndex);
+      onSelect(selectedItem as ListItemType, selectedIndex);
     } else {
       console.error("'onSelect' is undefined");
     }
   };
 
   useEffect(() => {
-    setDataList(data.map((v: ListType) => ({ ...v, selected: v.selected || false })));
+    setDataList(data.map((v: ListItemType) => ({ ...v, selected: v.selected || false })));
   }, [data]);
 
   /**
@@ -117,7 +117,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   };
 
   const customRenderItem = (
-    info: ListRenderItemInfo<Required<ListType>>
+    info: ListRenderItemInfo<Required<ListItemType>>
   ): React.ReactElement | null => {
     const { item, index } = info;
     if (!item.title || !item.value) {
@@ -151,7 +151,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         wrap="no-wrap"
         title={submitTitle}
         onPress={() => {
-          onSubmit(dataList.map((v: ListType) => ({ ...v })));
+          onSubmit(dataList.map((v: ListItemType) => ({ ...v })));
         }}
       />
     </Fragment>
