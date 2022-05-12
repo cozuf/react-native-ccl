@@ -67,30 +67,32 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   const { radioButtonGroup } = colors;
   const { component } = tokens;
 
-  const [nData, setNData] = useState(data);
+  const [dataList, setDataList] = useState(data);
 
-  const onButtonSelect = (index: number) => {
-    const tData = nData.map((v, i) => ({ ...v, selected: i === index }));
-    setNData(tData);
+  const onButtonSelect = (selectedValue: IList["value"]) => {
+    const newData = dataList.map((v) => ({ ...v, selected: v.value === selectedValue }));
+    const selectedItem = newData.find((v) => v.selected)
+    const selectedIndex = newData.findIndex((v) => v.selected)
+    setDataList(newData);
     if (typeof onSelect === 'function') {
-      onSelect(tData[index], index);
+      onSelect(selectedItem as Required<IList>, selectedIndex);
     } else {
       console.error("'onSelect' is undefined");
     }
   };
 
   useEffect(() => {
-    setNData(data.map((v: ListType) => ({ ...v, selected: v.selected || false })));
+    setDataList(data.map((v: ListType) => ({ ...v, selected: v.selected || false })));
   }, [data]);
 
   /**
    * warning useEffect
    */
   useEffect(() => {
-    if (data.some((v) => !v.active)) {
+    if (data.some((v) => v.active === undefined)) {
       console.warn("It would be good if items of data contain 'active' key");
     }
-    if (data.some((v) => !v.selected)) {
+    if (data.some((v) => !v.selected === undefined)) {
       console.warn(
         'It would be good to define selected item at the begining, to show them.'
       );
@@ -132,9 +134,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         selected={item.selected}
         title={item.title}
         value={item.value}
-        onSelect={() => {
-          onButtonSelect(index);
-        }}
+        onSelect={onButtonSelect}
       />
     );
   };
@@ -143,7 +143,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     <Fragment>
       <FlatList
         keyExtractor={(_, index: number) => index.toString()}
-        data={nData}
+        data={dataList}
         renderItem={renderItem || customRenderItem}
         ItemSeparatorComponent={renderSeperator}
       />
@@ -151,7 +151,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         wrap="no-wrap"
         title={submitTitle}
         onPress={() => {
-          onSubmit(nData.map((v: ListType) => ({ ...v })));
+          onSubmit(dataList.map((v: ListType) => ({ ...v })));
         }}
       />
     </Fragment>

@@ -1,4 +1,4 @@
-import React, { FC, isValidElement, ReactNode, useState } from 'react';
+import React, { FC, isValidElement, ReactNode } from 'react';
 import { View, TouchableOpacity, ViewStyle, StyleProp, StyleSheet } from 'react-native';
 import { Icon, IIconProps, Seperator, Text } from '..';
 import { useTheme } from '../../Context/Theme';
@@ -41,7 +41,7 @@ export interface IRadionButtonProps {
   /**
    * invokes select the item
    */
-  onSelect: (selected: boolean) => void;
+  onSelect: (selectedValue: any) => void;
 
   /**
    * 
@@ -100,7 +100,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
   titleSize = "m",
   titleWeight = "regular"
 }) => {
-  const [isSelected, setIsSelected] = useState<boolean>(selected);
+  // const [isSelected, setIsSelected] = useState<boolean>(selected);
   const theme = useTheme();
   const { colors, tokens } = theme;
   const { radioButton } = colors;
@@ -174,9 +174,8 @@ const RadioButton: FC<IRadionButtonProps> = ({
         containerStyle
       ]}
       onPress={() => {
-        setIsSelected(!isSelected);
         if (typeof onSelect === 'function') {
-          onSelect(!isSelected);
+          onSelect(value);
         }
       }}
     >

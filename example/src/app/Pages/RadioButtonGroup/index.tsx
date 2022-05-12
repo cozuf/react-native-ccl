@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PageContainer, RadioButtonGroup } from 'react-native-ccl';
 
 const DATA = [
@@ -35,15 +35,16 @@ const DATA = [
 ];
 
 const RadioButtonGroupPage = () => {
+  const [dataList, setDataList] = useState(DATA)
   return (
     <PageContainer type="default">
       <RadioButtonGroup
-        data={DATA}
+        data={dataList}
         onSelect={(item: any, index: number) => {
           console.log({ item, index });
         }}
         onSubmit={(data: any[]) => {
-          console.log({ data });
+          setDataList(data)
         }}
       />
     </PageContainer>
