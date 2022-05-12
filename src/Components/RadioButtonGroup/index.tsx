@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { RadioButton, Button, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
+import type { ITextProps } from '../Text';
 
 export interface IListItem {
   active?: boolean
@@ -51,6 +52,21 @@ export interface IRadioButtonGroupProps<ItemT> {
    *
    */
   submitTitle?: string;
+
+  /**
+   *  
+   */
+  submitTitleWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  submitTitleSize?: ITextProps["size"]
+
+  /**
+   * 
+   */
+  submitTitleStyle?: ITextProps["style"]
 }
 
 export interface IRadioButtonGroupTypes extends IRadioButtonGroupProps<ListItemType>, Omit<FlatListProps<ListItemType>, 'data' | 'renderItem'> { }
@@ -61,6 +77,9 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   renderItem,
   onSubmit = () => { },
   submitTitle = 'Tamam',
+  submitTitleWeight,
+  submitTitleSize,
+  submitTitleStyle
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
@@ -74,6 +93,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     const selectedItem = newData.find((v) => v.selected)
     const selectedIndex = newData.findIndex((v) => v.selected)
     setDataList(newData);
+
     if (typeof onSelect === 'function') {
       onSelect(selectedItem as ListItemType, selectedIndex);
     } else {
@@ -150,6 +170,9 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
       <Button
         wrap="no-wrap"
         title={submitTitle}
+        titleSize={submitTitleSize}
+        titleWeight={submitTitleWeight}
+        titleStyle={submitTitleStyle}
         onPress={() => {
           onSubmit(dataList.map((v: ListItemType) => ({ ...v })));
         }}
