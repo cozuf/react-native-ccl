@@ -169,6 +169,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
       />
       <Button
         wrap="no-wrap"
+        disabled={dataList.every((v) => !v.selected)}
         title={submitTitle}
         titleSize={submitTitleSize}
         titleWeight={submitTitleWeight}
