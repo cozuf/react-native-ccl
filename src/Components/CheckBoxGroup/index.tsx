@@ -163,9 +163,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
       console.warn("It would be good if items of data contain 'active' key");
     }
     if (data.some((v) => v.selected === undefined)) {
-      console.warn(
-        'It would be good to define selected item at the begining, to show them.'
-      );
+      console.warn('It would be good to define selected item at the begining, to show them.');
     }
   }, [data]);
 
