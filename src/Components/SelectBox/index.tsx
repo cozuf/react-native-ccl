@@ -31,6 +31,7 @@ export interface ISelectBoxProps<ItemT> {
    * @default true
    */
   active?: boolean;
+
   /**
    * type to display
    * @default Modal
@@ -47,6 +48,11 @@ export interface ISelectBoxProps<ItemT> {
    *
    */
   icon?: IIconProps | ReactNode;
+
+  /**
+   * @default true
+   */
+  showTitle?: boolean;
 
   /**
    * @default Başlık
@@ -245,6 +251,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   displayType = 'modal',
   selectionType = 'singleSelect',
   icon,
+  showTitle = true,
   title = 'Başlık',
   titleSize = "m",
   titleWeight = "regular",
@@ -287,7 +294,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   const Modal = useModal();
   const setModal = useSetModal()
-  
+
   const theme = useTheme();
   const { colors, tokens } = theme;
   const { selectBox, common, modal } = colors;
@@ -304,6 +311,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   }, [data])
 
   const onSubmitSelection = (data: any) => {
+    setDataList(data)
     if (typeof onSubmit === 'function') {
       onSubmit(data);
     }
@@ -491,25 +499,28 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   };
 
   const renderTitle = () => {
-    return (
-      <View style={[styles.titleContainer, titleContainerStyle]}>
-        <Text
-          size={titleSize}
-          weigth={titleWeight}
-          style={
-            [
-              {
-                color: selectBox[STATE].title,
-              },
-              styles.title,
-              titleStyle
-            ]
-          }
-        >
-          {title}
-        </Text>
-      </View>
-    )
+    if (showTitle) {
+      return (
+        <View style={[styles.titleContainer, titleContainerStyle]}>
+          <Text
+            size={titleSize}
+            weigth={titleWeight}
+            style={
+              [
+                {
+                  color: selectBox[STATE].title,
+                },
+                styles.title,
+                titleStyle
+              ]
+            }
+          >
+            {title}
+          </Text>
+        </View>
+      )
+    }
+    return null
   }
 
   const renderValue = () => {
@@ -596,7 +607,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       </TouchableOpacity>
       {renderWarning()}
       {renderError()}
-      {/* {renderRest()} */}
     </Fragment>
   );
 };

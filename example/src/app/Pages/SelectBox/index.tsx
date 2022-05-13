@@ -80,6 +80,17 @@ const WARNING_DATA = [
   }
 ];
 
+const SHOW_TITLE_DATA = [
+  {
+    title: 'Başlık Gösterme',
+    value: false,
+  },
+  {
+    title: 'Başlık Göster',
+    value: true,
+  }
+];
+
 
 const SelectBoxPage = () => {
   const navigation = useNavigation();
@@ -88,6 +99,7 @@ const SelectBoxPage = () => {
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
   const [error, setError] = useState("");
   const [warning, setWarning] = useState("");
+  const [showTitle, setShowTitle] = useState<boolean>(true);
 
   useEffect(() => {
     fetch("http://app.mobilitre.com/main/country_list")
@@ -110,6 +122,7 @@ const SelectBoxPage = () => {
         displayType={DISPLAY_TYPE_DATA[displayTypeIndex].value as ISelectBoxProps<any>["displayType"]}
         data={areas}
         title="Bölge"
+        showTitle={showTitle}
         searchable={true}
         navigation={navigation}
         onSubmit={(data: any) => {
@@ -148,6 +161,11 @@ const SelectBoxPage = () => {
         <TapSelector
           data={WARNING_DATA}
           onTap={() => setWarning((pValue: string) => pValue.length > 0 ? "" : "Uyarı Var")}
+        />
+        <Seperator type="vertical" />
+        <TapSelector
+          data={SHOW_TITLE_DATA}
+          onTap={() => setShowTitle((pValue: boolean) => !pValue)}
         />
       </View>
     </PageContainer>
