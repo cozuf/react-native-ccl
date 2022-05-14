@@ -27,7 +27,8 @@ const PAGES_NAMES = {
   ColorsPage: 'ColorsPage',
   ClassGlobalStatePage: "ClassGlobalStatePage",
   ClassExample: "ClassExample",
-  StateCardPage: "StateCardPage"
+  StateCardPage: "StateCardPage",
+  SegmentedButtonPage: "SegmentedButtonPage"
 };
 
 export { PAGES_NAMES };

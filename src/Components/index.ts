@@ -20,7 +20,8 @@ import DateTimePicker, { IDateTimePickerProps, IDateTimePickerTypes } from './Da
 import Switch, { ISwitchProps, ISwitchTypes } from './Switch';
 import SnackBar, { ISnackBarProps, SnackBarRef } from './SnackBar';
 import Card, { ICardProps } from './Card';
-import StateCard, { IStateCard } from './StateCard';
+import StateCard, { IStateCardProps } from './StateCard';
+import SegmentedButton, { ISegmentedButtonProps } from './SegmentedButton';
 
 export {
   Text,
@@ -45,7 +46,8 @@ export {
   Switch,
   SnackBar,
   Card,
-  StateCard
+  StateCard,
+  SegmentedButton
 };
 
 export type {
@@ -84,5 +86,6 @@ export type {
   ICardProps,
   IPageContainerProps,
   IPageContainerTypes,
-  IStateCard
+  IStateCardProps,
+  ISegmentedButtonProps
 };

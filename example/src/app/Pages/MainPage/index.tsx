@@ -116,6 +116,10 @@ const COMPONENTS: ComponentListType[] = [
   {
     name: 'StateCard',
     navigation: 'StateCardPage',
+  },
+  {
+    name: 'SegmentedButton',
+    navigation: 'SegmentedButtonPage',
   }
 ];
 

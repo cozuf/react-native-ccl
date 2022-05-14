@@ -21,7 +21,8 @@ export {
   Switch,
   SnackBar,
   Card,
-  StateCard
+  StateCard,
+  SegmentedButton
 } from "./Components";
 
 export { SelectPage } from "./Components/SelectBox/Page"
@@ -64,7 +65,8 @@ export type {
   IDateTimePickerTypes,
   IPageContainerProps,
   IPageContainerTypes,
-  IStateCard
+  IStateCardProps,
+  ISegmentedButtonProps,
 } from "./Components"
 
 export {

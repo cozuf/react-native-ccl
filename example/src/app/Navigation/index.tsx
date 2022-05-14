@@ -45,6 +45,7 @@ import ClassGlobalStatePage from '../Pages/ClassGlobalStateContext';
 import PageContainer from '../Pages/PageContainer';
 import ClassExample from '../Pages/ClassExample';
 import StateCardPage from '../Pages/StateCard';
+import SegmentedButtonPage from '../Pages/SegmentedButton';
 //#endregion
 
 const Stack = createStackNavigator();
@@ -154,6 +155,7 @@ const Router = () => {
       <Stack.Screen name={PAGES_NAMES.PageContainer} component={PageContainer} />
       <Stack.Screen name={PAGES_NAMES.ClassExample} component={ClassExample} />
       <Stack.Screen name={PAGES_NAMES.StateCardPage} component={StateCardPage} />
+      <Stack.Screen name={PAGES_NAMES.SegmentedButtonPage} component={SegmentedButtonPage} />
     </Stack.Navigator>
   );
 };
