@@ -113,6 +113,10 @@ const COMPONENTS: ComponentListType[] = [
     name: 'ClassExample',
     navigation: 'ClassExample',
   },
+  {
+    name: 'StateCard',
+    navigation: 'StateCardPage',
+  }
 ];
 
 const MainPage = () => {

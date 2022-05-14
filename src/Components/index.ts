@@ -2,24 +2,13 @@ import Text, { ITextProps, ITextTypes } from './Text';
 import PageContainer, { IPageContainerProps, IPageContainerTypes } from './PageContainer';
 import Icon, { IIconProps } from './Icon';
 import TextInput, { ITextInputProps, ITextInputTypes } from './TextInput';
-import ActivityIndicator, {
-  IActivityIndicatorProps,
-} from './ActivityIndicator';
+import ActivityIndicator, { IActivityIndicatorProps, } from './ActivityIndicator';
 import Button, { IButtonProps, IButtonTypes } from './Button';
-import TapSelector, {
-  ITapSelectorProps,
-  ITapSelectorTypes,
-} from './TapSelector';
+import TapSelector, { ITapSelectorProps, ITapSelectorTypes, } from './TapSelector';
 import RadioButton, { IRadionButtonProps, } from './RadioButton';
-import RadioButtonGroup, {
-  IRadioButtonGroupProps,
-  IRadioButtonGroupTypes,
-} from './RadioButtonGroup';
+import RadioButtonGroup, { IRadioButtonGroupProps, IRadioButtonGroupTypes, } from './RadioButtonGroup';
 import CheckBox, { ICheckBoxProps } from './CheckBox';
-import CheckBoxGroup, {
-  ICheckBoxGroupProps,
-  ICheckBoxGroupTypes,
-} from './CheckBoxGroup';
+import CheckBoxGroup, { ICheckBoxGroupProps, ICheckBoxGroupTypes, } from './CheckBoxGroup';
 import Chip, { IChipProps } from './Chip';
 import ChipGroup, { IChipGroupProps, IChipGroupTypes } from './ChipGroup';
 import Badge, { IBadgeProps } from './Badge';
@@ -31,6 +20,7 @@ import DateTimePicker, { IDateTimePickerProps, IDateTimePickerTypes } from './Da
 import Switch, { ISwitchProps, ISwitchTypes } from './Switch';
 import SnackBar, { ISnackBarProps, SnackBarRef } from './SnackBar';
 import Card, { ICardProps } from './Card';
+import StateCard, { IStateCard } from './StateCard';
 
 export {
   Text,
@@ -54,8 +44,10 @@ export {
   DateTimePicker,
   Switch,
   SnackBar,
-  Card
+  Card,
+  StateCard
 };
+
 export type {
   ITextProps,
   ITextTypes,
@@ -91,5 +83,6 @@ export type {
   SnackBarRef,
   ICardProps,
   IPageContainerProps,
-  IPageContainerTypes
+  IPageContainerTypes,
+  IStateCard
 };
