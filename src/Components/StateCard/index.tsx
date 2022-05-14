@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Icon, Text, Button, Seperator, ITextProps, IIconProps } from "../..";
 import { useTheme } from "../../Context";
 
-export interface IStateCard {
+export interface IStateCardProps {
 
     /**
      *
@@ -56,7 +56,7 @@ export interface IStateCard {
     buttonTitleStyle?: ITextProps["style"]
 }
 
-const StateCard: FC<IStateCard> = ({
+const StateCard: FC<IStateCardProps> = ({
     icon = {
         family: "Feather",
         name: "wifi-off",
