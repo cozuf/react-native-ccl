@@ -17,9 +17,14 @@ export interface IBadgeProps {
    *
    */
   value: number | string;
+
+  /**
+   * 
+   */
+  containerStyle?: StyleProp<ViewStyle>
 }
 
-const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
+const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1, containerStyle }) => {
   const theme = useTheme();
   const { colors } = theme
   const { badge } = colors;
@@ -45,7 +50,7 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
     }
   };
 
-  const containerStyle: StyleProp<ViewStyle> = {
+  const defineContainerStyle: StyleProp<ViewStyle> = {
     height:
       Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
     width:
@@ -65,6 +70,7 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1 }) => {
       style={[
         styles.container,
         containerStyle,
+        defineContainerStyle
       ]}
     >
       <Text
@@ -87,6 +93,10 @@ export default Badge;
 
 const styles = StyleSheet.create({
   container: {
+    position: "absolute",
+    zIndex: 99,
+    top: 0,
+    right: 0,
     borderWidth: 2,
     alignItems: 'center',
     ...Platform.select({
@@ -104,5 +114,6 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
+    textAlignVertical: "center"
   }
 })
