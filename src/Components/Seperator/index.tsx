@@ -3,12 +3,14 @@ import { FlexStyle, StyleProp, StyleSheet, View, ViewStyle } from "react-native"
 
 export interface ISperatorProps {
   /**
-   * 
+   *  Seperator Direction
    */
   type?: "vertical" | "horizontal"
 
   /**
-   * 
+   * small = 4
+   * medium = 8
+   * large = 16
    */
   size?: "small" | "medium" | "large" | string | number
 
