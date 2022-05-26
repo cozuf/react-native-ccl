@@ -70,10 +70,11 @@ const SegmentedButton: FC<ISegmentedButtonProps<any>> = ({
     const [dataList, setDataList] = useState(data.map((v: any, i: number) => ({ ...v, selected: i === initialIndex })))
 
     useEffect(() => {
+        setDataList(data.map((v: any, i: number) => ({ ...v, selected: i === initialIndex })))
         if (typeof onSelect === "function") {
             onSelect(data[initialIndex], initialIndex)
         }
-    }, [])
+    }, [data])
 
     const onButtonSelect = (selectedIndex: number) => {
         const newDataList = dataList.map((v: any, i: number) => ({
@@ -90,6 +91,7 @@ const SegmentedButton: FC<ISegmentedButtonProps<any>> = ({
 
         return (
             <TouchableOpacity
+                key={`${i}`}
                 onPress={() => { onButtonSelect(i) }}
                 disabled={v.selected}
                 style={[
