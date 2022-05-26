@@ -1,7 +1,6 @@
 import type { Dispatch, ReactNode } from 'react'
 import type { ColorValue } from 'react-native'
-import type { ModalizeProps } from 'react-native-modalize'
-import type { IModalProps } from './Components'
+import type { IModalProps, IBottomSheetProps } from './Components'
 
 declare global {
 
@@ -369,7 +368,7 @@ declare global {
     }
 
     export interface SetBottomSheetScheme {
-        props: ModalizeProps,
+        props: IBottomSheetProps,
         renderContent?: () => ReactNode | null
     }
 

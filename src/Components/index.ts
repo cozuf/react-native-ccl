@@ -22,6 +22,7 @@ import SnackBar, { ISnackBarProps, SnackBarRef } from './SnackBar';
 import Card, { ICardProps } from './Card';
 import StateCard, { IStateCardProps } from './StateCard';
 import SegmentedButton, { ISegmentedButtonProps } from './SegmentedButton';
+import BottomSheet, { BottomSheetRef, IBottomSheetProps } from './BottomSheet';
 
 export {
   Text,
@@ -47,7 +48,8 @@ export {
   SnackBar,
   Card,
   StateCard,
-  SegmentedButton
+  SegmentedButton,
+  BottomSheet
 };
 
 export type {
@@ -87,5 +89,7 @@ export type {
   IPageContainerProps,
   IPageContainerTypes,
   IStateCardProps,
-  ISegmentedButtonProps
+  ISegmentedButtonProps,
+  IBottomSheetProps,
+  BottomSheetRef
 };

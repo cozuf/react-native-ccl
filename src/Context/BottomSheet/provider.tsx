@@ -1,68 +1,43 @@
-import React, { FC, useReducer, useRef, useCallback } from "react";
-import type { Modalize } from "react-native-modalize";
-import { Modalize as BottomSheet } from 'react-native-modalize';
-import { useTheme } from "../Theme";
+import React, { FC, useReducer, useRef } from "react";
+import { BottomSheetRef, BottomSheet } from "../../Components";
 import { BottomSheetContext, BottomSheetDispatchContext } from "./context";
 
 const reducer = (
     state: SetBottomSheetScheme,
     newState: Partial<SetBottomSheetScheme>
 ): SetBottomSheetScheme => {
-    const props = { ...state.props, ...newState.props }
-    const nState = { ...state, ...newState, props }
-    return nState
+    return { ...state, ...newState }
 };
 
 const BottomSheetProvider: FC<any> = ({ children }) => {
-    const bottomSheetRef = useRef<Modalize>(null);
-    const theme = useTheme()
-    const { modal, common, pageContainer } = theme.colors
+    const bottomSheetRef = useRef<BottomSheetRef>(null);
 
     const bottomSheet: BottomSheetScheme = {
         show: () => {
-            bottomSheetRef.current?.open()
+            bottomSheetRef.current?.show()
         },
         close: () => {
             bottomSheetRef.current?.close()
         }
     }
 
-    const initial = useCallback((): SetBottomSheetScheme => ({
+    const initial = {
         props: {
-            rootStyle: {
-            },
-            modalStyle: {
-                backgroundColor: pageContainer.background
-            },
-            handleStyle: {
-                backgroundColor: common.componentBackground
-            },
-            overlayStyle: {
-                backgroundColor: modal.outsideBackground
-            },
-            childrenStyle: {
-                paddingTop: 16,
-            },
             onClosed: () => {
-                setBottomSheetProps(initial())
-            },
-            
+                setBottomSheetProps(initial)
+            }
         },
         renderContent: () => null
-    }), [theme])
+    }
 
 
-    const [bottomSheetProps, setBottomSheetProps] = useReducer(reducer, initial());
+    const [bottomSheetProps, setBottomSheetProps] = useReducer(reducer, initial);
 
     return (
         <BottomSheetContext.Provider
             value={bottomSheet}>
             <BottomSheetDispatchContext.Provider
-                value={(values: Partial<SetBottomSheetScheme>) => {
-                    const props = { ...initial().props, ...values.props }
-                    const nState = { ...initial(), ...values, props }
-                    setBottomSheetProps({ ...nState })
-                }}>
+                value={setBottomSheetProps}>
                 {children}
                 <BottomSheet
                     ref={bottomSheetRef}
