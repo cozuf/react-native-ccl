@@ -1,6 +1,6 @@
 {
   "name": "react-native-ccl",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "react native component library",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
