@@ -91,6 +91,17 @@ const SHOW_TITLE_DATA = [
   }
 ];
 
+const SEARCHABLE_DATA = [
+  {
+    title: 'Aranamaz',
+    value: false,
+  },
+  {
+    title: 'Aranabilir',
+    value: true,
+  }
+];
+
 
 const SelectBoxPage = () => {
   const navigation = useNavigation();
@@ -99,7 +110,8 @@ const SelectBoxPage = () => {
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
   const [error, setError] = useState("");
   const [warning, setWarning] = useState("");
-  const [showTitle, setShowTitle] = useState<boolean>(true);
+  const [showTitleIndex, setShowTitleIndex] = useState<number>(0);
+  const [searchableIndex, setSearchableIndex] = useState<number>(0);
 
   useEffect(() => {
     fetch("http://app.mobilitre.com/main/country_list")
@@ -122,8 +134,8 @@ const SelectBoxPage = () => {
         displayType={DISPLAY_TYPE_DATA[displayTypeIndex].value as ISelectBoxProps<any>["displayType"]}
         data={areas}
         title="Bölge"
-        showTitle={showTitle}
-        searchable={true}
+        showTitle={SHOW_TITLE_DATA[showTitleIndex].value as ISelectBoxProps<any>["showTitle"]}
+        searchable={SEARCHABLE_DATA[searchableIndex].value as ISelectBoxProps<any>["searchable"]}
         navigation={navigation}
         onSubmit={(data: any) => {
           setAreas(data);
@@ -165,7 +177,12 @@ const SelectBoxPage = () => {
         <Seperator type="vertical" />
         <TapSelector
           data={SHOW_TITLE_DATA}
-          onTap={() => setShowTitle((pValue: boolean) => !pValue)}
+          onTap={(_, index: number) => setShowTitleIndex(index)}
+        />
+        <Seperator type="vertical" />
+        <TapSelector
+          data={SEARCHABLE_DATA}
+          onTap={(_, index: number) => setSearchableIndex(index)}
         />
       </View>
     </PageContainer>
