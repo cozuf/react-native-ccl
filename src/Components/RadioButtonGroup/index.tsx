@@ -162,6 +162,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   return (
     <Fragment>
       <FlatList
+        bounces={false}
         keyExtractor={(_, index: number) => index.toString()}
         data={dataList}
         renderItem={renderItem || customRenderItem}

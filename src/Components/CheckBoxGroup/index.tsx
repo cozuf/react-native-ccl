@@ -235,6 +235,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
       </View>
 
       <FlatList
+        bounces={false}
         keyExtractor={(_, index) => `${index}`}
         data={dataList}
         renderItem={renderItem || customRenderItem}
