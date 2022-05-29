@@ -134,7 +134,6 @@ const Modal: FC<CCLModalProps> = ({
             case "default":
             default:
                 return {
-                    flex: 1
                 }
             case "loading":
                 return {
