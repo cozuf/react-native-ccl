@@ -31,7 +31,6 @@ const BottomSheet = forwardRef((props: PropsWithChildren<IBottomSheetProps>, ref
         }
     }, [modalizeRef]);
 
-
     return (
         <Modalize
             ref={modalizeRef}
@@ -48,6 +47,7 @@ const BottomSheet = forwardRef((props: PropsWithChildren<IBottomSheetProps>, ref
             childrenStyle={[props.childrenStyle, {
                 paddingTop: component.vertical
             }]}
+            {...props}
         >
             {props.children}
         </Modalize >
