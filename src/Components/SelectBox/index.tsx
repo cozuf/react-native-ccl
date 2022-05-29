@@ -50,6 +50,11 @@ export interface ISelectBoxProps<ItemT> {
   icon?: IIconProps | ReactNode;
 
   /**
+   * 
+   */
+  textsContainerStyle?: StyleProp<ViewStyle>
+
+  /**
    * @default true
    */
   showTitle?: boolean;
@@ -251,6 +256,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   displayType = 'modal',
   selectionType = 'singleSelect',
   icon,
+  textsContainerStyle,
   showTitle = true,
   title = 'Başlık',
   titleSize = "m",
@@ -554,7 +560,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   const renderTitleAndValue = () => {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={[styles.textsContainer, textsContainerStyle]}>
         {renderTitle()}
         <Seperator type="vertical" size="small" style={[styles.seperator]} />
         {renderValue()}
@@ -624,6 +630,9 @@ const styles = StyleSheet.create({
   iconContainer: {
     alignItems: "center",
     justifyContent: "center"
+  },
+  textsContainer: {
+    flex: 1,
   },
   titleContainer: {},
   title: {},
