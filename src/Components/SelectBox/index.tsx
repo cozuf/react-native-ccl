@@ -298,7 +298,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const theme = useTheme();
   const { colors, tokens } = theme;
   const { selectBox, common, modal } = colors;
-  const { component } = tokens
+  const { page: pageTokens, component } = tokens
 
   const [dataList, setDataList] = useState<any[]>(data as any[]);
   // const [value, setValue] = useState<string>(searchText || '');
@@ -360,7 +360,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const openModal = () => {
     setModal({
       props: {
-        onTouchOutSide: () => Modal.close()
+        onTouchOutSide: () => Modal.close(),
+        containerStyle: { maxHeight: "100%", minHeight: "50%" }
       },
       renderChildren: renderContent
     })
@@ -382,14 +383,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         },
         disableScrollIfPossible: false,
         customRenderer: (
-          <Animated.View style={{ height: "100%" }}>
+          <Animated.View style={{ maxHeight: "100%", paddingVertical: pageTokens.vertical, paddingHorizontal: pageTokens.horizontal }}>
             {renderContent()}
           </Animated.View >
         ),
         HeaderComponent: () => (
-          <Text size={"l"} style={{ marginTop: 12, textAlign: "center" }}>{title}</Text>
+          <Fragment>
+            <Seperator type='vertical' size={"medium"} />
+            <Text size={"l"} weigth="bold" style={{ marginTop: 12, textAlign: "center" }}>{title}</Text>
+          </Fragment>
         ),
-        FooterComponent: <View style={{ height: getBottomSpace() }} />
+        FooterComponent: <Seperator type='vertical' size={getBottomSpace()} />
       }
     })
     bottomSheet.show();
@@ -550,7 +554,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   const renderTitleAndValue = () => {
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         {renderTitle()}
         <Seperator type="vertical" size="small" style={[styles.seperator]} />
         {renderValue()}
