@@ -92,8 +92,9 @@ export {
 // TODO: global'deki context type'ları gözden geçir ve düzenle
 
 // TODO: Text içeren komponentlerde weight ve size setlenebilmeli
+// TODO: Hata ve uyarı mesajlarının paddingleri aynı içerisi kadar olmalı
 
-// TODO: Context'ler dışarıdan initalize edilebilsin araştır ( Language)
+// TODO: Context'ler dışarıdan initalize edilebilsin araştır ( Language )
 
 // TODO: SelectBox için navigationProps ve navigationParams'ı suggest edilebilir yap
 

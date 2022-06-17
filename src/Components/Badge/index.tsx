@@ -117,3 +117,5 @@ const styles = StyleSheet.create({
     textAlignVertical: "center"
   }
 })
+
+// TODO: value'siz durum

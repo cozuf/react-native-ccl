@@ -270,3 +270,5 @@ const styles = StyleSheet.create({
   title: {
   }
 })
+
+// TODO: Seperatoru flexDirection durumuna göre ayarla
