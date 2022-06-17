@@ -1,13 +1,6 @@
-import React, { FC, useReducer, useRef } from "react";
+import React, { FC, useRef, useState } from "react";
 import { BottomSheetRef, BottomSheet } from "../../Components";
 import { BottomSheetContext, BottomSheetDispatchContext } from "./context";
-
-const reducer = (
-    state: SetBottomSheetScheme,
-    newState: Partial<SetBottomSheetScheme>
-): SetBottomSheetScheme => {
-    return { ...state, ...newState }
-};
 
 const BottomSheetProvider: FC<any> = ({ children }) => {
     const bottomSheetRef = useRef<BottomSheetRef>(null);
@@ -30,8 +23,7 @@ const BottomSheetProvider: FC<any> = ({ children }) => {
         renderContent: () => null
     }
 
-
-    const [bottomSheetProps, setBottomSheetProps] = useReducer(reducer, initial);
+    const [bottomSheetProps, setBottomSheetProps] = useState<Partial<SetBottomSheetScheme>>(initial);
 
     return (
         <BottomSheetContext.Provider
