@@ -93,7 +93,7 @@ const SegmentedButton: FC<ISegmentedButtonProps<any>> = ({
             <TouchableOpacity
                 key={`${i}`}
                 onPress={() => { onButtonSelect(i) }}
-                disabled={v.selected}
+                disabled={!v.active || v.selected}
                 style={[
                     itemContainerStyle,
                     styles.itemContainerStyle,
@@ -104,6 +104,7 @@ const SegmentedButton: FC<ISegmentedButtonProps<any>> = ({
                     }
                 ]}>
                 <Text
+                    active={v.active}
                     size={itemTitleSize}
                     weigth={itemTitleWeight}
                 >{v.title}</Text>
