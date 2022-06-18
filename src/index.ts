@@ -105,7 +105,6 @@ export {
 // TODO: Badge platform farklılıklarını gözden geçir ve onayla bitir
 // TODO: SearchBar onClear ayrılabilir mi bak gerekiyorsa ayır ve bitir
 // TODO: inputs'lar için infoButton yap SnackBar ile
-// TODO: SnackBar çeşitlendir - (arkadan öne - önden arkaya) - (aşağıdan yukarıya - yukarıdan aşağıya) - (soldan sağa - sağdan sola)
 
 
 // TODO: yayınlamadan önce ReadMe düzenle
