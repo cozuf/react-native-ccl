@@ -89,6 +89,8 @@ export {
   RNCCLProvider
 } from "./Context"
 
+// TODO: Placeholder yap
+
 // TODO: global'deki context type'ları gözden geçir ve düzenle
 
 // TODO: Text içeren komponentlerde weight ve size setlenebilmeli
