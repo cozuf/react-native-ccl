@@ -271,4 +271,5 @@ const styles = StyleSheet.create({
   }
 })
 
+// TODO: Butonda ikon pozisyonu sağ sol
 // TODO: Seperatoru flexDirection durumuna göre ayarla
