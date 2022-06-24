@@ -52,9 +52,8 @@ const ActivityIndicator: FC<IActivityIndicatorProps> = ({
   color,
   size = 24,
 }) => {
-  const theme = useTheme();
-  const { common } = theme.colors;
-  const COLOR = color ? color : common.active;
+  const { colors } = useTheme();
+  const COLOR = color ? color : colors.primary;
   switch (type) {
     case 'ballIndicator':
       return <BallIndicator color={COLOR} size={size} />;

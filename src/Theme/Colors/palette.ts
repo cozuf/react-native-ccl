@@ -37,6 +37,16 @@ const OPEN_BLUE_OPPOSITE_PALE = 'rgba(255, 102, 51, 0.5)';
 const GREEN = 'rgba(0, 128, 0, 1)';
 const GREEN_PALE = 'rgba(0, 128, 0, 0.5)';
 
+const TURQUAZ_BLUE = 'rgba(0, 204, 204, 1)';
+const TURQUAZ_BLUE_PALE = 'rgba(0, 204, 204, 0.5)';
+
+const SEA_TURQUAZ_BLUE = 'rgba(0, 204, 153, 1)';
+const SEA_TURQUAZ_BLUE_PALE = 'rgba(0, 204, 153, 0.5)';
+
+const LEAF_GREEN = "rgba(0, 255, 204, 1)"
+const LEAF_GREEN_1 = "rgba(0, 204, 163, 1)"
+const LEAF_GREEN_2 = "rgba(0, 153, 122, 1)"
+
 export {
   BLACK,
   BLACK_20,
@@ -71,4 +81,11 @@ export {
   OPEN_BLUE_OPPOSITE_PALE,
   GREEN,
   GREEN_PALE,
+  TURQUAZ_BLUE,
+  TURQUAZ_BLUE_PALE,
+  SEA_TURQUAZ_BLUE,
+  SEA_TURQUAZ_BLUE_PALE,
+  LEAF_GREEN,
+  LEAF_GREEN_1,
+  LEAF_GREEN_2
 };

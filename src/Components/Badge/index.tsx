@@ -25,9 +25,7 @@ export interface IBadgeProps {
 }
 
 const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1, containerStyle }) => {
-  const theme = useTheme();
-  const { colors } = theme
-  const { badge } = colors;
+  const { colors } = useTheme()
 
   const calculateSize = (): number => {
     switch (size) {
@@ -59,9 +57,9 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1, containerStyle }
       Platform.OS === 'android'
         ? calculateSize() / 2
         : (calculateSize() + 6) / 2,
-    borderColor: badge.border,
-    backgroundColor: badge.background,
-    shadowColor: badge.shadow,
+    borderColor: colors.pageBackground,
+    backgroundColor: colors.primary,
+    shadowColor: colors.shadow,
   }
 
   return (
@@ -79,7 +77,7 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1, containerStyle }
         style={[
           styles.text,
           {
-            color: badge.text,
+            color: colors.pageBackground,
           },
         ]}
       >

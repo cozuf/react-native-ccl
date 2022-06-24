@@ -18,7 +18,7 @@ import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import type { ITextProps } from '../Text';
 import type { IIconProps } from '../Icon';
 import Icon from '../Icon';
-import { getBottomSpace } from '../../Utils';
+import { getBottomSpace, makeColorPassive } from '../../Utils';
 import { useModal, useSetModal } from '../../Context/Modal';
 
 export interface ISelectBoxProps<ItemT> {
@@ -303,13 +303,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { selectBox, common, modal } = colors;
   const { page: pageTokens, component } = tokens
 
   const [dataList, setDataList] = useState<any[]>(data as any[]);
   // const [value, setValue] = useState<string>(searchText || '');
-
-  const STATE: keyof ColorScheme["selectBox"] = active ? "active" : "passive";
 
   // TODO: gözden geçir
   useEffect(() => {
@@ -379,10 +376,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       props: {
         adjustToContentHeight: true,
         modalStyle: {
-          backgroundColor: modal.containerBackground
+          backgroundColor: colors.componentBackground
         },
         overlayStyle: {
-          backgroundColor: modal.outsideBackground,
+          backgroundColor: colors.modalOutside
         },
         handlePosition: "inside",
         childrenStyle: {
@@ -477,7 +474,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
               family={CoreIcon.family}
               name={CoreIcon.name}
               size={CoreIcon.size}
-              color={CoreIcon.color || error ? common.error : selectBox[STATE].title}
+              color={CoreIcon.color || error ? colors.destructive : active ? colors.text : makeColorPassive(colors.text)}
             />
           </View>
         );
@@ -489,7 +486,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderSeperator = () => {
     if (icon) {
       return (
-        <Seperator type='horizontal' size={"medium"} />
+        <Seperator type='horizontal' size={"large"} />
       )
     }
     return null
@@ -498,11 +495,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderPlaceholder = () => {
     const selectedData = dataList.filter((v) => v.selected);
     if (selectedData.length > 0) {
-      let result: string = '';
-      selectedData.map((v) => {
-        result += v.title + ', ';
-      });
-      return result.substr(0, result.length - 2);
+      return selectedData.map((v) => v.title).join(" - ")
     } else {
       return placeholder;
     }
@@ -513,13 +506,11 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       return (
         <View style={[styles.titleContainer, titleContainerStyle]}>
           <Text
+            active={active}
             size={titleSize}
             weigth={titleWeight}
             style={
               [
-                {
-                  color: selectBox[STATE].title,
-                },
                 styles.title,
                 titleStyle
               ]
@@ -538,16 +529,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       <View
         style={[styles.valueContainer, valueContainerStyle]}>
         <Text
+          active={active}
           numberOfLines={1}
           size={valueSize}
           weigth={valueWeight}
           style={[
-            {
-              color:
-                renderPlaceholder() === placeholder
-                  ? selectBox[STATE].placeholder
-                  : selectBox[STATE].value,
-            },
+            renderPlaceholder() === placeholder ?
+              {
+                color: active ? colors.placeholder : makeColorPassive(colors.placeholder)
+              }
+              :
+              {},
             styles.value,
             valueStyle
           ]}
@@ -572,7 +564,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     if (warning) {
       return (
         <View style={[styles.warningContainer, warningContainerStyle]}>
-          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
+          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: colors.warning }, warningStyle]}>{warning}</Text>
         </View>
       )
     }
@@ -583,7 +575,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     if (error) {
       return (
         <View style={[styles.errorContainer, errorContainerStyle]}>
-          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
+          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.destructive }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -604,8 +596,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
             borderRadius: component.radius,
             paddingVertical: component.vertical,
             paddingHorizontal: component.horizontal,
-            backgroundColor: selectBox[STATE].background,
-            borderColor: error ? common.error : selectBox[STATE].border,
+            backgroundColor: colors.componentBackground,
+            borderColor: error ? colors.destructive : colors.text,
           },
           styles.container,
           containerStyle

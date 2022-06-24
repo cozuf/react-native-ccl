@@ -46,7 +46,6 @@ export interface ISnackBarProps {
 const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<SnackBarRef>) => {
     const theme = useTheme();
     const { colors, tokens } = theme;
-    const { snackBar } = colors;
     const { component } = tokens;
 
     const { duration, displayForm = "backToFront", containerStyle, onCompleteHide = () => { }, onCompleteShow = () => { }, children } = props
@@ -80,7 +79,7 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
 
     useImperativeHandle(ref, () => ({
         show: show,
-        close: close
+        close: duration === "infinite" ? close : () => { }
     }));
 
     useEffect(() => {
@@ -438,8 +437,8 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
                         styles.contentContainer,
                         {
                             borderRadius: component.semiRadius,
-                            backgroundColor: snackBar.background,
-                            shadowColor: snackBar.shadow
+                            backgroundColor: colors.componentBackground,
+                            shadowColor: colors.shadow
                         },
                         containerStyle
                     ]

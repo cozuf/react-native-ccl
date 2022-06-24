@@ -52,7 +52,6 @@ const PageContainer: FC<IPageContainerTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { pageContainer } = colors;
   const { page } = tokens;
 
   if (loading) {
@@ -62,7 +61,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
         style={[
           styles.container,
           {
-            backgroundColor: pageContainer.background,
+            backgroundColor: colors.pageBackground,
             paddingVertical: page.vertical,
             paddingHorizontal: page.horizontal,
             alignItems: "center",
@@ -85,7 +84,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
           style={[
             styles.container,
             {
-              backgroundColor: pageContainer.background,
+              backgroundColor: colors.pageBackground,
               paddingVertical: page.vertical,
               paddingHorizontal: page.horizontal,
             },
@@ -104,7 +103,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
           style={
             [
               {
-                backgroundColor: pageContainer.background,
+                backgroundColor: colors.pageBackground,
               },
               style
             ]
@@ -113,7 +112,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
             [
               styles?.contentContainer,
               {
-                backgroundColor: pageContainer.background,
+                backgroundColor: colors.pageBackground,
                 paddingVertical: page.vertical,
                 paddingHorizontal: page.horizontal,
               }
@@ -135,7 +134,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
           style={[
             styles.container,
             {
-              backgroundColor: pageContainer.background,
+              backgroundColor: colors.pageBackground,
               paddingVertical: page.vertical,
               paddingHorizontal: page.horizontal,
             },

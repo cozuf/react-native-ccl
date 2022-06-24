@@ -12,10 +12,10 @@ const HORIZONTAL = {
 }
 
 const BORDER = {
-    full: 0,
-    semi: 0,
-    quarter: 0,
-    double: 0
+    full: 1,
+    semi: 0.5,
+    quarter: 0.25,
+    double: 2
 }
 const RADIUS = {
     full: 8,

@@ -54,7 +54,6 @@ const Router = () => {
   const theme = useTheme();
   const setTheme = useSetTheme()
   const { colors, fonts } = theme
-  const { common, text, pageContainer } = colors;
 
   const renderHeaderLeft = (
     props: StackHeaderLeftButtonProps,
@@ -71,7 +70,7 @@ const Router = () => {
         icon={{
           family: 'AntDesign',
           name: 'arrowleft',
-          color: common.secondary,
+          color: colors.text,
           size: 24,
         }}
         onPress={() => {
@@ -89,10 +88,10 @@ const Router = () => {
         headerTitleStyle: {
           fontFamily: fonts.semibold,
           fontWeight: undefined,
-          color: text.active,
+          color: colors.text,
         },
         headerStyle: {
-          backgroundColor: pageContainer.background,
+          backgroundColor: colors.pageBackground,
           elevation: 0,
           shadowColor: 'transparent',
           shadowOpacity: undefined,

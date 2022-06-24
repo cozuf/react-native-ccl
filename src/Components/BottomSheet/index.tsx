@@ -14,7 +14,6 @@ export interface IBottomSheetProps extends ModalizeProps {
 const BottomSheet = forwardRef((props: PropsWithChildren<IBottomSheetProps>, ref: Ref<BottomSheetRef>) => {
     const modalizeRef = useRef<Modalize>()
     const { colors, tokens } = useTheme()
-    const { common, pageContainer, modal } = colors
     const { component } = tokens
 
     useImperativeHandle(ref, () => {
@@ -36,13 +35,13 @@ const BottomSheet = forwardRef((props: PropsWithChildren<IBottomSheetProps>, ref
             ref={modalizeRef}
             rootStyle={[{}]}
             modalStyle={[props.modalStyle, {
-                backgroundColor: pageContainer.background
+                backgroundColor: colors.pageBackground
             }]}
             handleStyle={[props.handleStyle, {
-                backgroundColor: common.componentBackground
+                backgroundColor: colors.componentBackground
             }]}
             overlayStyle={[props.overlayStyle, {
-                backgroundColor: modal.outsideBackground
+                backgroundColor: colors.modalOutside
             }]}
             childrenStyle={[props.childrenStyle, {
                 paddingTop: component.vertical

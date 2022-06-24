@@ -1,5 +1,6 @@
 import React, { FC, isValidElement, ReactNode } from 'react';
 import { View, TouchableOpacity, ViewStyle, StyleProp, StyleSheet } from 'react-native';
+import { makeColorPassive } from '../../Utils';
 import { Icon, IIconProps, Seperator, Text } from '..';
 import { useTheme } from '../../Context/Theme';
 import type { ITextProps } from '../Text';
@@ -100,10 +101,8 @@ const RadioButton: FC<IRadionButtonProps> = ({
   titleSize = "m",
   titleWeight = "regular"
 }) => {
-  // const [isSelected, setIsSelected] = useState<boolean>(selected);
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { radioButton } = colors;
   const { component } = tokens;
 
   const renderIcon = (): React.ReactElement | null => {
@@ -113,7 +112,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
           return iconSet.selected;
         } else {
           const coreIcon = iconSet.selected as IIconProps;
-          const ICON_COLOR = radioButton[active ? 'active' : 'passive'].icon;
+          const ICON_COLOR = active ? colors.primary : makeColorPassive(colors.primary);
           return (
             <View style={[styles.iconContainer, iconContainerStyle]}>
               <Icon {...coreIcon} color={ICON_COLOR} />
@@ -125,7 +124,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
           return iconSet.notSelected;
         } else {
           const coreIcon = iconSet.notSelected as IIconProps;
-          const ICON_COLOR = radioButton[active ? 'active' : 'passive'].icon;
+          const ICON_COLOR = active ? colors.primary : makeColorPassive(colors.primary);
           return (
             <View style={[styles.iconContainer, iconContainerStyle]}>
               <Icon {...coreIcon} color={ICON_COLOR} />
@@ -140,13 +139,13 @@ const RadioButton: FC<IRadionButtonProps> = ({
 
   const renderTitle = (): React.ReactElement | null => {
     if (title) {
-      const TEXT_COLOR = radioButton[active ? 'active' : 'passive'].text;
       return (
         <View style={[styles.titleContainer, titleContainerStyle]}>
           <Text
+            active={active}
             size={titleSize}
             weigth={titleWeight}
-            style={[{ color: TEXT_COLOR }, styles.title, titleStyle]}>
+            style={[styles.title, titleStyle]}>
             {title}
           </Text>
         </View>

@@ -7,6 +7,7 @@ import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import type { ModalizeProps } from 'react-native-modalize';
 import moment from "moment"
 import type { ITextProps } from '../Text';
+import { makeColorPassive } from '../../Utils';
 
 export interface IDateTimePickerProps {
   /**
@@ -198,10 +199,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const setBottomSheet = useSetBottomSheet();
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { dateTimePicker, modal, common } = colors;
   const { component } = tokens
-
-  const STATE: keyof ColorScheme["dateTimePicker"] = active ? "active" : "passive";
 
   const renderSubmit = () => {
     return (
@@ -236,7 +234,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
             onDateChange(date);
           }}
           mode={mode}
-          textColor={dateTimePicker.active.pickerText as string}
+          textColor={colors.text as string}
           {...props}
           fadeToColor={theme.name === 'Dark' ? 'black' : 'white'}
         />
@@ -261,10 +259,10 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const bottomSheetProps: ModalizeProps = {
     adjustToContentHeight: true,
     modalStyle: {
-      backgroundColor: modal.containerBackground,
+      backgroundColor: colors.pageBackground,
     },
     overlayStyle: {
-      backgroundColor: modal.outsideBackground,
+      backgroundColor: colors.modalOutside,
     },
     handlePosition: "inside",
     childrenStyle: {
@@ -282,7 +280,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
             onDateChange(date);
           }}
           mode={mode}
-          textColor={dateTimePicker.active.pickerText as string}
+          textColor={colors.text as string}
           {...props}
           fadeToColor={theme.name === 'Dark' ? 'black' : 'white'}
           style={{
@@ -325,7 +323,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     if (warning) {
       return (
         <View style={[styles.warningContainer, warningContainerStyle]}>
-          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: common.warning }, warningStyle]}>{warning}</Text>
+          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: colors.warning }, warningStyle]}>{warning}</Text>
         </View>
       )
     }
@@ -336,7 +334,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     if (error) {
       return (
         <View style={[styles.errorContainer, errorContainerStyle]}>
-          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
+          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.destructive }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -355,19 +353,30 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
             borderRadius: component.radius,
             paddingVertical: component.vertical,
             paddingHorizontal: component.horizontal,
-            backgroundColor: dateTimePicker[STATE].background,
-            borderColor: error ? common.error : dateTimePicker[STATE].border,
+            backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
+            borderColor: error ? colors.destructive : colors.seperator,
           },
           containerStyle
         ]}
       >
         <View style={[styles.titleContainer, titleContainerStyle]}>
-          <Text size={titleSize} weigth={titleWeight} style={[styles.title, error ? { color: common.error } : {}, titleStyle]}>
+          <Text
+            active={active}
+            size={titleSize}
+            weigth={titleWeight}
+            style={[
+              styles.title,
+              error ?
+                { color: colors.destructive }
+                :
+                {},
+              titleStyle
+            ]}>
             {title}
           </Text>
         </View>
         <View style={[styles.valueContainer, valueContainerStyle]}>
-          <Text size={valueSize} weigth={valueWeight} style={[styles.value, valueStyle]}>
+          <Text active={active} size={valueSize} weigth={valueWeight} style={[styles.value, valueStyle]}>
             {date ? moment(date).format(displayFormat) : placeholder}
           </Text>
         </View>

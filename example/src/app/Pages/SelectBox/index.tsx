@@ -9,6 +9,17 @@ import {
   TapSelector,
 } from 'react-native-ccl';
 
+const ACTIVE_DATA = [
+  {
+    title: 'Active',
+    value: true,
+  },
+  {
+    title: 'Passive',
+    value: false,
+  },
+];
+
 const DATA = [
   {
     selected: false,
@@ -105,6 +116,7 @@ const SEARCHABLE_DATA = [
 
 const SelectBoxPage = () => {
   const navigation = useNavigation();
+  const [active, setActive] = useState<boolean>(true);
   const [areas, setAreas] = useState<any[]>(DATA);
   const [selectTypeIndex, setSelectTypeIndex] = useState<number>(0);
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
@@ -130,6 +142,7 @@ const SelectBoxPage = () => {
   return (
     <PageContainer type="default">
       <SelectBox
+        active={active}
         selectionType={SELECT_TYPE_DATA[selectTypeIndex].value as ISelectBoxProps<any>["selectionType"]}
         displayType={DISPLAY_TYPE_DATA[displayTypeIndex].value as ISelectBoxProps<any>["displayType"]}
         data={areas}
@@ -151,6 +164,13 @@ const SelectBoxPage = () => {
         error={error}
       />
       <View style={{ paddingTop: 16 }}>
+        <TapSelector
+          data={ACTIVE_DATA}
+          onTap={() => {
+            setActive(!active);
+          }}
+        />
+        <Seperator type="vertical" />
         <TapSelector
           data={SELECT_TYPE_DATA}
           onTap={(_: any, index: number) => {

@@ -96,7 +96,6 @@ const Modal: FC<CCLModalProps> = ({
     const [isVisible, setIsVisible] = useState<boolean>(visible);
     const theme = useTheme();
     const { colors, tokens } = theme;
-    const { modal } = colors;
     const { page, component } = tokens
 
     useEffect(() => {
@@ -190,7 +189,7 @@ const Modal: FC<CCLModalProps> = ({
                         styles.outside,
                         defineOutSideStyle(),
                         {
-                            backgroundColor: modal.outsideBackground,
+                            backgroundColor: colors.modalOutside,
                         },
                         outsideStyle,
                     ]
@@ -212,8 +211,8 @@ const Modal: FC<CCLModalProps> = ({
                             {
                                 padding: page.horizontal,
                                 borderRadius: component.doubleRadius,
-                                backgroundColor: modal.containerBackground,
-                                shadowColor: modal.shadow,
+                                backgroundColor: colors.pageBackground,
+                                shadowColor: colors.shadow,
                             },
                             containerStyle,
                         ]

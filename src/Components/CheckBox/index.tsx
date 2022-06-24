@@ -1,5 +1,6 @@
 import React, { FC, isValidElement, memo, ReactElement, ReactNode } from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { makeColorPassive } from '../../Utils';
 import { Icon, IIconProps, ITextProps, Text, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
 
@@ -84,11 +85,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme
-  const { checkBox } = colors
   const { component } = tokens
-
-  const STATE: keyof ColorScheme["checkBox"] = active ? "active" : "passive"
-
 
   const renderIcon = (): ReactElement | null => {
     if (iconSet) {
@@ -115,22 +112,22 @@ const CheckBox: FC<ICheckBoxProps> = ({
             {
               borderWidth: 2,
               borderRadius: 4,
-              borderColor: checkBox[STATE].iconBorder,
-              backgroundColor: selected
-                ? checkBox[STATE].iconBorder
-                : 'transparent',
+              borderColor: active ? colors.primary : selected ? colors.transparent : makeColorPassive(colors.primary),
+              backgroundColor: selected ? active ? colors.primary : makeColorPassive(colors.primary) : colors.transparent,
             },
           ]}
         >
-          {selected ? (
-            <Icon
-              family="Feather"
-              name="check"
-              size={16}
-              color={checkBox[STATE].icon}
-            />
-          ) : null}
-        </View>
+          {
+            selected ? (
+              <Icon
+                family="FontAwesome"
+                name="check"
+                size={16}
+                color={active ? colors.componentBackground : makeColorPassive(colors.componentBackground)
+                }
+              />
+            ) : null}
+        </View >
       );
     }
   };

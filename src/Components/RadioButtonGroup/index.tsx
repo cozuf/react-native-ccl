@@ -83,7 +83,6 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { radioButtonGroup } = colors;
   const { component } = tokens;
 
   const [dataList, setDataList] = useState(data);
@@ -124,7 +123,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
       <Seperator
         type="vertical"
         size={1}
-        style={[{ width: "96%", backgroundColor: radioButtonGroup.active.seperator }, styles.seperator]}
+        style={[{ width: "96%", backgroundColor: colors.seperator }, styles.seperator]}
         containerStyle={
           [
             styles.seperatorContainer,
