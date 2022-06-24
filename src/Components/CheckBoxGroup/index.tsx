@@ -107,7 +107,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme
-  const { component } = tokens
+
 
   const [dataList, setDataList] = useState(data);
 
@@ -185,7 +185,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
           [
             styles.seperatorContainer,
             {
-              paddingVertical: component.semiVertical
+              paddingVertical: tokens.semiInner
             }
           ]
         } />

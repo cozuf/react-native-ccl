@@ -193,13 +193,14 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   warningContainerStyle,
   ...props
 }) => {
-  const [visible, setVisible] = useState<boolean>(false);
-  const [nDate, setNDate] = useState<Date>(date || new Date());
-  const bottomSheet = useBottomSheet();
-  const setBottomSheet = useSetBottomSheet();
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { component } = tokens
+
+  const bottomSheet = useBottomSheet();
+  const setBottomSheet = useSetBottomSheet();
+
+  const [visible, setVisible] = useState<boolean>(false);
+  const [nDate, setNDate] = useState<Date>(date || new Date());
 
   const renderSubmit = () => {
     return (
@@ -349,10 +350,10 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         onPress={onPress}
         style={[
           {
-            borderWidth: component.border,
-            borderRadius: component.radius,
-            paddingVertical: component.vertical,
-            paddingHorizontal: component.horizontal,
+            borderWidth: tokens.thinBorder,
+            borderRadius: tokens.radius,
+            paddingVertical: tokens.inner,
+            paddingHorizontal: tokens.doubleInner,
             backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
             borderColor: error ? colors.destructive : colors.seperator,
           },

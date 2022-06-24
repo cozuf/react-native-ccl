@@ -303,7 +303,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { page: pageTokens, component } = tokens
 
   const [dataList, setDataList] = useState<any[]>(data as any[]);
   // const [value, setValue] = useState<string>(searchText || '');
@@ -386,7 +385,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         },
         disableScrollIfPossible: false,
         customRenderer: (
-          <Animated.View style={{ maxHeight: "100%", paddingVertical: pageTokens.vertical, paddingHorizontal: pageTokens.horizontal }}>
+          <Animated.View style={{ maxHeight: "100%", paddingVertical: tokens.inner, paddingHorizontal: tokens.doubleInner }}>
             {renderContent()}
           </Animated.View >
         ),
@@ -592,10 +591,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         onPress={onPress}
         style={[
           {
-            borderWidth: component.border,
-            borderRadius: component.radius,
-            paddingVertical: component.vertical,
-            paddingHorizontal: component.horizontal,
+            borderWidth: tokens.thinBorder,
+            borderRadius: tokens.radius,
+            paddingVertical: tokens.inner,
+            paddingHorizontal: tokens.doubleInner,
             backgroundColor: colors.componentBackground,
             borderColor: error ? colors.destructive : colors.text,
           },

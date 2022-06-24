@@ -91,17 +91,16 @@ const Switch: FC<ISwitchTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { component } = tokens;
 
   return (
     <View
       style={[
         styles.container,
         {
-          borderWidth: component.border,
-          borderRadius: component.radius,
-          paddingVertical: component.semiVertical,
-          paddingHorizontal: component.semiHorizontal,
+          borderWidth: tokens.thinBorder,
+          borderRadius: tokens.radius,
+          paddingVertical: tokens.semiInner,
+          paddingHorizontal: tokens.inner,
           backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
           borderColor: active ? colors.text : makeColorPassive(colors.text),
         },

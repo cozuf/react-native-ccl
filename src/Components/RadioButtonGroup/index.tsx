@@ -83,7 +83,6 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { component } = tokens;
 
   const [dataList, setDataList] = useState(data);
 
@@ -128,7 +127,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
           [
             styles.seperatorContainer,
             {
-              paddingVertical: component.semiVertical
+              paddingVertical: tokens.semiInner
             }
           ]
         } />

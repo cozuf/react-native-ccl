@@ -96,7 +96,6 @@ const Modal: FC<CCLModalProps> = ({
     const [isVisible, setIsVisible] = useState<boolean>(visible);
     const theme = useTheme();
     const { colors, tokens } = theme;
-    const { page, component } = tokens
 
     useEffect(() => {
         setIsVisible(visible);
@@ -107,23 +106,23 @@ const Modal: FC<CCLModalProps> = ({
             case "default":
             default:
                 return {
-                    paddingVertical: page.doubleHorizontal,
-                    paddingHorizontal: page.doubleHorizontal
+                    paddingVertical: tokens.fourTimesInner,
+                    paddingHorizontal: tokens.fourTimesInner
                 }
             case "fault":
             case "warning":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: page.doubleHorizontal
+                    paddingHorizontal: tokens.fourTimesInner
                 }
             case "loading":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: page.doubleHorizontal
+                    paddingHorizontal: tokens.fourTimesInner
                 }
             case "selective":
                 return {
-                    paddingHorizontal: page.doubleHorizontal
+                    paddingHorizontal: tokens.fourTimesInner
                 }
         }
     }
@@ -209,8 +208,8 @@ const Modal: FC<CCLModalProps> = ({
                             styles.container,
                             defineContainerStyle(),
                             {
-                                padding: page.horizontal,
-                                borderRadius: component.doubleRadius,
+                                padding: tokens.doubleInner,
+                                borderRadius: tokens.radius * 2,
                                 backgroundColor: colors.pageBackground,
                                 shadowColor: colors.shadow,
                             },

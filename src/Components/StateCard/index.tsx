@@ -75,7 +75,6 @@ const StateCard: FC<IStateCardProps> = ({
 
     const theme = useTheme()
     const { colors, tokens } = theme
-    const { page } = tokens
 
     const renderIcon = () => {
         if (isValidElement(icon)) {
@@ -126,8 +125,8 @@ const StateCard: FC<IStateCardProps> = ({
     return (
         <View style={[
             {
-                paddingHorizontal: page.doubleHorizontal,
-                paddingVertical: page.doubleVertical
+                paddingHorizontal: tokens.fourTimesInner,
+                paddingVertical: tokens.fourTimesInner
             },
             styles.stateContainer]}>
             {renderIcon()}

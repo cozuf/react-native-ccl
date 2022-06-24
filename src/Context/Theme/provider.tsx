@@ -60,13 +60,7 @@ const mergeColors = (name: string, newColors?: Partial<ColorScheme>): ColorSchem
 
 const mergeTokens = (newTokens?: Partial<TokenScheme>): TokenScheme => {
     return {
-        page: {
-            ...DefaultTokens.page,
-            ...newTokens?.page
-        },
-        component: {
-            ...DefaultTokens.component,
-            ...newTokens?.component
-        }
+        ...DefaultTokens,
+        ...newTokens
     }
 }

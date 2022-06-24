@@ -14,7 +14,6 @@ export interface IBottomSheetProps extends ModalizeProps {
 const BottomSheet = forwardRef((props: PropsWithChildren<IBottomSheetProps>, ref: Ref<BottomSheetRef>) => {
     const modalizeRef = useRef<Modalize>()
     const { colors, tokens } = useTheme()
-    const { component } = tokens
 
     useImperativeHandle(ref, () => {
         if (modalizeRef && modalizeRef.current) {
@@ -44,7 +43,7 @@ const BottomSheet = forwardRef((props: PropsWithChildren<IBottomSheetProps>, ref
                 backgroundColor: colors.modalOutside
             }]}
             childrenStyle={[props.childrenStyle, {
-                paddingTop: component.vertical
+                paddingTop: tokens.inner
             }]}
             {...props}
         >

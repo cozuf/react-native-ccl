@@ -201,7 +201,6 @@ const NTextInput: FC<ITextInputTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, fonts, tokens } = theme;
-  const { component } = tokens;
 
   const NativeTextInputRef = useRef<TextInput | null>(null);
   const [isFocused, setIsFocused] = useState<boolean>();
@@ -474,9 +473,9 @@ const NTextInput: FC<ITextInputTypes> = ({
         style={[
           styles.container,
           {
-            padding: component.vertical,
-            borderRadius: component.radius,
-            borderWidth: component.border,
+            padding: tokens.inner,
+            borderRadius: tokens.radius,
+            borderWidth: tokens.thinBorder,
             backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
             borderColor: active ? error ? colors.destructive : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text),
           },

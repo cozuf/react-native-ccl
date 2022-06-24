@@ -15,7 +15,6 @@ import {
 import { makeColorPassive } from '../../Utils';
 import { Icon, IIconProps, Text, ITextProps } from '..';
 import { useTheme } from '../../Context/Theme';
-import { tokens } from '../../Theme';
 
 export interface IButtonProps {
   /**
@@ -112,8 +111,8 @@ const Button: FC<IButtonTypes> = ({
 }) => {
   const [pressed, setPressed] = useState<boolean>(false);
   const theme = useTheme();
-  const { colors } = theme
-  // FIXME: active passive durumu
+  const { colors, tokens } = theme
+
   const defineBackgroundColor = (): ColorValue | undefined => {
     if (clickType === "opacity" || (clickType === "changeable" && !pressed)) {
       switch (type) {
@@ -201,8 +200,8 @@ const Button: FC<IButtonTypes> = ({
   const renderContainerStyle = (): StyleProp<ViewStyle> => {
     return {
       backgroundColor: defineBackgroundColor(),
-      borderRadius: tokens.component.radius,
-      borderWidth: tokens.component.border,
+      borderRadius: tokens.radius,
+      borderWidth: tokens.thinBorder,
       borderColor: defineBorderColor(),
       alignSelf: wrappableStyle(),
     };
@@ -270,8 +269,8 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-              paddingVertical: tokens.component.vertical,
-              paddingHorizontal: tokens.component.horizontal,
+              paddingVertical: tokens.inner,
+              paddingHorizontal: tokens.doubleInner,
             }
             : {},
           wrap !== 'free' ? styles.container : {},
@@ -306,8 +305,8 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-              paddingVertical: tokens.component.vertical,
-              paddingHorizontal: tokens.component.horizontal
+              paddingVertical: tokens.inner,
+              paddingHorizontal: tokens.doubleInner,
             }
             : {},
           wrap !== 'free' ? styles.container : {},
