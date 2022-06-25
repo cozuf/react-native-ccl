@@ -53,14 +53,9 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value, containerStyle }) =>
   const defineContainerStyle: StyleProp<ViewStyle> =
     value ?
       {
-        height:
-          Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
-        width:
-          Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
-        borderRadius:
-          Platform.OS === 'android'
-            ? calculateSize() / 2
-            : (calculateSize() + 6) / 2,
+        height: Platform.OS === 'android' && Platform.Version < 28 ? calculateSize() : calculateSize() + 6,
+        width: Platform.OS === 'android' && Platform.Version < 28 ? calculateSize() : calculateSize() + 6,
+        borderRadius: Platform.OS === 'android' && Platform.Version < 28 ? calculateSize() / 2 : (calculateSize() + 6) / 2,
         borderColor: colors.pageBackground,
         backgroundColor: colors.primary,
         shadowColor: colors.shadow,
