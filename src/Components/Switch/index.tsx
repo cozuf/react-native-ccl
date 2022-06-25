@@ -154,3 +154,4 @@ const styles = StyleSheet.create({
 })
 
 // TODO: Kendin yap animated ile böylelikle ikiside aynı olur
+// TODO: Sağlı Sollu tasarım olabilir
