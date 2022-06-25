@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Badge, IBadgeProps, PageContainer, TapSelector } from 'react-native-ccl';
+import { Badge, Button, IBadgeProps, PageContainer, TapSelector } from 'react-native-ccl';
 
 const SIZES = [{ title: 'small' }, { title: 'medium' }, { title: 'large' }];
 const VALUES = [{ title: 5 }, { title: 10 }];
+
 const BadgePage = () => {
   const [sizeIndex, setSizeIndex] = useState<number>(0);
   const [valueIndex, setValueIndex] = useState<number>(0);
+
   return (
     <PageContainer type="default">
       <View style={{ alignItems: 'center', paddingVertical: 12 }}>
-        <Badge
-          size={SIZES[sizeIndex].title as IBadgeProps["size"]}
-          value={VALUES[valueIndex].title}
-        />
+        <View style={{ padding: sizeIndex === 0 ? 10 : sizeIndex === 1 ? 12 : 14 }}>
+          <Button onPress={() => { }} />
+          <Badge
+            size={SIZES[sizeIndex].title as IBadgeProps["size"]}
+            value={VALUES[valueIndex].title}
+          />
+        </View>
       </View>
       <View style={{ paddingVertical: 16 }}>
         <TapSelector
