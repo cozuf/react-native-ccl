@@ -15,7 +15,6 @@ class Example extends Component<Props, State>{
         }
     }
     render(): React.ReactNode {
-        console.log({ props: this.props })
         const { value } = this.state
         const { globalState, setGlobalState } = this.props
         const { token } = globalState

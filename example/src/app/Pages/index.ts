@@ -24,7 +24,6 @@ const PAGES_NAMES = {
   TextPage: 'TextPage',
   TextInputPage: 'TextInputPage',
   SelectPage: 'SelectPage',
-  ColorsPage: 'ColorsPage',
   ClassGlobalStatePage: "ClassGlobalStatePage",
   ClassExample: "ClassExample",
   StateCardPage: "StateCardPage",

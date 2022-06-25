@@ -144,4 +144,3 @@ const styles = StyleSheet.create({
 })
 
 // TODO: animated ekle
-// TODO: ColorScheme ye ekle

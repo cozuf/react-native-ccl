@@ -37,7 +37,6 @@ import ModalPage from '../Pages/Modal';
 import SelectBoxPage from '../Pages/SelectBox';
 import DateTimePickerPage from '../Pages/DateTimePicker';
 import SwitchPage from '../Pages/Switch';
-import ColorsPage from '../Pages/Colors';
 import BottomSheetPage from '../Pages/BottomSheet';
 import SnackBarPage from '../Pages/SnackBar';
 import CardPage from '../Pages/Card';
@@ -146,7 +145,6 @@ const Router = () => {
       <Stack.Screen name={PAGES_NAMES.SelectPage} component={SelectBoxSelectPage} />
       <Stack.Screen name={PAGES_NAMES.DateTimePickerPage} component={DateTimePickerPage} />
       <Stack.Screen name={PAGES_NAMES.SwitchPage} component={SwitchPage} />
-      <Stack.Screen name={PAGES_NAMES.ColorsPage} component={ColorsPage} />
       <Stack.Screen name={PAGES_NAMES.BottomSheetPage} component={BottomSheetPage} />
       <Stack.Screen name={PAGES_NAMES.SnackBarPage} component={SnackBarPage} />
       <Stack.Screen name={PAGES_NAMES.CardPage} component={CardPage} />
