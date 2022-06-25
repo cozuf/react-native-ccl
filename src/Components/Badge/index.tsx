@@ -11,12 +11,12 @@ export interface IBadgeProps {
   /**
    *
    */
-  size?: 'small' | 'medium' | 'large' | number;
+  size?: 'small' | 'medium' | 'large' | number
 
   /**
    *
    */
-  value: number | string;
+  value: number | string | undefined
 
   /**
    * 
@@ -24,7 +24,7 @@ export interface IBadgeProps {
   containerStyle?: StyleProp<ViewStyle>
 }
 
-const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1, containerStyle }) => {
+const Badge: FC<IBadgeProps> = ({ testID, size = 20, value, containerStyle }) => {
   const { colors } = useTheme()
 
   const calculateSize = (): number => {
@@ -41,26 +41,39 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value = 1, containerStyle }
   };
 
   const getValue = (): string | undefined => {
-    if (typeof value === 'number' && value > 9) {
-      return '9+';
-    } else {
-      return value.toString();
+    if (typeof value === 'number') {
+      if (value > 9) {
+        return '9+';
+      }
+      return value.toString()
     }
+    return value
   };
 
-  const defineContainerStyle: StyleProp<ViewStyle> = {
-    height:
-      Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
-    width:
-      Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
-    borderRadius:
-      Platform.OS === 'android'
-        ? calculateSize() / 2
-        : (calculateSize() + 6) / 2,
-    borderColor: colors.pageBackground,
-    backgroundColor: colors.primary,
-    shadowColor: colors.shadow,
-  }
+  const defineContainerStyle: StyleProp<ViewStyle> =
+    value ?
+      {
+        height:
+          Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
+        width:
+          Platform.OS === 'android' ? calculateSize() : calculateSize() + 6,
+        borderRadius:
+          Platform.OS === 'android'
+            ? calculateSize() / 2
+            : (calculateSize() + 6) / 2,
+        borderColor: colors.pageBackground,
+        backgroundColor: colors.primary,
+        shadowColor: colors.shadow,
+      }
+      :
+      {
+        height: 16,
+        width: 16,
+        borderRadius: 8,
+        borderColor: colors.pageBackground,
+        backgroundColor: colors.primary,
+        shadowColor: colors.shadow,
+      }
 
   return (
     <View
@@ -115,5 +128,3 @@ const styles = StyleSheet.create({
     textAlignVertical: "center"
   }
 })
-
-// TODO: value'siz durum

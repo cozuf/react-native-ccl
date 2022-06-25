@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Badge, Button, IBadgeProps, PageContainer, TapSelector } from 'react-native-ccl';
 
 const SIZES = [{ title: 'small' }, { title: 'medium' }, { title: 'large' }];
-const VALUES = [{ title: 5 }, { title: 10 }];
+const VALUES = [{ title: undefined }, { title: 5 }, { title: 10 }];
 
 const BadgePage = () => {
   const [sizeIndex, setSizeIndex] = useState<number>(0);
@@ -12,7 +12,7 @@ const BadgePage = () => {
   return (
     <PageContainer type="default">
       <View style={{ alignItems: 'center', paddingVertical: 12 }}>
-        <View style={{ padding: sizeIndex === 0 ? 10 : sizeIndex === 1 ? 12 : 14 }}>
+        <View style={{ padding: valueIndex !== 0 ? sizeIndex === 0 ? 10 : sizeIndex === 1 ? 12 : 14 : 8 }}>
           <Button onPress={() => { }} />
           <Badge
             size={SIZES[sizeIndex].title as IBadgeProps["size"]}
