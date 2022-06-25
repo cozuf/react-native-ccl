@@ -222,7 +222,6 @@ const Button: FC<IButtonTypes> = ({
   };
 
   const renderTitle = (): ReactNode => {
-
     return (
       <Text
         weigth={titleWeight}
@@ -339,6 +338,3 @@ const styles = StyleSheet.create({
   title: {
   }
 })
-
-// TODO: Butonda ikon pozisyonu sağ sol
-// TODO: Seperatoru flexDirection durumuna göre ayarla
