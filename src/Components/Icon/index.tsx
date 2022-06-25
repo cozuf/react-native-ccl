@@ -1,5 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
+import { makeColorPassive } from '../../Utils'
+import { useTheme } from '../../Context/Theme'
+
 // @ts-ignore
 import AntDesign from 'react-native-vector-icons/AntDesign';
 // @ts-ignore
@@ -30,7 +33,6 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 // @ts-ignore
 import Zocial from 'react-native-vector-icons/Zocial';
-import { useTheme } from '../../Context/Theme';
 
 export interface IIconProps {
   /**
@@ -86,9 +88,8 @@ const Icon: FC<IIconProps> = ({
   active = true,
   containerStyle
 }) => {
-  const theme = useTheme();
-  const { icon } = theme.colors;
-  const COLOR = color ? color : icon[active ? 'active' : 'passive'];
+  const { colors } = useTheme();
+  const COLOR = color ? active ? color : makeColorPassive(color) : active ? colors.primary : makeColorPassive(colors.primary);
 
   const renderIcon = (): ReactNode => {
     switch (family) {

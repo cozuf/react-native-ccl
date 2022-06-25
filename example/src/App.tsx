@@ -35,16 +35,15 @@ const App = () => {
 export default App;
 
 const Child = () => {
-  const theme = useTheme();
-  const { common } = theme.colors;
+  const { name, colors } = useTheme();
 
   return (
     <SafeAreaView
-      style={[styles.safeAreaContainer, { backgroundColor: common.statusbar }]}
+      style={[styles.safeAreaContainer, { backgroundColor: colors.pageBackground }]}
     >
       <StatusBar
-        backgroundColor={common.statusbar}
-        barStyle={theme.name === 'Dark' ? 'light-content' : 'dark-content'}
+        backgroundColor={colors.pageBackground}
+        barStyle={name === 'Dark' ? 'light-content' : 'dark-content'}
       />
       <Router />
     </SafeAreaView>

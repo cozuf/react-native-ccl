@@ -14,6 +14,7 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
+import { makeColorPassive } from '../../Utils';
 import { Button, Icon, IIconProps, Text, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
 import type { ITextProps } from '../Text';
@@ -200,14 +201,11 @@ const NTextInput: FC<ITextInputTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, fonts, tokens } = theme;
-  const { textInput, common } = colors;
-  const { component } = tokens;
 
   const NativeTextInputRef = useRef<TextInput | null>(null);
   const [isFocused, setIsFocused] = useState<boolean>();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
 
-  const STATE: keyof ColorScheme["textInput"] = active ? isFocused ? "focused" : "active" : "passive"
 
   const defineSize = (): number => {
     switch (valueSize) {
@@ -265,7 +263,7 @@ const NTextInput: FC<ITextInputTypes> = ({
               family={CoreIcon.family}
               name={CoreIcon.name}
               size={CoreIcon.size}
-              color={CoreIcon.color || error ? common.error : textInput[STATE].titleText}
+              color={active ? CoreIcon.color || error ? colors.destructive : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text)}
             />
           </View>
         );
@@ -285,7 +283,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (warning) {
       return (
         <View style={[styles.warningContainer, warningContainerStyle]}>
-          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: common.warning }, warningStyle,]}>{warning}</Text>
+          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: colors.warning }, warningStyle,]}>{warning}</Text>
         </View>
       )
     }
@@ -296,7 +294,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (error) {
       return (
         <View style={[styles.errorContainer, errorContainerStyle]}>
-          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: common.error }, errorStyle]}>{error}</Text>
+          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.destructive }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -322,7 +320,7 @@ const NTextInput: FC<ITextInputTypes> = ({
               family: 'Ionicons',
               name: 'close',
               size: 20,
-              color: textInput[STATE].inputText,
+              color: colors.text,
             }}
             onPress={() => {
               NativeTextInputRef.current?.clear();
@@ -348,7 +346,7 @@ const NTextInput: FC<ITextInputTypes> = ({
                 family: 'Entypo',
                 name: 'eye',
                 size: 20,
-                color: textInput[STATE].inputText,
+                color: colors.text,
               }}
               onPress={() => {
                 setPasswordVisible(false)
@@ -369,7 +367,7 @@ const NTextInput: FC<ITextInputTypes> = ({
                 family: 'Entypo',
                 name: 'eye-with-line',
                 size: 20,
-                color: textInput[STATE].inputText,
+                color: colors.text,
               }}
               onPress={() => {
                 setPasswordVisible(true)
@@ -388,7 +386,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (title) {
       return (
         <View style={[styles.titleContainer, titleContainerStyle]}>
-          <Text weigth={titleWeight} size={titleSize} style={[styles.title, titleStyle, { color: error ? common.error : textInput[STATE].titleText }]}>
+          <Text weigth={titleWeight} size={titleSize} style={[styles.title, titleStyle, { color: active ? error ? colors.destructive : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text) }]}>
             {isRequired ? `* ${title}` : title}
           </Text>
         </View>
@@ -419,8 +417,8 @@ const NTextInput: FC<ITextInputTypes> = ({
                   ios: {
                     paddingVertical:
                       inputStyle && (inputStyle as TextStyle).paddingVertical
-                        ? Number((inputStyle as TextStyle)?.paddingVertical) + 6.5
-                        : 6.5,
+                        ? Number((inputStyle as TextStyle)?.paddingVertical) + 4
+                        : 4,
                   },
                   android: {
                     paddingVertical:
@@ -430,7 +428,7 @@ const NTextInput: FC<ITextInputTypes> = ({
                   },
                 }),
               },
-              { color: textInput[STATE].inputText },
+              { color: colors.text },
             ]}
             keyboardType={keyboardType()}
             secureTextEntry={type === 'password' && !passwordVisible}
@@ -446,10 +444,8 @@ const NTextInput: FC<ITextInputTypes> = ({
                 onBlur(e);
               }
             }}
-            selectionColor={textInput.focused.selection}
-            placeholderTextColor={
-              textInput[active ? 'active' : 'passive'].placeholder
-            }
+            selectionColor={colors.primary}
+            placeholderTextColor={colors.placeholder}
             {...props}
           />
         </View>
@@ -477,11 +473,11 @@ const NTextInput: FC<ITextInputTypes> = ({
         style={[
           styles.container,
           {
-            padding: component.vertical,
-            borderRadius: component.radius,
-            borderWidth: component.border,
-            backgroundColor: textInput[STATE].background,
-            borderColor: error ? common.error : textInput[STATE].border,
+            padding: tokens.inner,
+            borderRadius: tokens.radius,
+            borderWidth: tokens.thinBorder,
+            backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
+            borderColor: active ? error ? colors.destructive : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text),
           },
           containerStyle
         ]}

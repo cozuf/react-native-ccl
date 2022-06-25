@@ -1,5 +1,6 @@
 import React, { FC, ReactElement, ReactNode, useRef, useState } from "react";
 import { Animated, View, Omit, Pressable, Easing, ViewStyle, StyleSheet } from "react-native";
+import { makeColorPassive } from "../../Utils";
 import { Icon, IIconProps, } from "..";
 import { useTheme } from '../../Context/Theme';
 
@@ -59,9 +60,9 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     active = true,
     isExpanded = true,
     icon = {
-        family: "MaterialIcons",
-        name: "keyboard-arrow-down",
-        size: 20
+        family: "Entypo",
+        name: "chevron-down",
+        size: 24
     },
     headerComponent = () => null,
     footerComponent = () => null,
@@ -73,13 +74,10 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
 }) => {
     const theme = useTheme()
     const { colors, tokens } = theme
-    const { card } = colors
-    const { component } = tokens
+
     const [open, setOpen] = useState(isExpanded);
     const animatedController = useRef(new Animated.Value(isExpanded ? 1 : 0)).current;
     const [bodySectionHeight, setBodySectionHeight] = useState<number>(0);
-
-    const STATE: keyof ColorScheme["card"] = active ? "active" : "passive"
 
     const bodyHeight = animatedController.interpolate({
         inputRange: [0, 1],
@@ -118,7 +116,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
     };
 
     const renderIcon = (): ReactElement | null => {
-        return <Icon family={icon.family || "MaterialIcons"} name={icon.name || "keyboard-arrow-down"} size={icon.size || 20} color={icon?.color || card[STATE].border} />
+        return <Icon family={icon.family} name={icon.name || "chevron-down"} size={icon.size} color={icon.color || active ? colors.primary : makeColorPassive(colors.primary)} />
     }
 
     return (
@@ -127,12 +125,12 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
             style={
                 [
                     {
-                        borderWidth: component.border,
-                        borderRadius: component.radius,
-                        paddingVertical: component.vertical,
-                        paddingHorizontal: component.horizontal,
-                        borderColor: card[STATE].border,
-                        backgroundColor: card[STATE].background,
+                        borderWidth: tokens.thinBorder,
+                        borderRadius: tokens.radius,
+                        paddingVertical: tokens.inner,
+                        paddingHorizontal: tokens.doubleInner,
+                        borderColor: active ? colors.primary : makeColorPassive(colors.primary),
+                        backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
                     },
                     containerStyle
                 ]
@@ -156,7 +154,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
             <View style={[footerContainerStyle, styles.footerContainer]}>
                 {footerComponent()}
             </View>
-        </Pressable>
+        </Pressable >
     );
 }
 
@@ -171,22 +169,18 @@ const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({
 }) => {
     const theme = useTheme()
     const { colors, tokens } = theme
-    const { card } = colors
-    const { component } = tokens
-
-    const STATE: keyof ColorScheme["card"] = active ? "active" : "passive"
 
     return (
         <View
             style={
                 [
                     {
-                        borderWidth: component.border,
-                        borderRadius: component.radius,
-                        paddingVertical: component.vertical,
-                        paddingHorizontal: component.horizontal,
-                        borderColor: card[STATE].border,
-                        backgroundColor: card[STATE].background,
+                        borderWidth: tokens.thinBorder,
+                        borderRadius: tokens.radius,
+                        paddingVertical: tokens.inner,
+                        paddingHorizontal: tokens.doubleInner,
+                        borderColor: active ? colors.primary : makeColorPassive(colors.primary),
+                        backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
                     },
                     containerStyle
                 ]

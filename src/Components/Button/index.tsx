@@ -10,10 +10,11 @@ import {
   Omit,
   GestureResponderEvent,
   StyleSheet,
+  ColorValue,
 } from 'react-native';
+import { makeColorPassive } from '../../Utils';
 import { Icon, IIconProps, Text, ITextProps } from '..';
 import { useTheme } from '../../Context/Theme';
-import { tokens } from '../../Theme';
 
 export interface IButtonProps {
   /**
@@ -37,7 +38,7 @@ export interface IButtonProps {
    * @enum 'filled' | 'outlined' | 'simplied'
    * @default filled
    */
-  type?: keyof ColorScheme["button"]["active"]["normal"]
+  type?: "filled" | "outlined" | "simplied"
 
   /**
    * @enum 'wrap' | 'no-wrap' | 'free'
@@ -110,11 +111,79 @@ const Button: FC<IButtonTypes> = ({
 }) => {
   const [pressed, setPressed] = useState<boolean>(false);
   const theme = useTheme();
-  const { colors } = theme
-  const { button } = colors
+  const { colors, tokens } = theme
 
-  const STATE: keyof ColorScheme["button"] = props.disabled ? "passive" : "active"
-  const PRESSED_STATE: keyof ColorScheme["button"]["active"] = pressed ? "pressed" : "normal"
+  const defineBackgroundColor = (): ColorValue | undefined => {
+    if (clickType === "opacity" || (clickType === "changeable" && !pressed)) {
+      switch (type) {
+        case "filled":
+        default:
+          return props.disabled ? makeColorPassive(colors.primary) : colors.primary
+        case "outlined":
+          return props.disabled ? makeColorPassive(colors.pageBackground) : colors.pageBackground
+        case "simplied":
+          return colors.transparent
+      }
+    } else {
+      switch (type) {
+        case "filled":
+        default:
+          return colors.componentBackground
+        case "outlined":
+          return colors.primary
+        case "simplied":
+          return colors.componentBackground
+      }
+    }
+  }
+
+  const defineBorderColor = (): ColorValue | undefined => {
+    if (clickType === "opacity" || (clickType === "changeable" && !pressed)) {
+      switch (type) {
+        case "filled":
+        default:
+          return props.disabled ? colors.transparent : colors.primary
+        case "outlined":
+          return props.disabled ? makeColorPassive(colors.primary) : colors.primary
+        case "simplied":
+          return colors.transparent
+      }
+    } else {
+      switch (type) {
+        case "filled":
+        default:
+          return colors.primary
+        case "outlined":
+          return colors.primary
+        case "simplied":
+          return colors.transparent
+      }
+    }
+  }
+
+  const defineChildrenColor = (): ColorValue | undefined => {
+    if (clickType === "opacity" || (clickType === "changeable" && !pressed)) {
+      switch (type) {
+        case "filled":
+        default:
+          return props.disabled ? makeColorPassive(colors.componentText) : colors.componentText
+        case "outlined":
+          return props.disabled ? makeColorPassive(colors.primary) : colors.primary
+        case "simplied":
+          return props.disabled ? makeColorPassive(colors.primary) : colors.primary
+      }
+    } else {
+      switch (type) {
+        case "filled":
+        default:
+          return colors.primary
+        case "outlined":
+          return colors.componentText
+        case "simplied":
+          return colors.primary
+      }
+    }
+  }
 
   const wrappableStyle = (): FlexAlignType | undefined => {
     switch (wrap) {
@@ -130,10 +199,10 @@ const Button: FC<IButtonTypes> = ({
 
   const renderContainerStyle = (): StyleProp<ViewStyle> => {
     return {
-      backgroundColor: button[STATE][PRESSED_STATE][type].background,
-      borderRadius: tokens.component.radius,
-      borderWidth: tokens.component.border,
-      borderColor: button[STATE][PRESSED_STATE][type].border,
+      backgroundColor: defineBackgroundColor(),
+      borderRadius: tokens.radius,
+      borderWidth: tokens.thinBorder,
+      borderColor: defineBorderColor(),
       alignSelf: wrappableStyle(),
     };
   };
@@ -146,7 +215,7 @@ const Button: FC<IButtonTypes> = ({
       return (
         <Icon
           {...CoreIcon}
-          color={CoreIcon.color ? CoreIcon.color : button[STATE][PRESSED_STATE][type].text}
+          color={CoreIcon.color ? CoreIcon.color : defineChildrenColor()}
         />
       );
     }
@@ -161,7 +230,7 @@ const Button: FC<IButtonTypes> = ({
         style={
           [
             {
-              color: button[STATE][PRESSED_STATE][type].text
+              color: defineChildrenColor()
             },
             styles.title,
             titleStyle
@@ -200,8 +269,8 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-              paddingVertical: tokens.component.vertical,
-              paddingHorizontal: tokens.component.horizontal,
+              paddingVertical: tokens.inner,
+              paddingHorizontal: tokens.doubleInner,
             }
             : {},
           wrap !== 'free' ? styles.container : {},
@@ -236,8 +305,8 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-              paddingVertical: tokens.component.vertical,
-              paddingHorizontal: tokens.component.horizontal
+              paddingVertical: tokens.inner,
+              paddingHorizontal: tokens.doubleInner,
             }
             : {},
           wrap !== 'free' ? styles.container : {},

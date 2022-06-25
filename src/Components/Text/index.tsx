@@ -6,6 +6,7 @@ import {
   TextProps as NativeTextProps,
   TextStyle as NativeTextStyle,
 } from 'react-native';
+import { makeColorPassive } from '../../Utils';
 import { useTheme } from '../../Context/Theme';
 
 type TextStyle = Omit<NativeTextStyle, 'fontFamily' | 'fontWeight' | 'fontSize'>
@@ -68,9 +69,6 @@ const Regular: FC<ITextTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, fonts } = theme
-  const { text } = colors
-
-  const STATE: keyof ColorScheme["text"] = active ? "active" : "passive"
 
   const defineSize = (): number => {
     switch (size) {
@@ -128,7 +126,7 @@ const Regular: FC<ITextTypes> = ({
         {
           fontFamily: fonts[weigth],
           fontSize: defineSize(),
-          color: text[STATE],
+          color: active ? colors.text : makeColorPassive(colors.text),
         },
         defineStyle(style)
       ]

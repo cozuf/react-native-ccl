@@ -51,95 +51,16 @@ export default ThemeProvider;
 const mergeColors = (name: string, newColors?: Partial<ColorScheme>): ColorScheme => {
     const defaultColors = name === "Light" || name === "light" ? light : dark
 
+    // FIXME: burada olanları ve olmayanlarıda dene
     return {
-        badge: {
-            ...defaultColors.badge,
-            ...newColors?.badge
-        },
-        button: {
-            ...defaultColors.button,
-            ...newColors?.button
-        },
-        card: {
-            ...defaultColors.card,
-            ...newColors?.card
-        },
-        checkBox: {
-            ...defaultColors.checkBox,
-            ...newColors?.checkBox
-        },
-        checkBoxGroup: {
-            ...defaultColors.checkBoxGroup,
-            ...newColors?.checkBoxGroup
-        },
-        chip: {
-            ...defaultColors.chip,
-            ...newColors?.chip
-        },
-        chipGroup: {
-            ...defaultColors.chipGroup,
-            ...newColors?.chipGroup
-        },
-        common: {
-            ...defaultColors.common,
-            ...newColors?.common
-        },
-        dateTimePicker: {
-            ...defaultColors.dateTimePicker,
-            ...newColors?.dateTimePicker
-        },
-        icon: {
-            ...defaultColors.icon,
-            ...newColors?.icon
-        },
-        modal: {
-            ...defaultColors.modal,
-            ...newColors?.modal
-        },
-        pageContainer: {
-            ...defaultColors.pageContainer,
-            ...newColors?.pageContainer
-        },
-        radioButton: {
-            ...defaultColors.radioButton,
-            ...newColors?.radioButton
-        },
-        radioButtonGroup: {
-            ...defaultColors.radioButtonGroup,
-            ...newColors?.radioButtonGroup
-        },
-        selectBox: {
-            ...defaultColors.selectBox,
-            ...newColors?.selectBox
-        },
-        snackBar: {
-            ...defaultColors.snackBar,
-            ...newColors?.snackBar
-        },
-        switchComponent: {
-            ...defaultColors.switchComponent,
-            ...newColors?.switchComponent
-        },
-        text: {
-            ...defaultColors.text,
-            ...newColors?.text
-        },
-        textInput: {
-            ...defaultColors.textInput,
-            ...newColors?.textInput
-        }
+        ...defaultColors,
+        ...newColors
     }
 }
 
 const mergeTokens = (newTokens?: Partial<TokenScheme>): TokenScheme => {
     return {
-        page: {
-            ...DefaultTokens.page,
-            ...newTokens?.page
-        },
-        component: {
-            ...DefaultTokens.component,
-            ...newTokens?.component
-        }
+        ...DefaultTokens,
+        ...newTokens
     }
 }

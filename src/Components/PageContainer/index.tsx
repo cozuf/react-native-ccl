@@ -52,8 +52,6 @@ const PageContainer: FC<IPageContainerTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { pageContainer } = colors;
-  const { page } = tokens;
 
   if (loading) {
     return (
@@ -62,9 +60,9 @@ const PageContainer: FC<IPageContainerTypes> = ({
         style={[
           styles.container,
           {
-            backgroundColor: pageContainer.background,
-            paddingVertical: page.vertical,
-            paddingHorizontal: page.horizontal,
+            backgroundColor: colors.pageBackground,
+            paddingVertical: tokens.inner,
+            paddingHorizontal: tokens.doubleInner,
             alignItems: "center",
             justifyContent: "center"
           },
@@ -85,9 +83,9 @@ const PageContainer: FC<IPageContainerTypes> = ({
           style={[
             styles.container,
             {
-              backgroundColor: pageContainer.background,
-              paddingVertical: page.vertical,
-              paddingHorizontal: page.horizontal,
+              backgroundColor: colors.pageBackground,
+              paddingVertical: tokens.inner,
+              paddingHorizontal: tokens.doubleInner,
             },
             style,
           ]}
@@ -104,7 +102,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
           style={
             [
               {
-                backgroundColor: pageContainer.background,
+                backgroundColor: colors.pageBackground,
               },
               style
             ]
@@ -113,9 +111,9 @@ const PageContainer: FC<IPageContainerTypes> = ({
             [
               styles?.contentContainer,
               {
-                backgroundColor: pageContainer.background,
-                paddingVertical: page.vertical,
-                paddingHorizontal: page.horizontal,
+                backgroundColor: colors.pageBackground,
+                paddingVertical: tokens.inner,
+                paddingHorizontal: tokens.doubleInner,
               }
               ,
               contentContainerStyle,
@@ -135,9 +133,9 @@ const PageContainer: FC<IPageContainerTypes> = ({
           style={[
             styles.container,
             {
-              backgroundColor: pageContainer.background,
-              paddingVertical: page.vertical,
-              paddingHorizontal: page.horizontal,
+              backgroundColor: colors.pageBackground,
+              paddingVertical: tokens.inner,
+              paddingHorizontal: tokens.doubleInner,
             },
             style,
           ]}

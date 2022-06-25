@@ -37,3 +37,50 @@ export const SCREEN_HEIGHT = Dimensions.get("screen").height;
 export const SCREEN_WIDTH = Dimensions.get("screen").width
 export const WINDOW_HEIGHT = Dimensions.get("window").height
 export const WINDOW_WIDTH = Dimensions.get("window").width
+
+export const makeColorPassive = (color) => {
+    // const colorType: "rgb" | "rgba" | "hsl" | "hsla" | "hex"| "hexa"
+    const colorType = defineColorType(color)
+    switch (colorType) {
+        case "rgb":
+            return color.replace(")", ",0.5)")
+        case "rgba":
+            return color.replace(color.substring(color.lastIndexOf(","), color.indexOf(")") + 1), ", 0.5)")
+        case "hsl":
+            return color.replace(")", ",0.5)")
+        case "hsla":
+            return color.replace(color.substring(color.lastIndexOf(","), color.indexOf(")") + 1), ", 0.5)")
+        case "hex":
+            return `${hex}05`
+        case "hexa":
+            return `${color.slice(0, -1)}05`
+        case null:
+        default:
+            return color;
+    }
+
+}
+
+const defineColorType = (color) => {
+    if (color.includes("rgba")) {
+        return "rgba"
+    }
+    if (color.includes("rgb")) {
+        return "rgb"
+    }
+    if (color.includes("hsla")) {
+        return "hsla"
+    }
+    if (color.includes("hsl")) {
+        return "hsl"
+    }
+    if (color.includes("#")) {
+        if (color.length === "7") {
+            return "hex"
+        }
+        if (color.length === "9") {
+            return "hexa"
+        }
+    }
+    return null
+}

@@ -9,7 +9,7 @@ const BadgePage = () => {
   const [valueIndex, setValueIndex] = useState<number>(0);
   return (
     <PageContainer type="default">
-      <View style={{ alignItems: 'center' }}>
+      <View style={{ alignItems: 'center', paddingVertical: 12 }}>
         <Badge
           size={SIZES[sizeIndex].title as IBadgeProps["size"]}
           value={VALUES[valueIndex].title}

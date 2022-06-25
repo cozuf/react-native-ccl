@@ -64,8 +64,6 @@ const SegmentedButton: FC<ISegmentedButtonProps<any>> = ({
 }) => {
     const theme = useTheme()
     const { colors, tokens } = theme
-    const { common } = colors
-    const { component } = tokens
 
     const [dataList, setDataList] = useState(data.map((v: any, i: number) => ({ ...v, selected: i === initialIndex })))
 
@@ -98,9 +96,9 @@ const SegmentedButton: FC<ISegmentedButtonProps<any>> = ({
                     itemContainerStyle,
                     styles.itemContainerStyle,
                     {
-                        borderRadius: component.semiRadius,
-                        paddingVertical: component.semiVertical,
-                        backgroundColor: v.selected ? "white" : "transparent"
+                        borderRadius: tokens.semiRadius,
+                        paddingVertical: tokens.semiInner,
+                        backgroundColor: v.selected ? colors.pageBackground : colors.transparent
                     }
                 ]}>
                 <Text
@@ -117,10 +115,10 @@ const SegmentedButton: FC<ISegmentedButtonProps<any>> = ({
             style={
                 [
                     {
-                        borderRadius: component.radius,
-                        paddingVertical: component.vertical,
-                        paddingHorizontal: component.horizontal,
-                        backgroundColor: common.componentBackground
+                        borderRadius: tokens.radius,
+                        paddingVertical: tokens.inner,
+                        paddingHorizontal: tokens.doubleInner,
+                        backgroundColor: colors.componentBackground
                     },
                     containerStyle,
                     styles.containerStyle

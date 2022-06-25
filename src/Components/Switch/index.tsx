@@ -8,6 +8,7 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
+import { makeColorPassive } from '../../Utils';
 import { Seperator, Text } from '..';
 import { useTheme } from '../../Context/Theme';
 import type { ITextProps } from '../Text';
@@ -90,22 +91,18 @@ const Switch: FC<ISwitchTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { switchComponent } = colors;
-  const { component } = tokens;
-
-  const STATE: keyof ColorScheme["switchComponent"] = active ? "active" : "passive"
 
   return (
     <View
       style={[
         styles.container,
         {
-          borderWidth: component.border,
-          borderRadius: component.radius,
-          paddingVertical: component.semiVertical,
-          paddingHorizontal: component.semiHorizontal,
-          backgroundColor: switchComponent[STATE].background,
-          borderColor: switchComponent[STATE].border,
+          borderWidth: tokens.thinBorder,
+          borderRadius: tokens.radius,
+          paddingVertical: tokens.semiInner,
+          paddingHorizontal: tokens.inner,
+          backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
+          borderColor: active ? colors.text : makeColorPassive(colors.text),
         },
         containerStyle
       ]}
@@ -124,13 +121,15 @@ const Switch: FC<ISwitchTypes> = ({
         disabled={!active}
         value={value}
         onValueChange={onValueChange}
-        ios_backgroundColor={
-          switchComponent[STATE].backgroundOff
-        }
-        thumbColor={switchComponent[STATE].thumb}
+        // ios background
+        ios_backgroundColor={value ? active ? colors.destructive : makeColorPassive(colors.destructive) : colors.seperator}
+        // ball of switch
+        thumbColor={active ? colors.pageBackground : makeColorPassive(colors.pageBackground)}
         trackColor={{
-          false: switchComponent[STATE].backgroundOff,
-          true: switchComponent[STATE].backgroundOn,
+          // android off background
+          false: active ? colors.seperator : makeColorPassive(colors.seperator),
+          // both side on background
+          true: active ? colors.primary : makeColorPassive(colors.primary),
         }}
         {...props}
       />
@@ -153,3 +152,5 @@ const styles = StyleSheet.create({
 
   },
 })
+
+// TODO: Kendin yap animated ile böylelikle ikiside aynı olur
