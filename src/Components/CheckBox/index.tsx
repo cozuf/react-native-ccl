@@ -196,5 +196,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 })
-
-// FIXME: Text font weight düzeltilmeli (style içindeki)

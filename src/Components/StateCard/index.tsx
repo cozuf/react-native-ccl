@@ -123,12 +123,17 @@ const StateCard: FC<IStateCardProps> = ({
     }
 
     return (
-        <View style={[
-            {
-                paddingHorizontal: tokens.fourTimesInner,
-                paddingVertical: tokens.fourTimesInner
-            },
-            styles.stateContainer]}>
+        <View
+            style={
+                [
+                    {
+                        paddingHorizontal: tokens.fourTimesInner,
+                        paddingVertical: tokens.fourTimesInner
+                    },
+                    styles.stateContainer
+                ]
+            }
+        >
             {renderIcon()}
             <Seperator type="vertical" size={"small"} />
             {renderTitle()}
@@ -148,5 +153,3 @@ const styles = StyleSheet.create({
 
     }
 })
-
-// TODO: düzenle configler ve example

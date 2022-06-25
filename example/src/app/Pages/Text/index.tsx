@@ -123,7 +123,6 @@ const TextPage = () => {
 const styles = StyleSheet.create({
   common: {
     textAlign: 'center',
-    fontWeight: "100"
   },
 });
 

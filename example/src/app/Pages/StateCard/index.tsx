@@ -3,7 +3,7 @@ import { PageContainer, StateCard } from "react-native-ccl";
 
 const StateCardPage = () => {
     return (
-        <PageContainer>
+        <PageContainer style={{ justifyContent: "center" }}>
             <StateCard />
         </PageContainer>
     )
