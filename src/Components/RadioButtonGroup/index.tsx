@@ -5,9 +5,8 @@ import {
   ListRenderItemInfo,
   StyleSheet,
 } from 'react-native';
-import { RadioButton, Button, Seperator } from '..';
+import { ITextProps, RadioButton, Button, Seperator, SearchBar } from '..';
 import { useTheme } from '../../Context/Theme';
-import type { ITextProps } from '../Text';
 
 export interface IListItem {
   active?: boolean
@@ -44,9 +43,17 @@ export interface IRadioButtonGroupProps<ItemT> {
   /**
    *
    */
-  onSubmit?: (
-    selectedList: ItemT[] /* data: ItemT[], selectedIndexes: number[]*/
-  ) => void;
+  onSubmit?: (selectedList: ItemT[], selectedItems: ItemT[]) => void;
+
+  /**
+   * 
+   */
+  searchable?: boolean
+
+  /**
+   * 
+   */
+  onSearch?: (searchedText: string) => void
 
   /**
    *
@@ -76,28 +83,19 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   onSelect,
   renderItem,
   onSubmit = () => { },
+  searchable,
+  onSearch = () => { },
   submitTitle = 'Tamam',
   submitTitleWeight,
   submitTitleSize,
-  submitTitleStyle
+  submitTitleStyle,
+  ...props
 }) => {
-  const theme = useTheme();
-  const { colors, tokens } = theme;
+  const theme = useTheme()
+  const { colors, tokens } = theme
 
-  const [dataList, setDataList] = useState(data);
-
-  const onButtonSelect = (selectedValue: IListItem["value"]) => {
-    const newData = dataList.map((v) => ({ ...v, selected: v.value === selectedValue }));
-    const selectedItem = newData.find((v) => v.selected)
-    const selectedIndex = newData.findIndex((v) => v.selected)
-    setDataList(newData);
-
-    if (typeof onSelect === 'function') {
-      onSelect(selectedItem as ListItemType, selectedIndex);
-    } else {
-      console.error("'onSelect' is undefined");
-    }
-  };
+  const [searchText, setSearchText] = useState<string>("")
+  const [dataList, setDataList] = useState(data)
 
   useEffect(() => {
     setDataList(data.map((v: ListItemType) => ({ ...v, selected: v.selected || false })));
@@ -117,6 +115,38 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     }
   });
 
+  const onItemSelect = (selectedValue: IListItem["value"]) => {
+    const newData = dataList.map((v) => ({ ...v, selected: v.value === selectedValue }));
+    const selectedItem = newData.find((v) => v.selected)
+    const selectedIndex = newData.findIndex((v) => v.selected)
+    setDataList(newData);
+
+    if (typeof onSelect === 'function') {
+      onSelect(selectedItem as ListItemType, selectedIndex);
+    } else {
+      console.error("'onSelect' is undefined");
+    }
+  };
+
+  const renderSearchInput = () => {
+    if (searchable) {
+      return (
+        <Fragment>
+          <SearchBar
+            value={searchText}
+            autoCapitalize="none"
+            onSearch={(value: string) => {
+              setSearchText(value)
+              onSearch(value)
+              setDataList(data.filter((v: IListItem) => v.title.toLowerCase().includes(value.toLowerCase())))
+            }} />
+          <Seperator type='vertical' />
+        </Fragment>
+      )
+    }
+    return null
+  }
+
   const renderSeperator = (): JSX.Element => {
     return (
       <Seperator
@@ -134,14 +164,12 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     );
   };
 
-  const customRenderItem = (
+  const renderDefaultItem = (
     info: ListRenderItemInfo<Required<ListItemType>>
   ): React.ReactElement | null => {
     const { item, index } = info;
     if (!item.title || !item.value) {
-      console.error(
-        "Items of 'data' property In RadioButtonGroup Component must contain 'title' and 'value' keys"
-      );
+      console.error("Items of 'data' property In RadioButtonGroup Component must contain 'title' and 'value' keys");
       return null;
     }
 
@@ -152,19 +180,21 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         selected={item.selected}
         title={item.title}
         value={item.value}
-        onSelect={onButtonSelect}
+        onSelect={onItemSelect}
       />
     );
   };
 
   return (
     <Fragment>
+      {renderSearchInput()}
       <FlatList
         bounces={false}
         keyExtractor={(_, index: number) => index.toString()}
         data={dataList}
-        renderItem={renderItem || customRenderItem}
+        renderItem={renderItem || renderDefaultItem}
         ItemSeparatorComponent={renderSeperator}
+        {...props}
       />
       <Button
         wrap="no-wrap"
@@ -174,7 +204,8 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         titleWeight={submitTitleWeight}
         titleStyle={submitTitleStyle}
         onPress={() => {
-          onSubmit(dataList.map((v: ListItemType) => ({ ...v })));
+          const selectedItems = dataList.filter((v) => v.selected)
+          onSubmit(dataList as ListItemType[], selectedItems);
         }}
       />
     </Fragment>

@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import {
@@ -6,7 +5,7 @@ import {
   PageContainer,
   SelectBox,
   Seperator,
-  TapSelector,
+  TapSelector
 } from 'react-native-ccl';
 
 const ACTIVE_DATA = [
@@ -61,7 +60,6 @@ const DATA = [
 const DISPLAY_TYPE_DATA = [
   { title: 'Modal', value: 'modal' },
   { title: 'BottomSheet', value: 'bottomSheet' },
-  { title: 'Page', value: 'page' },
 ];
 
 const SELECT_TYPE_DATA = [
@@ -104,7 +102,6 @@ const SEARCHABLE_DATA = [
 
 
 const SelectBoxPage = () => {
-  const navigation = useNavigation();
   const [active, setActive] = useState<boolean>(true);
   const [areas, setAreas] = useState<any[]>(DATA);
   const [selectTypeIndex, setSelectTypeIndex] = useState<number>(0);
@@ -137,7 +134,6 @@ const SelectBoxPage = () => {
         title="Bölge"
         showTitle={SHOW_TITLE_DATA[showTitleIndex].value as ISelectBoxProps<any>["showTitle"]}
         searchable={SEARCHABLE_DATA[searchableIndex].value as ISelectBoxProps<any>["searchable"]}
-        navigation={navigation}
         onSubmit={(data: any) => {
           setAreas(data);
         }}

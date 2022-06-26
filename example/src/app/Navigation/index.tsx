@@ -12,7 +12,6 @@ import {
   Button,
   Switch,
   useTheme,
-  SelectPage as SelectBoxSelectPage,
   useSetTheme
 } from 'react-native-ccl';
 
@@ -142,7 +141,6 @@ const Router = () => {
       <Stack.Screen name={PAGES_NAMES.SearchBarPage} component={SearchBarPage} />
       <Stack.Screen name={PAGES_NAMES.ModalPage} component={ModalPage} />
       <Stack.Screen name={PAGES_NAMES.SelectBoxPage} component={SelectBoxPage} />
-      <Stack.Screen name={PAGES_NAMES.SelectPage} component={SelectBoxSelectPage} />
       <Stack.Screen name={PAGES_NAMES.DateTimePickerPage} component={DateTimePickerPage} />
       <Stack.Screen name={PAGES_NAMES.SwitchPage} component={SwitchPage} />
       <Stack.Screen name={PAGES_NAMES.BottomSheetPage} component={BottomSheetPage} />

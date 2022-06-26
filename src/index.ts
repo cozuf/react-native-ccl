@@ -25,7 +25,6 @@ export {
   SegmentedButton
 } from "./Components";
 
-export { SelectPage } from "./Components/SelectBox/Page"
 export { dark, light, fonts, tokens } from './Theme';
 export { isIphoneX, ifIphoneX, getStatusBarHeight, getBottomSpace } from "./Utils"
 
@@ -96,7 +95,7 @@ export {
 // TODO: Context'ler dışarıdan çağır "i18n.t" gibi
 // TODO: Context'ler dışarıdan initalize edilebilsin araştır ( Language )
 
-// TODO: SelectBox için navigationProps ve navigationParams'ı suggest edilebilir yap
+// TODO: SelectBox için renderItem prop'unu düzenle onSelect ile alakalı
 
 // TODO: Language context yap - hook, with
 // TODO: SnackBar context yap - hook, with

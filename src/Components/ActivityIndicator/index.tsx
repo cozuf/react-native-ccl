@@ -75,9 +75,7 @@ const ActivityIndicator: FC<IActivityIndicatorProps> = ({
       return <WaveIndicator color={COLOR} size={size} />;
     case "default":
     default:
-      return (
-        <Default testID={testID} color={COLOR} size={size > 15 ? 'large' : 'small'} />
-      );
+      return <Default testID={testID} color={COLOR} size={size > 15 ? 'large' : 'small'} />
   }
 };
 
