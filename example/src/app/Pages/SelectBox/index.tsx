@@ -80,17 +80,6 @@ const ERROD_DATA = [
   }
 ];
 
-const WARNING_DATA = [
-  {
-    title: 'Uyarı Yok',
-    value: false,
-  },
-  {
-    title: 'Uyarı Var',
-    value: true,
-  }
-];
-
 const SHOW_TITLE_DATA = [
   {
     title: 'Başlık Gösterme',
@@ -121,7 +110,6 @@ const SelectBoxPage = () => {
   const [selectTypeIndex, setSelectTypeIndex] = useState<number>(0);
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
   const [error, setError] = useState("");
-  const [warning, setWarning] = useState("");
   const [showTitleIndex, setShowTitleIndex] = useState<number>(0);
   const [searchableIndex, setSearchableIndex] = useState<number>(0);
 
@@ -160,7 +148,6 @@ const SelectBoxPage = () => {
         }}
         minChoice={2}
         maxChoice={4}
-        warning={warning}
         error={error}
       />
       <View style={{ paddingTop: 16 }}>
@@ -188,11 +175,6 @@ const SelectBoxPage = () => {
         <TapSelector
           data={ERROD_DATA}
           onTap={() => setError((pValue: string) => pValue.length > 0 ? "" : "Hata Var")}
-        />
-        <Seperator type="vertical" />
-        <TapSelector
-          data={WARNING_DATA}
-          onTap={() => setWarning((pValue: string) => pValue.length > 0 ? "" : "Uyarı Var")}
         />
         <Seperator type="vertical" />
         <TapSelector

@@ -200,31 +200,6 @@ export interface ISelectBoxProps<ItemT> {
   /**
    *
    */
-  warning?: string
-
-  /**
-   *  
-   */
-  warningWeight?: ITextProps["weigth"]
-
-  /**
-   *  
-   */
-  warningSize?: ITextProps["size"]
-
-  /**
-   *
-   */
-  warningStyle?: ViewStyle
-
-  /**
-   *
-   */
-  warningContainerStyle?: StyleProp<View>
-
-  /**
-   *
-   */
   error?: string
 
   /**
@@ -288,12 +263,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   errorSize = "m",
   errorWeight = "regular",
   errorStyle,
-  errorContainerStyle,
-  warning,
-  warningSize = "m",
-  warningWeight = "regular",
-  warningStyle,
-  warningContainerStyle,
+  errorContainerStyle
 }) => {
   const bottomSheet = useBottomSheet();
   const setBottomSheet = useSetBottomSheet();
@@ -485,7 +455,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderSeperator = () => {
     if (icon) {
       return (
-        <Seperator type='horizontal' size={"large"} />
+        <Seperator type='horizontal' size={tokens.doubleInner} />
       )
     }
     return null
@@ -510,6 +480,12 @@ const SelectBox: FC<ISelectBoxTypes> = ({
             weigth={titleWeight}
             style={
               [
+                error ?
+                  {
+                    color: colors.destructive
+                  }
+                  :
+                  {},
                 styles.title,
                 titleStyle
               ]
@@ -559,21 +535,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     )
   }
 
-  const renderWarning = () => {
-    if (warning) {
-      return (
-        <View style={[styles.warningContainer, warningContainerStyle]}>
-          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: colors.warning }, warningStyle]}>{warning}</Text>
-        </View>
-      )
+  const renderErrorSeperator = () => {
+    if (error) {
+      return <Seperator type='vertical' size={2} />
     }
     return null
-  };
+  }
 
   const renderError = () => {
     if (error) {
       return (
-        <View style={[styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: tokens.doubleInner }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.destructive }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -606,7 +578,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         {renderSeperator()}
         {renderTitleAndValue()}
       </TouchableOpacity>
-      {renderWarning()}
+      {renderErrorSeperator()}
       {renderError()}
     </Fragment>
   );

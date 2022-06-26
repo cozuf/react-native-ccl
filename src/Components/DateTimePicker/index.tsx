@@ -1,12 +1,11 @@
 import React, { FC, Fragment, ReactNode, useEffect, useState } from 'react';
 import { Dimensions, Omit, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
-import { Button, Modal, Text } from '..';
+import { Button, Modal, Text, ITextProps, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import type { ModalizeProps } from 'react-native-modalize';
 import moment from "moment"
-import type { ITextProps } from '../Text';
 import { makeColorPassive } from '../../Utils';
 
 export interface IDateTimePickerProps {
@@ -111,31 +110,6 @@ export interface IDateTimePickerProps {
   /**
    *
    */
-  warning?: string
-
-  /**
-   *
-   */
-  warningStyle?: ITextProps["style"]
-
-  /**
-   *  
-   */
-  warningWeight?: ITextProps["weigth"]
-
-  /**
-   *  
-   */
-  warningSize?: ITextProps["size"]
-
-  /**
-   *
-   */
-  warningContainerStyle?: ITextProps["style"]
-
-  /**
-   *
-   */
   error?: string
 
   /**
@@ -186,11 +160,6 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   errorSize = "m",
   errorWeight = "regular",
   errorContainerStyle,
-  warning,
-  warningStyle,
-  warningSize = "m",
-  warningWeight = "regular",
-  warningContainerStyle,
   ...props
 }) => {
   const theme = useTheme();
@@ -320,21 +289,17 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     }
   };
 
-  const renderWarning = () => {
-    if (warning) {
-      return (
-        <View style={[styles.warningContainer, warningContainerStyle]}>
-          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: colors.warning }, warningStyle]}>{warning}</Text>
-        </View>
-      )
+  const renderErrorSeperator = () => {
+    if (error) {
+      return <Seperator type='vertical' size={2} />
     }
     return null
-  };
+  }
 
   const renderError = () => {
     if (error) {
       return (
-        <View style={[styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: tokens.doubleInner }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.destructive }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -383,7 +348,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         </View>
         {renderChildren()}
       </TouchableOpacity>
-      {renderWarning()}
+      {renderErrorSeperator()}
       {renderError()}
     </Fragment>
   );

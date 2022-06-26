@@ -29,23 +29,11 @@ const ERROD_DATA = [
   }
 ];
 
-const WARNING_DATA = [
-  {
-    title: 'Uyarı Yok',
-    value: false,
-  },
-  {
-    title: 'Uyarı Var',
-    value: true,
-  }
-];
-
 const DateTimePickerPage = () => {
   const [active, setActive] = useState<boolean>(true)
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [error, setError] = useState("");
-  const [warning, setWarning] = useState("");
 
   return (
     <PageContainer type="default">
@@ -58,7 +46,6 @@ const DateTimePickerPage = () => {
         mode={'date'}
         locale={'tr'}
         onSubmit={setDate}
-        warning={warning}
         error={error}
       />
       <View style={{ paddingTop: 16 }}>
@@ -79,11 +66,6 @@ const DateTimePickerPage = () => {
         <TapSelector
           data={ERROD_DATA}
           onTap={() => setError((pValue: string) => pValue.length > 0 ? "" : "Hata Var")}
-        />
-        <Seperator type="vertical" />
-        <TapSelector
-          data={WARNING_DATA}
-          onTap={() => setWarning((pValue: string) => pValue.length > 0 ? "" : "Uyarı Var")}
         />
       </View>
     </PageContainer>

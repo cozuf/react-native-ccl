@@ -103,30 +103,6 @@ export interface ITextInputProps {
   /**
    *
    */
-  warning?: string;
-
-  /**
-   *  
-   */
-  warningWeight?: ITextProps["weigth"]
-
-  /**
-   *  
-   */
-  warningSize?: ITextProps["size"]
-
-  /**
-   *
-   */
-  warningStyle?: ITextProps["style"]
-  /**
-   *
-   */
-  warningContainerStyle?: StyleProp<ViewStyle>;
-
-  /**
-   *
-   */
   error?: string;
 
   /**
@@ -182,11 +158,6 @@ const NTextInput: FC<ITextInputTypes> = ({
   valueSize = "m",
   inputStyle,
   onChangeText,
-  warning,
-  warningSize = "m",
-  warningWeight = "regular",
-  warningStyle,
-  warningContainerStyle,
   error,
   errorSize = "m",
   errorWeight = "regular",
@@ -279,21 +250,10 @@ const NTextInput: FC<ITextInputTypes> = ({
     return null
   };
 
-  const renderWarning = () => {
-    if (warning) {
-      return (
-        <View style={[styles.warningContainer, warningContainerStyle]}>
-          <Text weigth={warningWeight} size={warningSize} style={[styles.warning, { color: colors.warning }, warningStyle,]}>{warning}</Text>
-        </View>
-      )
-    }
-    return null
-  };
-
   const renderError = () => {
     if (error) {
       return (
-        <View style={[styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: tokens.inner }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.destructive }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -301,8 +261,8 @@ const NTextInput: FC<ITextInputTypes> = ({
     return null
   };
 
-  const renderWarningErrorSeperator = () => {
-    if (error && warning) {
+  const renderErrorSeperator = () => {
+    if (error) {
       return <Seperator type="vertical" />
     }
     return null
@@ -398,7 +358,6 @@ const NTextInput: FC<ITextInputTypes> = ({
   const renderInputContainer = (): ReactElement | null => {
     return (
       <View style={[styles.inputContainer]}>
-
         <View style={styles.nativeInputContainer}>
           <TextInput
             ref={(ref) => {
@@ -449,7 +408,6 @@ const NTextInput: FC<ITextInputTypes> = ({
             {...props}
           />
         </View>
-
         {renderClear()}
         {renderPasswordVisible()}
       </View>
@@ -481,17 +439,13 @@ const NTextInput: FC<ITextInputTypes> = ({
           },
           containerStyle
         ]}
-        onPress={() => {
-          changeFocus();
-        }}
+        onPress={changeFocus}
       >
         {renderIcon()}
         {renderSeperator()}
         {renderTitleAndInput()}
       </Pressable>
-      <Seperator type='vertical' />
-      {renderWarning()}
-      {renderWarningErrorSeperator()}
+      {renderErrorSeperator()}
       {renderError()}
     </Fragment>
   );
