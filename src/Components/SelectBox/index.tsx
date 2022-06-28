@@ -163,6 +163,11 @@ export interface ISelectBoxProps<ItemT> {
   onSubmit?: (data: ReadonlyArray<ItemT>, selectedItems: ReadonlyArray<ItemT>) => void;
 
   /**
+   * 
+   */
+  onComponentPress?: () => void
+
+  /**
    * callback if you want render custom item
    */
   renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
@@ -230,9 +235,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   valueContainerStyle,
   searchable = false,
   // searchText,
-  // onSearch,
+  onSearch,
   data,
-  // onSelect,
+  onSelect,
+  onComponentPress,
   onSubmitTitle,
   onSubmitTitleSize,
   onSubmitTitleWeight,
@@ -283,7 +289,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           data={dataList}
           searchable={searchable}
           renderItem={renderItem}
-          onSelect={() => { }}
+          onSelect={onSelect}
+          onSearch={onSearch}
           submitTitle={onSubmitTitle}
           submitTitleSize={onSubmitTitleSize}
           submitTitleWeight={onSubmitTitleWeight}
@@ -297,9 +304,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         <CheckBoxGroup
           showsVerticalScrollIndicator={false}
           data={dataList}
-          onSelect={() => { }}
           searchable={searchable}
           renderItem={renderItem}
+          onSelect={onSelect}
+          onSearch={onSearch}
           minChoice={minChoice}
           maxChoice={maxChoice}
           submitTitle={onSubmitTitle}
@@ -499,7 +507,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       <TouchableOpacity
         testID={testID}
         disabled={!active}
-        onPress={onPress}
+        onPress={onComponentPress || onPress}
         style={[
           {
             borderWidth: tokens.thinBorder,

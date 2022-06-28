@@ -33,7 +33,7 @@ export interface IRadioButtonGroupProps<ItemT> {
   /**
    * invokes when click the option
    */
-  onSelect: (item: ItemT, index: number) => void;
+  onSelect?: (item: ItemT, index: number) => void;
 
   /**
    * callback if you want render custom item
