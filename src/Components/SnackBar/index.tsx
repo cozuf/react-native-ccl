@@ -1,6 +1,6 @@
 import React, { useEffect, useImperativeHandle, useState, forwardRef, Ref, PropsWithChildren, useRef } from "react";
 import { Animated, Easing, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { SCREEN_WIDTH, WINDOW_WIDTH } from "../../Utils";
+import { getBottomSpace, SCREEN_WIDTH, WINDOW_WIDTH } from "../../Utils";
 import { useTheme } from "../../Context";
 
 const SHORT_DURATION = 1000
@@ -30,6 +30,11 @@ export interface ISnackBarProps {
     /**
      * 
      */
+    type?: "default" | "success" | "error"
+
+    /**
+     * 
+     */
     containerStyle?: StyleProp<ViewStyle>
 
     /**
@@ -41,13 +46,18 @@ export interface ISnackBarProps {
      * 
      */
     onCompleteHide?: () => void
+
+    /**
+     * A React node that will define the content of the modal.
+     */
+    children?: React.ReactNode;
 }
 
 const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<SnackBarRef>) => {
     const theme = useTheme();
     const { colors, tokens } = theme;
 
-    const { duration, displayForm = "backToFront", containerStyle, onCompleteHide = () => { }, onCompleteShow = () => { }, children } = props
+    const { duration, displayForm = "backToFront", type = "default", containerStyle, onCompleteHide = () => { }, onCompleteShow = () => { }, children } = props
 
     const left = useRef(new Animated.Value(-SCREEN_WIDTH)).current
     const right = useRef(new Animated.Value(-SCREEN_WIDTH)).current
@@ -309,7 +319,7 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
             bottom,
             {
                 duration: SHOWING_TIME,
-                toValue: 0,
+                toValue: getBottomSpace(),
                 useNativeDriver: false,
             }
         ).start(({ finished }) => {
@@ -321,7 +331,7 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
             bottom,
             {
                 duration: SHOWING_TIME,
-                toValue: -66,
+                toValue: -(66 + getBottomSpace()),
                 useNativeDriver: false,
             }
         ).start(({ finished }) => {
@@ -423,7 +433,7 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
                                     }
                                     :
                                     {
-                                        bottom: 0,
+                                        bottom: getBottomSpace(),
                                         left: 0,
                                         right: 0
                                     }
@@ -436,7 +446,7 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
                         styles.contentContainer,
                         {
                             borderRadius: tokens.semiRadius,
-                            backgroundColor: colors.componentBackground,
+                            backgroundColor: type === "success" ? colors.positive : type === "error" ? colors.destructive : colors.componentBackground,
                             shadowColor: colors.shadow
                         },
                         containerStyle
@@ -455,7 +465,7 @@ const styles = StyleSheet.create({
     animatedContainer: {
         overflow: "hidden",
         position: "absolute",
-        bottom: 0,
+        bottom: getBottomSpace(),
         height: 66,
     },
     contentContainer: {

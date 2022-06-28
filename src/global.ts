@@ -1,6 +1,6 @@
 import type { Dispatch, ReactNode } from 'react'
 import type { ColorValue } from 'react-native'
-import type { IModalProps, IBottomSheetProps } from './Components'
+import type { IModalProps, IBottomSheetProps, ISnackBarProps } from './Components'
 
 declare global {
 
@@ -27,52 +27,6 @@ declare global {
         transparent: ColorValue
     }
 
-    //#endregion
-
-    //#region GlobalStateScheme
-
-    export interface GlobalStateScheme { }
-
-    export type SetGlobalStateScheme = Partial<GlobalStateScheme>
-
-    export interface IGlobalState {
-        globalState: GlobalStateScheme
-        setGlobalState: Dispatch<SetGlobalStateScheme>
-    }
-    //#endregion
-
-    //#region BottomSheetScheme
-    export interface BottomSheetScheme {
-        show: () => void,
-        close: () => void,
-    }
-
-    export interface SetBottomSheetScheme {
-        props: IBottomSheetProps,
-        renderContent?: () => ReactNode | null
-    }
-
-    export interface IBottomSheetScheme {
-        bottomSheet: BottomSheetScheme
-        setBottomSheet: Dispatch<Partial<SetBottomSheetScheme>>
-    }
-    //#endregion
-
-    //#region ModalScheme
-    export interface ModalScheme {
-        show: () => void,
-        close: () => void,
-    }
-
-    export interface SetModalScheme {
-        props: Omit<IModalProps, "visible">,
-        renderChildren?: () => ReactNode | null
-    }
-
-    export interface IModalScheme {
-        modal: ModalScheme
-        setModal: Dispatch<Partial<SetModalScheme>>
-    }
     //#endregion
 
     //#region FontScheme
@@ -112,7 +66,7 @@ declare global {
     }
     //#endregion
 
-    //#region Theme
+    //#region ThemeScheme
     export interface ThemeScheme {
         name: 'Light' | 'Dark'
         colors: ColorScheme
@@ -125,6 +79,67 @@ declare global {
         setTheme: Dispatch<Partial<ThemeScheme>>
     }
     //#endregion
+
+    //#region GlobalStateScheme
+
+    export interface GlobalStateScheme { }
+
+    export interface IGlobalState {
+        globalState: Partial<GlobalStateScheme>
+        setGlobalState: Dispatch<Partial<GlobalStateScheme>>
+    }
+    //#endregion
+
+    //#region BottomSheetScheme
+    export interface BottomSheetScheme {
+        show: () => void,
+        close: () => void,
+    }
+
+    export interface SetBottomSheetScheme {
+        props: IBottomSheetProps,
+        renderContent?: () => ReactNode | null
+    }
+
+    export interface IBottomSheetScheme {
+        bottomSheet: BottomSheetScheme
+        setBottomSheet: Dispatch<Partial<SetBottomSheetScheme>>
+    }
+    //#endregion
+
+    //#region ModalScheme
+    export interface ModalScheme {
+        show: () => void,
+        close: () => void,
+    }
+
+    export interface SetModalScheme {
+        props: Omit<IModalProps, "visible">,
+        renderChildren?: () => ReactNode | null
+    }
+
+    export interface IModalScheme {
+        modal: ModalScheme
+        setModal: Dispatch<Partial<SetModalScheme>>
+    }
+    //#endregion
+
+    // #region SnackBarScheme
+    export interface SnackBarScheme {
+        show: () => void,
+        close: () => void,
+    }
+
+    export interface SetSnackBarScheme {
+        props: ISnackBarProps,
+        renderChildren?: () => ReactNode | null
+    }
+
+    export interface ISnackBarScheme {
+        snackBar: SnackBarScheme
+        setSnacBar: Dispatch<Partial<SetSnackBarScheme>>
+    }
+    // #endregion
 
     //#region RNCCLScheme
     export interface RNCCLScheme {
