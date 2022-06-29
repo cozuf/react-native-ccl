@@ -446,7 +446,7 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
                         styles.contentContainer,
                         {
                             borderRadius: tokens.semiRadius,
-                            backgroundColor: type === "success" ? colors.positive : type === "error" ? colors.destructive : colors.componentBackground,
+                            backgroundColor: type === "success" ? colors.success : type === "error" ? colors.error : colors.componentBackground,
                             shadowColor: colors.shadow
                         },
                         containerStyle

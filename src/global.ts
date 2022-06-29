@@ -11,17 +11,26 @@ declare global {
         primary: ColorValue
         secondary: ColorValue
         tertiary: ColorValue
-        positive: ColorValue
+        success: ColorValue
         warning: ColorValue
-        destructive: ColorValue
+        error: ColorValue
+
         pageBackground: ColorValue
+
         componentBackground: ColorValue
+        componentBorder: ColorValue
+        componentIcon: ColorValue
+        componentTitle: ColorValue
+        componentValue: ColorValue
+        componentDisabled: ColorValue
+        componentText: ColorValue
+        
+        listItemSeperator: ColorValue
         seperator: ColorValue
         modalOutside: ColorValue
         shadow: ColorValue
         placeholder: ColorValue
         text: ColorValue
-        componentText: ColorValue
         white: ColorValue
         black: ColorValue
         transparent: ColorValue
