@@ -99,6 +99,7 @@ export {
 // LATER: Context'ler dışarıdan çağır "i18n.t" gibi
 // LATER: Context'ler dışarıdan initalize edilebilsin araştır ( Language )
 
+// TODO: SelectBox için searchable da multiselect ise seçili kalmalı
 // TODO: SelectBox için renderItem prop'unu düzenle onSelect ile alakalı
 
 // TODO: Language context yap - hook, with
