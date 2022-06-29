@@ -300,7 +300,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     if (error) {
       return (
         <View style={[{ paddingHorizontal: tokens.doubleInner }, styles.errorContainer, errorContainerStyle]}>
-          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.destructive }, errorStyle]}>{error}</Text>
+          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -320,7 +320,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
             paddingVertical: tokens.inner,
             paddingHorizontal: tokens.doubleInner,
             backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
-            borderColor: error ? colors.destructive : colors.seperator,
+            borderColor: error ? colors.error : colors.seperator,
           },
           containerStyle
         ]}
@@ -333,7 +333,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
             style={[
               styles.title,
               error ?
-                { color: colors.destructive }
+                { color: colors.error }
                 :
                 {},
               titleStyle

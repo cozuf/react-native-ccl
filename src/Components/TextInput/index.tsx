@@ -234,7 +234,7 @@ const NTextInput: FC<ITextInputTypes> = ({
               family={CoreIcon.family}
               name={CoreIcon.name}
               size={CoreIcon.size}
-              color={active ? CoreIcon.color || error ? colors.destructive : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text)}
+              color={active ? CoreIcon.color || error ? colors.error : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text)}
             />
           </View>
         );
@@ -254,7 +254,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (error) {
       return (
         <View style={[{ paddingHorizontal: tokens.inner }, styles.errorContainer, errorContainerStyle]}>
-          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.destructive }, errorStyle]}>{error}</Text>
+          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -346,7 +346,7 @@ const NTextInput: FC<ITextInputTypes> = ({
     if (title) {
       return (
         <View style={[styles.titleContainer, titleContainerStyle]}>
-          <Text weigth={titleWeight} size={titleSize} style={[styles.title, titleStyle, { color: active ? error ? colors.destructive : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text) }]}>
+          <Text weigth={titleWeight} size={titleSize} style={[styles.title, titleStyle, { color: active ? error ? colors.error : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text) }]}>
             {isRequired ? `* ${title}` : title}
           </Text>
         </View>
@@ -435,7 +435,7 @@ const NTextInput: FC<ITextInputTypes> = ({
             borderRadius: tokens.radius,
             borderWidth: tokens.thinBorder,
             backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
-            borderColor: active ? error ? colors.destructive : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text),
+            borderColor: active ? error ? colors.error : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text),
           },
           containerStyle
         ]}
