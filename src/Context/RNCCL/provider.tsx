@@ -3,6 +3,7 @@ import { light, fonts as defaultFonts, tokens as defaultTokens } from "../../The
 import { BottomSheetProvider } from "../BottomSheet"
 import { GlobalStateProvider } from "../GlobalState"
 import { ModalProvider } from "../Modal"
+import { SnackBarProvider } from "../SnackBar"
 import { ThemeProvider } from "../Theme"
 
 const RNCCLProvider: FC<RNCCLScheme> = ({ theme, globalState, children }) => {
@@ -10,11 +11,13 @@ const RNCCLProvider: FC<RNCCLScheme> = ({ theme, globalState, children }) => {
     return (
         <GlobalStateProvider initialGobalState={globalState}>
             <ThemeProvider name={name || "light"} colors={colors || light} fonts={fonts || defaultFonts} tokens={tokens || defaultTokens}>
-                <ModalProvider>
-                    <BottomSheetProvider>
-                        {children}
-                    </BottomSheetProvider>
-                </ModalProvider>
+                <SnackBarProvider>
+                    <ModalProvider>
+                        <BottomSheetProvider>
+                            {children}
+                        </BottomSheetProvider>
+                    </ModalProvider>
+                </SnackBarProvider>
             </ThemeProvider>
         </GlobalStateProvider>
     )

@@ -1,5 +1,5 @@
-import React, { RefObject, useRef, useState } from 'react';
-import { Button, ISnackBarProps, PageContainer, Seperator, SnackBar, SnackBarRef, TapSelector } from 'react-native-ccl';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
+import { Button, ISnackBarProps, PageContainer, Seperator, SnackBarRef, TapSelector, useSetSnakBar, useSnackBar } from 'react-native-ccl';
 
 const FORMS = [
     {
@@ -19,6 +19,18 @@ const FORMS = [
     },
 ]
 
+const TYPES = [
+    {
+        title: "default"
+    },
+    {
+        title: "success"
+    },
+    {
+        title: "error"
+    }
+]
+
 const DURATIONS = [
     {
         title: "infinite"
@@ -35,10 +47,25 @@ const DURATIONS = [
 ]
 
 const SnackBarPage = () => {
+    const snackBar = useSnackBar()
+    const setSnackBar = useSetSnakBar()
     const snackBarRef = useRef<SnackBarRef>() as RefObject<SnackBarRef>
     const [visible, setVisible] = useState<boolean | null>(false)
     const [formIndex, setFormIndex] = useState<number>(0);
+    const [typeIndex, setTypeIndex] = useState<number>(0);
     const [durationIndex, setDurationIndex] = useState<number>(0);
+
+    useEffect(() => {
+        setSnackBar({
+            props: {
+                duration: DURATIONS[durationIndex].title as ISnackBarProps["duration"],
+                displayForm: FORMS[formIndex].title as ISnackBarProps["displayForm"],
+                type: TYPES[typeIndex].title as ISnackBarProps["type"],
+                onCompleteHide: () => { setVisible(false) },
+                onCompleteShow: () => { setVisible(true) }
+            }
+        })
+    }, [formIndex, typeIndex, durationIndex])
 
     return (
         <PageContainer type="default">
@@ -47,6 +74,13 @@ const SnackBarPage = () => {
                 data={FORMS}
                 onTap={(_, index) => {
                     setFormIndex(index);
+                }}
+            />
+            <TapSelector
+                containerStyle={{ marginBottom: 8 }}
+                data={TYPES}
+                onTap={(_, index) => {
+                    setTypeIndex(index);
                 }}
             />
             <TapSelector
@@ -61,6 +95,7 @@ const SnackBarPage = () => {
                 disabled={visible !== false}
                 onPress={() => {
                     snackBarRef.current?.show()
+                    snackBar.show()
                     setVisible(null)
                 }}
             />
@@ -73,14 +108,8 @@ const SnackBarPage = () => {
                 onPress={() => {
                     snackBarRef.current?.close()
                     setVisible(null)
+                    snackBar.close()
                 }}
-            />
-            <SnackBar
-                ref={snackBarRef}
-                duration={DURATIONS[durationIndex].title as ISnackBarProps["duration"]}
-                displayForm={FORMS[formIndex].title as ISnackBarProps["displayForm"]}
-                onCompleteHide={() => { setVisible(false) }}
-                onCompleteShow={() => { setVisible(true) }}
             />
         </PageContainer>
     );

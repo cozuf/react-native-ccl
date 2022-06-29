@@ -388,7 +388,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
               family={CoreIcon.family}
               name={CoreIcon.name}
               size={CoreIcon.size}
-              color={CoreIcon.color || error ? colors.destructive : active ? colors.text : makeColorPassive(colors.text)}
+              color={CoreIcon.color || error ? colors.error : active ? colors.text : makeColorPassive(colors.text)}
             />
           </View>
         );
@@ -428,7 +428,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
                 [
                   error ?
                     {
-                      color: colors.destructive
+                      color: colors.error
                     }
                     :
                     {},
@@ -493,7 +493,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     if (error) {
       return (
         <View style={[{ paddingHorizontal: tokens.doubleInner }, styles.errorContainer, errorContainerStyle]}>
-          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.destructive }, errorStyle]}>{error}</Text>
+          <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
     }
@@ -515,7 +515,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
             paddingVertical: tokens.inner,
             paddingHorizontal: tokens.doubleInner,
             backgroundColor: colors.componentBackground,
-            borderColor: error ? colors.destructive : colors.text,
+            borderColor: error ? colors.error : colors.text,
           },
           styles.container,
           containerStyle

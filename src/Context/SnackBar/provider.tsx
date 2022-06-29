@@ -1,0 +1,58 @@
+import React, { FC, useReducer, useRef } from "react";
+import { SnackBarRef, SnackBar } from "../../Components";
+import { SnackBarContext, SnackBarDispatchContext } from "./context";
+
+const reducer = (
+    state: SetSnackBarScheme,
+    newState: Partial<SetSnackBarScheme>
+): SetSnackBarScheme => {
+    return { ...state, ...newState };
+};
+
+const SnackBarProvider: FC<any> = ({ children }) => {
+    const snackBarRef = useRef<SnackBarRef>(null);
+
+    const snackBar: SnackBarScheme = {
+        show: () => {
+            snackBarRef.current?.show()
+        },
+        close: () => {
+            snackBarRef.current?.close()
+        }
+    }
+
+    const initial: SetSnackBarScheme = {
+        props: {
+            displayForm: "bottomToTop",
+            duration: "infinite",
+            containerStyle: {},
+            onCompleteHide: () => { },
+            onCompleteShow: () => { },
+        },
+        renderChildren: () => null
+    }
+
+    const [snackBarProps, setSnackBarProps] = useReducer(reducer, initial);
+
+    return (
+        <SnackBarContext.Provider
+            value={snackBar}>
+            <SnackBarDispatchContext.Provider
+                value={setSnackBarProps}>
+                {children}
+                <SnackBar
+                    ref={snackBarRef}
+                    displayForm="bottomToTop"
+                    duration="infinite"
+                    containerStyle={{}}
+                    onCompleteHide={() => { }}
+                    onCompleteShow={() => { }}
+                    {...snackBarProps.props}>
+                    {typeof snackBarProps.renderChildren === "function" ? snackBarProps.renderChildren() : null}
+                </SnackBar>
+            </SnackBarDispatchContext.Provider>
+        </SnackBarContext.Provider >
+    );
+};
+
+export default SnackBarProvider;

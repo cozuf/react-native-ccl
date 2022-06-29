@@ -47,6 +47,10 @@ const LEAF_GREEN = "rgba(0, 255, 204, 1)"
 const LEAF_GREEN_1 = "rgba(0, 204, 163, 1)"
 const LEAF_GREEN_2 = "rgba(0, 153, 122, 1)"
 
+const TURQUOISE = 'rgba(64, 224, 208, 1)'
+const TURQUOISE_1 = 'rgba(29, 175, 161, 1)'
+const TURQUOISE_2 = 'rgba(14, 88, 80, 1)'
+
 export {
   BLACK,
   BLACK_20,
@@ -87,5 +91,8 @@ export {
   SEA_TURQUAZ_BLUE_PALE,
   LEAF_GREEN,
   LEAF_GREEN_1,
-  LEAF_GREEN_2
+  LEAF_GREEN_2,
+  TURQUOISE,
+  TURQUOISE_1,
+  TURQUOISE_2
 };
