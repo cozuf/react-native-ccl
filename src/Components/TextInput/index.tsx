@@ -456,6 +456,7 @@ export default NTextInput;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignItems: "center"
   },
   titleContainer: {},
   title: {},
@@ -473,7 +474,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   input: {
-    // paddingVertical: 12,
   },
   cleanContainer: {},
   warningContainer: {},

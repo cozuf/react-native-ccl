@@ -10,16 +10,11 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { Seperator, Text, CheckBoxGroup, RadioButtonGroup } from '..';
-import type { NavigationProp } from '@react-navigation/core';
-import type { ParamListBase } from '@react-navigation/routers';
+import { Seperator, Text, ITextProps, CheckBoxGroup, RadioButtonGroup, Icon, IIconProps } from '..';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
-import type { ITextProps } from '../Text';
-import type { IIconProps } from '../Icon';
-import Icon from '../Icon';
-import { getBottomSpace, makeColorPassive } from '../../Utils';
 import { useModal, useSetModal } from '../../Context/Modal';
+import { getBottomSpace, makeColorPassive } from '../../Utils';
 
 export interface ISelectBoxProps<ItemT> {
   /**
@@ -165,22 +160,17 @@ export interface ISelectBoxProps<ItemT> {
   /**
    * invokes when selection complete and press submit button
    */
-  onSubmit?: (data: ReadonlyArray<ItemT>) => void;
+  onSubmit?: (data: ReadonlyArray<ItemT>, selectedItems: ReadonlyArray<ItemT>) => void;
+
+  /**
+   * 
+   */
+  onComponentPress?: () => void
 
   /**
    * callback if you want render custom item
    */
   renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
-
-  /**
-   *
-   */
-  navigation?: NavigationProp<ParamListBase>;
-
-  /**
-   *
-   */
-  page?: string;
 
   /**
    *
@@ -244,18 +234,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   valueStyle,
   valueContainerStyle,
   searchable = false,
-  searchText,
-  // onSearch,
+  // searchText,
+  onSearch,
   data,
-  // onSelect,
+  onSelect,
+  onComponentPress,
   onSubmitTitle,
   onSubmitTitleSize,
   onSubmitTitleWeight,
   onSubmitTitleStyle,
   onSubmit,
   renderItem,
-  navigation,
-  page = 'SelectPage',
   maxChoice,
   minChoice,
   containerStyle,
@@ -277,23 +266,18 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const [dataList, setDataList] = useState<any[]>(data as any[]);
   // const [value, setValue] = useState<string>(searchText || '');
 
-  // TODO: gözden geçir
-  useEffect(() => {
-    setDataList(data as any[])
-  }, [data])
+  useEffect(() => { setDataList(data as any[]) }, [data])
 
-  const onSubmitSelection = (data: any) => {
+  const onSubmitSelection = (data: any[], seletedItems: any[]) => {
     setDataList(data)
     if (typeof onSubmit === 'function') {
-      onSubmit(data);
+      onSubmit(data, seletedItems);
     }
     switch (displayType) {
       case "bottomSheet":
         return bottomSheet.close()
       case "modal":
-        return Modal.close();
-      case "page":
-        navigation?.goBack();
+        return Modal.close()
     }
   }
 
@@ -301,8 +285,12 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     if (selectionType === "singleSelect") {
       return (
         <RadioButtonGroup
+          showsVerticalScrollIndicator={false}
           data={dataList}
-          onSelect={() => { }}
+          searchable={searchable}
+          renderItem={renderItem}
+          onSelect={onSelect}
+          onSearch={onSearch}
           submitTitle={onSubmitTitle}
           submitTitleSize={onSubmitTitleSize}
           submitTitleWeight={onSubmitTitleWeight}
@@ -314,8 +302,12 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     if (selectionType === "multiSelect") {
       return (
         <CheckBoxGroup
+          showsVerticalScrollIndicator={false}
           data={dataList}
-          onSelect={() => { }}
+          searchable={searchable}
+          renderItem={renderItem}
+          onSelect={onSelect}
+          onSearch={onSearch}
           minChoice={minChoice}
           maxChoice={maxChoice}
           submitTitle={onSubmitTitle}
@@ -333,7 +325,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     setModal({
       props: {
         onTouchOutSide: () => Modal.close(),
-        containerStyle: { maxHeight: "100%", minHeight: "50%" }
+        containerStyle: { flex: searchable ? 1 : undefined, maxHeight: "100%", minHeight: "50%" }
       },
       renderChildren: renderContent
     })
@@ -343,7 +335,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const openBottomSheet = () => {
     setBottomSheet({
       props: {
-        adjustToContentHeight: true,
+        adjustToContentHeight: searchable ? false : true,
         modalStyle: {
           backgroundColor: colors.componentBackground
         },
@@ -355,7 +347,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         },
         disableScrollIfPossible: false,
         customRenderer: (
-          <Animated.View style={{ maxHeight: "100%", paddingVertical: tokens.inner, paddingHorizontal: tokens.doubleInner }}>
+          <Animated.View style={{ height: searchable ? "100%" : undefined, maxHeight: "100%", paddingVertical: tokens.inner, paddingHorizontal: tokens.doubleInner }}>
             {renderContent()}
           </Animated.View >
         ),
@@ -371,50 +363,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     bottomSheet.show();
   }
 
-  const openPage = () => {
-    if (!navigation) {
-      console.error('Navigation is undefined');
-      return;
-    }
-    if (!page) {
-      console.error('page prop is undefined');
-      return;
-    }
-
-    navigation.navigate(page, {
-      title,
-      data: dataList,
-      setData: setDataList,
-      selectionType,
-      searchable,
-      searchText,
-      onSearch: (_navigation: NavigationProp<ParamListBase>, text: string) => {
-        // setValue(text);
-        let nData;
-        if (text.length > 0) {
-          const nDataList = data.filter((v) =>
-            v.title?.toLowerCase().includes(text.toLowerCase())
-          );
-          setDataList(nDataList);
-          nData = nDataList;
-        } else {
-          setDataList(data as any[]);
-          nData = data;
-        }
-        _navigation.setParams({ searchText: text, data: nData });
-      },
-      onSubmit: (data: any[]) => {
-        setDataList(data);
-        if (typeof onSubmit === 'function') {
-          onSubmit(data);
-        }
-      },
-      renderItem,
-      minChoice: minChoice,
-      maxChoice: maxChoice,
-    });
-  };
-
   const onPress = () => {
     switch (displayType) {
       case 'modal':
@@ -422,9 +370,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         break;
       case 'bottomSheet':
         openBottomSheet();
-        break;
-      case 'page':
-        openPage();
         break;
     }
   };
@@ -473,27 +418,30 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderTitle = () => {
     if (showTitle) {
       return (
-        <View style={[styles.titleContainer, titleContainerStyle]}>
-          <Text
-            active={active}
-            size={titleSize}
-            weigth={titleWeight}
-            style={
-              [
-                error ?
-                  {
-                    color: colors.error
-                  }
-                  :
-                  {},
-                styles.title,
-                titleStyle
-              ]
-            }
-          >
-            {title}
-          </Text>
-        </View>
+        <Fragment>
+          <View style={[styles.titleContainer, titleContainerStyle]}>
+            <Text
+              active={active}
+              size={titleSize}
+              weigth={titleWeight}
+              style={
+                [
+                  error ?
+                    {
+                      color: colors.error
+                    }
+                    :
+                    {},
+                  styles.title,
+                  titleStyle
+                ]
+              }
+            >
+              {title}
+            </Text>
+          </View>
+          <Seperator type="vertical" size="small" style={[styles.seperator]} />
+        </Fragment>
       )
     }
     return null
@@ -529,7 +477,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     return (
       <View style={[styles.textsContainer, textsContainerStyle]}>
         {renderTitle()}
-        <Seperator type="vertical" size="small" style={[styles.seperator]} />
         {renderValue()}
       </View>
     )
@@ -560,7 +507,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       <TouchableOpacity
         testID={testID}
         disabled={!active}
-        onPress={onPress}
+        onPress={onComponentPress || onPress}
         style={[
           {
             borderWidth: tokens.thinBorder,
@@ -588,7 +535,8 @@ export default SelectBox;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems: "center"
   },
   iconContainer: {
     alignItems: "center",

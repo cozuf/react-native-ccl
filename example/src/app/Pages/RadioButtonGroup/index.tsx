@@ -3,34 +3,46 @@ import { PageContainer, RadioButtonGroup } from 'react-native-ccl';
 
 const DATA = [
   {
-    active: true,
     selected: false,
-    title: '1',
+    active: true,
+    title: 'Akdeniz',
     value: 1,
   },
   {
-    active: true,
     selected: false,
-    title: '2',
+    active: true,
+    title: 'Karadeniz',
     value: 2,
   },
   {
-    active: true,
     selected: false,
-    title: '3',
+    active: true,
+    title: 'İç Anadolu',
     value: 3,
   },
   {
-    active: true,
     selected: false,
-    title: '4',
+    active: true,
+    title: 'Ege',
     value: 4,
   },
   {
-    active: true,
     selected: false,
-    title: '5',
+    active: true,
+    title: 'Marmara',
     value: 5,
+  },
+  {
+    selected: false,
+    active: true,
+    title: 'Doğu Anadolu',
+    value: 6,
+  },
+  {
+    selected: false,
+    active: true,
+    title: 'Güney Doğu Anadolu',
+    value: 7,
   },
 ];
 

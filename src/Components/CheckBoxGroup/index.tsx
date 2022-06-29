@@ -7,7 +7,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { CheckBox, Button, Seperator } from '..';
+import { CheckBox, Button, Seperator, SearchBar } from '..';
 import { useTheme } from '../../Context/Theme';
 import type { ITextProps } from '../Text';
 
@@ -36,7 +36,7 @@ export interface ICheckBoxGroupProps<ItemT> {
   /**
    * invokes when click the option
    */
-  onSelect: (item: ItemT, index: number) => void;
+  onSelect?: (item: ItemT, index: number) => void;
 
   /**
    * callback if you want render custom item
@@ -46,7 +46,17 @@ export interface ICheckBoxGroupProps<ItemT> {
   /**
    *
    */
-  onSubmit?: (data: ItemT[]) => void;
+  onSubmit?: (data: ItemT[], selectedItems: ItemT[]) => void;
+
+  /**
+   * 
+   */
+  searchable?: boolean
+
+  /**
+   * 
+   */
+  onSearch?: (searchedText: string) => void
 
   /**
    *
@@ -96,6 +106,8 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   onSelect,
   renderItem,
   onSubmit = () => { },
+  searchable,
+  onSearch = () => { },
   submitTitle = 'Tamam',
   submitTitleWeight,
   submitTitleSize,
@@ -104,11 +116,12 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   maxChoice = 0,
   selectAllTitle = 'Tümünü Seç',
   unSelectAllTitle = 'Tümünü Kaldır',
+  ...props
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme
 
-
+  const [searchText, setSearchText] = useState<string>("")
   const [dataList, setDataList] = useState(data);
 
   useEffect(() => {
@@ -131,7 +144,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   }, [data, maxChoice]);
 
-  const onButtonSelect = (selectedValue: IListItem["value"], selected: IListItem["selected"]) => {
+  const onSelectItem = (selectedValue: IListItem["value"], selected: IListItem["selected"]) => {
     const newData = dataList.map((v: ListItemType) => ({ ...v, selected: v.value === selectedValue ? selected : v.selected, }));
     if (maxChoice !== 0) {
       const selectedDataLength = newData.filter((v: ListItemType) => v.selected).length;
@@ -175,41 +188,24 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     }
   };
 
-  const renderSeperator = (): JSX.Element => {
-    return (
-      <Seperator
-        type="vertical"
-        size={1}
-        style={{ width: "96%", backgroundColor: colors.seperator }}
-        containerStyle={
-          [
-            styles.seperatorContainer,
-            {
-              paddingVertical: tokens.semiInner
-            }
-          ]
-        } />
-    );
-  };
+  const renderSearchInput = () => {
+    if (searchable) {
+      return (
+        <SearchBar
+          value={searchText}
+          autoCapitalize="none"
+          onSearch={(value: string) => {
+            setSearchText(value)
+            onSearch(value)
+            setDataList(data.filter((v: IListItem) => v.title.toLowerCase().includes(value.toLowerCase())))
+          }} />
+      )
+    }
+    return null
+  }
 
-  const customRenderItem = (info: ListRenderItemInfo<ListItemType>): ReactElement | null => {
-    const { item, index } = info;
+  const renderHeader = () => {
     return (
-      <CheckBox
-        key={`${index}`}
-        active={item.active}
-        selected={item.selected}
-        title={item.title}
-        value={item.value}
-        onSelect={(selectedValue, selected) => {
-          onButtonSelect(selectedValue, selected);
-        }}
-      />
-    );
-  };
-
-  return (
-    <Fragment>
       <View style={styles.buttonsContainer}>
         <Button
           wrap={'wrap'}
@@ -232,13 +228,53 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
           }}
         />
       </View>
+    )
+  }
 
+  const renderSeperator = (): JSX.Element => {
+    return (
+      <Seperator
+        type="vertical"
+        size={1}
+        style={{ width: "96%", backgroundColor: colors.seperator }}
+        containerStyle={
+          [
+            styles.seperatorContainer,
+            {
+              paddingVertical: tokens.semiInner
+            }
+          ]
+        } />
+    );
+  };
+
+  const renderDefaultItem = (info: ListRenderItemInfo<ListItemType>): ReactElement | null => {
+    const { item, index } = info;
+    return (
+      <CheckBox
+        key={`${index}`}
+        active={item.active}
+        selected={item.selected}
+        title={item.title}
+        value={item.value}
+        onSelect={(selectedValue, selected) => {
+          onSelectItem(selectedValue, selected);
+        }}
+      />
+    );
+  };
+
+  return (
+    <Fragment>
+      {renderSearchInput()}
       <FlatList
         bounces={false}
         keyExtractor={(_, index) => `${index}`}
+        ListHeaderComponent={renderHeader}
         data={dataList}
-        renderItem={renderItem || customRenderItem}
+        renderItem={renderItem || renderDefaultItem}
         ItemSeparatorComponent={renderSeperator}
+        {...props}
       />
 
       <Button
@@ -249,7 +285,8 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         titleStyle={submitTitleStyle}
         disabled={isDisabled()}
         onPress={() => {
-          onSubmit(dataList as ListItemType[]);
+          const selectedItems = dataList.filter((v: IListItem) => v.selected)
+          onSubmit(dataList as ListItemType[], selectedItems);
         }}
       />
     </Fragment>
