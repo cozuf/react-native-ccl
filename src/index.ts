@@ -95,19 +95,19 @@ export {
 
 // TODO: Placeholder yap
 
-// TODO: global'deki context type'ları gözden geçir ve düzenle
+// FIXME: global'deki context type'ları gözden geçir ve düzenle
 
-// TODO: Context'ler dışarıdan çağır "i18n.t" gibi
-// TODO: Context'ler dışarıdan initalize edilebilsin araştır ( Language )
+// LATER: Context'ler dışarıdan çağır "i18n.t" gibi
+// LATER: Context'ler dışarıdan initalize edilebilsin araştır ( Language )
 
 // TODO: SelectBox için navigationProps ve navigationParams'ı suggest edilebilir yap
 
 // TODO: Language context yap - hook, with
 // TODO: RNCCL context yap diğerlerini içine koy
 
-// TODO: SearchBar onClear ayrılabilir mi bak gerekiyorsa ayır ve bitir
-// TODO: inputs'lar için infoButton yap SnackBar ile
+// LATER: SearchBar onClear ayrılabilir mi bak gerekiyorsa ayır ve bitir
+// LATER: inputs'lar için infoButton yap SnackBar ile
 
 
-// TODO: yayınlamadan önce ReadMe düzenle
-// FIXME: import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
+// FIXME: yayınlamadan önce ReadMe düzenle
+// LATER: import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
