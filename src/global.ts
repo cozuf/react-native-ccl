@@ -24,7 +24,7 @@ declare global {
         componentValue: ColorValue
         componentDisabled: ColorValue
         componentText: ColorValue
-        
+
         listItemSeperator: ColorValue
         seperator: ColorValue
         modalOutside: ColorValue
@@ -149,6 +149,38 @@ declare global {
         setSnacBar: Dispatch<Partial<SetSnackBarScheme>>
     }
     // #endregion
+
+    interface Translations {
+        modal: {
+            buttons: {
+                positive: string,
+                negative: string,
+                default: string
+            }
+        }
+    }
+
+    export type NestedKeyOf<ObjectType extends object> =
+        { [Key in keyof ObjectType & (string)]:
+            ObjectType[Key] extends object
+            ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
+            : `${Key}`
+        }[keyof ObjectType & (string)]
+
+    export interface LanguageScheme {
+        languageKey: string
+        translate: (translateKey: NestedKeyOf<Translations>, params?: any) => string
+    }
+
+    export interface SetLanguageScheme {
+        languageKey: string
+        translations: Translations
+    }
+
+    export interface ILanguageScheme {
+        language: LanguageScheme
+        setLanguage: SetLanguageScheme
+    }
 
     //#region RNCCLScheme
     export interface RNCCLScheme {
