@@ -54,8 +54,9 @@ export interface ISnackBarProps {
 }
 
 const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<SnackBarRef>) => {
-    const theme = useTheme();
-    const { colors, tokens } = theme;
+    const theme = useTheme()
+    const { colors, tokens } = theme
+    const { innerSpace, radiuses } = tokens
 
     const { duration, displayForm = "backToFront", type = "default", containerStyle, onCompleteHide = () => { }, onCompleteShow = () => { }, children } = props
 
@@ -402,8 +403,8 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
                 [
                     styles.animatedContainer,
                     {
-                        paddingVertical: tokens.inner,
-                        paddingHorizontal: tokens.doubleInner,
+                        paddingVertical: innerSpace.componentVertical,
+                        paddingHorizontal: innerSpace.componentHorizontal,
                         width: WINDOW_WIDTH,
                         opacity: opacity,
                     },
@@ -445,7 +446,7 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
                     [
                         styles.contentContainer,
                         {
-                            borderRadius: tokens.semiRadius,
+                            borderRadius: radiuses.component,
                             backgroundColor: type === "success" ? colors.success : type === "error" ? colors.error : colors.componentBackground,
                             shadowColor: colors.shadow
                         },

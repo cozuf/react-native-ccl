@@ -9,25 +9,26 @@ declare global {
     //#region TokenScheme
 
     export interface TokenScheme {
-        quarterInner: number
-        semiInner: number
-        inner: number
-        doubleInner: number
-        fourTimesInner: number
-
-        quarterOuter: number
-        semiOuter: number
-        outer: number
-        doubleOuter: number
-        fourTimesOuter: number
-
-        semiRadius: number
-        radius: number
-        fullRadius: number
-
-        thinBorder: number
-        border: number
-        boldBorder: number
+        innerSpace: {
+            pageVertical: number
+            pageHorizontal: number
+            componentVertical: number
+            componentHorizontal: number
+            itemSeperator: number
+        }
+        outerSpace: {
+            componentVertical: number
+            componentHorizontal: number
+        }
+        borders: {
+            badge: number
+            button: number
+            component: number
+            textInputFocused: number
+        }
+        radiuses: {
+            component: number
+        }
     }
     //#endregion
 }

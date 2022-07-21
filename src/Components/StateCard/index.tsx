@@ -75,6 +75,7 @@ const StateCard: FC<IStateCardProps> = ({
 
     const theme = useTheme()
     const { colors, tokens } = theme
+    const { innerSpace } = tokens
 
     const renderIcon = () => {
         if (isValidElement(icon)) {
@@ -127,8 +128,8 @@ const StateCard: FC<IStateCardProps> = ({
             style={
                 [
                     {
-                        paddingHorizontal: tokens.fourTimesInner,
-                        paddingVertical: tokens.fourTimesInner
+                        paddingHorizontal: innerSpace.componentHorizontal,
+                        paddingVertical: innerSpace.componentVertical
                     },
                     styles.stateContainer
                 ]

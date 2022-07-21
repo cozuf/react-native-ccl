@@ -170,8 +170,9 @@ const NTextInput: FC<ITextInputTypes> = ({
   isRequired,
   ...props
 }) => {
-  const theme = useTheme();
-  const { colors, fonts, tokens } = theme;
+  const theme = useTheme()
+  const { colors, fonts, tokens } = theme
+  const { innerSpace, borders, radiuses } = tokens
 
   const NativeTextInputRef = useRef<TextInput | null>(null);
   const [isFocused, setIsFocused] = useState<boolean>();
@@ -253,7 +254,7 @@ const NTextInput: FC<ITextInputTypes> = ({
   const renderError = () => {
     if (error) {
       return (
-        <View style={[{ paddingHorizontal: tokens.inner }, styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: innerSpace.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -431,11 +432,12 @@ const NTextInput: FC<ITextInputTypes> = ({
         style={[
           styles.container,
           {
-            padding: tokens.inner,
-            borderRadius: tokens.radius,
-            borderWidth: tokens.thinBorder,
+            paddingVertical: innerSpace.componentVertical,
+            paddingHorizontal: innerSpace.componentHorizontal,
+            borderRadius: radiuses.component,
+            borderWidth: borders.textInputFocused,
             backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
-            borderColor: active ? error ? colors.error : isFocused ? colors.primary : colors.text : makeColorPassive(colors.text),
+            borderColor: active ? error ? colors.error : isFocused ? colors.primary : borders.component === 0 ? colors.componentBackground : colors.text : makeColorPassive(colors.text),
           },
           containerStyle
         ]}

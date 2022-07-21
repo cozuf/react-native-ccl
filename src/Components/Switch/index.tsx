@@ -89,18 +89,19 @@ const Switch: FC<ISwitchTypes> = ({
   titleWeight = "regular",
   ...props
 }) => {
-  const theme = useTheme();
-  const { colors, tokens } = theme;
+  const theme = useTheme()
+  const { colors, tokens } = theme
+  const { innerSpace, borders, radiuses } = tokens
 
   return (
     <View
       style={[
         styles.container,
         {
-          borderWidth: tokens.thinBorder,
-          borderRadius: tokens.radius,
-          paddingVertical: tokens.semiInner,
-          paddingHorizontal: tokens.inner,
+          borderWidth: borders.component,
+          borderRadius: radiuses.component,
+          paddingVertical: innerSpace.componentVertical,
+          paddingHorizontal: innerSpace.componentHorizontal,
           backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
           borderColor: active ? colors.text : makeColorPassive(colors.text),
         },

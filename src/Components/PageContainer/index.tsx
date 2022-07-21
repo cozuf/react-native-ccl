@@ -52,6 +52,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
+  const { innerSpace } = tokens
 
   if (loading) {
     return (
@@ -61,8 +62,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
           styles.container,
           {
             backgroundColor: colors.pageBackground,
-            paddingVertical: tokens.inner,
-            paddingHorizontal: tokens.doubleInner,
+            paddingVertical: innerSpace.pageVertical,
+            paddingHorizontal: innerSpace.pageHorizontal,
             alignItems: "center",
             justifyContent: "center"
           },
@@ -84,8 +85,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
             styles.container,
             {
               backgroundColor: colors.pageBackground,
-              paddingVertical: tokens.inner,
-              paddingHorizontal: tokens.doubleInner,
+              paddingVertical: innerSpace.pageVertical,
+              paddingHorizontal: innerSpace.pageHorizontal,
             },
             style,
           ]}
@@ -112,8 +113,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
               styles?.contentContainer,
               {
                 backgroundColor: colors.pageBackground,
-                paddingVertical: tokens.inner,
-                paddingHorizontal: tokens.doubleInner,
+                paddingVertical: innerSpace.pageVertical,
+                paddingHorizontal: innerSpace.pageHorizontal,
               }
               ,
               contentContainerStyle,
@@ -134,8 +135,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
             styles.container,
             {
               backgroundColor: colors.pageBackground,
-              paddingVertical: tokens.inner,
-              paddingHorizontal: tokens.doubleInner,
+              paddingVertical: innerSpace.pageVertical,
+              paddingHorizontal: innerSpace.pageHorizontal,
             },
             style,
           ]}

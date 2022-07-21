@@ -164,6 +164,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
+  const { innerSpace, borders, radiuses } = tokens
 
   const bottomSheet = useBottomSheet();
   const setBottomSheet = useSetBottomSheet();
@@ -299,7 +300,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const renderError = () => {
     if (error) {
       return (
-        <View style={[{ paddingHorizontal: tokens.doubleInner }, styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: innerSpace.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -315,10 +316,10 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         onPress={onPress}
         style={[
           {
-            borderWidth: tokens.thinBorder,
-            borderRadius: tokens.radius,
-            paddingVertical: tokens.inner,
-            paddingHorizontal: tokens.doubleInner,
+            borderWidth: borders.component,
+            borderRadius: radiuses.component,
+            paddingVertical: innerSpace.componentVertical,
+            paddingHorizontal: innerSpace.componentHorizontal,
             backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
             borderColor: error ? colors.error : colors.seperator,
           },

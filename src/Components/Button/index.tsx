@@ -112,6 +112,7 @@ const Button: FC<IButtonTypes> = ({
   const [pressed, setPressed] = useState<boolean>(false);
   const theme = useTheme();
   const { colors, tokens } = theme
+  const { innerSpace, borders, radiuses } = tokens
 
   const defineBackgroundColor = (): ColorValue | undefined => {
     if (clickType === "opacity" || (clickType === "changeable" && !pressed)) {
@@ -200,8 +201,8 @@ const Button: FC<IButtonTypes> = ({
   const renderContainerStyle = (): StyleProp<ViewStyle> => {
     return {
       backgroundColor: defineBackgroundColor(),
-      borderRadius: tokens.radius,
-      borderWidth: tokens.thinBorder,
+      borderRadius: radiuses.component,
+      borderWidth: borders.button,
       borderColor: defineBorderColor(),
       alignSelf: wrappableStyle(),
     };
@@ -268,8 +269,8 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-              paddingVertical: tokens.inner,
-              paddingHorizontal: tokens.doubleInner,
+              paddingVertical: innerSpace.componentVertical,
+              paddingHorizontal: innerSpace.componentHorizontal
             }
             : {},
           wrap !== 'free' ? styles.container : {},
@@ -304,8 +305,8 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-              paddingVertical: tokens.inner,
-              paddingHorizontal: tokens.doubleInner,
+              paddingVertical: innerSpace.componentVertical,
+              paddingHorizontal: innerSpace.componentHorizontal
             }
             : {},
           wrap !== 'free' ? styles.container : {},

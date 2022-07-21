@@ -96,6 +96,7 @@ const Modal: FC<CCLModalProps> = ({
     const [isVisible, setIsVisible] = useState<boolean>(visible);
     const theme = useTheme();
     const { colors, tokens } = theme;
+    const { innerSpace, radiuses } = tokens
 
     useEffect(() => {
         setIsVisible(visible);
@@ -106,23 +107,23 @@ const Modal: FC<CCLModalProps> = ({
             case "default":
             default:
                 return {
-                    paddingVertical: tokens.fourTimesInner,
-                    paddingHorizontal: tokens.fourTimesInner
+                    paddingVertical: innerSpace.componentVertical,
+                    paddingHorizontal: innerSpace.componentHorizontal
                 }
             case "fault":
             case "warning":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: tokens.fourTimesInner
+                    paddingHorizontal: innerSpace.componentHorizontal
                 }
             case "loading":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: tokens.fourTimesInner
+                    paddingHorizontal: innerSpace.componentHorizontal
                 }
             case "selective":
                 return {
-                    paddingHorizontal: tokens.fourTimesInner
+                    paddingHorizontal: innerSpace.componentHorizontal
                 }
         }
     }
@@ -208,8 +209,8 @@ const Modal: FC<CCLModalProps> = ({
                             styles.container,
                             defineContainerStyle(),
                             {
-                                padding: tokens.doubleInner,
-                                borderRadius: tokens.radius * 2,
+                                padding: innerSpace.componentHorizontal,
+                                borderRadius: radiuses.component * 2,
                                 backgroundColor: colors.pageBackground,
                                 shadowColor: colors.shadow,
                             },

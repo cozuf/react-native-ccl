@@ -103,6 +103,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
+  const { innerSpace } = tokens
 
   const renderIcon = (): React.ReactElement | null => {
     if (iconSet) {
@@ -166,8 +167,8 @@ const RadioButton: FC<IRadionButtonProps> = ({
       style={[
         styles.container,
         {
-          paddingVertical: tokens.inner,
-          paddingHorizontal: tokens.doubleInner,
+          paddingVertical: innerSpace.componentVertical,
+          paddingHorizontal: innerSpace.componentHorizontal,
         },
         containerStyle
       ]}

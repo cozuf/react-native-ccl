@@ -262,6 +262,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   const theme = useTheme();
   const { colors, tokens } = theme;
+  const { innerSpace, borders, radiuses } = tokens
 
   const [dataList, setDataList] = useState<any[]>(data as any[]);
   // const [value, setValue] = useState<string>(searchText || '');
@@ -347,7 +348,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         },
         disableScrollIfPossible: false,
         customRenderer: (
-          <Animated.View style={{ height: searchable ? "100%" : undefined, maxHeight: "100%", paddingVertical: tokens.inner, paddingHorizontal: tokens.doubleInner }}>
+          <Animated.View style={{ height: searchable ? "100%" : undefined, maxHeight: "100%", paddingVertical: innerSpace.componentVertical, paddingHorizontal: innerSpace.componentHorizontal }}>
             {renderContent()}
           </Animated.View >
         ),
@@ -400,7 +401,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderSeperator = () => {
     if (icon) {
       return (
-        <Seperator type='horizontal' size={tokens.doubleInner} />
+        <Seperator type='horizontal' size={innerSpace.componentVertical} />
       )
     }
     return null
@@ -492,7 +493,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderError = () => {
     if (error) {
       return (
-        <View style={[{ paddingHorizontal: tokens.doubleInner }, styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: innerSpace.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -510,10 +511,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         onPress={onComponentPress || onPress}
         style={[
           {
-            borderWidth: tokens.thinBorder,
-            borderRadius: tokens.radius,
-            paddingVertical: tokens.inner,
-            paddingHorizontal: tokens.doubleInner,
+            borderWidth: borders.component,
+            borderRadius: radiuses.component,
+            paddingVertical: innerSpace.componentVertical,
+            paddingHorizontal: innerSpace.componentHorizontal,
             backgroundColor: colors.componentBackground,
             borderColor: error ? colors.error : colors.text,
           },
