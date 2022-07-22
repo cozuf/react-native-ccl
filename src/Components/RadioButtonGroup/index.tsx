@@ -153,7 +153,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
       <Seperator
         type="vertical"
         size={1}
-        style={[{ width: "96%", backgroundColor: colors.seperator }, styles.seperator]}
+        style={[{ width: "96%", backgroundColor: colors.listItemSeperator }, styles.seperator]}
         containerStyle={
           [
             styles.seperatorContainer,

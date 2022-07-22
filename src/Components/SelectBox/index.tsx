@@ -338,7 +338,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       props: {
         adjustToContentHeight: searchable ? false : true,
         modalStyle: {
-          backgroundColor: colors.componentBackground
+          backgroundColor: colors.pageBackground
         },
         overlayStyle: {
           backgroundColor: colors.modalOutside
@@ -346,9 +346,15 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         handlePosition: "inside",
         childrenStyle: {
         },
+        
         disableScrollIfPossible: false,
         customRenderer: (
-          <Animated.View style={{ height: searchable ? "100%" : undefined, maxHeight: "100%", paddingVertical: innerSpace.componentVertical, paddingHorizontal: innerSpace.componentHorizontal }}>
+          <Animated.View style={{
+            height: searchable ? "100%" : undefined,
+            maxHeight: "100%",
+            paddingVertical: innerSpace.componentVertical,
+            paddingHorizontal: innerSpace.componentHorizontal,
+          }}>
             {renderContent()}
           </Animated.View >
         ),

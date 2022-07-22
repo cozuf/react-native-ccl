@@ -237,7 +237,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
       <Seperator
         type="vertical"
         size={1}
-        style={{ width: "96%", backgroundColor: colors.seperator }}
+        style={{ width: "96%", backgroundColor: colors.listItemSeperator }}
         containerStyle={
           [
             styles.seperatorContainer,

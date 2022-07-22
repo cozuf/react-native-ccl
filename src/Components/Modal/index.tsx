@@ -3,6 +3,7 @@ import { Modal as NativeModal, Platform, Pressable, StyleSheet, View } from "rea
 import type { ModalProps, Omit, StyleProp, ViewStyle } from "react-native";
 import { ActivityIndicator, Button, IActivityIndicatorProps, Icon, Seperator, Text } from "..";
 import { useTheme } from "../../Context";
+import { getBottomSpace, getStatusBarHeight } from "../../Utils";
 
 export interface IModalProps {
     /**
@@ -106,10 +107,17 @@ const Modal: FC<CCLModalProps> = ({
         switch (type) {
             case "default":
             default:
-                return {
-                    paddingVertical: innerSpace.componentVertical,
-                    paddingHorizontal: innerSpace.componentHorizontal
-                }
+                return Platform.select({
+                    ios: {
+                        paddingTop: getBottomSpace() || getStatusBarHeight(),
+                        paddingBottom: getBottomSpace() || innerSpace.pageVertical,
+                        paddingHorizontal: innerSpace.pageHorizontal
+                    },
+                    android: {
+                        paddingVertical: innerSpace.pageVertical,
+                        paddingHorizontal: innerSpace.pageHorizontal
+                    }
+                }) as ViewStyle
             case "fault":
             case "warning":
                 return {
@@ -285,17 +293,19 @@ const Loading: FC<Pick<CCLModalProps, "message" | "indicatorProps">> = ({ messag
 
 const Fault: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { } }) => {
+    const { colors } = useTheme()
     return (
         <Fragment>
             <View
                 style={styles.headerContainer}
             >
-                <Icon family="AntDesign" name="closecircle" size={24} />
+                <Icon family="AntDesign" name="closecircle" size={24} color={colors.error} />
                 <View style={styles.titleContainer}>
                     <Text weigth="bold" size={'xl'} style={styles.title}>
                         {title}
                     </Text>
                 </View>
+                <Icon family="AntDesign" name="closecircle" size={24} color={colors.transparent} />
             </View>
             <View style={styles.messageContainer}>
                 <Text size="xl" weigth="medium">
@@ -309,17 +319,19 @@ const Fault: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | 
 
 const Warning: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { } }) => {
+    const { colors } = useTheme()
     return (
         <Fragment>
             <View
                 style={styles.headerContainer}
             >
-                <Icon family="AntDesign" name="warning" size={24} />
+                <Icon family="AntDesign" name="warning" size={24} color={colors.warning} />
                 <View style={styles.titleContainer}>
                     <Text weigth="bold" size={'xl'} style={styles.title}>
                         {title}
                     </Text>
                 </View>
+                <Icon family="AntDesign" name="warning" size={24} color={colors.transparent} />
             </View>
             <View style={styles.messageContainer}>
                 <Text size="xl" weigth="medium">
