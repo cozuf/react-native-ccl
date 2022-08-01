@@ -316,12 +316,12 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         onPress={onPress}
         style={[
           {
-            borderWidth: borders.component,
+            borderWidth: error ? borders.textInputFocused : borders.component,
             borderRadius: radiuses.component,
             paddingVertical: innerSpace.componentVertical,
             paddingHorizontal: innerSpace.componentHorizontal,
             backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
-            borderColor: error ? colors.error : colors.seperator,
+            borderColor: error ? colors.error : colors.componentBorder,
           },
           containerStyle
         ]}

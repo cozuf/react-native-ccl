@@ -14,6 +14,9 @@ declare global {
         success: ColorValue
         warning: ColorValue
         error: ColorValue
+        white: ColorValue
+        black: ColorValue
+        transparent: ColorValue
 
         pageBackground: ColorValue
 
@@ -22,18 +25,21 @@ declare global {
         componentIcon: ColorValue
         componentTitle: ColorValue
         componentValue: ColorValue
-        componentDisabled: ColorValue
-        componentText: ColorValue
 
+        buttonText: ColorValue
+
+        /**
+         * selectBox listItemSeperator
+         */
         listItemSeperator: ColorValue
-        seperator: ColorValue
+
         modalOutside: ColorValue
+        modalBackground: ColorValue
+
         shadow: ColorValue
-        placeholder: ColorValue
+
         text: ColorValue
-        white: ColorValue
-        black: ColorValue
-        transparent: ColorValue
+        placeholder: ColorValue
     }
 
     //#endregion

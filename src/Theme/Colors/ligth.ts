@@ -22,23 +22,28 @@ const light: ColorScheme = {
   success: GREEN,
   warning: ORANGE,
   error: RED,
+  white: WHITE,
+  black: BLACK,
+  transparent: TRANSPARENT,
+
   pageBackground: WHITE,
+
   componentBackground: GREY_90,
   componentBorder: OPEN_BLUE,
   componentIcon: BLACK,
   componentTitle: BLACK,
   componentValue: BLACK,
-  componentDisabled: TURQUAZ_BLUE,
+
+  buttonText: WHITE,
+
   listItemSeperator: GREY_80,
-  seperator: TRANSPARENT,
+
   modalOutside: BLACK_20,
+  modalBackground: WHITE,
+
   shadow: BLACK,
   placeholder: GREY,
-  white: WHITE,
-  black: BLACK,
-  transparent: TRANSPARENT,
   text: BLACK,
-  componentText: WHITE
 };
 
 export default light;

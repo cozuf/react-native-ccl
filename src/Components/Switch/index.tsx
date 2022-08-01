@@ -123,12 +123,12 @@ const Switch: FC<ISwitchTypes> = ({
         value={value}
         onValueChange={onValueChange}
         // ios background
-        ios_backgroundColor={value ? active ? colors.error : makeColorPassive(colors.error) : colors.seperator}
+        ios_backgroundColor={value ? active ? colors.error : makeColorPassive(colors.error) : colors.transparent}
         // ball of switch
         thumbColor={active ? colors.pageBackground : makeColorPassive(colors.pageBackground)}
         trackColor={{
           // android off background
-          false: active ? colors.seperator : makeColorPassive(colors.seperator),
+          false: active ? colors.secondary : makeColorPassive(colors.secondary),
           // both side on background
           true: active ? colors.primary : makeColorPassive(colors.primary),
         }}

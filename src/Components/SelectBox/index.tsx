@@ -346,7 +346,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         handlePosition: "inside",
         childrenStyle: {
         },
-        
+
         disableScrollIfPossible: false,
         customRenderer: (
           <Animated.View style={{
@@ -517,7 +517,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         onPress={onComponentPress || onPress}
         style={[
           {
-            borderWidth: borders.component,
+            borderWidth: error ? borders.textInputFocused : borders.component,
             borderRadius: radiuses.component,
             paddingVertical: innerSpace.componentVertical,
             paddingHorizontal: innerSpace.componentHorizontal,

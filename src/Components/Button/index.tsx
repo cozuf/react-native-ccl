@@ -167,7 +167,7 @@ const Button: FC<IButtonTypes> = ({
       switch (type) {
         case "filled":
         default:
-          return props.disabled ? makeColorPassive(colors.componentText) : colors.componentText
+          return props.disabled ? makeColorPassive(colors.buttonText) : colors.buttonText
         case "outlined":
           return props.disabled ? makeColorPassive(colors.primary) : colors.primary
         case "simplied":
@@ -179,7 +179,7 @@ const Button: FC<IButtonTypes> = ({
         default:
           return colors.primary
         case "outlined":
-          return colors.componentText
+          return colors.buttonText
         case "simplied":
           return colors.primary
       }
