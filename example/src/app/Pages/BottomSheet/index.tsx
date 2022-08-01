@@ -7,6 +7,7 @@ const BottomSheetPage = () => {
     const setBottomSheet = useSetBottomSheet();
     const [handlePosition, setHandlePosition] = useState<"inside" | "outside">("inside");
     const [adjustToContentHeight, setAdjustToContentHeight] = useState<boolean>(false);
+    
     return (
         <PageContainer type="default">
             <Button

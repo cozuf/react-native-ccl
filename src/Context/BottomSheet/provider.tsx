@@ -29,7 +29,18 @@ const BottomSheetProvider: FC<any> = ({ children }) => {
         <BottomSheetContext.Provider
             value={bottomSheet}>
             <BottomSheetDispatchContext.Provider
-                value={setBottomSheetProps}>
+                value={(nextProps) => setBottomSheetProps({
+                    props: {
+                        ...nextProps.props,
+                        onClosed: () => {
+                            if (typeof nextProps.props?.onClosed === "function") {
+                                nextProps.props?.onClosed()
+                            }
+                            initial.props.onClosed()
+                        }
+                    },
+                    renderContent: nextProps.renderContent || initial.renderContent
+                })}>
                 {children}
                 <BottomSheet
                     ref={bottomSheetRef}
