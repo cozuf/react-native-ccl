@@ -124,7 +124,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
 
     if (typeof onSelect === 'function') {
       onSelect(selectedItem as ListItemType, selectedIndex);
-    } else {
+    } else if (typeof renderItem === "function") {
       console.error("'onSelect' is undefined");
     }
   };

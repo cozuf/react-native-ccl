@@ -145,7 +145,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
 
   }, [data, maxChoice]);
 
-  const onSelectItem = (selectedValue: IListItem["value"], selected: IListItem["selected"]) => {
+  const onItemSelect = (selectedValue: IListItem["value"], selected: IListItem["selected"]) => {
     const newData = dataList.map((v: ListItemType) => ({ ...v, selected: v.value === selectedValue ? selected : v.selected, }));
     if (maxChoice !== 0) {
       const selectedDataLength = newData.filter((v: ListItemType) => v.selected).length;
@@ -163,7 +163,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
       const selectedItem = newData.find((v) => v.value === selectedValue)
       const selectedIndex = newData.findIndex((v) => v.value === selectedValue)
       onSelect(selectedItem as ListItemType, selectedIndex);
-    } else {
+    } else if (typeof renderItem === "function") {
       console.error("'onSelect' is undefined");
     }
   };
@@ -258,9 +258,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         selected={item.selected}
         title={item.title}
         value={item.value}
-        onSelect={(selectedValue, selected) => {
-          onSelectItem(selectedValue, selected);
-        }}
+        onSelect={onItemSelect}
       />
     );
   };
