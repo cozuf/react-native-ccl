@@ -198,7 +198,9 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
           onSearch={(value: string) => {
             setSearchText(value)
             onSearch(value)
-            setDataList(data.filter((v: IListItem) => v.title.toLowerCase().includes(value.toLowerCase())))
+            const mappedData = data.map((firstV: IListItem,) => dataList.find((secondV: IListItem) => firstV.value === secondV.value) || { ...firstV } as Required<IListItem>)
+            const fiteredData = mappedData.filter((v: IListItem) => v.title.toLowerCase().includes(value.toLowerCase()))
+            setDataList(fiteredData)
           }} />
       )
     }
