@@ -242,7 +242,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
           [
             styles.seperatorContainer,
             {
-              paddingVertical: innerSpace.itemSeperator
+              paddingVertical: innerSpace.thin
             }
           ]
         } />

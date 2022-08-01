@@ -158,7 +158,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
           [
             styles.seperatorContainer,
             {
-              paddingVertical: innerSpace.itemSeperator
+              paddingVertical: innerSpace.thin
             }
           ]
         } />
