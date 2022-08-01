@@ -24,6 +24,17 @@ const PASSWORD_DATA = [
   }
 ];
 
+const MULTILINE_DATA = [
+  {
+    title: 'Singleline',
+    value: false,
+  },
+  {
+    title: 'Multiline',
+    value: true,
+  }
+];
+
 const ERROD_DATA = [
   {
     title: 'Hata Yok',
@@ -40,6 +51,8 @@ const TextInputPage = () => {
   const [active, setActive] = useState<boolean>(true);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [error, setError] = useState("");
+  const [multilineIndex, setMultilineIndex] = useState<number>(0)
+
 
   return (
     <PageContainer type="default">
@@ -50,11 +63,13 @@ const TextInputPage = () => {
         cleanable={true}
         type={showPassword ? "password" : "default"}
         error={error}
+        multiline={MULTILINE_DATA[multilineIndex].value}
         icon={{
           family: "AntDesign",
           name: "edit",
           size: 24
         }}
+        inputStyle={MULTILINE_DATA[multilineIndex].value ? { height: 200 } : {}}
       />
 
       <View style={{ paddingVertical: 16 }}>
@@ -66,6 +81,11 @@ const TextInputPage = () => {
         <TapSelector
           data={PASSWORD_DATA}
           onTap={(item) => { setShowPassword(item.value) }}
+        />
+        <Seperator type="vertical" />
+        <TapSelector
+          data={MULTILINE_DATA}
+          onTap={(_, selectedIndex) => { setMultilineIndex(selectedIndex) }}
         />
         <Seperator type="vertical" />
         <TapSelector
