@@ -65,6 +65,11 @@ export interface IDateTimePickerProps {
   /**
    * 
    */
+  onSubmitTitle?: string
+
+  /**
+   * 
+   */
   containerStyle?: StyleProp<ViewStyle>
 
   /**
@@ -147,6 +152,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   mode = 'datetime',
   displayFormat = "DD-MM-YYYY HH:mm:SS",
   onDateChange = () => { },
+  onSubmitTitle = "Tamam",
   onSubmit = () => { },
   containerStyle,
   titleContainerStyle,
@@ -179,6 +185,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const renderSubmit = () => {
     return (
       <Button
+        title={onSubmitTitle}
         onPress={() => {
           onSubmit(nDate);
           if (display === "modal") {
