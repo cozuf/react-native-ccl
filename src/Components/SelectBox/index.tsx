@@ -158,6 +158,16 @@ export interface ISelectBoxProps<ItemT> {
   onSubmit?: (data: ReadonlyArray<ItemT>, selectedItems: ReadonlyArray<ItemT>) => void;
 
   /**
+   *
+   */
+  selectAllTitle?: string;
+
+  /**
+   *
+   */
+  unSelectAllTitle?: string;
+
+  /**
    * 
    */
   onComponentPress?: () => void
@@ -238,6 +248,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   onSubmitTitleWeight,
   onSubmitTitleStyle,
   onSubmit,
+  selectAllTitle,
+  unSelectAllTitle,
   renderItem,
   maxChoice,
   minChoice,
@@ -309,6 +321,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           submitTitleSize={onSubmitTitleSize}
           submitTitleWeight={onSubmitTitleWeight}
           submitTitleStyle={onSubmitTitleStyle}
+          selectAllTitle={selectAllTitle}
+          unSelectAllTitle={unSelectAllTitle}
           onSubmit={onSubmitSelection}
         />
       )
