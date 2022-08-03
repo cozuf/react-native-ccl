@@ -35,6 +35,17 @@ const MULTILINE_DATA = [
   }
 ];
 
+const TITLE_DATA = [
+  {
+    title: 'Başlık Gösterme',
+    value: undefined,
+  },
+  {
+    title: 'Başlık Göster',
+    value: "Bölge",
+  }
+];
+
 const ERROD_DATA = [
   {
     title: 'Hata Yok',
@@ -52,12 +63,13 @@ const TextInputPage = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [error, setError] = useState("");
   const [multilineIndex, setMultilineIndex] = useState<number>(0)
-
+  const [titleIndex, setTitleIndex] = useState<number>(0);
 
   return (
     <PageContainer type="default">
       <TextInput
         active={active}
+        title={TITLE_DATA[titleIndex].value}
         value={value}
         onChangeText={setValue}
         cleanable={true}
@@ -86,6 +98,11 @@ const TextInputPage = () => {
         <TapSelector
           data={MULTILINE_DATA}
           onTap={(_, selectedIndex) => { setMultilineIndex(selectedIndex) }}
+        />
+        <Seperator type="vertical" />
+        <TapSelector
+          data={TITLE_DATA}
+          onTap={(_, index: number) => setTitleIndex(index)}
         />
         <Seperator type="vertical" />
         <TapSelector

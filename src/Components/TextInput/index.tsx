@@ -147,7 +147,7 @@ const NTextInput: FC<ITextInputTypes> = ({
   testID,
   active = true,
   type = 'default',
-  title = 'Başlık',
+  title,
   titleSize = "m",
   titleWeight = "regular",
   titleStyle,
