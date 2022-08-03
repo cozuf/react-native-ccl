@@ -78,14 +78,14 @@ const ERROD_DATA = [
   }
 ];
 
-const SHOW_TITLE_DATA = [
+const TITLE_DATA = [
   {
     title: 'Başlık Gösterme',
-    value: false,
+    value: undefined,
   },
   {
     title: 'Başlık Göster',
-    value: true,
+    value: "Bölge",
   }
 ];
 
@@ -107,7 +107,7 @@ const SelectBoxPage = () => {
   const [selectTypeIndex, setSelectTypeIndex] = useState<number>(0);
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
   const [error, setError] = useState("");
-  const [showTitleIndex, setShowTitleIndex] = useState<number>(0);
+  const [titleIndex, setTitleIndex] = useState<number>(0);
   const [searchableIndex, setSearchableIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -131,8 +131,7 @@ const SelectBoxPage = () => {
         selectionType={SELECT_TYPE_DATA[selectTypeIndex].value as ISelectBoxProps<any>["selectionType"]}
         displayType={DISPLAY_TYPE_DATA[displayTypeIndex].value as ISelectBoxProps<any>["displayType"]}
         data={areas}
-        title="Bölge"
-        showTitle={SHOW_TITLE_DATA[showTitleIndex].value as ISelectBoxProps<any>["showTitle"]}
+        title={TITLE_DATA[titleIndex].value}
         searchable={SEARCHABLE_DATA[searchableIndex].value as ISelectBoxProps<any>["searchable"]}
         onSubmit={(data: any) => {
           setAreas(data);
@@ -174,8 +173,8 @@ const SelectBoxPage = () => {
         />
         <Seperator type="vertical" />
         <TapSelector
-          data={SHOW_TITLE_DATA}
-          onTap={(_, index: number) => setShowTitleIndex(index)}
+          data={TITLE_DATA}
+          onTap={(_, index: number) => setTitleIndex(index)}
         />
         <Seperator type="vertical" />
         <TapSelector

@@ -50,11 +50,6 @@ export interface ISelectBoxProps<ItemT> {
   textsContainerStyle?: StyleProp<ViewStyle>
 
   /**
-   * @default true
-   */
-  showTitle?: boolean;
-
-  /**
    * @default Başlık
    */
   title?: string;
@@ -222,8 +217,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   selectionType = 'singleSelect',
   icon,
   textsContainerStyle,
-  showTitle = true,
-  title = 'Başlık',
+  title,
   titleSize = "m",
   titleWeight = "regular",
   titleStyle,
@@ -325,7 +319,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const openModal = () => {
     setModal({
       props: {
-        onTouchOutSide: () => Modal.close(),
+        onTouchOutSide: Modal.close,
         containerStyle: { flex: searchable ? 1 : undefined, maxHeight: "100%", minHeight: "50%" }
       },
       renderChildren: renderContent
@@ -423,7 +417,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   };
 
   const renderTitle = () => {
-    if (showTitle) {
+    if (title) {
       return (
         <Fragment>
           <View style={[styles.titleContainer, titleContainerStyle]}>
