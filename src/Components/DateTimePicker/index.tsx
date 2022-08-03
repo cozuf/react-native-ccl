@@ -1,12 +1,12 @@
 import React, { FC, Fragment, ReactNode, useEffect, useState } from 'react';
-import { Dimensions, Omit, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Dimensions, Omit, Platform, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
-import { Button, Modal, Text, ITextProps, Seperator } from '..';
+import { Button, IModalProps, Text, ITextProps, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
-import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
+import { useBottomSheet, useSetBottomSheet, useModal, useSetModal } from '../../Context';
 import type { ModalizeProps } from 'react-native-modalize';
 import moment from "moment"
-import { makeColorPassive } from '../../Utils';
+import { getBottomSpace, makeColorPassive } from '../../Utils';
 
 export interface IDateTimePickerProps {
   /**
@@ -138,7 +138,7 @@ export interface IDateTimePickerTypes extends IDateTimePickerProps, Omit<DatePic
 const DateTimePicker: FC<IDateTimePickerTypes> = ({
   testID,
   active = true,
-  title = 'Başlık',
+  title,
   titleSize = "m",
   titleWeight = "regular",
   placeholder = 'Placeholder',
@@ -166,11 +166,15 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const { colors, tokens } = theme;
   const { innerSpace, borders, radiuses } = tokens
 
+  const modal = useModal()
+  const setModal = useSetModal()
+
   const bottomSheet = useBottomSheet();
   const setBottomSheet = useSetBottomSheet();
 
-  const [visible, setVisible] = useState<boolean>(false);
   const [nDate, setNDate] = useState<Date>(date || new Date());
+
+  const paddingHorizontal = display === "modal" ? Platform.OS === "android" ? 64 : 40 : innerSpace.pageHorizontal
 
   const renderSubmit = () => {
     return (
@@ -178,9 +182,8 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
         onPress={() => {
           onSubmit(nDate);
           if (display === "modal") {
-            setVisible(false);
-          }
-          else {
+            modal.close()
+          } else {
             bottomSheet.close()
           }
         }}
@@ -188,43 +191,10 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     );
   };
 
-  const renderModal = (): ReactNode => {
-    return (
-      <Modal
-        type="default"
-        visible={visible}
-        onTouchOutSide={() => {
-          setVisible(false);
-        }}
-        containerStyle={{ flex: undefined, alignItems: 'center' }}
-      >
-        <RNDatePicker
-          date={nDate}
-          onDateChange={(date: Date) => {
-            setNDate(date);
-            onDateChange(date);
-          }}
-          mode={mode}
-          textColor={colors.text as string}
-          {...props}
-          fadeToColor={theme.name === 'Dark' ? 'black' : 'white'}
-        />
-        {renderSubmit()}
-      </Modal>
-    );
-  };
-
-  const renderChildren = (): ReactNode | null => {
-    switch (display) {
-      case "modal":
-        return renderModal();
-      default:
-        return null
-    }
-  }
-
-  const openModal = () => {
-    setVisible(true);
+  const modalProps: Omit<IModalProps, "visible"> = {
+    type: "default",
+    onTouchOutSide: modal.close,
+    containerStyle: { flex: undefined, alignItems: 'center' }
   }
 
   const bottomSheetProps: ModalizeProps = {
@@ -239,11 +209,13 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
     childrenStyle: {
       padding: 8
     },
+    HeaderComponent: <Seperator type='vertical' size={"medium"} />,
+    FooterComponent: <Seperator type='vertical' size={getBottomSpace()} />
   }
 
-  const renderBottomSheetContent = (): ReactNode => {
+  const renderDisplayContent = (): ReactNode => {
     return (
-      <View style={{ alignItems: "center" }}>
+      <Fragment>
         <RNDatePicker
           date={nDate}
           onDateChange={(date: Date) => {
@@ -255,40 +227,82 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
           {...props}
           fadeToColor={theme.name === 'Dark' ? 'black' : 'white'}
           style={{
-            width: Dimensions.get("screen").width - 16,
+            width: Dimensions.get("screen").width - paddingHorizontal,
           }}
-
         />
         {renderSubmit()}
-      </View>
+      </Fragment>
     )
   }
 
   const openBottomSheet = () => {
     setBottomSheet({
       props: bottomSheetProps,
-      renderContent: renderBottomSheetContent
+      renderContent: renderDisplayContent
     })
     bottomSheet.show()
   }
 
-  useEffect(() => {
-    setBottomSheet({
-      props: bottomSheetProps,
-      renderContent: renderBottomSheetContent
+  const openModal = () => {
+    setModal({
+      props: modalProps,
+      renderChildren: renderDisplayContent
     })
+
+    modal.show()
+  }
+
+  useEffect(() => {
+    if (display === "bottomSheet") {
+      setBottomSheet({
+        props: bottomSheetProps,
+        renderContent: renderDisplayContent
+      })
+    }
   }, [date, nDate])
 
   const onPress = () => {
     switch (display) {
       case 'modal':
-        openModal();
-        break;
+        return openModal();
       case "bottomSheet":
-        openBottomSheet();
-        break;
+        return openBottomSheet()
     }
   };
+
+  const renderTitle = () => {
+    if (title) {
+      return (
+        <View style={[styles.titleContainer, titleContainerStyle]}>
+          <Text
+            active={active}
+            size={titleSize}
+            weigth={titleWeight}
+            style={[
+              styles.title,
+              error ?
+                { color: colors.error }
+                :
+                {},
+              titleStyle
+            ]}>
+            {title}
+          </Text>
+        </View>
+      )
+    }
+    return null
+  }
+
+  const renderValue = () => {
+    return (
+      <View style={[styles.valueContainer, valueContainerStyle]}>
+        <Text active={active} size={valueSize} weigth={valueWeight} style={[styles.value, valueStyle]}>
+          {date ? moment(date).format(displayFormat) : placeholder}
+        </Text>
+      </View>
+    )
+  }
 
   const renderErrorSeperator = () => {
     if (error) {
@@ -326,28 +340,8 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
           containerStyle
         ]}
       >
-        <View style={[styles.titleContainer, titleContainerStyle]}>
-          <Text
-            active={active}
-            size={titleSize}
-            weigth={titleWeight}
-            style={[
-              styles.title,
-              error ?
-                { color: colors.error }
-                :
-                {},
-              titleStyle
-            ]}>
-            {title}
-          </Text>
-        </View>
-        <View style={[styles.valueContainer, valueContainerStyle]}>
-          <Text active={active} size={valueSize} weigth={valueWeight} style={[styles.value, valueStyle]}>
-            {date ? moment(date).format(displayFormat) : placeholder}
-          </Text>
-        </View>
-        {renderChildren()}
+        {renderTitle()}
+        {renderValue()}
       </TouchableOpacity>
       {renderErrorSeperator()}
       {renderError()}

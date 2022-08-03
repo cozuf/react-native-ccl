@@ -14,11 +14,17 @@ const ACTIVE_DATA = [
 ];
 
 const DISPLAY_TYPE_DATA = [
-  { title: 'Modal', value: 'modal' },
-  { title: 'BottomSheet', value: 'bottomSheet' }
+  {
+    title: 'Modal',
+    value: 'modal'
+  },
+  {
+    title: 'BottomSheet',
+    value: 'bottomSheet'
+  }
 ];
 
-const ERROD_DATA = [
+const ERROR_DATA = [
   {
     title: 'Hata Yok',
     value: false,
@@ -28,11 +34,23 @@ const ERROD_DATA = [
     value: true,
   }
 ];
+const SHOW_TITLE_DATA = [
+  {
+    title: 'Başlık Gösterme',
+    value: undefined,
+  },
+  {
+    title: 'Başlık Göster',
+    value: "Başlık",
+  }
+];
 
 const DateTimePickerPage = () => {
+  const [date, setDate] = useState<Date | undefined>(undefined);
+
   const [active, setActive] = useState<boolean>(true)
   const [displayTypeIndex, setDisplayTypeIndex] = useState<number>(0);
-  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [showTitleIndex, setShowTitleIndex] = useState<number>(0);
   const [error, setError] = useState("");
 
   return (
@@ -41,6 +59,7 @@ const DateTimePickerPage = () => {
         active={active}
         date={date}
         display={DISPLAY_TYPE_DATA[displayTypeIndex].value as IDateTimePickerProps["display"]}
+        title={SHOW_TITLE_DATA[showTitleIndex].value}
         // onDateChange={setDate}
         androidVariant="iosClone"
         mode={'date'}
@@ -64,7 +83,12 @@ const DateTimePickerPage = () => {
         />
         <Seperator type="vertical" />
         <TapSelector
-          data={ERROD_DATA}
+          data={SHOW_TITLE_DATA}
+          onTap={(_, selectedIndex) => { setShowTitleIndex(selectedIndex) }}
+        />
+        <Seperator type="vertical" />
+        <TapSelector
+          data={ERROR_DATA}
           onTap={() => setError((pValue: string) => pValue.length > 0 ? "" : "Hata Var")}
         />
       </View>
