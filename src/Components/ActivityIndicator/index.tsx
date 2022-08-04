@@ -1,18 +1,15 @@
 import React, { FC } from 'react';
 import { ColorValue, ActivityIndicator as Default } from 'react-native';
-import {
-  BallIndicator,
-  BarIndicator,
-  DotIndicator,
-  MaterialIndicator,
-  PacmanIndicator,
-  PulseIndicator,
-  SkypeIndicator,
-  UIActivityIndicator,
-  WaveIndicator,
-  // @ts-ignore
-} from 'react-native-indicators';
-import { useTheme } from '../../Context/Theme';
+import BallIndicator from './ball-indicator';
+import BarIndicator from './bar-indicator';
+import DotIndicator from './dot-indicator';
+import MaterialIndicator from './material-indicator';
+import PacmanIndicator from './pacman-indicator';
+import PulseIndicator from './pulse-indicator';
+import SkypeIndicator from './skype-indicator';
+import UIActivityIndicator from './ui-activity-indicator';
+import WaveIndicator from './wave-indicator';
+import { useTheme } from '../../Context';
 
 export interface IActivityIndicatorProps {
   /**
@@ -64,7 +61,8 @@ const ActivityIndicator: FC<IActivityIndicatorProps> = ({
     case 'materialIndicator':
       return <MaterialIndicator color={COLOR} size={size} />;
     case 'pacmanIndicator':
-      return <PacmanIndicator color={COLOR} size={size} />;
+      // TODO:Pacman ontrol edilecek
+      return <PacmanIndicator color={COLOR} size={60} />;
     case 'pulseIndicator':
       return <PulseIndicator color={COLOR} size={size} />;
     case 'skypeIndicator':
