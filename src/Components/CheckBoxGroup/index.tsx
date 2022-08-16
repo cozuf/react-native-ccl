@@ -287,7 +287,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         disabled={isDisabled()}
         onPress={() => {
           const selectedItems = dataList.filter((v: IListItem) => v.selected)
-          onSubmit(dataList as ListItemType[], selectedItems);
+          onSubmit(selectedItems, dataList as ListItemType[]);
         }}
       />
     </Fragment>

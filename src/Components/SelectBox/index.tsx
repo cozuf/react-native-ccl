@@ -31,7 +31,7 @@ export interface ISelectBoxProps<ItemT> {
    * type to display
    * @default Modal
    */
-  displayType: 'modal' | "bottomSheet" | 'page';
+  displayType: 'modal' | 'bottomSheet';
 
   /**
    * type to choose
@@ -155,7 +155,7 @@ export interface ISelectBoxProps<ItemT> {
   /**
    * invokes when selection complete and press submit button
    */
-  onSubmit?: (data: ReadonlyArray<ItemT>, selectedItems: ReadonlyArray<ItemT>) => void;
+  onSubmit?: (selectedItems: ReadonlyArray<ItemT>, data: ReadonlyArray<ItemT>) => void;
 
   /**
    *
@@ -260,25 +260,23 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   errorStyle,
   errorContainerStyle
 }) => {
-  const bottomSheet = useBottomSheet();
-  const setBottomSheet = useSetBottomSheet();
+  const bottomSheet = useBottomSheet()
+  const setBottomSheet = useSetBottomSheet()
 
-  const Modal = useModal();
+  const Modal = useModal()
   const setModal = useSetModal()
 
-  const theme = useTheme();
-  const { colors, tokens } = theme;
-  const { innerSpace, borders, radiuses } = tokens
+  const { colors, tokens } = useTheme()
+  const { innerSpace, borders, radiuses } = tokens;
 
-  const [dataList, setDataList] = useState<any[]>(data as any[]);
-  // const [value, setValue] = useState<string>(searchText || '');
+  const [dataList, setDataList] = useState<any[]>(data as any[])
 
   useEffect(() => { setDataList(data as any[]) }, [data])
 
   const onSubmitSelection = (data: any[], seletedItems: any[]) => {
     setDataList(data)
     if (typeof onSubmit === 'function') {
-      onSubmit(data, seletedItems);
+      onSubmit(seletedItems, data);
     }
     switch (displayType) {
       case "bottomSheet":

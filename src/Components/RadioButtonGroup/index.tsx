@@ -208,7 +208,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         titleStyle={submitTitleStyle}
         onPress={() => {
           const selectedItems = dataList.filter((v) => v.selected)
-          onSubmit(dataList as ListItemType[], selectedItems);
+          onSubmit(selectedItems, dataList as ListItemType[]);
         }}
       />
     </Fragment>
