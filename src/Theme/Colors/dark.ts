@@ -14,7 +14,7 @@ import {
   WHITE_20,
 } from './palette';
 
-const dark: ColorScheme = {
+const dark: RNCCL.ColorScheme = {
   brand: TURQUOISE_2,
   primary: TURQUOISE,
   secondary: TURQUOISE_1,

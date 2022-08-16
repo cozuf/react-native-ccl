@@ -14,7 +14,7 @@ import {
   WHITE,
 } from './palette';
 
-const light: ColorScheme = {
+const light: RNCCL.ColorScheme = {
   brand: OPEN_BLUE,
   primary: OPEN_BLUE,
   secondary: TURQUAZ_BLUE,

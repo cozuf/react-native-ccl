@@ -3,16 +3,16 @@ import { SnackBarRef, SnackBar } from "../../Components";
 import { SnackBarContext, SnackBarDispatchContext } from "./context";
 
 const reducer = (
-    state: SetSnackBarScheme,
-    newState: Partial<SetSnackBarScheme>
-): SetSnackBarScheme => {
+    state: RNCCL.SetSnackBarScheme,
+    newState: Partial<RNCCL.SetSnackBarScheme>
+): RNCCL.SetSnackBarScheme => {
     return { ...state, ...newState };
 };
 
 const SnackBarProvider: FC<any> = ({ children }) => {
     const snackBarRef = useRef<SnackBarRef>(null);
 
-    const snackBar: SnackBarScheme = {
+    const snackBar: RNCCL.SnackBarScheme = {
         show: () => {
             snackBarRef.current?.show()
         },
@@ -21,7 +21,7 @@ const SnackBarProvider: FC<any> = ({ children }) => {
         }
     }
 
-    const initial: SetSnackBarScheme = {
+    const initial: RNCCL.SetSnackBarScheme = {
         props: {
             displayForm: "bottomToTop",
             duration: "infinite",

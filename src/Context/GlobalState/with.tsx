@@ -1,7 +1,7 @@
 import React, { ComponentType, FC } from "react"
 import { useGlobalState, useSetGlobalState } from "./hook"
 
-export const withGlobalState = <P extends Object>(WrappEdComponent: ComponentType<P>): FC<P & IGlobalState> => ({ ...props }) => {
+export const withGlobalState = <P extends Object>(WrappEdComponent: ComponentType<P>): FC<P & RNCCL.IGlobalState> => ({ ...props }) => {
     const globalState = useGlobalState()
     const setGlobalState = useSetGlobalState()
 

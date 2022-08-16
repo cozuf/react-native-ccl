@@ -1,7 +1,7 @@
 import React, { ComponentType, FC } from "react"
 import { useBottomSheet, useSetBottomSheet } from "./hook"
 
-export const withBottomSheet = <P extends Object>(WrappEdComponent: ComponentType<P>): FC<P & IBottomSheetScheme> => ({ ...props }) => {
+export const withBottomSheet = <P extends Object>(WrappEdComponent: ComponentType<P>): FC<P & RNCCL.IBottomSheetScheme> => ({ ...props }) => {
     const bottomSheet = useBottomSheet()
     const setBottomSheet = useSetBottomSheet()
 

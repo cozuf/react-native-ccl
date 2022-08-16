@@ -1,9 +1,9 @@
 import { createContext, Dispatch } from "react";
 
 
-export const SnackBarContext = createContext<SnackBarScheme>({
+export const SnackBarContext = createContext<RNCCL.SnackBarScheme>({
     show: () => { },
     close: () => { }
 });
 
-export const SnackBarDispatchContext = createContext<Dispatch<Partial<SetSnackBarScheme>>>(() => { });
+export const SnackBarDispatchContext = createContext<Dispatch<Partial<RNCCL.SetSnackBarScheme>>>(() => { });

@@ -6,9 +6,9 @@ import { tokens as DefaultTokens } from "../../Theme";
 import { ThemeContext, ThemeContextDispatch } from "./context";
 
 const reducer = (
-    theme: ThemeScheme,
-    newTheme: Partial<ThemeScheme>
-): ThemeScheme => {
+    theme: RNCCL.ThemeScheme,
+    newTheme: Partial<RNCCL.ThemeScheme>
+): RNCCL.ThemeScheme => {
     const name = newTheme.name || "Light"
     const colors = mergeColors(name, newTheme.colors)
     const fonts = newTheme.fonts ? { ...DefaultFonts, ...newTheme.fonts } : theme.fonts
@@ -18,16 +18,16 @@ const reducer = (
 };
 
 interface IThemeProvider {
-    name?: ThemeScheme["name"]
-    colors?: Partial<ColorScheme>
-    fonts?: FontScheme
-    tokens?: TokenScheme
+    name?: RNCCL.ThemeScheme["name"]
+    colors?: Partial<RNCCL.ColorScheme>
+    fonts?: RNCCL.FontScheme
+    tokens?: RNCCL.TokenScheme
 }
 
 const ThemeProvider: FC<IThemeProvider> = ({ name, colors, fonts, tokens, children }) => {
     const DEFINED_NAME = name ? name : useColorScheme() === 'dark' ? 'Dark' : 'Light'
 
-    const initial: ThemeScheme = {
+    const initial: RNCCL.ThemeScheme = {
         name: DEFINED_NAME,
         colors: mergeColors(DEFINED_NAME, colors),
         fonts: { ...DefaultFonts, ...fonts },
@@ -48,7 +48,7 @@ const ThemeProvider: FC<IThemeProvider> = ({ name, colors, fonts, tokens, childr
 
 export default ThemeProvider;
 
-const mergeColors = (name: string, newColors?: Partial<ColorScheme>): ColorScheme => {
+const mergeColors = (name: string, newColors?: Partial<RNCCL.ColorScheme>): RNCCL.ColorScheme => {
     const defaultColors = name === "Light" || name === "light" ? light : dark
 
     // FIXME: burada olanları ve olmayanlarıda dene
@@ -58,7 +58,7 @@ const mergeColors = (name: string, newColors?: Partial<ColorScheme>): ColorSchem
     }
 }
 
-const mergeTokens = (newTokens?: Partial<TokenScheme>): TokenScheme => {
+const mergeTokens = (newTokens?: Partial<RNCCL.TokenScheme>): RNCCL.TokenScheme => {
     return {
         ...DefaultTokens,
         ...newTokens

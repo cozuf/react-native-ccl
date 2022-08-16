@@ -1,5 +1,5 @@
 import { Dispatch, useContext } from "react";
 import { ModalContext, ModalDispatchContext } from "./context";
 
-export const useModal = (): ModalScheme => useContext(ModalContext)
-export const useSetModal = (): Dispatch<Partial<SetModalScheme>> => useContext(ModalDispatchContext)
+export const useModal = (): RNCCL.ModalScheme => useContext(ModalContext)
+export const useSetModal = (): Dispatch<Partial<RNCCL.SetModalScheme>> => useContext(ModalDispatchContext)

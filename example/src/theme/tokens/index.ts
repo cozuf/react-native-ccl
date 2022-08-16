@@ -1,5 +1,5 @@
 
-export const tokens: TokenScheme = {
+export const tokens: RNCCL.TokenScheme = {
     innerSpace: {
         pageVertical: 16,
         pageHorizontal: 16,

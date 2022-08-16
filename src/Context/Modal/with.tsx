@@ -1,7 +1,7 @@
 import React, { ComponentType, FC } from "react"
 import { useModal, useSetModal } from "./hook"
 
-export const withModal = <P extends Object>(WrappEdComponent: ComponentType<P>): FC<P & IModalScheme> => ({ ...props }) => {
+export const withModal = <P extends Object>(WrappEdComponent: ComponentType<P>): FC<P & RNCCL.IModalScheme> => ({ ...props }) => {
     const modal = useModal()
     const setModal = useSetModal()
 

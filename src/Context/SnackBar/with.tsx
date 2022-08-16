@@ -1,7 +1,7 @@
 import React, { ComponentType, FC } from "react"
 import { useSnackBar, useSetSnakBar } from "./hook"
 
-export const withSnackBar = <P extends Object>(WrappEdComponent: ComponentType<P>): FC<P & ISnackBarScheme> => ({ ...props }) => {
+export const withSnackBar = <P extends Object>(WrappEdComponent: ComponentType<P>): FC<P & RNCCL.ISnackBarScheme> => ({ ...props }) => {
     const modal = useSnackBar()
     const setModal = useSetSnakBar()
 

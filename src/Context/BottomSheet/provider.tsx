@@ -5,7 +5,7 @@ import { BottomSheetContext, BottomSheetDispatchContext } from "./context";
 const BottomSheetProvider: FC<any> = ({ children }) => {
     const bottomSheetRef = useRef<BottomSheetRef>(null);
 
-    const bottomSheet: BottomSheetScheme = {
+    const bottomSheet: RNCCL.BottomSheetScheme = {
         show: () => {
             bottomSheetRef.current?.show()
         },
@@ -23,7 +23,7 @@ const BottomSheetProvider: FC<any> = ({ children }) => {
         renderContent: () => null
     }
 
-    const [bottomSheetProps, setBottomSheetProps] = useState<Partial<SetBottomSheetScheme>>(initial);
+    const [bottomSheetProps, setBottomSheetProps] = useState<Partial<RNCCL.SetBottomSheetScheme>>(initial);
 
     return (
         <BottomSheetContext.Provider
