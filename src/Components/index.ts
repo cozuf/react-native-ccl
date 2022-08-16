@@ -15,7 +15,7 @@ import Badge, { IBadgeProps } from './Badge';
 import SearchBar, { ISearchBarProps, ISearchBarTypes } from './SearchBar';
 import Modal, { IModalProps, CCLModalProps } from './Modal';
 import SelectBox, { ISelectBoxProps, ISelectBoxTypes } from './SelectBox';
-import Seperator from './Seperator';
+import Seperator, { ISperatorProps } from './Seperator';
 import DateTimePicker, { IDateTimePickerProps, IDateTimePickerTypes } from './DateTimePicker';
 import Switch, { ISwitchProps, ISwitchTypes } from './Switch';
 import SnackBar, { ISnackBarProps, SnackBarRef } from './SnackBar';
@@ -61,6 +61,7 @@ export type {
   IActivityIndicatorProps,
   IButtonProps,
   IButtonTypes,
+  ISperatorProps,
   IDateTimePickerProps,
   IDateTimePickerTypes,
   ITapSelectorProps,

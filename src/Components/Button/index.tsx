@@ -13,7 +13,7 @@ import {
   ColorValue,
 } from 'react-native';
 import { makeColorPassive } from '../../Utils';
-import { Icon, IIconProps, Text, ITextProps } from '..';
+import { Icon, IIconProps, Text, ITextProps, Seperator, ISperatorProps } from '..';
 import { useTheme } from '../../Context/Theme';
 
 export interface IButtonProps {
@@ -84,7 +84,12 @@ export interface IButtonProps {
   /**
    *
    */
-  containerStyle?: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>
+
+  /**
+   * 
+   */
+  childSeperatorSize?: ISperatorProps["size"]
 }
 
 export type IButtonTypes = IButtonProps &
@@ -102,11 +107,12 @@ const Button: FC<IButtonTypes> = ({
   title = 'Button',
   icon,
   titleStyle,
-  titleSize = "l",
+  titleSize = "m",
   titleWeight = "semibold",
   containerStyle,
   onPress = () => { },
   onLongPress = () => { },
+  childSeperatorSize = "medium",
   ...props
 }) => {
   const [pressed, setPressed] = useState<boolean>(false);
@@ -242,6 +248,13 @@ const Button: FC<IButtonTypes> = ({
     );
   };
 
+  const renderChildSeperator = () => {
+    if (childType = "both") {
+      return <Seperator type='horizontal' size={childSeperatorSize} />
+    }
+    return null
+  }
+
   const renderChildren = (): ReactNode => {
     switch (childType) {
       case 'text':
@@ -252,6 +265,7 @@ const Button: FC<IButtonTypes> = ({
         return (
           <Fragment>
             {renderIcon()}
+            {renderChildSeperator()}
             {renderTitle()}
           </Fragment>
         );
