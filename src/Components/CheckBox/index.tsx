@@ -23,7 +23,7 @@ export interface ICheckBoxProps {
   /**
    * to show value
    */
-  title?: string;
+  title?: string | ReactElement
 
   /**
    * unique value
@@ -137,7 +137,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
   }
 
   const renderTitle = (): ReactElement | null => {
-    if (title) {
+    if (typeof title === "string") {
       return (
         <View style={[styles.titleContainer, titleContainerStyle]}>
           <Text
@@ -148,6 +148,9 @@ const CheckBox: FC<ICheckBoxProps> = ({
           </Text>
         </View>
       )
+    }
+    if (isValidElement(title)) {
+      return title
     }
     return null;
   };
