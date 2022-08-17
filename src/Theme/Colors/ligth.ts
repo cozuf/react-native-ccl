@@ -26,9 +26,9 @@ const light: RNCCL.ColorScheme = {
   black: BLACK,
   transparent: TRANSPARENT,
 
-  pageBackground: WHITE,
+  pageBackground: GREY_90,
 
-  componentBackground: GREY_90,
+  componentBackground: WHITE,
   componentBorder: OPEN_BLUE,
   componentIcon: BLACK,
   componentTitle: BLACK,
