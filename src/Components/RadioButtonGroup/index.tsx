@@ -1,12 +1,15 @@
 import React, { FC, Fragment, useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   FlatListProps,
   ListRenderItemInfo,
   StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { ITextProps, RadioButton, Button, Seperator, SearchBar } from '..';
-import { useTheme } from '../../Context/Theme';
+import { ITextProps, RadioButton, Button, Seperator, SearchBar, ISearchBarTypes } from '..';
+import { useTheme } from '../../Context';
 
 export interface IListItem {
   active?: boolean
@@ -38,12 +41,12 @@ export interface IRadioButtonGroupProps<ItemT> {
   /**
    * callback if you want render custom item
    */
-  renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
+  renderItem?: (item: ItemT, index: number) => React.ReactElement | null;
 
   /**
    *
    */
-  onSubmit?: (selectedList: ItemT[], selectedItems: ItemT[]) => void;
+  onSubmit?: (selectedItems: ItemT[], data: ItemT[]) => void;
 
   /**
    * 
@@ -74,6 +77,16 @@ export interface IRadioButtonGroupProps<ItemT> {
    * 
    */
   submitTitleStyle?: ITextProps["style"]
+
+  /**
+   * 
+   */
+  searchBarProps?: Omit<ISearchBarTypes, "value" | "onSearch">
+
+  /**
+   * 
+   */
+  loading?: boolean
 }
 
 export interface IRadioButtonGroupTypes extends IRadioButtonGroupProps<ListItemType>, Omit<FlatListProps<ListItemType>, 'data' | 'renderItem'> { }
@@ -89,6 +102,8 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   submitTitleWeight,
   submitTitleSize,
   submitTitleStyle,
+  searchBarProps,
+  loading,
   ...props
 }) => {
   const theme = useTheme()
@@ -142,7 +157,9 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
               const mappedData = data.map((firstV: IListItem,) => dataList.find((secondV: IListItem) => firstV.value === secondV.value) || { ...firstV } as Required<IListItem>)
               const fiteredData = mappedData.filter((v: IListItem) => v.title.toLowerCase().includes(value.toLowerCase()))
               setDataList(fiteredData)
-            }} />
+            }}
+            {...searchBarProps}
+          />
           <Seperator type='vertical' />
         </Fragment>
       )
@@ -167,13 +184,20 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     );
   };
 
-  const renderDefaultItem = (
-    info: ListRenderItemInfo<Required<ListItemType>>
-  ): React.ReactElement | null => {
+  const renderDefaultItem = (info: ListRenderItemInfo<Required<ListItemType>>): React.ReactElement | null => {
     const { item, index } = info;
     if (!item.title || !item.value) {
       console.error("Items of 'data' property In RadioButtonGroup Component must contain 'title' and 'value' keys");
       return null;
+    }
+
+    if (typeof renderItem === "function") {
+      return (
+        <TouchableOpacity
+          onPress={() => { onItemSelect(item.value) }}>
+          {renderItem(item, index)}
+        </TouchableOpacity>
+      )
     }
 
     return (
@@ -188,17 +212,21 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     );
   };
 
-  return (
-    <Fragment>
-      {renderSearchInput()}
+  const renderSelection = () => {
+    return (
       <FlatList
         bounces={false}
         keyExtractor={(_, index: number) => index.toString()}
         data={dataList}
-        renderItem={renderItem || renderDefaultItem}
+        renderItem={renderDefaultItem}
         ItemSeparatorComponent={renderSeperator}
         {...props}
       />
+    )
+  }
+
+  const renderSubmitButton = () => {
+    return (
       <Button
         wrap="no-wrap"
         disabled={dataList.every((v) => !v.selected)}
@@ -211,6 +239,32 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
           onSubmit(selectedItems, dataList as ListItemType[]);
         }}
       />
+    )
+  }
+
+  const renderLoading = () => {
+    return (
+      <View style={{ flex: 1 }}>
+        <Seperator type='vertical' size={20} />
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    )
+  }
+
+  const renderContent = () => {
+    if (loading) {
+      return renderLoading()
+    } else {
+      return renderSelection()
+    }
+  }
+
+
+  return (
+    <Fragment>
+      {renderSearchInput()}
+      {renderContent()}
+      {renderSubmitButton()}
     </Fragment>
   );
 };

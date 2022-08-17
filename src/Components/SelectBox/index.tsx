@@ -2,7 +2,6 @@ import React, { FC, Fragment, isValidElement, ReactNode, useEffect, useState } f
 import {
   Animated,
   FlatListProps,
-  ListRenderItemInfo,
   Omit,
   StyleProp,
   StyleSheet,
@@ -17,6 +16,7 @@ import { useModal, useSetModal } from '../../Context/Modal';
 import { getBottomSpace, makeColorPassive } from '../../Utils';
 
 export interface ISelectBoxProps<ItemT> {
+  //#region ComponentProps
   /**
    * 
    */
@@ -100,15 +100,42 @@ export interface ISelectBoxProps<ItemT> {
   valueContainerStyle?: StyleProp<ViewStyle>
 
   /**
-   * set true if you want to search in given list
-   * @default false
+   * 
    */
-  searchable?: boolean;
+  containerStyle?: ViewStyle
 
   /**
    *
    */
-  searchText?: string;
+  error?: string
+
+  /**
+   *  
+   */
+  errorWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  errorSize?: ITextProps["size"]
+
+  /**
+   *
+   */
+  errorStyle?: ViewStyle
+
+  /**
+   *
+   */
+  errorContainerStyle?: StyleProp<View>
+  //#endregion
+
+  //#region Selector Props
+  /**
+   * set true if you want to search in given list
+   * @default false
+   */
+  searchable?: boolean;
 
   /**
    * invokes when enter text to input
@@ -175,7 +202,7 @@ export interface ISelectBoxProps<ItemT> {
   /**
    * callback if you want render custom item
    */
-  renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
+  renderItem?: (item: ItemT, index: number) => React.ReactElement | null;
 
   /**
    *
@@ -186,36 +213,7 @@ export interface ISelectBoxProps<ItemT> {
    *
    */
   minChoice?: number;
-
-  /**
-   * 
-   */
-  containerStyle?: ViewStyle
-
-  /**
-   *
-   */
-  error?: string
-
-  /**
-   *  
-   */
-  errorWeight?: ITextProps["weigth"]
-
-  /**
-   *  
-   */
-  errorSize?: ITextProps["size"]
-
-  /**
-   *
-   */
-  errorStyle?: ViewStyle
-
-  /**
-   *
-   */
-  errorContainerStyle?: StyleProp<View>
+  //#endregion
 }
 
 export interface ISelectBoxTypes extends ISelectBoxProps<any>, Omit<FlatListProps<any>, 'data' | 'renderItem'> { }
@@ -237,8 +235,13 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   valueWeight = "regular",
   valueStyle,
   valueContainerStyle,
+  containerStyle,
+  error,
+  errorSize = "m",
+  errorWeight = "regular",
+  errorStyle,
+  errorContainerStyle,
   searchable = false,
-  // searchText,
   onSearch,
   data,
   onSelect,
@@ -253,12 +256,6 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   renderItem,
   maxChoice,
   minChoice,
-  containerStyle,
-  error,
-  errorSize = "m",
-  errorWeight = "regular",
-  errorStyle,
-  errorContainerStyle
 }) => {
   const bottomSheet = useBottomSheet()
   const setBottomSheet = useSetBottomSheet()
