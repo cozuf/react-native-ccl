@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Button, IButtonProps, PageContainer, TapSelector } from 'react-native-ccl';
+import { Button, IButtonProps, PageContainer, Seperator, TapSelector } from 'react-native-ccl';
 
 const ACTIVE_DATA = [
   {
@@ -45,49 +45,50 @@ const ButtonPage = () => {
         titleWeight={TITLE_WEIGHT_TYPES[titleWeightIndex].title as IButtonProps["titleWeight"]}
         onPress={() => { }}
       />
-      <View style={{ paddingVertical: 16 }}>
+      <Seperator type='vertical' size={"large"} />
+      <View>
         <TapSelector
           data={ACTIVE_DATA}
           onTap={() => {
             setActive(!active);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={CHILD_TYPES}
           onTap={(_: any, index: number) => {
             setChildTypeIndex(index);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={CLICK_TYPES}
           onTap={(_: any, index: number) => {
             setClickTypeIndex(index);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={TYPES}
           onTap={(_: any, index: number) => {
             setTypeIndex(index);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={WRAP_TYPES}
           onTap={(_: any, index: number) => {
             setWrapIndex(index);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={TITLE_WEIGHT_TYPES}
           onTap={(_: any, index: number) => {
             setTitleWeightIndex(index);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={TITLE_SIZE_TYPES}
           onTap={(_: any, index: number) => {
