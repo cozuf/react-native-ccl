@@ -127,7 +127,7 @@ const Button: FC<IButtonTypes> = ({
         default:
           return props.disabled ? makeColorPassive(colors.primary) : colors.primary
         case "outlined":
-          return props.disabled ? makeColorPassive(colors.pageBackground) : colors.pageBackground
+          return props.disabled ? makeColorPassive(colors.componentBackground) : colors.componentBackground
         case "simplied":
           return colors.transparent
       }
