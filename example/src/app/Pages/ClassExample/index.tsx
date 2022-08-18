@@ -14,6 +14,11 @@ class Example extends Component<Props, State>{
             value: ""
         }
     }
+    componentDidUpdate = () => { }
+    getSnapshotBeforeUpdate = () => {
+        console.log({ gState: this.props.globalState })
+        return null
+    }
     render(): React.ReactNode {
         const { value } = this.state
         const { globalState, setGlobalState } = this.props
@@ -25,7 +30,17 @@ class Example extends Component<Props, State>{
                 <Seperator type="vertical" size={"large"} />
                 <TextInput value={value} onChangeText={(text: string) => { this.setState({ value: text }) }} />
                 <Seperator type="vertical" size={"large"} />
-                <Button title="Değiştir" onPress={() => { setGlobalState({ token: value }) }} />
+                <Button title="Değiştir" onPress={() => {
+                    setGlobalState({
+                        token: value,
+                        objec1: {
+                            object11: {
+                                b: "b mi"
+                            }
+                        }
+                    })
+                }}
+                />
             </PageContainer>
         )
     }

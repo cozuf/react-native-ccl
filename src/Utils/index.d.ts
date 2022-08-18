@@ -10,3 +10,4 @@ export const SCREEN_WIDTH: number
 export const WINDOW_HEIGHT: number
 export const WINDOW_WIDTH: number
 export const makeColorPassive: (color: ColorValue) => string
+export const isObject: (value: any) => boolean
