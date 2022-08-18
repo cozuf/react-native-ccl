@@ -143,7 +143,7 @@ export interface ITextInputProps {
 
 export type ITextInputTypes = ITextInputProps & Omit<TextInputProps, 'onChangeText' | 'onFocus' | 'onBlur' | 'style' | "keyboardType">
 
-const NTextInput: FC<ITextInputTypes> = ({
+const STextInput: FC<ITextInputTypes> = ({
   testID,
   active = true,
   type = 'default',
@@ -453,7 +453,7 @@ const NTextInput: FC<ITextInputTypes> = ({
   );
 };
 
-export default NTextInput;
+export default STextInput;
 
 const styles = StyleSheet.create({
   container: {
