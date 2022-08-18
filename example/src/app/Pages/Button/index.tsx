@@ -2,16 +2,8 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Button, IButtonProps, PageContainer, Seperator, TapSelector } from 'react-native-ccl';
 
-const ACTIVE_DATA = [
-  {
-    title: 'Active',
-    value: true,
-  },
-  {
-    title: 'Passive',
-    value: false,
-  },
-];
+const ACTIVE_DATA = [{ title: 'Active', value: true, }, { title: 'Passive', value: false, }];
+const LOADING_DATA = [{ title: 'not loading', value: false, }, { title: 'Loading', value: true, }];
 const TYPES = [{ title: 'filled' }, { title: 'outlined' }, { title: 'simplied' }];
 const CLICK_TYPES = [{ title: 'opacity' }, { title: 'changeable' }];
 const CHILD_TYPES = [{ title: 'text' }, { title: 'icon' }, { title: 'both' }];
@@ -21,6 +13,7 @@ const TITLE_SIZE_TYPES = [{ title: 'xxs' }, { title: 'xs' }, { title: 's' }, { t
 
 const ButtonPage = () => {
   const [active, setActive] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [clickTypeIndex, setClickTypeIndex] = useState<number>(0);
   const [childTypeIndex, setChildTypeIndex] = useState<number>(0);
   const [typeIndex, setTypeIndex] = useState<number>(0);
@@ -31,7 +24,8 @@ const ButtonPage = () => {
   return (
     <PageContainer type="default">
       <Button
-        disabled={!active}
+        loading={loading}
+        disabled={loading || !active}
         childType={CHILD_TYPES[childTypeIndex].title as IButtonProps["childType"]}
         clickType={CLICK_TYPES[clickTypeIndex].title as IButtonProps["clickType"]}
         icon={{
@@ -51,6 +45,13 @@ const ButtonPage = () => {
           data={ACTIVE_DATA}
           onTap={() => {
             setActive(!active);
+          }}
+        />
+        <Seperator type='vertical' size={"medium"} />
+        <TapSelector
+          data={LOADING_DATA}
+          onTap={() => {
+            setLoading((v) => !v);
           }}
         />
         <Seperator type='vertical' size={"medium"} />

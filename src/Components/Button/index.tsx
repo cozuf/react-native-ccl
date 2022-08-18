@@ -11,6 +11,7 @@ import {
   GestureResponderEvent,
   StyleSheet,
   ColorValue,
+  ActivityIndicator,
 } from 'react-native';
 import { makeColorPassive } from '../../Utils';
 import { Icon, IIconProps, Text, ITextProps, Seperator, ISperatorProps } from '..';
@@ -90,6 +91,11 @@ export interface IButtonProps {
    * 
    */
   childSeperatorSize?: ISperatorProps["size"]
+
+  /**
+   * 
+   */
+  loading?: boolean
 }
 
 export type IButtonTypes = IButtonProps &
@@ -113,6 +119,7 @@ const Button: FC<IButtonTypes> = ({
   onPress = () => { },
   onLongPress = () => { },
   childSeperatorSize = "medium",
+  loading,
   ...props
 }) => {
   const [pressed, setPressed] = useState<boolean>(false);
@@ -255,15 +262,38 @@ const Button: FC<IButtonTypes> = ({
     return null
   }
 
+  const renderLoading = () => {
+    if (loading) {
+      return (
+        <Fragment>
+          <ActivityIndicator color={defineChildrenColor()} size={"small"} />
+          <Seperator type='horizontal' size={childSeperatorSize} />
+        </Fragment>
+      )
+    }
+    return null
+  }
+
   const renderChildren = (): ReactNode => {
     switch (childType) {
       case 'text':
-        return renderTitle();
+        return (
+          <Fragment>
+            {renderLoading()}
+            {renderTitle()}
+          </Fragment>
+        )
       case 'icon':
-        return renderIcon();
+        return (
+          <Fragment>
+            {renderLoading()}
+            {renderIcon()}
+          </Fragment>
+        )
       case 'both':
         return (
           <Fragment>
+            {renderLoading()}
             {renderIcon()}
             {renderChildSeperator()}
             {renderTitle()}
@@ -290,6 +320,7 @@ const Button: FC<IButtonTypes> = ({
           wrap !== 'free' ? styles.container : {},
           containerStyle
         ]}
+        disabled={loading || props.disabled}
         {...(props as TouchableOpacityProps)}
       >
         {renderChildren()}
@@ -326,6 +357,7 @@ const Button: FC<IButtonTypes> = ({
           wrap !== 'free' ? styles.container : {},
           containerStyle,
         ]}
+        disabled={loading || props.disabled}
         {...(props as PressableProps)}
       >
         {renderChildren()}
