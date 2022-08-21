@@ -5,7 +5,7 @@ import { Icon, IIconProps, Seperator, Text } from '..';
 import { useTheme } from '../../Context/Theme';
 import type { ITextProps } from '../Text';
 
-export interface IRadionButtonProps {
+export interface IRadioButtonProps {
   /**
    * 
    */
@@ -75,7 +75,7 @@ export interface IRadionButtonProps {
   titleSize?: ITextProps["size"]
 }
 
-const RadioButton: FC<IRadionButtonProps> = ({
+const RadioButton: FC<IRadioButtonProps> = ({
   testID,
   active = true,
   selected = false,

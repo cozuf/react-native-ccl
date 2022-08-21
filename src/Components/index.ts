@@ -5,7 +5,7 @@ import TextInput, { ITextInputProps, ITextInputTypes } from './TextInput';
 import ActivityIndicator, { IActivityIndicatorProps, } from './ActivityIndicator';
 import Button, { IButtonProps, IButtonTypes } from './Button';
 import TapSelector, { ITapSelectorProps, ITapSelectorTypes, } from './TapSelector';
-import RadioButton, { IRadionButtonProps, } from './RadioButton';
+import RadioButton, { IRadioButtonProps, } from './RadioButton';
 import RadioButtonGroup, { IRadioButtonGroupProps, IRadioButtonGroupTypes, } from './RadioButtonGroup';
 import CheckBox, { ICheckBoxProps } from './CheckBox';
 import CheckBoxGroup, { ICheckBoxGroupProps, ICheckBoxGroupTypes, } from './CheckBoxGroup';
@@ -66,7 +66,7 @@ export type {
   IDateTimePickerTypes,
   ITapSelectorProps,
   ITapSelectorTypes,
-  IRadionButtonProps,
+  IRadioButtonProps,
   IRadioButtonGroupProps,
   IRadioButtonGroupTypes,
   ICheckBoxProps,

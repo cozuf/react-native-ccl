@@ -39,7 +39,7 @@ export type {
   IButtonTypes,
   ITapSelectorProps,
   ITapSelectorTypes,
-  IRadionButtonProps,
+  IRadioButtonProps,
   IRadioButtonGroupProps,
   IRadioButtonGroupTypes,
   ICheckBoxProps,
