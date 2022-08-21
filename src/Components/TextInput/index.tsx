@@ -373,6 +373,8 @@ const STextInput: FC<ITextInputTypes> = ({
               {
                 fontFamily: fonts[valueWeight],
                 fontSize: defineSize(),
+                color: colors.text,
+                textAlignVertical: (inputStyle as TextStyle).textAlignVertical || props.multiline ? "top" : "auto",
                 ...Platform.select({
                   ios: {
                     paddingVertical:
@@ -388,7 +390,6 @@ const STextInput: FC<ITextInputTypes> = ({
                   },
                 }),
               },
-              { color: colors.text },
             ]}
             keyboardType={keyboardType()}
             secureTextEntry={type === 'password' && !passwordVisible}
