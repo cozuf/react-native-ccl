@@ -1,4 +1,4 @@
-import React, { FC, Fragment, isValidElement, ReactElement, ReactNode, useRef, useState } from 'react';
+import React, { forwardRef, Fragment, isValidElement, ReactElement, ReactNode, useImperativeHandle, useRef, useState } from 'react';
 import {
   TextStyle,
   View,
@@ -18,6 +18,13 @@ import { makeColorPassive } from '../../Utils';
 import { Button, Icon, IIconProps, Text, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';
 import type { ITextProps } from '../Text';
+
+export interface ITextInputRef {
+  focus: () => void
+  blur: () => void
+  clear: () => void
+  isFocused: () => boolean
+}
 
 export interface ITextInputProps {
   /**
@@ -141,35 +148,36 @@ export interface ITextInputProps {
   isRequired?: boolean;
 }
 
-export type ITextInputTypes = ITextInputProps & Omit<TextInputProps, 'onChangeText' | 'onFocus' | 'onBlur' | 'style' | "keyboardType">
+export type ITextInputTypes = ITextInputProps & Omit<TextInputProps, 'value' | 'onChangeText' | 'onFocus' | 'onBlur' | 'style' | "keyboardType">
 
-const STextInput: FC<ITextInputTypes> = ({
-  testID,
-  active = true,
-  type = 'default',
-  title,
-  titleSize = "m",
-  titleWeight = "regular",
-  titleStyle,
-  titleContainerStyle,
-  icon,
-  value,
-  valueWeight = "medium",
-  valueSize = "m",
-  inputStyle,
-  onChangeText,
-  error,
-  errorSize = "m",
-  errorWeight = "regular",
-  errorStyle,
-  errorContainerStyle,
-  containerStyle,
-  onFocus,
-  onBlur,
-  cleanable,
-  isRequired,
-  ...props
-}) => {
+const STextInput = forwardRef<ITextInputRef, ITextInputTypes>((props, ref) => {
+  const {
+    testID,
+    active = true,
+    type = 'default',
+    title,
+    titleSize = "m",
+    titleWeight = "regular",
+    titleStyle,
+    titleContainerStyle,
+    icon,
+    value,
+    valueWeight = "medium",
+    valueSize = "m",
+    inputStyle,
+    onChangeText,
+    error,
+    errorSize = "m",
+    errorWeight = "regular",
+    errorStyle,
+    errorContainerStyle,
+    containerStyle,
+    onFocus,
+    onBlur,
+    cleanable,
+    isRequired,
+    ...otherProps
+  } = props
   const theme = useTheme()
   const { colors, fonts, tokens } = theme
   const { innerSpace, borders, radiuses } = tokens
@@ -177,6 +185,25 @@ const STextInput: FC<ITextInputTypes> = ({
   const NativeTextInputRef = useRef<TextInput | null>(null);
   const [isFocused, setIsFocused] = useState<boolean>();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
+
+
+  useImperativeHandle(ref, () => {
+    if (NativeTextInputRef.current) {
+      return {
+        focus: () => NativeTextInputRef.current?.focus() || {},
+        blur: () => NativeTextInputRef.current?.blur() || {},
+        clear: () => NativeTextInputRef.current?.clear() || {},
+        isFocused: () => NativeTextInputRef.current?.isFocused() || false
+      }
+    } else {
+      return {
+        focus: () => { },
+        blur: () => { },
+        clear: () => { },
+        isFocused: () => false
+      }
+    }
+  });
 
 
   const defineSize = (): number => {
@@ -407,7 +434,7 @@ const STextInput: FC<ITextInputTypes> = ({
             }}
             selectionColor={colors.primary}
             placeholderTextColor={colors.placeholder}
-            {...props}
+            {...otherProps}
           />
         </View>
         {renderClear()}
@@ -452,7 +479,8 @@ const STextInput: FC<ITextInputTypes> = ({
       {renderError()}
     </Fragment>
   );
-};
+
+})
 
 export default STextInput;
 

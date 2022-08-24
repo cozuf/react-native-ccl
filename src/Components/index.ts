@@ -1,11 +1,11 @@
 import Text, { ITextProps, ITextTypes } from './Text';
 import PageContainer, { IPageContainerProps, IPageContainerTypes } from './PageContainer';
 import Icon, { IIconProps } from './Icon';
-import TextInput, { ITextInputProps, ITextInputTypes } from './TextInput';
+import TextInput, { ITextInputRef, ITextInputProps, ITextInputTypes } from './TextInput';
 import ActivityIndicator, { IActivityIndicatorProps, } from './ActivityIndicator';
 import Button, { IButtonProps, IButtonTypes } from './Button';
 import TapSelector, { ITapSelectorProps, ITapSelectorTypes, } from './TapSelector';
-import RadioButton, { IRadioButtonProps, } from './RadioButton';
+import RadioButton, { IRadioButtonProps } from './RadioButton';
 import RadioButtonGroup, { IRadioButtonGroupProps, IRadioButtonGroupTypes, } from './RadioButtonGroup';
 import CheckBox, { ICheckBoxProps } from './CheckBox';
 import CheckBoxGroup, { ICheckBoxGroupProps, ICheckBoxGroupTypes, } from './CheckBoxGroup';
@@ -18,7 +18,7 @@ import SelectBox, { ISelectBoxProps, ISelectBoxTypes } from './SelectBox';
 import Seperator, { ISperatorProps } from './Seperator';
 import DateTimePicker, { IDateTimePickerProps, IDateTimePickerTypes } from './DateTimePicker';
 import Switch, { ISwitchProps, ISwitchTypes } from './Switch';
-import SnackBar, { ISnackBarProps, SnackBarRef } from './SnackBar';
+import SnackBar, { ISnackBarProps, ISnackBarRef } from './SnackBar';
 import Card, { ICardProps } from './Card';
 import StateCard, { IStateCardProps } from './StateCard';
 import SegmentedButton, { ISegmentedButtonProps } from './SegmentedButton';
@@ -56,6 +56,7 @@ export type {
   ITextProps,
   ITextTypes,
   IIconProps,
+  ITextInputRef,
   ITextInputProps,
   ITextInputTypes,
   IActivityIndicatorProps,
@@ -85,7 +86,7 @@ export type {
   ISwitchProps,
   ISwitchTypes,
   ISnackBarProps,
-  SnackBarRef,
+  ISnackBarRef,
   ICardProps,
   IPageContainerProps,
   IPageContainerTypes,
