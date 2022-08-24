@@ -97,7 +97,7 @@ const Modal: FC<IModalTypes> = ({
     const [isVisible, setIsVisible] = useState<boolean>(visible);
     const theme = useTheme();
     const { colors, tokens } = theme;
-    const { innerSpace, radiuses } = tokens
+    const { spaces, radiuses } = tokens
 
     useEffect(() => {
         setIsVisible(visible);
@@ -110,28 +110,28 @@ const Modal: FC<IModalTypes> = ({
                 return Platform.select({
                     ios: {
                         paddingTop: getBottomSpace() || getStatusBarHeight(),
-                        paddingBottom: getBottomSpace() || innerSpace.pageVertical,
-                        paddingHorizontal: innerSpace.pageHorizontal
+                        paddingBottom: getBottomSpace() || spaces.pageVertical,
+                        paddingHorizontal: spaces.pageHorizontal
                     },
                     android: {
-                        paddingVertical: innerSpace.pageVertical,
-                        paddingHorizontal: innerSpace.pageHorizontal
+                        paddingVertical: spaces.pageVertical,
+                        paddingHorizontal: spaces.pageHorizontal
                     }
                 }) as ViewStyle
             case "fault":
             case "warning":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: innerSpace.componentHorizontal
+                    paddingHorizontal: spaces.componentHorizontal
                 }
             case "loading":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: innerSpace.componentHorizontal
+                    paddingHorizontal: spaces.componentHorizontal
                 }
             case "selective":
                 return {
-                    paddingHorizontal: innerSpace.componentHorizontal
+                    paddingHorizontal: spaces.componentHorizontal
                 }
         }
     }
@@ -217,7 +217,7 @@ const Modal: FC<IModalTypes> = ({
                             styles.container,
                             defineContainerStyle(),
                             {
-                                padding: innerSpace.componentHorizontal,
+                                padding: spaces.componentHorizontal,
                                 borderRadius: radiuses.component * 2,
                                 backgroundColor: colors.pageBackground,
                                 shadowColor: colors.shadow,

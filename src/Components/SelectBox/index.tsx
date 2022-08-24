@@ -264,7 +264,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const setModal = useSetModal()
 
   const { colors, tokens } = useTheme()
-  const { innerSpace, borders, radiuses } = tokens;
+  const { spaces, borders, radiuses } = tokens;
 
   const [dataList, setDataList] = useState<any[]>(data as any[])
 
@@ -355,8 +355,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           <Animated.View style={{
             height: searchable ? "100%" : undefined,
             maxHeight: "100%",
-            paddingVertical: innerSpace.componentVertical,
-            paddingHorizontal: innerSpace.componentHorizontal,
+            paddingVertical: spaces.componentVertical,
+            paddingHorizontal: spaces.componentHorizontal,
           }}>
             {renderContent()}
           </Animated.View >
@@ -410,7 +410,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderSeperator = () => {
     if (icon) {
       return (
-        <Seperator type='horizontal' size={innerSpace.componentVertical} />
+        <Seperator type='horizontal' size={spaces.componentVertical} />
       )
     }
     return null
@@ -502,7 +502,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderError = () => {
     if (error) {
       return (
-        <View style={[{ paddingHorizontal: innerSpace.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: spaces.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -522,8 +522,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           {
             borderWidth: error ? borders.textInputFocused : borders.component,
             borderRadius: radiuses.component,
-            paddingVertical: innerSpace.componentVertical,
-            paddingHorizontal: innerSpace.componentHorizontal,
+            paddingVertical: spaces.componentVertical,
+            paddingHorizontal: spaces.componentHorizontal,
             backgroundColor: colors.componentBackground,
             borderColor: error ? colors.error : colors.text,
           },

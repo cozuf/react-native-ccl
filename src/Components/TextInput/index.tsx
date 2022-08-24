@@ -180,7 +180,7 @@ const STextInput = forwardRef<ITextInputRef, ITextInputTypes>((props, ref) => {
   } = props
   const theme = useTheme()
   const { colors, fonts, tokens } = theme
-  const { innerSpace, borders, radiuses } = tokens
+  const { spaces, borders, radiuses } = tokens
 
   const NativeTextInputRef = useRef<TextInput | null>(null);
   const [isFocused, setIsFocused] = useState<boolean>();
@@ -281,7 +281,7 @@ const STextInput = forwardRef<ITextInputRef, ITextInputTypes>((props, ref) => {
   const renderError = () => {
     if (error) {
       return (
-        <View style={[{ paddingHorizontal: innerSpace.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: spaces.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -460,8 +460,8 @@ const STextInput = forwardRef<ITextInputRef, ITextInputTypes>((props, ref) => {
         style={[
           styles.container,
           {
-            paddingVertical: innerSpace.componentVertical,
-            paddingHorizontal: innerSpace.componentHorizontal,
+            paddingVertical: spaces.componentVertical,
+            paddingHorizontal: spaces.componentHorizontal,
             borderRadius: radiuses.component,
             borderWidth: borders.textInputFocused,
             backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),

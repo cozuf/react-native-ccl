@@ -60,48 +60,50 @@ declare global {
         //#region TokenScheme
 
         interface TokenScheme {
-            innerSpace: {
+            spaces: {
                 pageVertical: number
                 pageHorizontal: number
                 componentVertical: number
                 componentHorizontal: number
-
-                thin: number
-                semiThin: number
+                // 
+                extraLight: number
+                light: number
+                extraSmall: number
+                small: number
                 regular: number
+                medium: number
                 semiLarge: number
                 large: number
-            }
-            outerSpace: {
-                componentVertical: number
-                componentHorizontal: number
-
-                thin: number
-                semiThin: number
-                regular: number
-                semiLarge: number
-                large: number
+                extraLarge: number
             }
             borders: {
                 badge: number
                 button: number
                 component: number
                 textInputFocused: number
-
-                thin: number
-                semiThin: number
+                // 
+                extraLight: number
+                light: number
+                extraSmall: number
+                small: number
                 regular: number
+                medium: number
                 semiLarge: number
                 large: number
+                extraLarge: number
             }
             radiuses: {
                 component: number
-
-                thin: number
-                semiThin: number
+                // 
+                extraLight: number
+                light: number
+                extraSmall: number
+                small: number
                 regular: number
+                medium: number
                 semiLarge: number
                 large: number
+                extraLarge: number
             }
         }
         //#endregion

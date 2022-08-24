@@ -85,7 +85,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme
-  const { innerSpace } = tokens
+  const { spaces } = tokens
 
   const renderIcon = (): ReactElement | null => {
     if (iconSet) {
@@ -164,8 +164,8 @@ const CheckBox: FC<ICheckBoxProps> = ({
         [
           styles.container,
           {
-            paddingVertical: innerSpace.componentVertical,
-            paddingHorizontal: innerSpace.componentHorizontal
+            paddingVertical: spaces.componentVertical,
+            paddingHorizontal: spaces.componentHorizontal
           },
           containerStyle,
         ]

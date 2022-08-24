@@ -74,7 +74,7 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
 }) => {
     const theme = useTheme()
     const { colors, tokens } = theme
-    const { innerSpace, borders, radiuses } = tokens
+    const { spaces, borders, radiuses } = tokens
 
     const [open, setOpen] = useState(isExpanded);
     const animatedController = useRef(new Animated.Value(isExpanded ? 1 : 0)).current;
@@ -128,8 +128,8 @@ const ExpandableCard: FC<Omit<ICardProps, "expandable">> = ({
                     {
                         borderWidth: borders.component,
                         borderRadius: radiuses.component,
-                        paddingVertical: innerSpace.componentVertical,
-                        paddingHorizontal: innerSpace.componentHorizontal,
+                        paddingVertical: spaces.componentVertical,
+                        paddingHorizontal: spaces.componentHorizontal,
                         borderColor: active ? colors.primary : makeColorPassive(colors.primary),
                         backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
                     },
@@ -170,7 +170,7 @@ const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({
 }) => {
     const theme = useTheme()
     const { colors, tokens } = theme
-    const { innerSpace, borders, radiuses } = tokens
+    const { spaces, borders, radiuses } = tokens
 
     return (
         <View
@@ -179,8 +179,8 @@ const DefaultCard: FC<Omit<ICardProps, "expandable">> = ({
                     {
                         borderWidth: borders.component,
                         borderRadius: radiuses.component,
-                        paddingVertical: innerSpace.componentVertical,
-                        paddingHorizontal: innerSpace.componentHorizontal,
+                        paddingVertical: spaces.componentVertical,
+                        paddingHorizontal: spaces.componentHorizontal,
                         borderColor: active ? colors.primary : makeColorPassive(colors.primary),
                         backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
                     },

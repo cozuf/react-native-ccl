@@ -52,7 +52,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { innerSpace } = tokens
+  const { spaces } = tokens
 
   if (loading) {
     return (
@@ -62,8 +62,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
           styles.container,
           {
             backgroundColor: colors.pageBackground,
-            paddingVertical: innerSpace.pageVertical,
-            paddingHorizontal: innerSpace.pageHorizontal,
+            paddingVertical: spaces.pageVertical,
+            paddingHorizontal: spaces.pageHorizontal,
             alignItems: "center",
             justifyContent: "center"
           },
@@ -85,8 +85,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
             styles.container,
             {
               backgroundColor: colors.pageBackground,
-              paddingVertical: innerSpace.pageVertical,
-              paddingHorizontal: innerSpace.pageHorizontal,
+              paddingVertical: spaces.pageVertical,
+              paddingHorizontal: spaces.pageHorizontal,
             },
             style,
           ]}
@@ -113,8 +113,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
               styles?.contentContainer,
               {
                 backgroundColor: colors.pageBackground,
-                paddingVertical: innerSpace.pageVertical,
-                paddingHorizontal: innerSpace.pageHorizontal,
+                paddingVertical: spaces.pageVertical,
+                paddingHorizontal: spaces.pageHorizontal,
               }
               ,
               contentContainerStyle,
@@ -135,8 +135,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
             styles.container,
             {
               backgroundColor: colors.pageBackground,
-              paddingVertical: innerSpace.pageVertical,
-              paddingHorizontal: innerSpace.pageHorizontal,
+              paddingVertical: spaces.pageVertical,
+              paddingHorizontal: spaces.pageHorizontal,
             },
             style,
           ]}

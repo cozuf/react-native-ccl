@@ -125,7 +125,7 @@ const Button: FC<IButtonTypes> = ({
   const [pressed, setPressed] = useState<boolean>(false);
   const theme = useTheme();
   const { colors, tokens } = theme
-  const { innerSpace, borders, radiuses } = tokens
+  const { spaces, borders, radiuses } = tokens
 
   const defineBackgroundColor = (): ColorValue | undefined => {
     if (clickType === "opacity" || (clickType === "changeable" && !pressed)) {
@@ -313,8 +313,8 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-              paddingVertical: innerSpace.componentVertical,
-              paddingHorizontal: innerSpace.componentHorizontal
+              paddingVertical: spaces.componentVertical,
+              paddingHorizontal: spaces.componentHorizontal
             }
             : {},
           wrap !== 'free' ? styles.container : {},
@@ -350,8 +350,8 @@ const Button: FC<IButtonTypes> = ({
           renderContainerStyle(),
           wrap !== 'free'
             ? {
-              paddingVertical: innerSpace.componentVertical,
-              paddingHorizontal: innerSpace.componentHorizontal
+              paddingVertical: spaces.componentVertical,
+              paddingHorizontal: spaces.componentHorizontal
             }
             : {},
           wrap !== 'free' ? styles.container : {},
