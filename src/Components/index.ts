@@ -13,7 +13,7 @@ import Chip, { IChipProps } from './Chip';
 import ChipGroup, { IChipGroupProps, IChipGroupTypes } from './ChipGroup';
 import Badge, { IBadgeProps } from './Badge';
 import SearchBar, { ISearchBarProps, ISearchBarTypes } from './SearchBar';
-import Modal, { IModalProps, CCLModalProps } from './Modal';
+import Modal, { IModalProps, IModalTypes } from './Modal';
 import SelectBox, { ISelectBoxProps, ISelectBoxTypes } from './SelectBox';
 import Seperator, { ISperatorProps } from './Seperator';
 import DateTimePicker, { IDateTimePickerProps, IDateTimePickerTypes } from './DateTimePicker';
@@ -22,7 +22,7 @@ import SnackBar, { ISnackBarProps, ISnackBarRef } from './SnackBar';
 import Card, { ICardProps } from './Card';
 import StateCard, { IStateCardProps } from './StateCard';
 import SegmentedButton, { ISegmentedButtonProps } from './SegmentedButton';
-import BottomSheet, { BottomSheetRef, IBottomSheetProps } from './BottomSheet';
+import BottomSheet, { IBottomSheetRef, IBottomSheetProps } from './BottomSheet';
 
 export {
   Text,
@@ -51,6 +51,12 @@ export {
   SegmentedButton,
   BottomSheet
 };
+interface IListItem {
+  active?: boolean
+  value: any
+  title: string
+  selected: boolean
+}
 
 export type {
   ITextProps,
@@ -78,7 +84,7 @@ export type {
   IChipGroupTypes,
   IBadgeProps,
   IModalProps,
-  CCLModalProps,
+  IModalTypes,
   ISearchBarProps,
   ISearchBarTypes,
   ISelectBoxProps,
@@ -93,5 +99,6 @@ export type {
   IStateCardProps,
   ISegmentedButtonProps,
   IBottomSheetProps,
-  BottomSheetRef
+  IBottomSheetRef,
+  IListItem
 };

@@ -72,9 +72,9 @@ export interface IModalProps {
     onRejectButtonPress?: () => void
 }
 
-export interface CCLModalProps extends IModalProps, Omit<ModalProps, "testID" | "visible"> { }
+export interface IModalTypes extends IModalProps, Omit<ModalProps, "testID" | "visible"> { }
 
-const Modal: FC<CCLModalProps> = ({
+const Modal: FC<IModalTypes> = ({
     testID,
     type = "default",
     visible,
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const Loading: FC<Pick<CCLModalProps, "message" | "indicatorProps">> = ({ message, indicatorProps }) => {
+const Loading: FC<Pick<IModalTypes, "message" | "indicatorProps">> = ({ message, indicatorProps }) => {
     return (
         <Fragment>
             <ActivityIndicator type={indicatorProps?.type} size={indicatorProps?.size || 40} />
@@ -291,7 +291,7 @@ const Loading: FC<Pick<CCLModalProps, "message" | "indicatorProps">> = ({ messag
     )
 }
 
-const Fault: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
+const Fault: FC<Pick<IModalTypes, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { } }) => {
     const { colors } = useTheme()
     return (
@@ -317,7 +317,7 @@ const Fault: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | 
     )
 }
 
-const Warning: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
+const Warning: FC<Pick<IModalTypes, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { } }) => {
     const { colors } = useTheme()
     return (
@@ -343,7 +343,7 @@ const Warning: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" 
     )
 }
 
-const Selective: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress" | "rejectButtonTitle" | "onRejectButtonPress">> = ({
+const Selective: FC<Pick<IModalTypes, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress" | "rejectButtonTitle" | "onRejectButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { }, rejectButtonTitle, onRejectButtonPress = () => { } }) => {
     return (
         <Fragment>

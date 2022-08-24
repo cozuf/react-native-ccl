@@ -8,15 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ITextProps, RadioButton, Button, Seperator, SearchBar, ISearchBarTypes } from '..';
+import { ITextProps, RadioButton, Button, Seperator, SearchBar, ISearchBarTypes, IListItem } from '..';
 import { useTheme } from '../../Context';
-
-export interface IListItem {
-  active?: boolean
-  value: any
-  title: string
-  selected: boolean
-}
 
 export type ListItemType = Required<IListItem>
 
@@ -95,9 +88,9 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   data,
   onSelect,
   renderItem,
-  onSubmit = () => { },
   searchable,
   onSearch = () => { },
+  onSubmit = () => { },
   submitTitle = 'Tamam',
   submitTitleWeight,
   submitTitleSize,

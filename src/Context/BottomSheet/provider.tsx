@@ -1,9 +1,9 @@
 import React, { FC, useRef, useState } from "react";
-import { BottomSheetRef, BottomSheet } from "../../Components";
+import { IBottomSheetRef, BottomSheet } from "../../Components";
 import { BottomSheetContext, BottomSheetDispatchContext } from "./context";
 
 const BottomSheetProvider: FC<any> = ({ children }) => {
-    const bottomSheetRef = useRef<BottomSheetRef>(null);
+    const bottomSheetRef = useRef<IBottomSheetRef>(null);
 
     const bottomSheet: RNCCL.BottomSheetScheme = {
         show: () => {

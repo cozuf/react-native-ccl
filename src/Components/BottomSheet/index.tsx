@@ -2,7 +2,7 @@ import React, { forwardRef, PropsWithChildren, Ref, useImperativeHandle, useRef 
 import { Modalize, ModalizeProps } from "react-native-modalize";
 import { useTheme } from "../../Context";
 
-export interface BottomSheetRef {
+export interface IBottomSheetRef {
     show: () => void
     close: () => void
 }
@@ -11,7 +11,7 @@ export interface IBottomSheetProps extends ModalizeProps {
 
 }
 
-const BottomSheet = forwardRef((props: PropsWithChildren<IBottomSheetProps>, ref: Ref<BottomSheetRef>) => {
+const BottomSheet = forwardRef((props: PropsWithChildren<IBottomSheetProps>, ref: Ref<IBottomSheetRef>) => {
     const modalizeRef = useRef<Modalize>()
     const { colors, tokens } = useTheme()
     const { innerSpace } = tokens

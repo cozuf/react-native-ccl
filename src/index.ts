@@ -60,7 +60,7 @@ export type {
   ISnackBarRef,
   ICardProps,
   IModalProps,
-  CCLModalProps,
+  IModalTypes,
   IDateTimePickerProps,
   IDateTimePickerTypes,
   IPageContainerProps,

@@ -9,15 +9,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { CheckBox, Button, Seperator, SearchBar, ISearchBarTypes, ITextProps } from '..';
+import { CheckBox, Button, Seperator, SearchBar, ISearchBarTypes, ITextProps, IListItem } from '..';
 import { useTheme } from '../../Context';
-
-export interface IListItem {
-  active?: boolean
-  value: any
-  title: string
-  selected: boolean
-}
 
 export type ListItemType = Required<IListItem>
 
@@ -126,9 +119,9 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   data,
   onSelect,
   renderItem,
-  onSubmit = () => { },
   searchable,
   onSearch = () => { },
+  onSubmit = () => { },
   submitTitle = 'Tamam',
   submitTitleWeight,
   submitTitleSize,
