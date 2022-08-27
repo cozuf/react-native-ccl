@@ -59,52 +59,40 @@ declare global {
 
         //#region TokenScheme
 
+        interface GeneralTokensScheme {
+            extraLight: number
+            light: number
+            extraSmall: number
+            small: number
+            regular: number
+            medium: number
+            semiLarge: number
+            large: number
+            extraLarge: number
+        }
+
+        interface SpaceTokensScheme {
+            pageVertical: number
+            pageHorizontal: number
+            componentVertical: number
+            componentHorizontal: number
+        }
+
+        interface BorderTokensScheme {
+            badge: number
+            button: number
+            component: number
+            textInputFocused: number
+        }
+
+        interface RadiusTokensScheme {
+            component: number
+        }
+
         interface TokenScheme {
-            spaces: {
-                pageVertical: number
-                pageHorizontal: number
-                componentVertical: number
-                componentHorizontal: number
-                // 
-                extraLight: number
-                light: number
-                extraSmall: number
-                small: number
-                regular: number
-                medium: number
-                semiLarge: number
-                large: number
-                extraLarge: number
-            }
-            borders: {
-                badge: number
-                button: number
-                component: number
-                textInputFocused: number
-                // 
-                extraLight: number
-                light: number
-                extraSmall: number
-                small: number
-                regular: number
-                medium: number
-                semiLarge: number
-                large: number
-                extraLarge: number
-            }
-            radiuses: {
-                component: number
-                // 
-                extraLight: number
-                light: number
-                extraSmall: number
-                small: number
-                regular: number
-                medium: number
-                semiLarge: number
-                large: number
-                extraLarge: number
-            }
+            spaces: RadiusTokensScheme & GeneralTokensScheme
+            borders: BorderTokensScheme & GeneralTokensScheme
+            radiuses: BorderTokensScheme & GeneralTokensScheme
         }
         //#endregion
 
