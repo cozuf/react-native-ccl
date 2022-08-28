@@ -1,4 +1,4 @@
-import React, { FC, Fragment, memo, ReactElement, useEffect, useState } from 'react';
+import React, { FC, Fragment, isValidElement, memo, ReactElement, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -9,12 +9,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { CheckBox, Button, Seperator, SearchBar, ISearchBarTypes, ITextProps, IListItem } from '..';
+import { CheckBox, Button, Seperator, SearchBar, ISearchBarTypes, ITextProps, IListItem, Text } from '..';
 import { useTheme } from '../../Context';
 
 export type ListItemType = Required<IListItem>
 
-export interface ICheckBoxGroupProps<ItemT> {
+export interface ICheckBoxGroupProps<ItemT extends ListItemType> {
   /**
    * Array of selectable options.
    * it must contain {title} and {value} keys.
@@ -38,11 +38,6 @@ export interface ICheckBoxGroupProps<ItemT> {
   renderItem?: (item: ItemT, index: number) => ReactElement | null;
 
   /**
-   *
-   */
-  onSubmit?: (selectedItems: ItemT[], data: ItemT[]) => void;
-
-  /**
    * 
    */
   searchable?: boolean
@@ -51,6 +46,11 @@ export interface ICheckBoxGroupProps<ItemT> {
    * 
    */
   onSearch?: (searchedText: string) => void
+
+  /**
+   *
+   */
+  onSubmit?: (selectedItems: ItemT[], data: ItemT[]) => void;
 
   /**
    *
@@ -83,6 +83,11 @@ export interface ICheckBoxGroupProps<ItemT> {
   maxChoice?: number;
 
   /**
+   * 
+   */
+  showShortcuts?: boolean
+
+  /**
    *
    */
   selectAllTitle?: string;
@@ -111,6 +116,11 @@ export interface ICheckBoxGroupProps<ItemT> {
    * 
    */
   loading?: boolean
+
+  /**
+   * 
+   */
+  description?: string | ReactElement
 }
 
 export type ICheckBoxGroupTypes = ICheckBoxGroupProps<ListItemType> & Omit<FlatListProps<ListItemType>, 'data' | 'renderItem'>;
@@ -121,19 +131,21 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   renderItem,
   searchable,
   onSearch = () => { },
-  onSubmit = () => { },
+  onSubmit,
   submitTitle = 'Tamam',
   submitTitleWeight,
   submitTitleSize,
   submitTitleStyle,
   minChoice = 0,
   maxChoice = 0,
+  showShortcuts = false,
   selectAllTitle = 'Tümünü Seç',
   unSelectAllTitle = 'Tümünü Kaldır',
   onSelectAll = () => { },
   onUnSelectAll = () => { },
   searchBarProps,
   loading,
+  description,
   ...props
 }) => {
   const theme = useTheme();
@@ -207,6 +219,20 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     }
   };
 
+  const renderDescription = () => {
+    if (typeof description === "string") {
+      return (
+        <Text style={{ paddingVertical: spaces.componentVertical }}>
+          {description}
+        </Text>
+      )
+    }
+    if (isValidElement(description)) {
+      return description
+    }
+    return null
+  }
+
   const renderSearchInput = () => {
     if (searchable) {
       return (
@@ -227,34 +253,37 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     return null
   }
 
-  const renderController = () => {
-    return (
-      <View style={styles.buttonsContainer}>
-        <Button
-          wrap={'wrap'}
-          title={unSelectAllTitle}
-          disabled={!dataList.some((v) => v.selected)}
-          type="simplied"
-          containerStyle={styles.buttons}
-          onPress={() => {
-            setDataList((oldDataList) => oldDataList.map((v: ListItemType) => ({ ...v, selected: false, active: true })));
-            onUnSelectAll()
-          }}
-        />
-        <Button
-          wrap={'wrap'}
-          title={selectAllTitle}
-          disabled={maxChoice !== 0 || !dataList.some((v) => !v.selected)}
-          type="simplied"
-          containerStyle={styles.buttons}
-          onPress={() => {
-            const newDataList = dataList.map((v: ListItemType) => ({ ...v, selected: true }))
-            setDataList(newDataList);
-            onSelectAll(newDataList)
-          }}
-        />
-      </View>
-    )
+  const renderShortcuts = () => {
+    if (showShortcuts) {
+      return (
+        <View style={styles.buttonsContainer}>
+          <Button
+            wrap={'wrap'}
+            title={unSelectAllTitle}
+            disabled={!dataList.some((v) => v.selected)}
+            type="simplied"
+            containerStyle={styles.buttons}
+            onPress={() => {
+              setDataList((oldDataList) => oldDataList.map((v: ListItemType) => ({ ...v, selected: false, active: true })));
+              onUnSelectAll()
+            }}
+          />
+          <Button
+            wrap={'wrap'}
+            title={selectAllTitle}
+            disabled={maxChoice !== 0 || !dataList.some((v) => !v.selected)}
+            type="simplied"
+            containerStyle={styles.buttons}
+            onPress={() => {
+              const newDataList = dataList.map((v: ListItemType) => ({ ...v, selected: true }))
+              setDataList(newDataList);
+              onSelectAll(newDataList)
+            }}
+          />
+        </View>
+      )
+    }
+    return null
   }
 
   const renderItemSeperator = (): JSX.Element => {
@@ -301,35 +330,12 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     );
   };
 
-  const renderSelection = () => {
-    return (
-      <FlatList
-        bounces={false}
-        keyExtractor={(_, index) => `${index}`}
-        ListHeaderComponent={renderController}
-        data={dataList}
-        renderItem={renderDefaultItem}
-        ItemSeparatorComponent={renderItemSeperator}
-        {...props}
-      />
-    )
-  }
-
-  const renderSubmitButton = () => {
-    return (
-      <Button
-        wrap="no-wrap"
-        title={submitTitle}
-        titleSize={submitTitleSize}
-        titleWeight={submitTitleWeight}
-        titleStyle={submitTitleStyle}
-        disabled={isDisabled()}
-        onPress={() => {
-          const selectedItems = dataList.filter((v: IListItem) => v.selected)
-          onSubmit(selectedItems, dataList as ListItemType[]);
-        }}
-      />
-    )
+  const renderContent = () => {
+    if (loading) {
+      return renderLoading()
+    } else {
+      return renderSelection()
+    }
   }
 
   const renderLoading = () => {
@@ -341,22 +347,59 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     )
   }
 
-  const renderContent = () => {
-    if (loading) {
-      return renderLoading()
-    } else {
-      return renderSelection()
-    }
+  const renderSelection = () => {
+    return (
+      <FlatList
+        bounces={false}
+        keyExtractor={(_, index) => `${index}`}
+        ListHeaderComponent={renderShortcuts}
+        data={dataList}
+        renderItem={renderDefaultItem}
+        ItemSeparatorComponent={renderItemSeperator}
+        {...props}
+      />
+    )
   }
 
-  return (
-    <Fragment>
-      {renderSearchInput()}
-      {renderContent()}
-      {renderSubmitButton()}
-    </Fragment>
-  );
-};
+  const renderSubmitButton = () => {
+    if (typeof onSubmit === "function") {
+      return (
+        <Button
+          wrap="no-wrap"
+          title={submitTitle}
+          titleSize={submitTitleSize}
+          titleWeight={submitTitleWeight}
+          titleStyle={submitTitleStyle}
+          disabled={isDisabled()}
+          onPress={() => {
+            const selectedItems = dataList.filter((v: IListItem) => v.selected)
+            onSubmit(selectedItems, dataList as ListItemType[]);
+          }}
+        />
+      )
+    }
+    return null
+  }
+
+  if (typeof onSubmit === "function") {
+    return (
+      <Fragment>
+        {renderDescription()}
+        {renderSearchInput()}
+        {renderContent()}
+        {renderSubmitButton()}
+      </Fragment>
+    )
+  } else {
+    return (
+      <View>
+        {renderDescription()}
+        {renderSearchInput()}
+        {renderContent()}
+      </View>
+    )
+  }
+}
 
 export default memo(CheckBoxGroup);
 
