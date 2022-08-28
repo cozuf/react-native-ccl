@@ -251,7 +251,7 @@ const CheckBoxGroupPage = () => {
       <CheckBoxGroup
         loading={loading}
         data={DATA}
-        description={"Açıklama"}
+        // description={"Açıklama"}
         searchable={SEARCHABLE_DATA[searchableIndex].value}
         renderItem={customRenderIndex === 1 ? customRender : undefined}
         showShortcuts={SHORTCUT_DATA[shortcutIndex].value}
