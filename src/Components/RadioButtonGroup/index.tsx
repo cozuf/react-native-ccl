@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useEffect, useState } from 'react';
+import React, { FC, Fragment, isValidElement, ReactElement, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ITextProps, RadioButton, Button, Seperator, SearchBar, ISearchBarTypes, IListItem } from '..';
+import { ITextProps, RadioButton, Button, Seperator, SearchBar, ISearchBarTypes, IListItem, Text } from '..';
 import { useTheme } from '../../Context';
 
 export type ListItemType = Required<IListItem>
 
-export interface IRadioButtonGroupProps<ItemT> {
+export interface IRadioButtonGroupProps<ItemT extends ListItemType> {
   /**
    * Array of selectable options.
    * it must contain {title} and {value} keys.
@@ -37,11 +37,6 @@ export interface IRadioButtonGroupProps<ItemT> {
   renderItem?: (item: ItemT, index: number) => React.ReactElement | null;
 
   /**
-   *
-   */
-  onSubmit?: (selectedItems: ItemT[], data: ItemT[]) => void;
-
-  /**
    * 
    */
   searchable?: boolean
@@ -50,6 +45,11 @@ export interface IRadioButtonGroupProps<ItemT> {
    * 
    */
   onSearch?: (searchedText: string) => void
+
+  /**
+   *
+   */
+  onSubmit?: (selectedItems: ItemT[], data: ItemT[]) => void;
 
   /**
    *
@@ -80,6 +80,11 @@ export interface IRadioButtonGroupProps<ItemT> {
    * 
    */
   loading?: boolean
+
+  /**
+   * 
+   */
+  description?: string | ReactElement
 }
 
 export interface IRadioButtonGroupTypes extends IRadioButtonGroupProps<ListItemType>, Omit<FlatListProps<ListItemType>, 'data' | 'renderItem'> { }
@@ -90,13 +95,14 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   renderItem,
   searchable,
   onSearch = () => { },
-  onSubmit = () => { },
+  onSubmit,
   submitTitle = 'Tamam',
   submitTitleWeight,
   submitTitleSize,
   submitTitleStyle,
   searchBarProps,
   loading,
+  description,
   ...props
 }) => {
   const theme = useTheme()
@@ -136,6 +142,20 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
       console.error("'onSelect' is undefined");
     }
   };
+
+  const renderDescription = () => {
+    if (typeof description === "string") {
+      return (
+        <Text style={{ paddingVertical: spaces.componentVertical }}>
+          {description}
+        </Text>
+      )
+    }
+    if (isValidElement(description)) {
+      return description
+    }
+    return null
+  }
 
   const renderSearchInput = () => {
     if (searchable) {
@@ -219,20 +239,23 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   }
 
   const renderSubmitButton = () => {
-    return (
-      <Button
-        wrap="no-wrap"
-        disabled={dataList.every((v) => !v.selected)}
-        title={submitTitle}
-        titleSize={submitTitleSize}
-        titleWeight={submitTitleWeight}
-        titleStyle={submitTitleStyle}
-        onPress={() => {
-          const selectedItems = dataList.filter((v) => v.selected)
-          onSubmit(selectedItems, dataList as ListItemType[]);
-        }}
-      />
-    )
+    if (typeof onSubmit === "function") {
+      return (
+        <Button
+          wrap="no-wrap"
+          disabled={dataList.every((v) => !v.selected)}
+          title={submitTitle}
+          titleSize={submitTitleSize}
+          titleWeight={submitTitleWeight}
+          titleStyle={submitTitleStyle}
+          onPress={() => {
+            const selectedItems = dataList.filter((v) => v.selected)
+            onSubmit(selectedItems, dataList as ListItemType[]);
+          }}
+        />
+      )
+    }
+    return null
   }
 
   const renderLoading = () => {
@@ -252,14 +275,25 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     }
   }
 
+  if (typeof onSubmit === "function") {
+    return (
+      <Fragment>
+        {renderDescription()}
+        {renderSearchInput()}
+        {renderContent()}
+        {renderSubmitButton()}
+      </Fragment>
+    );
+  } else {
+    return (
+      <View>
+        {renderDescription()}
+        {renderSearchInput()}
+        {renderContent()}
+      </View>
+    );
+  }
 
-  return (
-    <Fragment>
-      {renderSearchInput()}
-      {renderContent()}
-      {renderSubmitButton()}
-    </Fragment>
-  );
 };
 
 export default RadioButtonGroup;
