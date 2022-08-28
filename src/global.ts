@@ -90,9 +90,9 @@ declare global {
         }
 
         interface TokenScheme {
-            spaces: RadiusTokensScheme & GeneralTokensScheme
+            spaces: SpaceTokensScheme & GeneralTokensScheme
             borders: BorderTokensScheme & GeneralTokensScheme
-            radiuses: BorderTokensScheme & GeneralTokensScheme
+            radiuses: RadiusTokensScheme & GeneralTokensScheme
         }
         //#endregion
 
