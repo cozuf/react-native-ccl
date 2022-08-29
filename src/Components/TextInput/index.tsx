@@ -401,7 +401,7 @@ const STextInput = forwardRef<ITextInputRef, ITextInputTypes>((props, ref) => {
                 fontFamily: fonts[valueWeight],
                 fontSize: defineSize(),
                 color: colors.text,
-                textAlignVertical: (inputStyle as TextStyle).textAlignVertical || props.multiline ? "top" : "auto",
+                textAlignVertical: (inputStyle as TextStyle)?.textAlignVertical || props.multiline ? "top" : "auto",
                 ...Platform.select({
                   ios: {
                     paddingVertical:
