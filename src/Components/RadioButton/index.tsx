@@ -194,6 +194,8 @@ const styles = StyleSheet.create({
   },
   iconContainer: {},
   sperator: {},
-  titleContainer: {},
+  titleContainer: {
+    flex: 1
+  },
   title: {},
 })

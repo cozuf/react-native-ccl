@@ -190,7 +190,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  titleContainer: {},
+  titleContainer: {
+    flex: 1
+  },
   title: {},
   seperator: {},
   iconContainer: {
