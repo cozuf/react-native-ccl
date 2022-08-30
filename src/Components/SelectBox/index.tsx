@@ -9,13 +9,15 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { Seperator, Text, ITextProps, CheckBoxGroup, RadioButtonGroup, Icon, IIconProps } from '..';
+import { Seperator, Text, ITextProps, CheckBoxGroup, RadioButtonGroup, Icon, IListItem, IIconProps } from '..';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import { useModal, useSetModal } from '../../Context/Modal';
-import { getBottomSpace, makeColorPassive } from '../../Utils';
+import { getBottomSpace, makeColorPassive } from '../../Utils';;
 
-export interface ISelectBoxProps<ItemT> {
+export type ListItemType = Required<IListItem>
+
+export interface ISelectBoxProps<ItemT extends ListItemType> {
   //#region ComponentProps
   /**
    * 
@@ -270,7 +272,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   useEffect(() => { setDataList(data as any[]) }, [data])
 
-  const onSubmitSelection = (data: any[], seletedItems: any[]) => {
+  const onSubmitSelection = (seletedItems: any[], data: any[]) => {
     setDataList(data)
     if (typeof onSubmit === 'function') {
       onSubmit(seletedItems, data);
