@@ -313,6 +313,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     if (typeof renderItem === "function") {
       return (
         <TouchableOpacity
+          style={{ flex: 1 }}
           onPress={() => { onItemSelect(item.value, !item.selected) }}>
           {renderItem(item, index)}
         </TouchableOpacity>
