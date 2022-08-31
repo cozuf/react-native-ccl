@@ -207,6 +207,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     if (typeof renderItem === "function") {
       return (
         <TouchableOpacity
+          style={{ flex: 1 }}
           onPress={() => { onItemSelect(item.value) }}>
           {renderItem(item, index)}
         </TouchableOpacity>

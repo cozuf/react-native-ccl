@@ -42,7 +42,7 @@ export interface IRadioButtonProps {
   /**
    * invokes select the item
    */
-  onSelect: (selectedValue: any) => void;
+  onSelect?: (selectedValue: any) => void;
 
   /**
    * 
@@ -189,6 +189,7 @@ export default RadioButton;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
