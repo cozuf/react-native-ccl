@@ -1,13 +1,15 @@
-import React, { FC, Fragment, isValidElement, memo, ReactElement, useEffect, useState } from 'react';
+import React, { FC, isValidElement, memo, ReactElement, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
   FlatListProps,
   ListRenderItemInfo,
   Omit,
+  StyleProp,
   StyleSheet,
   TouchableOpacity,
   View,
+  ViewStyle,
 } from 'react-native';
 import { CheckBox, Button, Seperator, SearchBar, ISearchBarTypes, ITextProps, IListItem, Text } from '..';
 import { useTheme } from '../../Context';
@@ -121,6 +123,11 @@ export interface ICheckBoxGroupProps<ItemT extends ListItemType> {
    * 
    */
   description?: string | ReactElement
+
+  /**
+   * 
+   */
+  containerStyle?: StyleProp<ViewStyle>
 }
 
 export type ICheckBoxGroupTypes = ICheckBoxGroupProps<ListItemType> & Omit<FlatListProps<ListItemType>, 'data' | 'renderItem'>;
@@ -146,11 +153,12 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   searchBarProps,
   loading,
   description,
+  containerStyle,
   ...props
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme
-  const { spaces } = tokens
+  const { spaces, radiuses } = tokens
 
   const [searchText, setSearchText] = useState<string>("")
   const [dataList, setDataList] = useState(data);
@@ -222,9 +230,12 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   const renderDescription = () => {
     if (typeof description === "string") {
       return (
-        <Text style={{ paddingVertical: spaces.componentVertical }}>
-          {description}
-        </Text>
+        <View
+          style={{ paddingHorizontal: spaces.componentHorizontal }}>
+          <Text style={{ paddingVertical: spaces.componentVertical }}>
+            {description}
+          </Text>
+        </View>
       )
     }
     if (isValidElement(description)) {
@@ -263,6 +274,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
             disabled={!dataList.some((v) => v.selected)}
             type="simplied"
             containerStyle={styles.buttons}
+            titleStyle={{ color: colors.text }}
             onPress={() => {
               setDataList((oldDataList) => oldDataList.map((v: ListItemType) => ({ ...v, selected: false, active: true })));
               onUnSelectAll()
@@ -274,6 +286,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
             disabled={maxChoice !== 0 || !dataList.some((v) => !v.selected)}
             type="simplied"
             containerStyle={styles.buttons}
+            titleStyle={{ color: colors.text }}
             onPress={() => {
               const newDataList = dataList.map((v: ListItemType) => ({ ...v, selected: true }))
               setDataList(newDataList);
@@ -382,24 +395,23 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     return null
   }
 
-  if (typeof onSubmit === "function") {
-    return (
-      <Fragment>
-        {renderDescription()}
-        {renderSearchInput()}
-        {renderContent()}
-        {renderSubmitButton()}
-      </Fragment>
-    )
-  } else {
-    return (
-      <View>
-        {renderDescription()}
-        {renderSearchInput()}
-        {renderContent()}
-      </View>
-    )
-  }
+  return (
+    <View
+      style={[
+        {
+          flex: typeof onSubmit === "function" ? 1 : undefined,
+          backgroundColor: colors.componentBackground,
+          borderRadius: radiuses.component
+        },
+        containerStyle
+      ]}
+    >
+      {renderDescription()}
+      {renderSearchInput()}
+      {renderContent()}
+      {renderSubmitButton()}
+    </View>
+  )
 }
 
 export default memo(CheckBoxGroup);
