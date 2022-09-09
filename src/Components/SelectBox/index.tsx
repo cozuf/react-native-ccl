@@ -1,4 +1,4 @@
-import React, { FC, Fragment, isValidElement, ReactNode, useEffect, useState } from 'react';
+import React, { FC, Fragment, isValidElement, ReactElement, ReactNode, useEffect, useState } from 'react';
 import {
   Animated,
   FlatListProps,
@@ -107,6 +107,11 @@ export interface ISelectBoxProps<ItemT extends ListItemType> {
   containerStyle?: ViewStyle
 
   /**
+   * 
+   */
+  rightContainer?: () => ReactElement | null
+
+  /**
    *
    */
   error?: string
@@ -204,7 +209,7 @@ export interface ISelectBoxProps<ItemT extends ListItemType> {
   /**
    * callback if you want render custom item
    */
-  renderItem?: (item: ItemT, index: number) => React.ReactElement | null;
+  renderItem?: (item: ItemT, index: number) => ReactElement | null;
 
   /**
    *
@@ -258,6 +263,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   renderItem,
   maxChoice,
   minChoice,
+  rightContainer
 }) => {
   const bottomSheet = useBottomSheet()
   const setBottomSheet = useSetBottomSheet()
@@ -395,7 +401,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       } else {
         const CoreIcon = icon as IIconProps;
         return (
-          <View style={styles.iconContainer}>
+          <View style={styles.sideContainer}>
             <Icon
               family={CoreIcon.family}
               name={CoreIcon.name}
@@ -409,8 +415,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     return null
   };
 
-  const renderSeperator = () => {
-    if (icon) {
+  const renderSeperator = (shouldItBe: boolean) => {
+    if (shouldItBe) {
       return (
         <Seperator type='horizontal' size={spaces.componentVertical} />
       )
@@ -494,6 +500,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     )
   }
 
+  const renderRight = () => {
+    if (typeof rightContainer === "function") {
+      return (
+        <View style={styles.sideContainer}>
+          {rightContainer()}
+        </View>
+      )
+    }
+    return null
+  }
+
   const renderErrorSeperator = () => {
     if (error) {
       return <Seperator type='vertical' size={2} />
@@ -534,8 +551,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         ]}
       >
         {renderIcon()}
-        {renderSeperator()}
+        {renderSeperator(icon !== undefined)}
         {renderTitleAndValue()}
+        {renderSeperator(typeof rightContainer === "function")}
+        {renderRight()}
       </TouchableOpacity>
       {renderErrorSeperator()}
       {renderError()}
@@ -550,7 +569,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   },
-  iconContainer: {
+  sideContainer: {
     alignItems: "center",
     justifyContent: "center"
   },
