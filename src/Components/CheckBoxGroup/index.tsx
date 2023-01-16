@@ -1,4 +1,4 @@
-import React, { FC, isValidElement, memo, ReactElement, useEffect, useState } from 'react';
+import React, { FC, memo, ReactElement, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -11,7 +11,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { CheckBox, Button, Seperator, SearchBar, ISearchBarTypes, ITextProps, IListItem, Text } from '..';
+import { CheckBox, Seperator, IListItem } from '..';
 import { useTheme } from '../../Context';
 
 export type ListItemType = Required<IListItem>
@@ -40,89 +40,19 @@ export interface ICheckBoxGroupProps<ItemT extends ListItemType> {
   renderItem?: (item: ItemT, index: number) => ReactElement | null;
 
   /**
-   * 
+   *
    */
-  searchable?: boolean
-
-  /**
-   * 
-   */
-  onSearch?: (searchedText: string) => void
+  minChoice?: number
 
   /**
    *
    */
-  onSubmit?: (selectedItems: ItemT[], data: ItemT[]) => void;
-
-  /**
-   *
-   */
-  submitTitle?: string;
-
-  /**
-   *  
-   */
-  submitTitleWeight?: ITextProps["weigth"]
-
-  /**
-   *  
-   */
-  submitTitleSize?: ITextProps["size"]
-
-  /**
-   * 
-   */
-  submitTitleStyle?: ITextProps["style"]
-
-  /**
-   *
-   */
-  minChoice?: number;
-
-  /**
-   *
-   */
-  maxChoice?: number;
-
-  /**
-   * 
-   */
-  showShortcuts?: boolean
-
-  /**
-   *
-   */
-  selectAllTitle?: string;
-
-  /**
-   * 
-   */
-  onSelectAll?: (data: ItemT[]) => void;
-
-  /**
-   *
-   */
-  unSelectAllTitle?: string;
-
-  /**
-   * 
-   */
-  onUnSelectAll?: () => {}
-
-  /**
-   * 
-   */
-  searchBarProps?: Omit<ISearchBarTypes, "value" | "onSearch">
+  maxChoice?: number
 
   /**
    * 
    */
   loading?: boolean
-
-  /**
-   * 
-   */
-  description?: string | ReactElement
 
   /**
    * 
@@ -136,31 +66,15 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
   data,
   onSelect,
   renderItem,
-  searchable,
-  onSearch = () => { },
-  onSubmit,
-  submitTitle = 'Tamam',
-  submitTitleWeight,
-  submitTitleSize,
-  submitTitleStyle,
   minChoice = 0,
   maxChoice = 0,
-  showShortcuts = false,
-  selectAllTitle = 'Tümünü Seç',
-  unSelectAllTitle = 'Tümünü Kaldır',
-  onSelectAll = () => { },
-  onUnSelectAll = () => { },
-  searchBarProps,
   loading,
-  description,
   containerStyle,
   ...props
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme
-  const { spaces, radiuses } = tokens
-
-  const [searchText, setSearchText] = useState<string>("")
+  const { spaces } = tokens
   const [dataList, setDataList] = useState(data);
 
   useEffect(() => {
@@ -216,95 +130,14 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     if (data.some((v) => v.selected === undefined)) {
       console.warn('It would be good to define selected item at the begining, to show them.');
     }
-  }, [data]);
-
-  const isDisabled = (): boolean => {
-    if (minChoice !== 0) {
-      const selectedLength = dataList.filter((v: ListItemType) => v.selected).length;
-      return selectedLength < minChoice;
-    } else {
-      return false;
-    }
-  };
-
-  const renderDescription = () => {
-    if (typeof description === "string") {
-      return (
-        <View
-          style={{ paddingHorizontal: spaces.componentHorizontal }}>
-          <Text style={{ paddingVertical: spaces.componentVertical }}>
-            {description}
-          </Text>
-        </View>
-      )
-    }
-    if (isValidElement(description)) {
-      return description
-    }
-    return null
-  }
-
-  const renderSearchInput = () => {
-    if (searchable) {
-      return (
-        <SearchBar
-          value={searchText}
-          autoCapitalize="none"
-          onSearch={(value: string) => {
-            setSearchText(value)
-            onSearch(value)
-            const mappedData = data.map((firstV: IListItem,) => dataList.find((secondV: IListItem) => firstV.value === secondV.value) || { ...firstV } as Required<IListItem>)
-            const fiteredData = mappedData.filter((v: IListItem) => v.title.toLowerCase().includes(value.toLowerCase()))
-            setDataList(fiteredData)
-          }}
-          {...searchBarProps}
-        />
-      )
-    }
-    return null
-  }
-
-  const renderShortcuts = () => {
-    if (showShortcuts) {
-      return (
-        <View style={styles.buttonsContainer}>
-          <Button
-            wrap={'wrap'}
-            title={unSelectAllTitle}
-            disabled={!dataList.some((v) => v.selected)}
-            type="simplied"
-            containerStyle={styles.buttons}
-            titleStyle={{ color: colors.text }}
-            onPress={() => {
-              setDataList((oldDataList) => oldDataList.map((v: ListItemType) => ({ ...v, selected: false, active: true })));
-              onUnSelectAll()
-            }}
-          />
-          <Button
-            wrap={'wrap'}
-            title={selectAllTitle}
-            disabled={maxChoice !== 0 || !dataList.some((v) => !v.selected)}
-            type="simplied"
-            containerStyle={styles.buttons}
-            titleStyle={{ color: colors.text }}
-            onPress={() => {
-              const newDataList = dataList.map((v: ListItemType) => ({ ...v, selected: true }))
-              setDataList(newDataList);
-              onSelectAll(newDataList)
-            }}
-          />
-        </View>
-      )
-    }
-    return null
-  }
+  }, [data])
 
   const renderItemSeperator = (): JSX.Element => {
     return (
       <Seperator
         type="vertical"
         size={1}
-        style={{ width: "96%", backgroundColor: colors.listItemSeperator }}
+        style={[{ width: "96%", backgroundColor: colors.listItemSeperator }, styles.seperator]}
         containerStyle={
           [
             styles.seperatorContainer,
@@ -314,7 +147,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
           ]
         } />
     );
-  };
+  }
 
   const renderDefaultItem = (info: ListRenderItemInfo<ListItemType>): ReactElement | null => {
     const { item, index } = info;
@@ -342,7 +175,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
         onSelect={onItemSelect}
       />
     );
-  };
+  }
 
   const renderContent = () => {
     if (loading) {
@@ -366,7 +199,6 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
       <FlatList
         bounces={false}
         keyExtractor={(_, index) => `${index}`}
-        ListHeaderComponent={renderShortcuts}
         data={dataList}
         renderItem={renderDefaultItem}
         ItemSeparatorComponent={renderItemSeperator}
@@ -375,43 +207,7 @@ const CheckBoxGroup: FC<ICheckBoxGroupTypes> = ({
     )
   }
 
-  const renderSubmitButton = () => {
-    if (typeof onSubmit === "function") {
-      return (
-        <Button
-          wrap="no-wrap"
-          title={submitTitle}
-          titleSize={submitTitleSize}
-          titleWeight={submitTitleWeight}
-          titleStyle={submitTitleStyle}
-          disabled={isDisabled()}
-          onPress={() => {
-            const selectedItems = dataList.filter((v: IListItem) => v.selected)
-            onSubmit(selectedItems, dataList as ListItemType[]);
-          }}
-        />
-      )
-    }
-    return null
-  }
-
-  return (
-    <View
-      style={[
-        {
-          flex: typeof onSubmit === "function" ? 1 : undefined,
-          backgroundColor: colors.componentBackground,
-          borderRadius: radiuses.component
-        },
-        containerStyle
-      ]}
-    >
-      {renderDescription()}
-      {renderSearchInput()}
-      {renderContent()}
-      {renderSubmitButton()}
-    </View>
-  )
+  return renderContent()
 }
 
 export default memo(CheckBoxGroup);
@@ -421,11 +217,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   seperator: {},
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  buttons: {
-    paddingHorizontal: 0
-  },
 })
