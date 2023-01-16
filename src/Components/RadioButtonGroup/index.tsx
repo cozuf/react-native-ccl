@@ -1,4 +1,4 @@
-import React, { FC, Fragment, isValidElement, ReactElement, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ITextProps, RadioButton, Button, Seperator, SearchBar, ISearchBarTypes, IListItem, Text } from '..';
+import { RadioButton, Seperator, IListItem } from '..';
 import { useTheme } from '../../Context';
 
 export type ListItemType = Required<IListItem>
@@ -24,67 +24,22 @@ export interface IRadioButtonGroupProps<ItemT extends ListItemType> {
    * {active} to be selectable
    * {selected} to show selected before
    */
-  data: ReadonlyArray<ItemT>;
+  data: ReadonlyArray<ItemT>
 
   /**
    * invokes when click the option
    */
-  onSelect?: (item: ItemT, index: number) => void;
+  onSelect?: (item: ItemT, index: number) => void
 
   /**
    * callback if you want render custom item
    */
-  renderItem?: (item: ItemT, index: number) => React.ReactElement | null;
-
-  /**
-   * 
-   */
-  searchable?: boolean
-
-  /**
-   * 
-   */
-  onSearch?: (searchedText: string) => void
-
-  /**
-   *
-   */
-  onSubmit?: (selectedItems: ItemT[], data: ItemT[]) => void;
-
-  /**
-   *
-   */
-  submitTitle?: string;
-
-  /**
-   *  
-   */
-  submitTitleWeight?: ITextProps["weigth"]
-
-  /**
-   *  
-   */
-  submitTitleSize?: ITextProps["size"]
-
-  /**
-   * 
-   */
-  submitTitleStyle?: ITextProps["style"]
-
-  /**
-   * 
-   */
-  searchBarProps?: Omit<ISearchBarTypes, "value" | "onSearch">
+  renderItem?: (item: ItemT, index: number) => React.ReactElement | null
 
   /**
    * 
    */
   loading?: boolean
-
-  /**
-   * 
-   */
-  description?: string | ReactElement
 }
 
 export interface IRadioButtonGroupTypes extends IRadioButtonGroupProps<ListItemType>, Omit<FlatListProps<ListItemType>, 'data' | 'renderItem'> { }
@@ -93,28 +48,17 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
   data,
   onSelect,
   renderItem,
-  searchable,
-  onSearch = () => { },
-  onSubmit,
-  submitTitle = 'Tamam',
-  submitTitleWeight,
-  submitTitleSize,
-  submitTitleStyle,
-  searchBarProps,
   loading,
-  description,
   ...props
 }) => {
   const theme = useTheme()
   const { colors, tokens } = theme
   const { spaces } = tokens
-
-  const [searchText, setSearchText] = useState<string>("")
   const [dataList, setDataList] = useState(data)
 
   useEffect(() => {
     setDataList(data.map((v: ListItemType) => ({ ...v, selected: v.selected || false })));
-  }, [data]);
+  }, [data])
 
   /**
    * warning useEffect
@@ -128,7 +72,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         'It would be good to define selected item at the begining, to show them.'
       );
     }
-  });
+  })
 
   const onItemSelect = (selectedValue: IListItem["value"]) => {
     const newData = dataList.map((v) => ({ ...v, selected: v.value === selectedValue }));
@@ -141,43 +85,6 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     } else if (typeof renderItem === "function") {
       console.error("'onSelect' is undefined");
     }
-  };
-
-  const renderDescription = () => {
-    if (typeof description === "string") {
-      return (
-        <Text style={{ paddingVertical: spaces.componentVertical }}>
-          {description}
-        </Text>
-      )
-    }
-    if (isValidElement(description)) {
-      return description
-    }
-    return null
-  }
-
-  const renderSearchInput = () => {
-    if (searchable) {
-      return (
-        <Fragment>
-          <SearchBar
-            value={searchText}
-            autoCapitalize="none"
-            onSearch={(value: string) => {
-              setSearchText(value)
-              onSearch(value)
-              const mappedData = data.map((firstV: IListItem,) => dataList.find((secondV: IListItem) => firstV.value === secondV.value) || { ...firstV } as Required<IListItem>)
-              const fiteredData = mappedData.filter((v: IListItem) => v.title.toLowerCase().includes(value.toLowerCase()))
-              setDataList(fiteredData)
-            }}
-            {...searchBarProps}
-          />
-          <Seperator type='vertical' />
-        </Fragment>
-      )
-    }
-    return null
   }
 
   const renderSeperator = (): JSX.Element => {
@@ -195,7 +102,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
           ]
         } />
     );
-  };
+  }
 
   const renderDefaultItem = (info: ListRenderItemInfo<Required<ListItemType>>): React.ReactElement | null => {
     const { item, index } = info;
@@ -224,7 +131,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         onSelect={onItemSelect}
       />
     );
-  };
+  }
 
   const renderSelection = () => {
     return (
@@ -237,26 +144,6 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
         {...props}
       />
     )
-  }
-
-  const renderSubmitButton = () => {
-    if (typeof onSubmit === "function") {
-      return (
-        <Button
-          wrap="no-wrap"
-          disabled={dataList.every((v) => !v.selected)}
-          title={submitTitle}
-          titleSize={submitTitleSize}
-          titleWeight={submitTitleWeight}
-          titleStyle={submitTitleStyle}
-          onPress={() => {
-            const selectedItems = dataList.filter((v) => v.selected)
-            onSubmit(selectedItems, dataList as ListItemType[]);
-          }}
-        />
-      )
-    }
-    return null
   }
 
   const renderLoading = () => {
@@ -276,24 +163,7 @@ const RadioButtonGroup: FC<IRadioButtonGroupTypes> = ({
     }
   }
 
-  if (typeof onSubmit === "function") {
-    return (
-      <Fragment>
-        {renderDescription()}
-        {renderSearchInput()}
-        {renderContent()}
-        {renderSubmitButton()}
-      </Fragment>
-    );
-  } else {
-    return (
-      <View>
-        {renderDescription()}
-        {renderSearchInput()}
-        {renderContent()}
-      </View>
-    );
-  }
+  return renderContent()
 
 };
 
