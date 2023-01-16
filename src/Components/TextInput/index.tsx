@@ -402,6 +402,7 @@ const STextInput = forwardRef<ITextInputRef, ITextInputTypes>((props, ref) => {
                 fontSize: defineSize(),
                 color: colors.text,
                 textAlignVertical: (inputStyle as TextStyle)?.textAlignVertical || props.multiline ? "top" : "auto",
+                // TODO: padding: 0 yapmak yeterli
                 ...Platform.select({
                   ios: {
                     paddingVertical:
