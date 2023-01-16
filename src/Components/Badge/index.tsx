@@ -91,7 +91,7 @@ const Badge: FC<IBadgeProps> = ({ testID, size = 20, value, containerStyle }) =>
       >
         {getValue()}
       </Text>
-    </View >
+    </View>
   );
 };
 
