@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Button, Icon, IRadioButtonGroupTypes, PageContainer, RadioButtonGroup, Seperator, TapSelector, Text } from 'react-native-ccl';
+import { Button, Icon, PageContainer, RadioButtonGroup, Seperator, TapSelector, Text } from 'react-native-ccl';
 
 const DATA = [
   {
@@ -89,17 +89,6 @@ const DATA = [
   // },
 ];
 
-const SEARCHABLE_DATA = [
-  {
-    title: 'Aranamaz',
-    value: false,
-  },
-  {
-    title: 'Aranabilir',
-    value: true,
-  }
-];
-
 const CUSTOM_RENDER_DATA = [
   {
     title: 'Default',
@@ -107,17 +96,6 @@ const CUSTOM_RENDER_DATA = [
   },
   {
     title: 'Custom',
-    value: true,
-  }
-];
-
-const CUSTOM_SEARCHBAR_DATA = [
-  {
-    title: 'Default SearchBar',
-    value: false,
-  },
-  {
-    title: 'Custom SearchBar',
     value: true,
   }
 ];
@@ -133,23 +111,9 @@ const LOADING_DATA = [
   }
 ];
 
-const SUBMIT_DATA = [
-  {
-    title: 'Submit buton gösterme',
-    value: false,
-  },
-  {
-    title: 'Submit buton göster',
-    value: true,
-  }
-];
-
 const RadioButtonGroupPage = () => {
   const [loading, setLoading] = useState<boolean>(false)
-  const [searchableIndex, setSearchableIndex] = useState<number>(0);
-  const [submitIndex, setSubmitIndex] = useState<number>(0);
   const [customRenderIndex, setCustomRenderIndex] = useState<number>(0);
-  const [customSearchBarIndex, setCustomSearchBarIndex] = useState<number>(0);
 
   const customRender = (item: any) => {
     return (
@@ -178,18 +142,6 @@ const RadioButtonGroupPage = () => {
     )
   }
 
-  const customOnSubmit = (data: any[]) => {
-    console.log({ data });
-  }
-
-  const customSearchBarProps: IRadioButtonGroupTypes["searchBarProps"] = {
-    containerStyle: {
-      borderWidth: 0,
-      borderBottomWidth: 1,
-    },
-    icon: null
-  }
-
   return (
     <PageContainer type="default">
       <View>
@@ -201,30 +153,9 @@ const RadioButtonGroupPage = () => {
         />
         <Seperator type='vertical' size={"medium"} />
         <TapSelector
-          data={SEARCHABLE_DATA}
-          onTap={(_, i) => {
-            setSearchableIndex(i)
-          }}
-        />
-        <Seperator type='vertical' size={"medium"} />
-        <TapSelector
           data={CUSTOM_RENDER_DATA}
           onTap={(_, i) => {
             setCustomRenderIndex(i)
-          }}
-        />
-        <Seperator type='vertical' size={"medium"} />
-        <TapSelector
-          data={SUBMIT_DATA}
-          onTap={(_, i) => {
-            setSubmitIndex(i)
-          }}
-        />
-        <Seperator type='vertical' size={"medium"} />
-        <TapSelector
-          data={CUSTOM_SEARCHBAR_DATA}
-          onTap={(_, i) => {
-            setCustomSearchBarIndex(i)
           }}
         />
       </View>
@@ -232,22 +163,13 @@ const RadioButtonGroupPage = () => {
       <RadioButtonGroup
         loading={loading}
         data={DATA}
-        // description={"Açıklama"}
-        searchable={SEARCHABLE_DATA[searchableIndex].value}
         renderItem={customRenderIndex === 1 ? customRender : undefined}
         onSelect={(item: any, index: number) => {
           console.log({ item, index });
         }}
-        onSubmit={SUBMIT_DATA[submitIndex].value ? customOnSubmit : undefined}
         ItemSeparatorComponent={customRenderIndex === 1 ? customItemSeperator : undefined}
-        searchBarProps={customSearchBarIndex === 1 ? customSearchBarProps : undefined}
       />
-      {
-        !SUBMIT_DATA[submitIndex].value ?
-          <Button onPress={() => { }} />
-          :
-          null
-      }
+      <Button onPress={() => { }} />
     </PageContainer>
   );
 };
