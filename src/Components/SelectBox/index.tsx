@@ -249,17 +249,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   errorStyle,
   errorContainerStyle,
   searchable = false,
-  onSearch,
+  // onSearch,
   data,
   onSelect,
   onComponentPress,
-  onSubmitTitle,
-  onSubmitTitleSize,
-  onSubmitTitleWeight,
-  onSubmitTitleStyle,
-  onSubmit,
-  selectAllTitle,
-  unSelectAllTitle,
+  // onSubmitTitle,
+  // onSubmitTitleSize,
+  // onSubmitTitleWeight,
+  // onSubmitTitleStyle,
+  // onSubmit,
+  // selectAllTitle,
+  // unSelectAllTitle,
   renderItem,
   maxChoice,
   minChoice,
@@ -278,18 +278,18 @@ const SelectBox: FC<ISelectBoxTypes> = ({
 
   useEffect(() => { setDataList(data as any[]) }, [data])
 
-  const onSubmitSelection = (seletedItems: any[], data: any[]) => {
-    setDataList(data)
-    if (typeof onSubmit === 'function') {
-      onSubmit(seletedItems, data);
-    }
-    switch (displayType) {
-      case "bottomSheet":
-        return bottomSheet.close()
-      case "modal":
-        return Modal.close()
-    }
-  }
+  // const onSubmitSelection = (seletedItems: any[], data: any[]) => {
+  //   setDataList(data)
+  //   if (typeof onSubmit === 'function') {
+  //     onSubmit(seletedItems, data);
+  //   }
+  //   switch (displayType) {
+  //     case "bottomSheet":
+  //       return bottomSheet.close()
+  //     case "modal":
+  //       return Modal.close()
+  //   }
+  // }
 
   const renderContent = () => {
     if (selectionType === "singleSelect") {
@@ -297,15 +297,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         <RadioButtonGroup
           showsVerticalScrollIndicator={false}
           data={dataList}
-          searchable={searchable}
           renderItem={renderItem}
           onSelect={onSelect}
-          onSearch={onSearch}
-          submitTitle={onSubmitTitle}
-          submitTitleSize={onSubmitTitleSize}
-          submitTitleWeight={onSubmitTitleWeight}
-          submitTitleStyle={onSubmitTitleStyle}
-          onSubmit={onSubmitSelection}
         />
       )
     }
@@ -314,19 +307,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         <CheckBoxGroup
           showsVerticalScrollIndicator={false}
           data={dataList}
-          searchable={searchable}
           renderItem={renderItem}
           onSelect={onSelect}
-          onSearch={onSearch}
           minChoice={minChoice}
           maxChoice={maxChoice}
-          submitTitle={onSubmitTitle}
-          submitTitleSize={onSubmitTitleSize}
-          submitTitleWeight={onSubmitTitleWeight}
-          submitTitleStyle={onSubmitTitleStyle}
-          selectAllTitle={selectAllTitle}
-          unSelectAllTitle={unSelectAllTitle}
-          onSubmit={onSubmitSelection}
         />
       )
     }
