@@ -2,7 +2,6 @@ import Text, { ITextProps, ITextTypes } from './Text';
 import PageContainer, { IPageContainerProps, IPageContainerTypes } from './PageContainer';
 import Icon, { IIconProps } from './Icon';
 import TextInput, { ITextInputRef, ITextInputProps, ITextInputTypes } from './TextInput';
-import ActivityIndicator, { IActivityIndicatorProps, } from './ActivityIndicator';
 import Button, { IButtonProps, IButtonTypes } from './Button';
 import TapSelector, { ITapSelectorProps, ITapSelectorTypes, } from './TapSelector';
 import RadioButton, { IRadioButtonProps } from './RadioButton';
@@ -29,7 +28,6 @@ export {
   PageContainer,
   Icon,
   TextInput,
-  ActivityIndicator,
   Button,
   TapSelector,
   RadioButton,
@@ -65,7 +63,6 @@ export type {
   ITextInputRef,
   ITextInputProps,
   ITextInputTypes,
-  IActivityIndicatorProps,
   IButtonProps,
   IButtonTypes,
   ISperatorProps,

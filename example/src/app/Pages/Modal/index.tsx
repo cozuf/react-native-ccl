@@ -39,10 +39,6 @@ const ModalPage = () => {
         onRejectButtonPress={() => {
           setVisibleNew(false);
         }}
-        indicatorProps={{
-          type: "uIActivityIndicator",
-          size: 40
-        }}
       />
     );
   };

@@ -82,7 +82,6 @@
     "react-native-builder-bob": "^0.18.0",
     "react-native-date-picker": "3.4.2",
     "react-native-gesture-handler": "1.10.3",
-    "react-native-indicators": "0.17.0",
     "react-native-modalize": "2.0.8",
     "react-native-vector-icons": "8.1.0",
     "react-test-renderer": "17.0.1",
@@ -94,7 +93,6 @@
     "react-native": ">=0.64.3",
     "react-native-date-picker": ">=3.4.2",
     "react-native-gesture-handler": ">=1.10.3",
-    "react-native-indicators": ">=0.17.0",
     "react-native-modalize": ">=2.0.8",
     "react-native-vector-icons": ">=8.1.0"
   },
