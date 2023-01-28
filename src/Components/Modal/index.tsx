@@ -1,5 +1,5 @@
 import React, { FC, Fragment, ReactNode, useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Modal as NativeModal, Platform, Pressable, StyleSheet, View } from "react-native";
+import { ActivityIndicator, ColorValue, Modal as NativeModal, Platform, Pressable, StyleSheet, View } from "react-native";
 import type { ModalProps, Omit, StyleProp, ViewStyle } from "react-native";
 import { Button, Icon, Seperator, Text } from "..";
 import { useTheme } from "../../Context";
@@ -161,7 +161,7 @@ const Modal: FC<CCLModalProps> = ({
                 return children;
 
             case "loading":
-                return <Loading message={message} />
+                return <Loading message={message} color={colors.primary} />
 
             case "fault":
                 return <Fault title={title} message={message} acceptButtonTitle={acceptButtonTitle} onAcceptButtonPress={onAcceptButtonPress} />
@@ -274,10 +274,10 @@ const styles = StyleSheet.create({
     }
 });
 
-const Loading: FC<Pick<CCLModalProps, "message">> = ({ message, }) => {
+const Loading: FC<Pick<CCLModalProps, "message"> & { color: ColorValue }> = ({ message, color }) => {
     return (
         <Fragment>
-            <ActivityIndicator size={"large"} />
+            <ActivityIndicator size={"large"} color={color} />
             <Text size="xl" weigth="medium" style={styles.message}>
                 {message}
             </Text>
