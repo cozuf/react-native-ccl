@@ -1,8 +1,8 @@
 import { createContext, Dispatch } from "react";
 
-export const BottomSheetContext = createContext<BottomSheetScheme>({
+export const BottomSheetContext = createContext<RNCCL.BottomSheetScheme>({
     show: () => { },
     close: () => { }
 });
 
-export const BottomSheetDispatchContext = createContext<Dispatch<Partial<SetBottomSheetScheme>>>(() => { });
+export const BottomSheetDispatchContext = createContext<Dispatch<Partial<RNCCL.SetBottomSheetScheme>>>(() => { });

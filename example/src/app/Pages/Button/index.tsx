@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Button, IButtonProps, PageContainer, TapSelector } from 'react-native-ccl';
+import { Button, IButtonProps, PageContainer, Seperator, TapSelector } from 'react-native-ccl';
 
-const ACTIVE_DATA = [
-  {
-    title: 'Active',
-    value: true,
-  },
-  {
-    title: 'Passive',
-    value: false,
-  },
-];
+const ACTIVE_DATA = [{ title: 'Active', value: true, }, { title: 'Passive', value: false, }];
+const LOADING_DATA = [{ title: 'not loading', value: false, }, { title: 'Loading', value: true, }];
 const TYPES = [{ title: 'filled' }, { title: 'outlined' }, { title: 'simplied' }];
 const CLICK_TYPES = [{ title: 'opacity' }, { title: 'changeable' }];
 const CHILD_TYPES = [{ title: 'text' }, { title: 'icon' }, { title: 'both' }];
@@ -21,6 +13,7 @@ const TITLE_SIZE_TYPES = [{ title: 'xxs' }, { title: 'xs' }, { title: 's' }, { t
 
 const ButtonPage = () => {
   const [active, setActive] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [clickTypeIndex, setClickTypeIndex] = useState<number>(0);
   const [childTypeIndex, setChildTypeIndex] = useState<number>(0);
   const [typeIndex, setTypeIndex] = useState<number>(0);
@@ -31,7 +24,8 @@ const ButtonPage = () => {
   return (
     <PageContainer type="default">
       <Button
-        disabled={!active}
+        loading={loading}
+        disabled={loading || !active}
         childType={CHILD_TYPES[childTypeIndex].title as IButtonProps["childType"]}
         clickType={CLICK_TYPES[clickTypeIndex].title as IButtonProps["clickType"]}
         icon={{
@@ -45,49 +39,57 @@ const ButtonPage = () => {
         titleWeight={TITLE_WEIGHT_TYPES[titleWeightIndex].title as IButtonProps["titleWeight"]}
         onPress={() => { }}
       />
-      <View style={{ paddingVertical: 16 }}>
+      <Seperator type='vertical' size={"large"} />
+      <View>
         <TapSelector
           data={ACTIVE_DATA}
           onTap={() => {
             setActive(!active);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
+        <TapSelector
+          data={LOADING_DATA}
+          onTap={() => {
+            setLoading((v) => !v);
+          }}
+        />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={CHILD_TYPES}
           onTap={(_: any, index: number) => {
             setChildTypeIndex(index);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={CLICK_TYPES}
           onTap={(_: any, index: number) => {
             setClickTypeIndex(index);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={TYPES}
           onTap={(_: any, index: number) => {
             setTypeIndex(index);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={WRAP_TYPES}
           onTap={(_: any, index: number) => {
             setWrapIndex(index);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={TITLE_WEIGHT_TYPES}
           onTap={(_: any, index: number) => {
             setTitleWeightIndex(index);
           }}
         />
-        <View style={{ paddingVertical: 8 }} />
+        <Seperator type='vertical' size={"medium"} />
         <TapSelector
           data={TITLE_SIZE_TYPES}
           onTap={(_: any, index: number) => {

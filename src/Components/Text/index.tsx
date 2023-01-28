@@ -32,7 +32,7 @@ export interface ITextProps {
   /**
    *
    */
-  weigth?: keyof FontScheme
+  weigth?: keyof RNCCL.FontScheme
 
   /**
    * enable or disable

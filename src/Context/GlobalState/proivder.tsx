@@ -3,14 +3,14 @@ import { GlaobalStateContext, GlobalStateDispatchContext } from "./context";
 import DEFAULT_GLOBAL_STATE from "./values";
 
 const reducer = (
-    state: GlobalStateScheme,
-    newState: Partial<GlobalStateScheme>
-): GlobalStateScheme => {
+    state: RNCCL.GlobalStateScheme,
+    newState: Partial<RNCCL.GlobalStateScheme>
+): RNCCL.GlobalStateScheme => {
     return { ...state, ...newState };
 };
 
 export interface IGlobalStateProvider {
-    initialGobalState: GlobalStateScheme
+    initialGobalState: RNCCL.GlobalStateScheme
 }
 
 const GlobalStateProvider: FC<IGlobalStateProvider> = ({ initialGobalState, children }) => {

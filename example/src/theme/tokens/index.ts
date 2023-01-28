@@ -1,43 +1,48 @@
 
-export const tokens: TokenScheme = {
-    innerSpace: {
+export const tokens: RNCCL.TokenScheme = {
+    spaces: {
         pageVertical: 16,
         pageHorizontal: 16,
         componentVertical: 8,
         componentHorizontal: 16,
-        thin: 2,
-        semiThin: 4,
+        // 
+        extraLight: 1,
+        light: 2,
+        extraSmall: 4,
+        small: 6,
         regular: 8,
+        medium: 10,
         semiLarge: 12,
-        large: 16
-    },
-    outerSpace: {
-        componentVertical: 16,
-        componentHorizontal: 32,
-        thin: 4,
-        semiThin: 8,
-        regular: 12,
-        semiLarge: 16,
-        large: 24
+        large: 16,
+        extraLarge: 20,
     },
     borders: {
         badge: 2,
         button: 2,
         component: 0,
         textInputFocused: 2,
-
-        thin: 1,
-        semiThin: 2,
+        // 
+        extraLight: 0.5,
+        light: 1,
+        extraSmall: 2,
+        small: 3,
         regular: 4,
+        medium: 5,
         semiLarge: 6,
-        large: 8
+        large: 7,
+        extraLarge: 8,
     },
     radiuses: {
         component: 8,
-        thin: 4,
-        semiThin: 6,
+        // 
+        extraLight: 1,
+        light: 2,
+        extraSmall: 4,
+        small: 6,
         regular: 8,
-        semiLarge: 12,
-        large: 20
+        medium: 12,
+        semiLarge: 16,
+        large: 20,
+        extraLarge: 24,
     }
 }

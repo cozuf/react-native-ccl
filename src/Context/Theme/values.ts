@@ -2,7 +2,7 @@ import { light } from "../../Theme/Colors";
 import { fonts } from "../../Theme/Fonts";
 import { tokens } from "../../Theme";
 
-export const Theme: ThemeScheme = {
+export const Theme: RNCCL.ThemeScheme = {
     name: 'Light',
     colors: light,
     fonts: fonts,

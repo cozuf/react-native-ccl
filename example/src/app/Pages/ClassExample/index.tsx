@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, PageContainer, Seperator, Text, TextInput, withGlobalState, } from "react-native-ccl";
 
-interface Props extends IGlobalState { }
+interface Props extends RNCCL.IGlobalState { }
 
 interface State {
     value: string

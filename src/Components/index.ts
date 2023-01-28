@@ -1,10 +1,10 @@
 import Text, { ITextProps, ITextTypes } from './Text';
 import PageContainer, { IPageContainerProps, IPageContainerTypes } from './PageContainer';
 import Icon, { IIconProps } from './Icon';
-import TextInput, { ITextInputProps, ITextInputTypes } from './TextInput';
+import TextInput, { ITextInputRef, ITextInputProps, ITextInputTypes } from './TextInput';
 import Button, { IButtonProps, IButtonTypes } from './Button';
 import TapSelector, { ITapSelectorProps, ITapSelectorTypes, } from './TapSelector';
-import RadioButton, { IRadionButtonProps, } from './RadioButton';
+import RadioButton, { IRadioButtonProps } from './RadioButton';
 import RadioButtonGroup, { IRadioButtonGroupProps, IRadioButtonGroupTypes, } from './RadioButtonGroup';
 import CheckBox, { ICheckBoxProps } from './CheckBox';
 import CheckBoxGroup, { ICheckBoxGroupProps, ICheckBoxGroupTypes, } from './CheckBoxGroup';
@@ -12,16 +12,16 @@ import Chip, { IChipProps } from './Chip';
 import ChipGroup, { IChipGroupProps, IChipGroupTypes } from './ChipGroup';
 import Badge, { IBadgeProps } from './Badge';
 import SearchBar, { ISearchBarProps, ISearchBarTypes } from './SearchBar';
-import Modal, { IModalProps, CCLModalProps } from './Modal';
+import Modal, { IModalProps, IModalTypes } from './Modal';
 import SelectBox, { ISelectBoxProps, ISelectBoxTypes } from './SelectBox';
-import Seperator from './Seperator';
+import Seperator, { ISperatorProps } from './Seperator';
 import DateTimePicker, { IDateTimePickerProps, IDateTimePickerTypes } from './DateTimePicker';
 import Switch, { ISwitchProps, ISwitchTypes } from './Switch';
-import SnackBar, { ISnackBarProps, SnackBarRef } from './SnackBar';
+import SnackBar, { ISnackBarProps, ISnackBarRef } from './SnackBar';
 import Card, { ICardProps } from './Card';
 import StateCard, { IStateCardProps } from './StateCard';
 import SegmentedButton, { ISegmentedButtonProps } from './SegmentedButton';
-import BottomSheet, { BottomSheetRef, IBottomSheetProps } from './BottomSheet';
+import BottomSheet, { IBottomSheetRef, IBottomSheetProps } from './BottomSheet';
 
 export {
   Text,
@@ -49,20 +49,28 @@ export {
   SegmentedButton,
   BottomSheet
 };
+interface IListItem {
+  active?: boolean
+  value: any
+  title: string
+  selected: boolean
+}
 
 export type {
   ITextProps,
   ITextTypes,
   IIconProps,
+  ITextInputRef,
   ITextInputProps,
   ITextInputTypes,
   IButtonProps,
   IButtonTypes,
+  ISperatorProps,
   IDateTimePickerProps,
   IDateTimePickerTypes,
   ITapSelectorProps,
   ITapSelectorTypes,
-  IRadionButtonProps,
+  IRadioButtonProps,
   IRadioButtonGroupProps,
   IRadioButtonGroupTypes,
   ICheckBoxProps,
@@ -73,7 +81,7 @@ export type {
   IChipGroupTypes,
   IBadgeProps,
   IModalProps,
-  CCLModalProps,
+  IModalTypes,
   ISearchBarProps,
   ISearchBarTypes,
   ISelectBoxProps,
@@ -81,12 +89,13 @@ export type {
   ISwitchProps,
   ISwitchTypes,
   ISnackBarProps,
-  SnackBarRef,
+  ISnackBarRef,
   ICardProps,
   IPageContainerProps,
   IPageContainerTypes,
   IStateCardProps,
   ISegmentedButtonProps,
   IBottomSheetProps,
-  BottomSheetRef
+  IBottomSheetRef,
+  IListItem
 };

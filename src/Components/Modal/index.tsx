@@ -67,9 +67,9 @@ export interface IModalProps {
     onRejectButtonPress?: () => void
 }
 
-export interface CCLModalProps extends IModalProps, Omit<ModalProps, "testID" | "visible"> { }
+export interface IModalTypes extends IModalProps, Omit<ModalProps, "testID" | "visible"> { }
 
-const Modal: FC<CCLModalProps> = ({
+const Modal: FC<IModalTypes> = ({
     testID,
     type = "default",
     visible,
@@ -91,7 +91,7 @@ const Modal: FC<CCLModalProps> = ({
     const [isVisible, setIsVisible] = useState<boolean>(visible);
     const theme = useTheme();
     const { colors, tokens } = theme;
-    const { innerSpace, radiuses } = tokens
+    const { spaces, radiuses } = tokens
 
     useEffect(() => {
         setIsVisible(visible);
@@ -104,28 +104,28 @@ const Modal: FC<CCLModalProps> = ({
                 return Platform.select({
                     ios: {
                         paddingTop: getBottomSpace() || getStatusBarHeight(),
-                        paddingBottom: getBottomSpace() || innerSpace.pageVertical,
-                        paddingHorizontal: innerSpace.pageHorizontal
+                        paddingBottom: getBottomSpace() || spaces.pageVertical,
+                        paddingHorizontal: spaces.pageHorizontal
                     },
                     android: {
-                        paddingVertical: innerSpace.pageVertical,
-                        paddingHorizontal: innerSpace.pageHorizontal
+                        paddingVertical: spaces.pageVertical,
+                        paddingHorizontal: spaces.pageHorizontal
                     }
                 }) as ViewStyle
             case "fault":
             case "warning":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: innerSpace.componentHorizontal
+                    paddingHorizontal: spaces.componentHorizontal
                 }
             case "loading":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: innerSpace.componentHorizontal
+                    paddingHorizontal: spaces.componentHorizontal
                 }
             case "selective":
                 return {
-                    paddingHorizontal: innerSpace.componentHorizontal
+                    paddingHorizontal: spaces.componentHorizontal
                 }
         }
     }
@@ -211,7 +211,7 @@ const Modal: FC<CCLModalProps> = ({
                             styles.container,
                             defineContainerStyle(),
                             {
-                                padding: innerSpace.componentHorizontal,
+                                padding: spaces.componentHorizontal,
                                 borderRadius: radiuses.component * 2,
                                 backgroundColor: colors.pageBackground,
                                 shadowColor: colors.shadow,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const Loading: FC<Pick<CCLModalProps, "message"> & { color: ColorValue }> = ({ message, color }) => {
+const Loading: FC<Pick<IModalTypes, "message"> & { color: ColorValue }> = ({ message, color }) => {
     return (
         <Fragment>
             <ActivityIndicator size={"large"} color={color} />
@@ -285,7 +285,7 @@ const Loading: FC<Pick<CCLModalProps, "message"> & { color: ColorValue }> = ({ m
     )
 }
 
-const Fault: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
+const Fault: FC<Pick<IModalTypes, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { } }) => {
     const { colors } = useTheme()
     return (
@@ -311,7 +311,7 @@ const Fault: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | 
     )
 }
 
-const Warning: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
+const Warning: FC<Pick<IModalTypes, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { } }) => {
     const { colors } = useTheme()
     return (
@@ -337,7 +337,7 @@ const Warning: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" 
     )
 }
 
-const Selective: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress" | "rejectButtonTitle" | "onRejectButtonPress">> = ({
+const Selective: FC<Pick<IModalTypes, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress" | "rejectButtonTitle" | "onRejectButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { }, rejectButtonTitle, onRejectButtonPress = () => { } }) => {
     return (
         <Fragment>

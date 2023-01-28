@@ -14,7 +14,7 @@ import {
   WHITE,
 } from './palette';
 
-const light: ColorScheme = {
+const light: RNCCL.ColorScheme = {
   brand: OPEN_BLUE,
   primary: OPEN_BLUE,
   secondary: TURQUAZ_BLUE,
@@ -26,9 +26,9 @@ const light: ColorScheme = {
   black: BLACK,
   transparent: TRANSPARENT,
 
-  pageBackground: WHITE,
+  pageBackground: GREY_90,
 
-  componentBackground: GREY_90,
+  componentBackground: WHITE,
   componentBorder: OPEN_BLUE,
   componentIcon: BLACK,
   componentTitle: BLACK,

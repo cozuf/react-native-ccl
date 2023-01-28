@@ -1,9 +1,9 @@
 import { createContext, Dispatch } from "react";
 
 
-export const ModalContext = createContext<ModalScheme>({
+export const ModalContext = createContext<RNCCL.ModalScheme>({
     show: () => { },
     close: () => { }
 });
 
-export const ModalDispatchContext = createContext<Dispatch<Partial<SetModalScheme>>>(() => { });
+export const ModalDispatchContext = createContext<Dispatch<Partial<RNCCL.SetModalScheme>>>(() => { });

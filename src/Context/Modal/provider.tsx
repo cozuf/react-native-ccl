@@ -3,16 +3,16 @@ import { Modal } from "../..";
 import { ModalContext, ModalDispatchContext } from "./context";
 
 const reducer = (
-    state: SetModalScheme,
-    newState: Partial<SetModalScheme>
-): SetModalScheme => {
+    state: RNCCL.SetModalScheme,
+    newState: Partial<RNCCL.SetModalScheme>
+): RNCCL.SetModalScheme => {
     return { ...state, ...newState };
 };
 
 const ModalProvider: FC<any> = ({ children }) => {
     const [visible, setVisible] = useState<boolean>(false)
 
-    const modalRef: ModalScheme = {
+    const modalRef: RNCCL.ModalScheme = {
         show: () => {
             setVisible(true)
         },
@@ -21,7 +21,7 @@ const ModalProvider: FC<any> = ({ children }) => {
         }
     }
 
-    const initial: SetModalScheme = {
+    const initial: RNCCL.SetModalScheme = {
         props: {
             onTouchOutSide: () => {
                 setVisible(false)

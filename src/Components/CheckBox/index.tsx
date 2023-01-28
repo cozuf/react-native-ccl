@@ -23,7 +23,7 @@ export interface ICheckBoxProps {
   /**
    * to show value
    */
-  title?: string;
+  title?: string | ReactElement
 
   /**
    * unique value
@@ -85,7 +85,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme
-  const { innerSpace } = tokens
+  const { spaces } = tokens
 
   const renderIcon = (): ReactElement | null => {
     if (iconSet) {
@@ -137,7 +137,7 @@ const CheckBox: FC<ICheckBoxProps> = ({
   }
 
   const renderTitle = (): ReactElement | null => {
-    if (title) {
+    if (typeof title === "string") {
       return (
         <View style={[styles.titleContainer, titleContainerStyle]}>
           <Text
@@ -148,6 +148,9 @@ const CheckBox: FC<ICheckBoxProps> = ({
           </Text>
         </View>
       )
+    }
+    if (isValidElement(title)) {
+      return title
     }
     return null;
   };
@@ -161,8 +164,8 @@ const CheckBox: FC<ICheckBoxProps> = ({
         [
           styles.container,
           {
-            paddingVertical: innerSpace.componentVertical,
-            paddingHorizontal: innerSpace.componentHorizontal
+            paddingVertical: spaces.componentVertical,
+            paddingHorizontal: spaces.componentHorizontal
           },
           containerStyle,
         ]
@@ -184,10 +187,13 @@ export default memo(CheckBox);
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  titleContainer: {},
+  titleContainer: {
+    flex: 1
+  },
   title: {},
   seperator: {},
   iconContainer: {

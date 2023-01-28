@@ -1,8 +1,7 @@
-import React, { FC, Fragment, isValidElement, ReactNode, useEffect, useState } from 'react';
+import React, { FC, Fragment, isValidElement, ReactElement, ReactNode, useEffect, useState } from 'react';
 import {
   Animated,
   FlatListProps,
-  ListRenderItemInfo,
   Omit,
   StyleProp,
   StyleSheet,
@@ -10,13 +9,16 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { Seperator, Text, ITextProps, CheckBoxGroup, RadioButtonGroup, Icon, IIconProps } from '..';
+import { Seperator, Text, ITextProps, CheckBoxGroup, RadioButtonGroup, Icon, IListItem, IIconProps } from '..';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import { useModal, useSetModal } from '../../Context/Modal';
-import { getBottomSpace, makeColorPassive } from '../../Utils';
+import { getBottomSpace, makeColorPassive } from '../../Utils';;
 
-export interface ISelectBoxProps<ItemT> {
+export type ListItemType = Required<IListItem>
+
+export interface ISelectBoxProps<ItemT extends ListItemType> {
+  //#region ComponentProps
   /**
    * 
    */
@@ -31,7 +33,7 @@ export interface ISelectBoxProps<ItemT> {
    * type to display
    * @default Modal
    */
-  displayType: 'modal' | "bottomSheet" | 'page';
+  displayType: 'modal' | 'bottomSheet';
 
   /**
    * type to choose
@@ -100,15 +102,47 @@ export interface ISelectBoxProps<ItemT> {
   valueContainerStyle?: StyleProp<ViewStyle>
 
   /**
-   * set true if you want to search in given list
-   * @default false
+   * 
    */
-  searchable?: boolean;
+  containerStyle?: ViewStyle
+
+  /**
+   * 
+   */
+  rightContainer?: () => ReactElement | null
 
   /**
    *
    */
-  searchText?: string;
+  error?: string
+
+  /**
+   *  
+   */
+  errorWeight?: ITextProps["weigth"]
+
+  /**
+   *  
+   */
+  errorSize?: ITextProps["size"]
+
+  /**
+   *
+   */
+  errorStyle?: ViewStyle
+
+  /**
+   *
+   */
+  errorContainerStyle?: StyleProp<View>
+  //#endregion
+
+  //#region Selector Props
+  /**
+   * set true if you want to search in given list
+   * @default false
+   */
+  searchable?: boolean;
 
   /**
    * invokes when enter text to input
@@ -155,7 +189,7 @@ export interface ISelectBoxProps<ItemT> {
   /**
    * invokes when selection complete and press submit button
    */
-  onSubmit?: (data: ReadonlyArray<ItemT>, selectedItems: ReadonlyArray<ItemT>) => void;
+  onSubmit?: (selectedItems: ReadonlyArray<ItemT>, data: ReadonlyArray<ItemT>) => void;
 
   /**
    *
@@ -175,7 +209,7 @@ export interface ISelectBoxProps<ItemT> {
   /**
    * callback if you want render custom item
    */
-  renderItem?: (info: ListRenderItemInfo<ItemT>) => React.ReactElement | null;
+  renderItem?: (item: ItemT, index: number) => ReactElement | null;
 
   /**
    *
@@ -186,36 +220,7 @@ export interface ISelectBoxProps<ItemT> {
    *
    */
   minChoice?: number;
-
-  /**
-   * 
-   */
-  containerStyle?: ViewStyle
-
-  /**
-   *
-   */
-  error?: string
-
-  /**
-   *  
-   */
-  errorWeight?: ITextProps["weigth"]
-
-  /**
-   *  
-   */
-  errorSize?: ITextProps["size"]
-
-  /**
-   *
-   */
-  errorStyle?: ViewStyle
-
-  /**
-   *
-   */
-  errorContainerStyle?: StyleProp<View>
+  //#endregion
 }
 
 export interface ISelectBoxTypes extends ISelectBoxProps<any>, Omit<FlatListProps<any>, 'data' | 'renderItem'> { }
@@ -237,56 +242,54 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   valueWeight = "regular",
   valueStyle,
   valueContainerStyle,
-  searchable = false,
-  // searchText,
-  onSearch,
-  data,
-  onSelect,
-  onComponentPress,
-  onSubmitTitle,
-  onSubmitTitleSize,
-  onSubmitTitleWeight,
-  onSubmitTitleStyle,
-  onSubmit,
-  selectAllTitle,
-  unSelectAllTitle,
-  renderItem,
-  maxChoice,
-  minChoice,
   containerStyle,
   error,
   errorSize = "m",
   errorWeight = "regular",
   errorStyle,
-  errorContainerStyle
+  errorContainerStyle,
+  searchable = false,
+  // onSearch,
+  data,
+  onSelect,
+  onComponentPress,
+  // onSubmitTitle,
+  // onSubmitTitleSize,
+  // onSubmitTitleWeight,
+  // onSubmitTitleStyle,
+  // onSubmit,
+  // selectAllTitle,
+  // unSelectAllTitle,
+  renderItem,
+  maxChoice,
+  minChoice,
+  rightContainer
 }) => {
-  const bottomSheet = useBottomSheet();
-  const setBottomSheet = useSetBottomSheet();
+  const bottomSheet = useBottomSheet()
+  const setBottomSheet = useSetBottomSheet()
 
-  const Modal = useModal();
+  const Modal = useModal()
   const setModal = useSetModal()
 
-  const theme = useTheme();
-  const { colors, tokens } = theme;
-  const { innerSpace, borders, radiuses } = tokens
+  const { colors, tokens } = useTheme()
+  const { spaces, borders, radiuses } = tokens;
 
-  const [dataList, setDataList] = useState<any[]>(data as any[]);
-  // const [value, setValue] = useState<string>(searchText || '');
+  const [dataList, setDataList] = useState<any[]>(data as any[])
 
   useEffect(() => { setDataList(data as any[]) }, [data])
 
-  const onSubmitSelection = (data: any[], seletedItems: any[]) => {
-    setDataList(data)
-    if (typeof onSubmit === 'function') {
-      onSubmit(data, seletedItems);
-    }
-    switch (displayType) {
-      case "bottomSheet":
-        return bottomSheet.close()
-      case "modal":
-        return Modal.close()
-    }
-  }
+  // const onSubmitSelection = (seletedItems: any[], data: any[]) => {
+  //   setDataList(data)
+  //   if (typeof onSubmit === 'function') {
+  //     onSubmit(seletedItems, data);
+  //   }
+  //   switch (displayType) {
+  //     case "bottomSheet":
+  //       return bottomSheet.close()
+  //     case "modal":
+  //       return Modal.close()
+  //   }
+  // }
 
   const renderContent = () => {
     if (selectionType === "singleSelect") {
@@ -294,15 +297,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         <RadioButtonGroup
           showsVerticalScrollIndicator={false}
           data={dataList}
-          searchable={searchable}
           renderItem={renderItem}
           onSelect={onSelect}
-          onSearch={onSearch}
-          submitTitle={onSubmitTitle}
-          submitTitleSize={onSubmitTitleSize}
-          submitTitleWeight={onSubmitTitleWeight}
-          submitTitleStyle={onSubmitTitleStyle}
-          onSubmit={onSubmitSelection}
         />
       )
     }
@@ -311,19 +307,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         <CheckBoxGroup
           showsVerticalScrollIndicator={false}
           data={dataList}
-          searchable={searchable}
           renderItem={renderItem}
           onSelect={onSelect}
-          onSearch={onSearch}
           minChoice={minChoice}
           maxChoice={maxChoice}
-          submitTitle={onSubmitTitle}
-          submitTitleSize={onSubmitTitleSize}
-          submitTitleWeight={onSubmitTitleWeight}
-          submitTitleStyle={onSubmitTitleStyle}
-          selectAllTitle={selectAllTitle}
-          unSelectAllTitle={unSelectAllTitle}
-          onSubmit={onSubmitSelection}
         />
       )
     }
@@ -360,8 +347,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           <Animated.View style={{
             height: searchable ? "100%" : undefined,
             maxHeight: "100%",
-            paddingVertical: innerSpace.componentVertical,
-            paddingHorizontal: innerSpace.componentHorizontal,
+            paddingVertical: spaces.componentVertical,
+            paddingHorizontal: spaces.componentHorizontal,
           }}>
             {renderContent()}
           </Animated.View >
@@ -398,7 +385,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       } else {
         const CoreIcon = icon as IIconProps;
         return (
-          <View style={styles.iconContainer}>
+          <View style={styles.sideContainer}>
             <Icon
               family={CoreIcon.family}
               name={CoreIcon.name}
@@ -412,10 +399,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     return null
   };
 
-  const renderSeperator = () => {
-    if (icon) {
+  const renderSeperator = (shouldItBe: boolean) => {
+    if (shouldItBe) {
       return (
-        <Seperator type='horizontal' size={innerSpace.componentVertical} />
+        <Seperator type='horizontal' size={spaces.componentVertical} />
       )
     }
     return null
@@ -497,6 +484,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     )
   }
 
+  const renderRight = () => {
+    if (typeof rightContainer === "function") {
+      return (
+        <View style={styles.sideContainer}>
+          {rightContainer()}
+        </View>
+      )
+    }
+    return null
+  }
+
   const renderErrorSeperator = () => {
     if (error) {
       return <Seperator type='vertical' size={2} />
@@ -507,7 +505,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderError = () => {
     if (error) {
       return (
-        <View style={[{ paddingHorizontal: innerSpace.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: spaces.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -527,8 +525,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           {
             borderWidth: error ? borders.textInputFocused : borders.component,
             borderRadius: radiuses.component,
-            paddingVertical: innerSpace.componentVertical,
-            paddingHorizontal: innerSpace.componentHorizontal,
+            paddingVertical: spaces.componentVertical,
+            paddingHorizontal: spaces.componentHorizontal,
             backgroundColor: colors.componentBackground,
             borderColor: error ? colors.error : colors.text,
           },
@@ -537,8 +535,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         ]}
       >
         {renderIcon()}
-        {renderSeperator()}
+        {renderSeperator(icon !== undefined)}
         {renderTitleAndValue()}
+        {renderSeperator(typeof rightContainer === "function")}
+        {renderRight()}
       </TouchableOpacity>
       {renderErrorSeperator()}
       {renderError()}
@@ -553,7 +553,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   },
-  iconContainer: {
+  sideContainer: {
     alignItems: "center",
     justifyContent: "center"
   },

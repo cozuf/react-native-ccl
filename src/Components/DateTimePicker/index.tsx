@@ -170,7 +170,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { innerSpace, borders, radiuses } = tokens
+  const { spaces, borders, radiuses } = tokens
 
   const modal = useModal()
   const setModal = useSetModal()
@@ -180,7 +180,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
 
   const [nDate, setNDate] = useState<Date>(date || new Date());
 
-  const paddingHorizontal = display === "modal" ? Platform.OS === "android" ? 64 : 40 : innerSpace.pageHorizontal
+  const paddingHorizontal = display === "modal" ? Platform.OS === "android" ? 64 : 40 : spaces.pageHorizontal
 
   const renderSubmit = () => {
     return (
@@ -321,7 +321,7 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
   const renderError = () => {
     if (error) {
       return (
-        <View style={[{ paddingHorizontal: innerSpace.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: spaces.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -339,8 +339,8 @@ const DateTimePicker: FC<IDateTimePickerTypes> = ({
           {
             borderWidth: error ? borders.textInputFocused : borders.component,
             borderRadius: radiuses.component,
-            paddingVertical: innerSpace.componentVertical,
-            paddingHorizontal: innerSpace.componentHorizontal,
+            paddingVertical: spaces.componentVertical,
+            paddingHorizontal: spaces.componentHorizontal,
             backgroundColor: active ? colors.componentBackground : makeColorPassive(colors.componentBackground),
             borderColor: error ? colors.error : colors.componentBorder,
           },
