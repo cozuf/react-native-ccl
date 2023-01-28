@@ -1,6 +1,5 @@
 const PAGES_NAMES = {
   MainPage: 'MainPage',
-  ActivityIndicatorPage: 'ActivityIndicatorPage',
   BadgePage: 'BadgePage',
   BottomSheetPage: 'BottomSheetPage',
   ButtonPage: 'ButtonPage',

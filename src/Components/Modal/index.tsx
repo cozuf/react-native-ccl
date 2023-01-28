@@ -1,7 +1,7 @@
 import React, { FC, Fragment, ReactNode, useEffect, useRef, useState } from "react";
-import { Modal as NativeModal, Platform, Pressable, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Modal as NativeModal, Platform, Pressable, StyleSheet, View } from "react-native";
 import type { ModalProps, Omit, StyleProp, ViewStyle } from "react-native";
-import { ActivityIndicator, Button, IActivityIndicatorProps, Icon, Seperator, Text } from "..";
+import { Button, Icon, Seperator, Text } from "..";
 import { useTheme } from "../../Context";
 import { getBottomSpace, getStatusBarHeight } from "../../Utils";
 
@@ -35,11 +35,6 @@ export interface IModalProps {
      * 
      */
     onTouchOutSide: (value: boolean) => void
-
-    /**
-     * 
-     */
-    indicatorProps?: Partial<Omit<IActivityIndicatorProps, "testID">>
 
     /**
      * 
@@ -83,7 +78,6 @@ const Modal: FC<CCLModalProps> = ({
     onTouchOutSide = (v: boolean) => {
         visible = v
     },
-    indicatorProps,
     title = "Title",
     message = "Message",
     acceptButtonTitle = "Accept",
@@ -167,7 +161,7 @@ const Modal: FC<CCLModalProps> = ({
                 return children;
 
             case "loading":
-                return <Loading message={message} indicatorProps={indicatorProps} />
+                return <Loading message={message} />
 
             case "fault":
                 return <Fault title={title} message={message} acceptButtonTitle={acceptButtonTitle} onAcceptButtonPress={onAcceptButtonPress} />
@@ -280,10 +274,10 @@ const styles = StyleSheet.create({
     }
 });
 
-const Loading: FC<Pick<CCLModalProps, "message" | "indicatorProps">> = ({ message, indicatorProps }) => {
+const Loading: FC<Pick<CCLModalProps, "message">> = ({ message, }) => {
     return (
         <Fragment>
-            <ActivityIndicator type={indicatorProps?.type} size={indicatorProps?.size || 40} />
+            <ActivityIndicator size={"large"} />
             <Text size="xl" weigth="medium" style={styles.message}>
                 {message}
             </Text>

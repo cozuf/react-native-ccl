@@ -22,10 +22,6 @@ const COMPONENTS: ComponentListType[] = [
     navigation: 'TextInputPage',
   },
   {
-    name: 'ActivityIndicator',
-    navigation: 'ActivityIndicatorPage',
-  },
-  {
     name: 'Button',
     navigation: 'ButtonPage',
   },

@@ -8,8 +8,8 @@ import {
   ScrollView,
   SafeAreaView,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
-import { ActivityIndicator } from '..';
 import { useTheme } from '../../Context/Theme';
 
 export interface IPageContainerProps {
