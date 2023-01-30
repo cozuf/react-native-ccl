@@ -7,7 +7,6 @@ import {
   ViewStyle,
   NativeSyntheticEvent,
   TextInputFocusEventData,
-  Platform,
   Pressable,
   Omit,
   KeyboardTypeOptions,
@@ -402,21 +401,7 @@ const STextInput = forwardRef<ITextInputRef, ITextInputTypes>((props, ref) => {
                 fontSize: defineSize(),
                 color: colors.text,
                 textAlignVertical: (inputStyle as TextStyle)?.textAlignVertical || props.multiline ? "top" : "auto",
-                // TODO: padding: 0 yapmak yeterli
-                ...Platform.select({
-                  ios: {
-                    paddingVertical:
-                      inputStyle && (inputStyle as TextStyle).paddingVertical
-                        ? Number((inputStyle as TextStyle)?.paddingVertical) + 4
-                        : 4,
-                  },
-                  android: {
-                    paddingVertical:
-                      inputStyle && (inputStyle as TextStyle).paddingVertical
-                        ? Number((inputStyle as TextStyle)?.paddingVertical)
-                        : 0,
-                  },
-                }),
+                padding: 0
               },
             ]}
             keyboardType={keyboardType()}
