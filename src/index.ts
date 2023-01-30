@@ -91,22 +91,53 @@ export {
   RNCCLProvider
 } from "./Context"
 
-// TODO: Placeholder yap 
-
-// FIXME: global'deki context type'ları gözden geçir ve düzenle
-
-// LATER: Context'ler dışarıdan çağır "i18n.t" gibi
-// LATER: Context'ler dışarıdan initalize edilebilsin araştır ( Language )
-
-// TODO: SelectBox için searchable da multiselect ise seçili kalmalı
-// TODO: SelectBox için renderItem prop'unu düzenle onSelect ile alakalı
-
-// TODO: Language context yap - hook, with
-// TODO: RNCCL context yap diğerlerini içine koy
-
-// LATER: SearchBar onClear ayrılabilir mi bak gerekiyorsa ayır ve bitir
-// LATER: inputs'lar için infoButton yap SnackBar ile
-
-
 // FIXME: yayınlamadan önce ReadMe düzenle
 // LATER: import - export ları düzenle -> şimdilik mümkün değil ayırmak gerekiyor
+
+//#region Remove
+// TODO: ---TO REMOVE---
+// -> react-native-vector-icons
+// Button - Card - Checkbox - Modal - RadioBUtton - Selectbox - StateCard - TextInput
+
+// -> Indicator
+// PageContainer - loading - component yap
+// Modal - loading - component yap
+//#endregion
+
+//#region Fix
+// TODO: ---TO FIX---
+// -> Chip
+// Tema dizayn - disabled - unselected - selected
+
+// -> SnackBar
+// success - error - warning - default
+// border ekle
+
+// -> types
+// global'deki context type'ları gözden geçir ve düzenle
+
+// -> Dışarıdan erişim
+// Context'ler dışarıdan çağır "i18n.t" gibi
+// Context'ler dışarıdan initalize edilebilsin araştır ( Language )
+
+// -> SelectBox
+// searchable da multiselect ise seçili kalmalı
+// renderItem prop'unu düzenle onSelect ile alakalı
+
+// -> Context
+// Language context yap - hook, with
+// RNCCL context yap diğerlerini içine koy
+
+// -> SearchBar
+// onClear ayrılabilir mi bak gerekiyorsa ayır ve bitir
+//#endregion
+
+//#region Add
+// TODO: ---TO ADD---
+// -> Portalize
+// Araştırılacak
+
+// -> Placeholder, yapılacak
+
+// inputs'lar (textinput, selectbox, datetimepicker) için infoButton yap SnackBar ile
+//#endregion
