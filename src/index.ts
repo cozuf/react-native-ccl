@@ -99,8 +99,6 @@ export {
 // -> react-native-vector-icons
 // Button - Card - Checkbox - Modal - RadioBUtton - Selectbox - StateCard - TextInput
 
-// -> Indicator
-// Modal - loading - component yap
 //#endregion
 
 //#region Fix
