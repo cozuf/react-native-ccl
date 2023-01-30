@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import {
   ViewProps,
   ScrollViewProps,
@@ -37,6 +37,11 @@ export interface IPageContainerProps {
    * 
    */
   loading?: boolean
+
+  /**
+   * 
+   */
+  loadingComponent?: () => JSX.Element | ReactNode
 }
 
 export interface IPageContainerTypes extends IPageContainerProps, Omit<ViewProps, 'style'>, Omit<ScrollViewProps, 'style' | 'contentContainerStyle'> { }
@@ -48,6 +53,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
   contentContainerStyle,
   children,
   loading,
+  loadingComponent,
   ...props
 }) => {
   const theme = useTheme();
@@ -71,7 +77,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
         ]}
         {...props}
       >
-        <ActivityIndicator />
+        {loadingComponent ? loadingComponent() : <ActivityIndicator size="large" color={colors.primary} />}
       </View>
     )
   }

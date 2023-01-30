@@ -100,7 +100,6 @@ export {
 // Button - Card - Checkbox - Modal - RadioBUtton - Selectbox - StateCard - TextInput
 
 // -> Indicator
-// PageContainer - loading - component yap
 // Modal - loading - component yap
 //#endregion
 
