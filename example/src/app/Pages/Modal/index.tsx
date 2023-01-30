@@ -5,6 +5,7 @@ import {
   PageContainer,
   Seperator,
   TapSelector,
+  Text,
 } from 'react-native-ccl';
 import type { IModalProps } from 'src/Components/Modal';
 
@@ -39,6 +40,7 @@ const ModalPage = () => {
         onRejectButtonPress={() => {
           setVisibleNew(false);
         }}
+        loadingComponent={() => <Text>Yusuf</Text>}
       />
     );
   };
