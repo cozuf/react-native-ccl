@@ -9,7 +9,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { Seperator, Text, ITextProps, CheckBoxGroup, RadioButtonGroup, Icon, IListItem, IIconProps } from '..';
+import { Seperator, Text, ITextProps, CheckBoxGroup, RadioButtonGroup, Icon, IListItem, IIconProps, Button, SearchBar } from '..';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import { useModal, useSetModal } from '../../Context/Modal';
@@ -31,7 +31,7 @@ export interface ISelectBoxProps<ItemT extends ListItemType> {
 
   /**
    * type to display
-   * @default Modal
+   * @default modal
    */
   displayType: 'modal' | 'bottomSheet';
 
@@ -169,22 +169,22 @@ export interface ISelectBoxProps<ItemT extends ListItemType> {
   /**
    * @default Başlık
    */
-  onSubmitTitle?: string;
+  submitTitle?: string;
 
   /**
    *  
    */
-  onSubmitTitleWeight?: ITextProps["weigth"]
+  submitTitleWeight?: ITextProps["weigth"]
 
   /**
    *  
    */
-  onSubmitTitleSize?: ITextProps["size"]
+  submitTitleSize?: ITextProps["size"]
 
   /**
    * 
    */
-  onSubmitTitleStyle?: ITextProps["style"]
+  submitTitleStyle?: ITextProps["style"]
 
   /**
    * invokes when selection complete and press submit button
@@ -249,15 +249,15 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   errorStyle,
   errorContainerStyle,
   searchable = false,
-  // onSearch,
+  onSearch = () => { },
   data,
   onSelect,
   onComponentPress,
-  // onSubmitTitle,
-  // onSubmitTitleSize,
-  // onSubmitTitleWeight,
-  // onSubmitTitleStyle,
-  // onSubmit,
+  submitTitle,
+  submitTitleSize,
+  submitTitleWeight,
+  submitTitleStyle,
+  onSubmit,
   // selectAllTitle,
   // unSelectAllTitle,
   renderItem,
@@ -268,37 +268,140 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const bottomSheet = useBottomSheet()
   const setBottomSheet = useSetBottomSheet()
 
-  const Modal = useModal()
+  const modal = useModal()
   const setModal = useSetModal()
 
   const { colors, tokens } = useTheme()
   const { spaces, borders, radiuses } = tokens;
 
+  const [searchText, setSearchText] = useState<string>("")
   const [dataList, setDataList] = useState<any[]>(data as any[])
+  const [resultList, setResultList] = useState<any[]>(data as any[])
 
   useEffect(() => { setDataList(data as any[]) }, [data])
 
-  // const onSubmitSelection = (seletedItems: any[], data: any[]) => {
-  //   setDataList(data)
-  //   if (typeof onSubmit === 'function') {
-  //     onSubmit(seletedItems, data);
-  //   }
-  //   switch (displayType) {
-  //     case "bottomSheet":
-  //       return bottomSheet.close()
-  //     case "modal":
-  //       return Modal.close()
-  //   }
-  // }
+  useEffect(() => {
+    if (searchText.length > 0) {
+      setDataList((old) => old.filter((v) => (v.title as string).toLowerCase().includes(searchText.toLowerCase())))
+    } else {
+      setDataList(data as any[])
+    }
+  }, [searchText])
 
-  const renderContent = () => {
+  useEffect(() => {
+    renderDisplayer()
+  }, [dataList])
+
+  const onCustomSelect = (item: any, index: number) => {
+    if (selectionType === "singleSelect") {
+      setDataList((old) => old.map((v) => ({ ...v, selected: v.value === item.value })))
+    }
+    if (selectionType === "multiSelect") {
+      setDataList((old) => old.map((v) => ({ ...v, selected: v.value === item.value ? item.selected : v.selected })))
+    }
+    if (typeof onSelect === "function") {
+      onSelect(item, index)
+    }
+  }
+
+  const onSubmitSelection = () => {
+    const selectedItems = dataList.filter((v) => v.selected)
+    setResultList(dataList)
+    if (typeof onSubmit === 'function') {
+      onSubmit(selectedItems, dataList);
+    }
+    setSearchText("")
+    closeDisplayer()
+  }
+
+  const openModal = () => {
+    modal.show()
+  };
+
+  const openBottomSheet = () => {
+    bottomSheet.show();
+  }
+
+  const openDisplayer = () => {
+    switch (displayType) {
+      case 'modal':
+        openModal();
+        break;
+      case 'bottomSheet':
+        openBottomSheet();
+        break;
+    }
+  }
+
+  const closeDisplayer = () => {
+    switch (displayType) {
+      case "bottomSheet":
+        return bottomSheet.close()
+      case "modal":
+        return modal.close()
+    }
+  }
+
+  //#region Render Displayer
+  const renderHeader = () => {
+    return (
+      <View style={{ flexDirection: "row" }}>
+        <View >
+          <Button
+            wrap='free'
+            type='simplied'
+            childType='icon'
+            icon={{
+              family: "Ionicons",
+              name: "close",
+              size: 24,
+              color: colors.pageBackground
+            }}
+            onPress={() => { }} />
+        </View>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <Text size={"l"} weigth="bold" style={{ textAlign: "center" }}>{title}</Text>
+        </View>
+        <View >
+          <Button
+            wrap='free'
+            type='simplied'
+            childType='icon'
+            icon={{
+              family: "Ionicons",
+              name: "close",
+              size: 24,
+              color: colors.text
+            }}
+            onPress={closeDisplayer} />
+        </View>
+      </View>
+    )
+  }
+
+  const renderSearch = () => {
+    if (searchable) {
+      return (
+        <SearchBar
+          value={searchText}
+          onSearch={(t) => {
+            setSearchText(t)
+            onSearch(t)
+          }}
+        />
+      )
+    }
+    return null
+  }
+
+  const renderOptions = () => {
     if (selectionType === "singleSelect") {
       return (
         <RadioButtonGroup
           showsVerticalScrollIndicator={false}
           data={dataList}
           renderItem={renderItem}
-          onSelect={onSelect}
+          onSelect={onCustomSelect}
         />
       )
     }
@@ -308,7 +411,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           showsVerticalScrollIndicator={false}
           data={dataList}
           renderItem={renderItem}
-          onSelect={onSelect}
+          onSelect={onCustomSelect}
           minChoice={minChoice}
           maxChoice={maxChoice}
         />
@@ -317,66 +420,83 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     return null
   }
 
-  const openModal = () => {
-    setModal({
-      props: {
-        onTouchOutSide: Modal.close,
-        containerStyle: { flex: searchable ? 1 : undefined, maxHeight: "100%", minHeight: "50%" }
-      },
-      renderChildren: renderContent
-    })
-    Modal.show()
-  };
-
-  const openBottomSheet = () => {
-    setBottomSheet({
-      props: {
-        adjustToContentHeight: searchable ? false : true,
-        modalStyle: {
-          backgroundColor: colors.pageBackground
-        },
-        overlayStyle: {
-          backgroundColor: colors.modalOutside
-        },
-        handlePosition: "inside",
-        childrenStyle: {
-        },
-
-        disableScrollIfPossible: false,
-        customRenderer: (
-          <Animated.View style={{
-            height: searchable ? "100%" : undefined,
-            maxHeight: "100%",
-            paddingVertical: spaces.componentVertical,
-            paddingHorizontal: spaces.componentHorizontal,
-          }}>
-            {renderContent()}
-          </Animated.View >
-        ),
-        HeaderComponent: () => (
-          <Fragment>
-            <Seperator type='vertical' size={"medium"} />
-            <Text size={"l"} weigth="bold" style={{ marginTop: 12, textAlign: "center" }}>{title}</Text>
-          </Fragment>
-        ),
-        FooterComponent: <Seperator type='vertical' size={getBottomSpace()} />
-      }
-    })
-    bottomSheet.show();
+  const renderSubmitButton = () => {
+    return (
+      <Button
+        disabled={!dataList.some((v) => v.selected)}
+        title={submitTitle}
+        titleSize={submitTitleSize}
+        titleWeight={submitTitleWeight}
+        titleStyle={submitTitleStyle}
+        onPress={onSubmitSelection}
+      />
+    )
   }
 
-  const onPress = () => {
-    switch (displayType) {
-      case 'modal':
-        openModal();
-        break;
-      case 'bottomSheet':
-        openBottomSheet();
-        break;
+  const renderContent = () => {
+    return (
+      <Fragment>
+        {renderHeader()}
+        <Seperator type='vertical' />
+        {renderSearch()}
+        <Seperator type='vertical' />
+        {renderOptions()}
+        <Seperator type='vertical' />
+        {renderSubmitButton()}
+      </Fragment>
+    )
+  }
+
+  const renderDisplayer = () => {
+    if (displayType === "modal") {
+      setModal({
+        props: {
+          onTouchOutSide: modal.close,
+          containerStyle: { flex: searchable ? 1 : undefined, maxHeight: "100%" }
+        },
+        renderChildren: renderContent
+      })
     }
+
+    if (displayType === "bottomSheet") {
+      setBottomSheet({
+        props: {
+          adjustToContentHeight: searchable ? false : true,
+          modalStyle: {
+            backgroundColor: colors.pageBackground
+          },
+          overlayStyle: {
+            backgroundColor: colors.modalOutside
+          },
+          handlePosition: "inside",
+          childrenStyle: {
+          },
+
+          disableScrollIfPossible: false,
+          customRenderer: (
+            <Animated.View style={{
+              height: searchable ? "100%" : undefined,
+              maxHeight: "100%",
+              paddingVertical: spaces.componentVertical,
+              paddingHorizontal: spaces.componentHorizontal,
+            }}>
+              {renderContent()}
+            </Animated.View >
+          ),
+          HeaderComponent: () => null,
+          FooterComponent: <Seperator type='vertical' size={getBottomSpace()} />
+        }
+      })
+    }
+  }
+  //#endregion
+
+  const onPress = () => {
+    renderDisplayer()
+    openDisplayer()
   };
 
-  //#region Render Funcrions
+  //#region Render Component Funcrions
 
   const renderIcon = () => {
     if (icon) {
@@ -409,7 +529,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   }
 
   const renderPlaceholder = () => {
-    const selectedData = dataList.filter((v) => v.selected);
+    const selectedData = resultList.filter((v) => v.selected);
     if (selectedData.length > 0) {
       return selectedData.map((v) => v.title).join(" - ")
     } else {
