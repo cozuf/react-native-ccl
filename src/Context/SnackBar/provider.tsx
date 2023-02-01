@@ -1,5 +1,5 @@
 import React, { FC, useReducer, useRef } from "react";
-import { SnackBarRef, SnackBar } from "../../Components";
+import { ISnackBarRef, SnackBar } from "../../Components";
 import { SnackBarContext, SnackBarDispatchContext } from "./context";
 
 const reducer = (
@@ -10,7 +10,7 @@ const reducer = (
 };
 
 const SnackBarProvider: FC<any> = ({ children }) => {
-    const snackBarRef = useRef<SnackBarRef>(null);
+    const snackBarRef = useRef<ISnackBarRef>(null);
 
     const snackBar: RNCCL.SnackBarScheme = {
         show: () => {

@@ -1,7 +1,7 @@
 import React, { FC, Fragment, ReactNode, useEffect, useRef, useState } from "react";
-import { Modal as NativeModal, Platform, Pressable, StyleSheet, View } from "react-native";
+import { ActivityIndicator, ColorValue, Modal as NativeModal, Platform, Pressable, StyleSheet, View } from "react-native";
 import type { ModalProps, Omit, StyleProp, ViewStyle } from "react-native";
-import { ActivityIndicator, Button, IActivityIndicatorProps, Icon, Seperator, Text } from "..";
+import { Button, Icon, Seperator, Text } from "..";
 import { useTheme } from "../../Context";
 import { getBottomSpace, getStatusBarHeight } from "../../Utils";
 
@@ -39,11 +39,6 @@ export interface IModalProps {
     /**
      * 
      */
-    indicatorProps?: Partial<Omit<IActivityIndicatorProps, "testID">>
-
-    /**
-     * 
-     */
     title?: string
 
     /**
@@ -70,11 +65,16 @@ export interface IModalProps {
      * 
      */
     onRejectButtonPress?: () => void
+
+    /**
+     * 
+     */
+    loadingComponent?: () => JSX.Element | ReactNode
 }
 
-export interface CCLModalProps extends IModalProps, Omit<ModalProps, "testID" | "visible"> { }
+export interface IModalTypes extends IModalProps, Omit<ModalProps, "testID" | "visible"> { }
 
-const Modal: FC<CCLModalProps> = ({
+const Modal: FC<IModalTypes> = ({
     testID,
     type = "default",
     visible,
@@ -83,13 +83,13 @@ const Modal: FC<CCLModalProps> = ({
     onTouchOutSide = (v: boolean) => {
         visible = v
     },
-    indicatorProps,
     title = "Title",
     message = "Message",
     acceptButtonTitle = "Accept",
     onAcceptButtonPress = () => { },
     rejectButtonTitle = "Reject",
     onRejectButtonPress = () => { },
+    loadingComponent,
     children,
     ...props
 }) => {
@@ -97,7 +97,7 @@ const Modal: FC<CCLModalProps> = ({
     const [isVisible, setIsVisible] = useState<boolean>(visible);
     const theme = useTheme();
     const { colors, tokens } = theme;
-    const { innerSpace, radiuses } = tokens
+    const { spaces, radiuses } = tokens
 
     useEffect(() => {
         setIsVisible(visible);
@@ -110,28 +110,28 @@ const Modal: FC<CCLModalProps> = ({
                 return Platform.select({
                     ios: {
                         paddingTop: getBottomSpace() || getStatusBarHeight(),
-                        paddingBottom: getBottomSpace() || innerSpace.pageVertical,
-                        paddingHorizontal: innerSpace.pageHorizontal
+                        paddingBottom: getBottomSpace() || spaces.pageVertical,
+                        paddingHorizontal: spaces.pageHorizontal
                     },
                     android: {
-                        paddingVertical: innerSpace.pageVertical,
-                        paddingHorizontal: innerSpace.pageHorizontal
+                        paddingVertical: spaces.pageVertical,
+                        paddingHorizontal: spaces.pageHorizontal
                     }
                 }) as ViewStyle
             case "fault":
             case "warning":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: innerSpace.componentHorizontal
+                    paddingHorizontal: spaces.componentHorizontal
                 }
             case "loading":
                 return {
                     alignItems: "center",
-                    paddingHorizontal: innerSpace.componentHorizontal
+                    paddingHorizontal: spaces.componentHorizontal
                 }
             case "selective":
                 return {
-                    paddingHorizontal: innerSpace.componentHorizontal
+                    paddingHorizontal: spaces.componentHorizontal
                 }
         }
     }
@@ -167,7 +167,7 @@ const Modal: FC<CCLModalProps> = ({
                 return children;
 
             case "loading":
-                return <Loading message={message} indicatorProps={indicatorProps} />
+                return <Loading message={message} color={colors.primary} loadingComponent={loadingComponent} />
 
             case "fault":
                 return <Fault title={title} message={message} acceptButtonTitle={acceptButtonTitle} onAcceptButtonPress={onAcceptButtonPress} />
@@ -217,7 +217,7 @@ const Modal: FC<CCLModalProps> = ({
                             styles.container,
                             defineContainerStyle(),
                             {
-                                padding: innerSpace.componentHorizontal,
+                                padding: spaces.componentHorizontal,
                                 borderRadius: radiuses.component * 2,
                                 backgroundColor: colors.pageBackground,
                                 shadowColor: colors.shadow,
@@ -280,10 +280,10 @@ const styles = StyleSheet.create({
     }
 });
 
-const Loading: FC<Pick<CCLModalProps, "message" | "indicatorProps">> = ({ message, indicatorProps }) => {
+const Loading: FC<Pick<IModalTypes, "message"> & { color: ColorValue, loadingComponent?: () => JSX.Element | ReactNode }> = ({ message, color, loadingComponent }) => {
     return (
         <Fragment>
-            <ActivityIndicator type={indicatorProps?.type} size={indicatorProps?.size || 40} />
+            {loadingComponent ? loadingComponent() : <ActivityIndicator size={"large"} color={color} />}
             <Text size="xl" weigth="medium" style={styles.message}>
                 {message}
             </Text>
@@ -291,7 +291,7 @@ const Loading: FC<Pick<CCLModalProps, "message" | "indicatorProps">> = ({ messag
     )
 }
 
-const Fault: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
+const Fault: FC<Pick<IModalTypes, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { } }) => {
     const { colors } = useTheme()
     return (
@@ -317,7 +317,7 @@ const Fault: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | 
     )
 }
 
-const Warning: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
+const Warning: FC<Pick<IModalTypes, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { } }) => {
     const { colors } = useTheme()
     return (
@@ -343,7 +343,7 @@ const Warning: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" 
     )
 }
 
-const Selective: FC<Pick<CCLModalProps, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress" | "rejectButtonTitle" | "onRejectButtonPress">> = ({
+const Selective: FC<Pick<IModalTypes, "title" | "message" | "acceptButtonTitle" | "onAcceptButtonPress" | "rejectButtonTitle" | "onRejectButtonPress">> = ({
     title, message, acceptButtonTitle, onAcceptButtonPress = () => { }, rejectButtonTitle, onRejectButtonPress = () => { } }) => {
     return (
         <Fragment>

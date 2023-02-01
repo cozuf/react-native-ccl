@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { PageContainer, CheckBoxGroup, Seperator, TapSelector, Text, Icon, ICheckBoxGroupTypes } from 'react-native-ccl';
+import { PageContainer, CheckBoxGroup, Seperator, TapSelector, Text, Icon, Button } from 'react-native-ccl';
 
 const DATA = [
   {
@@ -45,17 +45,48 @@ const DATA = [
     title: 'Güney Doğu Anadolu',
     value: 7,
   },
-];
-
-const SEARCHABLE_DATA = [
-  {
-    title: 'Aranamaz',
-    value: false,
-  },
-  {
-    title: 'Aranabilir',
-    value: true,
-  }
+  // {
+  //   selected: false,
+  //   active: true,
+  //   title: 'Akdeniz',
+  //   value: 1,
+  // },
+  // {
+  //   selected: false,
+  //   active: true,
+  //   title: 'Karadeniz',
+  //   value: 2,
+  // },
+  // {
+  //   selected: false,
+  //   active: true,
+  //   title: 'İç Anadolu',
+  //   value: 3,
+  // },
+  // {
+  //   selected: false,
+  //   active: true,
+  //   title: 'Ege',
+  //   value: 4,
+  // },
+  // {
+  //   selected: false,
+  //   active: true,
+  //   title: 'Marmara',
+  //   value: 5,
+  // },
+  // {
+  //   selected: false,
+  //   active: true,
+  //   title: 'Doğu Anadolu',
+  //   value: 6,
+  // },
+  // {
+  //   selected: false,
+  //   active: true,
+  //   title: 'Güney Doğu Anadolu',
+  //   value: 7,
+  // },
 ];
 
 const CUSTOM_RENDER_DATA = [
@@ -65,17 +96,6 @@ const CUSTOM_RENDER_DATA = [
   },
   {
     title: 'Custom Item',
-    value: true,
-  }
-];
-
-const CUSTOM_SEARCHBAR_DATA = [
-  {
-    title: 'Default SearchBar',
-    value: false,
-  },
-  {
-    title: 'Custom SearchBar',
     value: true,
   }
 ];
@@ -93,9 +113,7 @@ const LOADING_DATA = [
 
 const CheckBoxGroupPage = () => {
   const [loading, setLoading] = useState<boolean>(false)
-  const [searchableIndex, setSearchableIndex] = useState<number>(0);
   const [customRenderIndex, setCustomRenderIndex] = useState<number>(0);
-  const [customSearchBarIndex, setCustomSearchBarIndex] = useState<number>(0);
 
   const customRender = (item: any) => {
     return (
@@ -124,14 +142,6 @@ const CheckBoxGroupPage = () => {
     )
   }
 
-  const customSearchBarProps: ICheckBoxGroupTypes["searchBarProps"] = {
-    containerStyle: {
-      borderWidth: 0,
-      borderBottomWidth: 1,
-    },
-    icon: null
-  }
-
   return (
     <PageContainer type="default">
       <View>
@@ -143,23 +153,9 @@ const CheckBoxGroupPage = () => {
         />
         <Seperator type='vertical' size={"medium"} />
         <TapSelector
-          data={SEARCHABLE_DATA}
-          onTap={(_, i) => {
-            setSearchableIndex(i)
-          }}
-        />
-        <Seperator type='vertical' size={"medium"} />
-        <TapSelector
           data={CUSTOM_RENDER_DATA}
           onTap={(_, i) => {
             setCustomRenderIndex(i)
-          }}
-        />
-        <Seperator type='vertical' size={"medium"} />
-        <TapSelector
-          data={CUSTOM_SEARCHBAR_DATA}
-          onTap={(_, i) => {
-            setCustomSearchBarIndex(i)
           }}
         />
       </View>
@@ -167,17 +163,13 @@ const CheckBoxGroupPage = () => {
       <CheckBoxGroup
         loading={loading}
         data={DATA}
-        searchable={SEARCHABLE_DATA[searchableIndex].value}
         renderItem={customRenderIndex === 1 ? customRender : undefined}
         onSelect={(item: any, index: number) => {
           console.log({ item, index });
         }}
-        onSubmit={(data: any[], selectedItems: any[]) => {
-          console.log({ data, selectedItems });
-        }}
         ItemSeparatorComponent={customRenderIndex === 1 ? customItemSeperator : undefined}
-        searchBarProps={customSearchBarIndex === 1 ? customSearchBarProps : undefined}
       />
+      <Button onPress={() => { }} />
     </PageContainer>
   );
 };

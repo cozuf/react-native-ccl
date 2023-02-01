@@ -11,7 +11,7 @@ const INFINITE_DURATION = -1
 const SHOWING_TIME = 700
 
 // https://github.com/cooperka/react-native-snackbar bunu da kullanabilirsin
-export interface SnackBarRef {
+export interface ISnackBarRef {
     show: () => void
     close: () => void
 }
@@ -53,10 +53,10 @@ export interface ISnackBarProps {
     children?: React.ReactNode;
 }
 
-const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<SnackBarRef>) => {
+const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<ISnackBarRef>) => {
     const theme = useTheme()
     const { colors, tokens } = theme
-    const { innerSpace, radiuses } = tokens
+    const { spaces, radiuses } = tokens
 
     const { duration, displayForm = "backToFront", type = "default", containerStyle, onCompleteHide = () => { }, onCompleteShow = () => { }, children } = props
 
@@ -403,8 +403,8 @@ const SnackBar = forwardRef((props: PropsWithChildren<ISnackBarProps>, ref: Ref<
                 [
                     styles.animatedContainer,
                     {
-                        paddingVertical: innerSpace.componentVertical,
-                        paddingHorizontal: innerSpace.componentHorizontal,
+                        paddingVertical: spaces.componentVertical,
+                        paddingHorizontal: spaces.componentHorizontal,
                         width: WINDOW_WIDTH,
                         opacity: opacity,
                     },

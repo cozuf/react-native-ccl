@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
-import { PageContainer, Seperator, TapSelector, TextInput } from 'react-native-ccl';
+import { ITextInputRef, PageContainer, Seperator, TapSelector, TextInput } from 'react-native-ccl';
 
 const ACTIVE_DATA = [
   {
@@ -58,6 +58,7 @@ const ERROD_DATA = [
 ];
 
 const TextInputPage = () => {
+  const inputRef = useRef<ITextInputRef>(null)
   const [value, setValue] = useState<string>('');
   const [active, setActive] = useState<boolean>(true);
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -65,9 +66,16 @@ const TextInputPage = () => {
   const [multilineIndex, setMultilineIndex] = useState<number>(0)
   const [titleIndex, setTitleIndex] = useState<number>(0);
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [inputRef.current])
+
   return (
     <PageContainer type="default">
       <TextInput
+        ref={inputRef}
         active={active}
         title={TITLE_DATA[titleIndex].value}
         value={value}

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import {
   ViewProps,
   ScrollViewProps,
@@ -8,8 +8,8 @@ import {
   ScrollView,
   SafeAreaView,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
-import { ActivityIndicator } from '..';
 import { useTheme } from '../../Context/Theme';
 
 export interface IPageContainerProps {
@@ -37,6 +37,11 @@ export interface IPageContainerProps {
    * 
    */
   loading?: boolean
+
+  /**
+   * 
+   */
+  loadingComponent?: () => JSX.Element | ReactNode
 }
 
 export interface IPageContainerTypes extends IPageContainerProps, Omit<ViewProps, 'style'>, Omit<ScrollViewProps, 'style' | 'contentContainerStyle'> { }
@@ -48,11 +53,12 @@ const PageContainer: FC<IPageContainerTypes> = ({
   contentContainerStyle,
   children,
   loading,
+  loadingComponent,
   ...props
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { innerSpace } = tokens
+  const { spaces } = tokens
 
   if (loading) {
     return (
@@ -62,8 +68,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
           styles.container,
           {
             backgroundColor: colors.pageBackground,
-            paddingVertical: innerSpace.pageVertical,
-            paddingHorizontal: innerSpace.pageHorizontal,
+            paddingVertical: spaces.pageVertical,
+            paddingHorizontal: spaces.pageHorizontal,
             alignItems: "center",
             justifyContent: "center"
           },
@@ -71,7 +77,7 @@ const PageContainer: FC<IPageContainerTypes> = ({
         ]}
         {...props}
       >
-        <ActivityIndicator />
+        {loadingComponent ? loadingComponent() : <ActivityIndicator size="large" color={colors.primary} />}
       </View>
     )
   }
@@ -85,8 +91,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
             styles.container,
             {
               backgroundColor: colors.pageBackground,
-              paddingVertical: innerSpace.pageVertical,
-              paddingHorizontal: innerSpace.pageHorizontal,
+              paddingVertical: spaces.pageVertical,
+              paddingHorizontal: spaces.pageHorizontal,
             },
             style,
           ]}
@@ -113,8 +119,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
               styles?.contentContainer,
               {
                 backgroundColor: colors.pageBackground,
-                paddingVertical: innerSpace.pageVertical,
-                paddingHorizontal: innerSpace.pageHorizontal,
+                paddingVertical: spaces.pageVertical,
+                paddingHorizontal: spaces.pageHorizontal,
               }
               ,
               contentContainerStyle,
@@ -135,8 +141,8 @@ const PageContainer: FC<IPageContainerTypes> = ({
             styles.container,
             {
               backgroundColor: colors.pageBackground,
-              paddingVertical: innerSpace.pageVertical,
-              paddingHorizontal: innerSpace.pageHorizontal,
+              paddingVertical: spaces.pageVertical,
+              paddingHorizontal: spaces.pageHorizontal,
             },
             style,
           ]}

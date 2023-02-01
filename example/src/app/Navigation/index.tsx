@@ -20,7 +20,6 @@ import TextPage from '../Pages/Text';
 import MainPage from '../Pages/MainPage';
 import IconPage from '../Pages/Icon';
 import TextInputPage from '../Pages/TextInput';
-import ActivityIndicatorPage from '../Pages/ActivityIndicator';
 import ButtonPage from '../Pages/Button';
 import TapSelectorPage from '../Pages/TapSelector';
 import RadioButtonPage from '../Pages/RadioButton';
@@ -127,7 +126,6 @@ const Router = () => {
       <Stack.Screen name={PAGES_NAMES.TextPage} component={TextPage} />
       <Stack.Screen name={PAGES_NAMES.IconPage} component={IconPage} />
       <Stack.Screen name={PAGES_NAMES.TextInputPage} component={TextInputPage} />
-      <Stack.Screen name={PAGES_NAMES.ActivityIndicatorPage} component={ActivityIndicatorPage} />
       <Stack.Screen name={PAGES_NAMES.ButtonPage} component={ButtonPage} />
       <Stack.Screen name={PAGES_NAMES.TapSelectorPage} component={TapSelectorPage} />
       <Stack.Screen name={PAGES_NAMES.RadioButtonPage} component={RadioButtonPage} />

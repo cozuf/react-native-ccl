@@ -5,7 +5,7 @@ import { Icon, IIconProps, Seperator, Text } from '..';
 import { useTheme } from '../../Context/Theme';
 import type { ITextProps } from '../Text';
 
-export interface IRadionButtonProps {
+export interface IRadioButtonProps {
   /**
    * 
    */
@@ -42,7 +42,7 @@ export interface IRadionButtonProps {
   /**
    * invokes select the item
    */
-  onSelect: (selectedValue: any) => void;
+  onSelect?: (selectedValue: any) => void;
 
   /**
    * 
@@ -75,7 +75,7 @@ export interface IRadionButtonProps {
   titleSize?: ITextProps["size"]
 }
 
-const RadioButton: FC<IRadionButtonProps> = ({
+const RadioButton: FC<IRadioButtonProps> = ({
   testID,
   active = true,
   selected = false,
@@ -103,7 +103,7 @@ const RadioButton: FC<IRadionButtonProps> = ({
 }) => {
   const theme = useTheme();
   const { colors, tokens } = theme;
-  const { innerSpace } = tokens
+  const { spaces } = tokens
 
   const renderIcon = (): React.ReactElement | null => {
     if (iconSet) {
@@ -167,8 +167,8 @@ const RadioButton: FC<IRadionButtonProps> = ({
       style={[
         styles.container,
         {
-          paddingVertical: innerSpace.componentVertical,
-          paddingHorizontal: innerSpace.componentHorizontal,
+          paddingVertical: spaces.componentVertical,
+          paddingHorizontal: spaces.componentHorizontal,
         },
         containerStyle
       ]}
@@ -189,11 +189,14 @@ export default RadioButton;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
   iconContainer: {},
   sperator: {},
-  titleContainer: {},
+  titleContainer: {
+    flex: 1
+  },
   title: {},
 })

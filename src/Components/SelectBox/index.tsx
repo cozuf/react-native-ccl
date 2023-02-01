@@ -1,4 +1,4 @@
-import React, { FC, Fragment, isValidElement, ReactNode, useEffect, useState } from 'react';
+import React, { FC, Fragment, isValidElement, ReactElement, ReactNode, useEffect, useState } from 'react';
 import {
   Animated,
   FlatListProps,
@@ -9,13 +9,15 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { Seperator, Text, ITextProps, CheckBoxGroup, RadioButtonGroup, Icon, IIconProps } from '..';
+import { Seperator, Text, ITextProps, CheckBoxGroup, RadioButtonGroup, Icon, IListItem, IIconProps, Button, SearchBar } from '..';
 import { useTheme } from '../../Context/Theme';
 import { useBottomSheet, useSetBottomSheet } from '../../Context/BottomSheet';
 import { useModal, useSetModal } from '../../Context/Modal';
-import { getBottomSpace, makeColorPassive } from '../../Utils';
+import { getBottomSpace, makeColorPassive } from '../../Utils';;
 
-export interface ISelectBoxProps<ItemT> {
+export type ListItemType = Required<IListItem>
+
+export interface ISelectBoxProps<ItemT extends ListItemType> {
   //#region ComponentProps
   /**
    * 
@@ -29,7 +31,7 @@ export interface ISelectBoxProps<ItemT> {
 
   /**
    * type to display
-   * @default Modal
+   * @default modal
    */
   displayType: 'modal' | 'bottomSheet';
 
@@ -105,6 +107,11 @@ export interface ISelectBoxProps<ItemT> {
   containerStyle?: ViewStyle
 
   /**
+   * 
+   */
+  rightContainer?: () => ReactElement | null
+
+  /**
    *
    */
   error?: string
@@ -162,22 +169,22 @@ export interface ISelectBoxProps<ItemT> {
   /**
    * @default Başlık
    */
-  onSubmitTitle?: string;
+  submitTitle?: string;
 
   /**
    *  
    */
-  onSubmitTitleWeight?: ITextProps["weigth"]
+  submitTitleWeight?: ITextProps["weigth"]
 
   /**
    *  
    */
-  onSubmitTitleSize?: ITextProps["size"]
+  submitTitleSize?: ITextProps["size"]
 
   /**
    * 
    */
-  onSubmitTitleStyle?: ITextProps["style"]
+  submitTitleStyle?: ITextProps["style"]
 
   /**
    * invokes when selection complete and press submit button
@@ -202,7 +209,7 @@ export interface ISelectBoxProps<ItemT> {
   /**
    * callback if you want render custom item
    */
-  renderItem?: (item: ItemT, index: number) => React.ReactElement | null;
+  renderItem?: (item: ItemT, index: number) => ReactElement | null;
 
   /**
    *
@@ -242,138 +249,80 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   errorStyle,
   errorContainerStyle,
   searchable = false,
-  onSearch,
+  onSearch = () => { },
   data,
   onSelect,
   onComponentPress,
-  onSubmitTitle,
-  onSubmitTitleSize,
-  onSubmitTitleWeight,
-  onSubmitTitleStyle,
+  submitTitle,
+  submitTitleSize,
+  submitTitleWeight,
+  submitTitleStyle,
   onSubmit,
-  selectAllTitle,
-  unSelectAllTitle,
+  // selectAllTitle,
+  // unSelectAllTitle,
   renderItem,
   maxChoice,
   minChoice,
+  rightContainer
 }) => {
   const bottomSheet = useBottomSheet()
   const setBottomSheet = useSetBottomSheet()
 
-  const Modal = useModal()
+  const modal = useModal()
   const setModal = useSetModal()
 
   const { colors, tokens } = useTheme()
-  const { innerSpace, borders, radiuses } = tokens;
+  const { spaces, borders, radiuses } = tokens;
 
+  const [searchText, setSearchText] = useState<string>("")
   const [dataList, setDataList] = useState<any[]>(data as any[])
+  const [resultList, setResultList] = useState<any[]>(data as any[])
 
   useEffect(() => { setDataList(data as any[]) }, [data])
 
-  const onSubmitSelection = (data: any[], seletedItems: any[]) => {
-    setDataList(data)
-    if (typeof onSubmit === 'function') {
-      onSubmit(seletedItems, data);
+  useEffect(() => {
+    if (searchText.length > 0) {
+      setDataList((old) => old.filter((v) => (v.title as string).toLowerCase().includes(searchText.toLowerCase())))
+    } else {
+      setDataList(data as any[])
     }
-    switch (displayType) {
-      case "bottomSheet":
-        return bottomSheet.close()
-      case "modal":
-        return Modal.close()
+  }, [searchText])
+
+  useEffect(() => {
+    renderDisplayer()
+  }, [dataList])
+
+  const onCustomSelect = (item: any, index: number) => {
+    if (selectionType === "singleSelect") {
+      setDataList((old) => old.map((v) => ({ ...v, selected: v.value === item.value })))
+    }
+    if (selectionType === "multiSelect") {
+      setDataList((old) => old.map((v) => ({ ...v, selected: v.value === item.value ? item.selected : v.selected })))
+    }
+    if (typeof onSelect === "function") {
+      onSelect(item, index)
     }
   }
 
-  const renderContent = () => {
-    if (selectionType === "singleSelect") {
-      return (
-        <RadioButtonGroup
-          showsVerticalScrollIndicator={false}
-          data={dataList}
-          searchable={searchable}
-          renderItem={renderItem}
-          onSelect={onSelect}
-          onSearch={onSearch}
-          submitTitle={onSubmitTitle}
-          submitTitleSize={onSubmitTitleSize}
-          submitTitleWeight={onSubmitTitleWeight}
-          submitTitleStyle={onSubmitTitleStyle}
-          onSubmit={onSubmitSelection}
-        />
-      )
+  const onSubmitSelection = () => {
+    const selectedItems = dataList.filter((v) => v.selected)
+    setResultList(dataList)
+    if (typeof onSubmit === 'function') {
+      onSubmit(selectedItems, dataList);
     }
-    if (selectionType === "multiSelect") {
-      return (
-        <CheckBoxGroup
-          showsVerticalScrollIndicator={false}
-          data={dataList}
-          searchable={searchable}
-          renderItem={renderItem}
-          onSelect={onSelect}
-          onSearch={onSearch}
-          minChoice={minChoice}
-          maxChoice={maxChoice}
-          submitTitle={onSubmitTitle}
-          submitTitleSize={onSubmitTitleSize}
-          submitTitleWeight={onSubmitTitleWeight}
-          submitTitleStyle={onSubmitTitleStyle}
-          selectAllTitle={selectAllTitle}
-          unSelectAllTitle={unSelectAllTitle}
-          onSubmit={onSubmitSelection}
-        />
-      )
-    }
-    return null
+    setSearchText("")
+    closeDisplayer()
   }
 
   const openModal = () => {
-    setModal({
-      props: {
-        onTouchOutSide: Modal.close,
-        containerStyle: { flex: searchable ? 1 : undefined, maxHeight: "100%", minHeight: "50%" }
-      },
-      renderChildren: renderContent
-    })
-    Modal.show()
+    modal.show()
   };
 
   const openBottomSheet = () => {
-    setBottomSheet({
-      props: {
-        adjustToContentHeight: searchable ? false : true,
-        modalStyle: {
-          backgroundColor: colors.pageBackground
-        },
-        overlayStyle: {
-          backgroundColor: colors.modalOutside
-        },
-        handlePosition: "inside",
-        childrenStyle: {
-        },
-
-        disableScrollIfPossible: false,
-        customRenderer: (
-          <Animated.View style={{
-            height: searchable ? "100%" : undefined,
-            maxHeight: "100%",
-            paddingVertical: innerSpace.componentVertical,
-            paddingHorizontal: innerSpace.componentHorizontal,
-          }}>
-            {renderContent()}
-          </Animated.View >
-        ),
-        HeaderComponent: () => (
-          <Fragment>
-            <Seperator type='vertical' size={"medium"} />
-            <Text size={"l"} weigth="bold" style={{ marginTop: 12, textAlign: "center" }}>{title}</Text>
-          </Fragment>
-        ),
-        FooterComponent: <Seperator type='vertical' size={getBottomSpace()} />
-      }
-    })
     bottomSheet.show();
   }
 
-  const onPress = () => {
+  const openDisplayer = () => {
     switch (displayType) {
       case 'modal':
         openModal();
@@ -382,9 +331,172 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         openBottomSheet();
         break;
     }
+  }
+
+  const closeDisplayer = () => {
+    switch (displayType) {
+      case "bottomSheet":
+        return bottomSheet.close()
+      case "modal":
+        return modal.close()
+    }
+  }
+
+  //#region Render Displayer
+  const renderHeader = () => {
+    return (
+      <View style={{ flexDirection: "row" }}>
+        <View >
+          <Button
+            wrap='free'
+            type='simplied'
+            childType='icon'
+            icon={{
+              family: "Ionicons",
+              name: "close",
+              size: 24,
+              color: colors.pageBackground
+            }}
+            onPress={() => { }} />
+        </View>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <Text size={"l"} weigth="bold" style={{ textAlign: "center" }}>{title}</Text>
+        </View>
+        <View >
+          <Button
+            wrap='free'
+            type='simplied'
+            childType='icon'
+            icon={{
+              family: "Ionicons",
+              name: "close",
+              size: 24,
+              color: colors.text
+            }}
+            onPress={closeDisplayer} />
+        </View>
+      </View>
+    )
+  }
+
+  const renderSearch = () => {
+    if (searchable) {
+      return (
+        <SearchBar
+          value={searchText}
+          onSearch={(t) => {
+            setSearchText(t)
+            onSearch(t)
+          }}
+        />
+      )
+    }
+    return null
+  }
+
+  const renderOptions = () => {
+    if (selectionType === "singleSelect") {
+      return (
+        <RadioButtonGroup
+          showsVerticalScrollIndicator={false}
+          data={dataList}
+          renderItem={renderItem}
+          onSelect={onCustomSelect}
+        />
+      )
+    }
+    if (selectionType === "multiSelect") {
+      return (
+        <CheckBoxGroup
+          showsVerticalScrollIndicator={false}
+          data={dataList}
+          renderItem={renderItem}
+          onSelect={onCustomSelect}
+          minChoice={minChoice}
+          maxChoice={maxChoice}
+        />
+      )
+    }
+    return null
+  }
+
+  const renderSubmitButton = () => {
+    return (
+      <Button
+        disabled={!dataList.some((v) => v.selected)}
+        title={submitTitle}
+        titleSize={submitTitleSize}
+        titleWeight={submitTitleWeight}
+        titleStyle={submitTitleStyle}
+        onPress={onSubmitSelection}
+      />
+    )
+  }
+
+  const renderContent = () => {
+    return (
+      <Fragment>
+        {renderHeader()}
+        <Seperator type='vertical' />
+        {renderSearch()}
+        <Seperator type='vertical' />
+        {renderOptions()}
+        <Seperator type='vertical' />
+        {renderSubmitButton()}
+      </Fragment>
+    )
+  }
+
+  const renderDisplayer = () => {
+    if (displayType === "modal") {
+      setModal({
+        props: {
+          onTouchOutSide: modal.close,
+          containerStyle: { flex: searchable ? 1 : undefined, maxHeight: "100%" }
+        },
+        renderChildren: renderContent
+      })
+    }
+
+    if (displayType === "bottomSheet") {
+      setBottomSheet({
+        props: {
+          adjustToContentHeight: searchable ? false : true,
+          modalStyle: {
+            backgroundColor: colors.pageBackground
+          },
+          overlayStyle: {
+            backgroundColor: colors.modalOutside
+          },
+          handlePosition: "inside",
+          childrenStyle: {
+          },
+
+          disableScrollIfPossible: false,
+          customRenderer: (
+            <Animated.View style={{
+              height: searchable ? "100%" : undefined,
+              maxHeight: "100%",
+              paddingVertical: spaces.componentVertical,
+              paddingHorizontal: spaces.componentHorizontal,
+            }}>
+              {renderContent()}
+            </Animated.View >
+          ),
+          HeaderComponent: () => null,
+          FooterComponent: <Seperator type='vertical' size={getBottomSpace()} />
+        }
+      })
+    }
+  }
+  //#endregion
+
+  const onPress = () => {
+    renderDisplayer()
+    openDisplayer()
   };
 
-  //#region Render Funcrions
+  //#region Render Component Funcrions
 
   const renderIcon = () => {
     if (icon) {
@@ -393,7 +505,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
       } else {
         const CoreIcon = icon as IIconProps;
         return (
-          <View style={styles.iconContainer}>
+          <View style={styles.sideContainer}>
             <Icon
               family={CoreIcon.family}
               name={CoreIcon.name}
@@ -407,17 +519,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     return null
   };
 
-  const renderSeperator = () => {
-    if (icon) {
+  const renderSeperator = (shouldItBe: boolean) => {
+    if (shouldItBe) {
       return (
-        <Seperator type='horizontal' size={innerSpace.componentVertical} />
+        <Seperator type='horizontal' size={spaces.componentVertical} />
       )
     }
     return null
   }
 
   const renderPlaceholder = () => {
-    const selectedData = dataList.filter((v) => v.selected);
+    const selectedData = resultList.filter((v) => v.selected);
     if (selectedData.length > 0) {
       return selectedData.map((v) => v.title).join(" - ")
     } else {
@@ -492,6 +604,17 @@ const SelectBox: FC<ISelectBoxTypes> = ({
     )
   }
 
+  const renderRight = () => {
+    if (typeof rightContainer === "function") {
+      return (
+        <View style={styles.sideContainer}>
+          {rightContainer()}
+        </View>
+      )
+    }
+    return null
+  }
+
   const renderErrorSeperator = () => {
     if (error) {
       return <Seperator type='vertical' size={2} />
@@ -502,7 +625,7 @@ const SelectBox: FC<ISelectBoxTypes> = ({
   const renderError = () => {
     if (error) {
       return (
-        <View style={[{ paddingHorizontal: innerSpace.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
+        <View style={[{ paddingHorizontal: spaces.componentHorizontal }, styles.errorContainer, errorContainerStyle]}>
           <Text weigth={errorWeight} size={errorSize} style={[styles.error, { color: colors.error }, errorStyle]}>{error}</Text>
         </View>
       )
@@ -522,8 +645,8 @@ const SelectBox: FC<ISelectBoxTypes> = ({
           {
             borderWidth: error ? borders.textInputFocused : borders.component,
             borderRadius: radiuses.component,
-            paddingVertical: innerSpace.componentVertical,
-            paddingHorizontal: innerSpace.componentHorizontal,
+            paddingVertical: spaces.componentVertical,
+            paddingHorizontal: spaces.componentHorizontal,
             backgroundColor: colors.componentBackground,
             borderColor: error ? colors.error : colors.text,
           },
@@ -532,8 +655,10 @@ const SelectBox: FC<ISelectBoxTypes> = ({
         ]}
       >
         {renderIcon()}
-        {renderSeperator()}
+        {renderSeperator(icon !== undefined)}
         {renderTitleAndValue()}
+        {renderSeperator(typeof rightContainer === "function")}
+        {renderRight()}
       </TouchableOpacity>
       {renderErrorSeperator()}
       {renderError()}
@@ -548,7 +673,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   },
-  iconContainer: {
+  sideContainer: {
     alignItems: "center",
     justifyContent: "center"
   },

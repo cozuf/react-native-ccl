@@ -5,6 +5,7 @@ import {
   PageContainer,
   Seperator,
   TapSelector,
+  Text,
 } from 'react-native-ccl';
 import type { IModalProps } from 'src/Components/Modal';
 
@@ -39,10 +40,7 @@ const ModalPage = () => {
         onRejectButtonPress={() => {
           setVisibleNew(false);
         }}
-        indicatorProps={{
-          type: "uIActivityIndicator",
-          size: 40
-        }}
+        loadingComponent={() => <Text>Yusuf</Text>}
       />
     );
   };
