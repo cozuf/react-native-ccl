@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import {
   ISelectBoxProps,
@@ -18,6 +18,17 @@ const ACTIVE_DATA = [
     value: false,
   },
 ];
+
+const DATA_TYPE = [
+  {
+    title: 'Default',
+    value: 1,
+  },
+  {
+    title: 'Fetch',
+    value: 2,
+  },
+]
 
 const DATA = [
   {
@@ -102,6 +113,7 @@ const SEARCHABLE_DATA = [
 
 
 const SelectBoxPage = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [active, setActive] = useState<boolean>(true);
   const [areas, setAreas] = useState<any[]>(DATA);
   const [selectTypeIndex, setSelectTypeIndex] = useState<number>(0);
@@ -110,7 +122,8 @@ const SelectBoxPage = () => {
   const [titleIndex, setTitleIndex] = useState<number>(0);
   const [searchableIndex, setSearchableIndex] = useState<number>(0);
 
-  useEffect(() => {
+  const fetchData = () => {
+    setLoading(true)
     fetch("http://app.mobilitre.com/main/country_list")
       .then(response => response.json())
       .then(data => {
@@ -121,35 +134,61 @@ const SelectBoxPage = () => {
           active: true
         }))
         setAreas(newData)
+      })
+      .catch((error) => {
+        console.error("error fetching data", { error })
+      })
+      .finally(() => {
+        setLoading(false)
       });
-  }, [])
+  }
+
+  const defaultData = () => {
+    setAreas(DATA)
+  }
 
   return (
     <PageContainer type="default">
-      <SelectBox
-        active={active}
-        selectionType={SELECT_TYPE_DATA[selectTypeIndex].value as ISelectBoxProps<any>["selectionType"]}
-        displayType={DISPLAY_TYPE_DATA[displayTypeIndex].value as ISelectBoxProps<any>["displayType"]}
-        data={areas}
-        title={TITLE_DATA[titleIndex].value}
-        searchable={SEARCHABLE_DATA[searchableIndex].value as ISelectBoxProps<any>["searchable"]}
-        onSubmit={(data: any) => {
-          setAreas(data);
-        }}
-        icon={{
-          family: "Entypo",
-          name: "location",
-          size: 20
-        }}
-        minChoice={2}
-        maxChoice={4}
-        error={error}
-      />
-      <View style={{ paddingTop: 16 }}>
+      <View style={{ height: 64 }}>
+        <SelectBox
+          active={active}
+          selectionType={SELECT_TYPE_DATA[selectTypeIndex].value as ISelectBoxProps<any>["selectionType"]}
+          displayType={DISPLAY_TYPE_DATA[displayTypeIndex].value as ISelectBoxProps<any>["displayType"]}
+          data={areas}
+          title={TITLE_DATA[titleIndex].value}
+          searchable={SEARCHABLE_DATA[searchableIndex].value as ISelectBoxProps<any>["searchable"]}
+          onSubmit={(selectedItems: any, data: any) => {
+            console.warn({ selectedItems })
+            setAreas(data);
+          }}
+          icon={{
+            family: "Entypo",
+            name: "location",
+            size: 20
+          }}
+          minChoice={2}
+          maxChoice={4}
+          error={error}
+        />
+      </View>
+      <Seperator type="vertical" size={16} />
+      <View>
         <TapSelector
           data={ACTIVE_DATA}
           onTap={() => {
             setActive(!active);
+          }}
+        />
+        <Seperator type="vertical" />
+        <TapSelector
+          data={DATA_TYPE}
+          loading={loading}
+          onTap={(item: any, _: number) => {
+            if (item.value === 1) {
+              defaultData()
+            } else {
+              fetchData()
+            }
           }}
         />
         <Seperator type="vertical" />

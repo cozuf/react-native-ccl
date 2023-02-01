@@ -65,6 +65,11 @@ export interface IModalProps {
      * 
      */
     onRejectButtonPress?: () => void
+
+    /**
+     * 
+     */
+    loadingComponent?: () => JSX.Element | ReactNode
 }
 
 export interface IModalTypes extends IModalProps, Omit<ModalProps, "testID" | "visible"> { }
@@ -84,6 +89,7 @@ const Modal: FC<IModalTypes> = ({
     onAcceptButtonPress = () => { },
     rejectButtonTitle = "Reject",
     onRejectButtonPress = () => { },
+    loadingComponent,
     children,
     ...props
 }) => {
@@ -161,7 +167,7 @@ const Modal: FC<IModalTypes> = ({
                 return children;
 
             case "loading":
-                return <Loading message={message} color={colors.primary} />
+                return <Loading message={message} color={colors.primary} loadingComponent={loadingComponent} />
 
             case "fault":
                 return <Fault title={title} message={message} acceptButtonTitle={acceptButtonTitle} onAcceptButtonPress={onAcceptButtonPress} />
@@ -274,10 +280,10 @@ const styles = StyleSheet.create({
     }
 });
 
-const Loading: FC<Pick<IModalTypes, "message"> & { color: ColorValue }> = ({ message, color }) => {
+const Loading: FC<Pick<IModalTypes, "message"> & { color: ColorValue, loadingComponent?: () => JSX.Element | ReactNode }> = ({ message, color, loadingComponent }) => {
     return (
         <Fragment>
-            <ActivityIndicator size={"large"} color={color} />
+            {loadingComponent ? loadingComponent() : <ActivityIndicator size={"large"} color={color} />}
             <Text size="xl" weigth="medium" style={styles.message}>
                 {message}
             </Text>
