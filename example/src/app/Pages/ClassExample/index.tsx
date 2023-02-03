@@ -33,14 +33,20 @@ class Example extends Component<Props, State>{
                 <Button title="Değiştir" onPress={() => {
                     setGlobalState({
                         token: value,
-                        objec1: {
-                            object11: {
-                                b: "b mi"
+                        location: {
+                            address: {
+                                country: "Türkiye",
+                                city: "Kütahya",
+                                town: "Altıntaş"
                             }
                         }
                     })
                 }}
                 />
+
+                <Text size={"l"}>
+                    {JSON.stringify(globalState).replaceAll("{", "{\n\t").replaceAll("}", "\n}").replaceAll(",", ",\n\t")}
+                </Text>
             </PageContainer>
         )
     }

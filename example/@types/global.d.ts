@@ -6,17 +6,22 @@ declare global {
         languages: string[]
     }
 
+    export interface Location {
+        lat?: number | string
+        long?: number | string
+        address: {
+            country: string
+            city: string
+            town: string
+        }
+    }
+
     namespace RNCCL {
 
         export interface GlobalStateScheme {
             token?: string
-            user: User
-            objec1: {
-                a?: string
-                object11: {
-                    b: string
-                }
-            }
+            user?: User
+            location?: Location
         }
 
     }
