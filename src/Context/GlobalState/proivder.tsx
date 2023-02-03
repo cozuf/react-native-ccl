@@ -1,4 +1,4 @@
-import React, { FC, useReducer } from "react";
+import React, { forwardRef, useReducer, Dispatch, useImperativeHandle, ReactNode } from "react";
 import { isObject } from "../../Utils";
 import { GlaobalStateContext, GlobalStateDispatchContext } from "./context";
 import DEFAULT_GLOBAL_STATE from "./values";
@@ -7,16 +7,33 @@ const reducer = (
     state: RNCCL.GlobalStateScheme,
     newState: Partial<RNCCL.GlobalStateScheme>
 ): RNCCL.GlobalStateScheme => {
-    return mergeState(state, newState) as RNCCL.GlobalStateScheme
-    // return { ...state, ...newState };
+    return mergeState(state, newState)
 };
+
+export interface IGLobalStateRef {
+    state: RNCCL.GlobalStateScheme,
+    setState: Dispatch<Partial<RNCCL.GlobalStateScheme>>
+}
 
 export interface IGlobalStateProvider {
     initialGobalState: RNCCL.GlobalStateScheme
+    children?: ReactNode
 }
 
-const GlobalStateProvider: FC<IGlobalStateProvider> = ({ initialGobalState, children }) => {
+const GlobalStateProvider = forwardRef<IGLobalStateRef, IGlobalStateProvider>((props, ref) => {
+    const { initialGobalState, children } = props
     const [state, setState] = useReducer(reducer, initialGobalState || DEFAULT_GLOBAL_STATE);
+
+// TODO: değişkliği hemen algılamıyor bakılmalı
+    useImperativeHandle(
+        ref,
+        () => ({
+            state: state,
+            setState: setState
+        })
+        ,
+        [state]
+    );
 
     return (
         <GlaobalStateContext.Provider value={state}>
@@ -25,7 +42,7 @@ const GlobalStateProvider: FC<IGlobalStateProvider> = ({ initialGobalState, chil
             </GlobalStateDispatchContext.Provider>
         </GlaobalStateContext.Provider>
     );
-};
+})
 
 export default GlobalStateProvider;
 
@@ -35,7 +52,7 @@ const recersiveMerge = <T extends Object>(oldObject: Object, newObject: Object):
     type oldOneObjectType = keyof typeof oldObject
     type newOneObjectType = keyof typeof newObject
     let finalObject = {}
-    
+
     for (let i = 0; i < Object.keys(oldObject).length; i++) {
         const ithKey = Object.keys(oldObject)[i];
         if (!newObject.hasOwnProperty(ithKey)) {

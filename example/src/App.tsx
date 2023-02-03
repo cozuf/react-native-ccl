@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { createRef } from 'react';
 import { SafeAreaView, StatusBar, StyleSheet, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Router from './app/Navigation';
@@ -8,16 +8,20 @@ import {
   RNCCLProvider,
   light,
   fonts,
-  dark
+  dark,
+  IGLobalStateRef
 } from 'react-native-ccl';
 import { tokens } from './theme';
 import { DefaultGLobalState } from './app/Constants';
+
+export const globalStateRef = createRef<IGLobalStateRef>()
 
 const App = () => {
   const isDarkTheme = useColorScheme() === "dark"
 
   return (
     <RNCCLProvider
+      stateRef={globalStateRef}
       globalState={DefaultGLobalState}
       theme={{
         name: isDarkTheme ? "Dark" : "Light",

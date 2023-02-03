@@ -1,5 +1,5 @@
-import GlobalStateProvider from "./proivder";
+import GlobalStateProvider, { IGLobalStateRef } from "./proivder";
 import { useGlobalState, useSetGlobalState } from "./hook";
 import { withGlobalState } from "./with"
 
-export { GlobalStateProvider, useGlobalState, useSetGlobalState, withGlobalState }
+export { IGLobalStateRef, GlobalStateProvider, useGlobalState, useSetGlobalState, withGlobalState }

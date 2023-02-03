@@ -76,6 +76,7 @@ export {
   useBottomSheet,
   useSetBottomSheet,
   withBottomSheet,
+  IGLobalStateRef,
   GlobalStateProvider,
   useGlobalState,
   useSetGlobalState,

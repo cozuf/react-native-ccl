@@ -1,6 +1,7 @@
-import type { Dispatch, ReactNode } from 'react'
+import type { Dispatch, ReactNode, Ref } from 'react'
 import type { ColorValue } from 'react-native'
 import type { IModalProps, IBottomSheetProps, ISnackBarProps } from './Components'
+import type { IGLobalStateRef } from './Context'
 
 declare global {
     namespace RNCCL {
@@ -175,6 +176,7 @@ declare global {
         interface RNCCLScheme {
             theme: ThemeScheme,
             globalState: GlobalStateScheme
+            stateRef?: Ref<IGLobalStateRef>
         }
         //#endregion
     }

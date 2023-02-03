@@ -6,10 +6,10 @@ import { ModalProvider } from "../Modal"
 import { SnackBarProvider } from "../SnackBar"
 import { ThemeProvider } from "../Theme"
 
-const RNCCLProvider: FC<RNCCL.RNCCLScheme> = ({ theme, globalState, children }) => {
+const RNCCLProvider: FC<RNCCL.RNCCLScheme> = ({ stateRef, theme, globalState, children }) => {
     const { name, colors, fonts, tokens } = theme
     return (
-        <GlobalStateProvider initialGobalState={globalState}>
+        <GlobalStateProvider ref={stateRef} initialGobalState={globalState}>
             <ThemeProvider name={name || "light"} colors={colors || light} fonts={fonts || defaultFonts} tokens={tokens || defaultTokens}>
                 <SnackBarProvider>
                     <ModalProvider>
