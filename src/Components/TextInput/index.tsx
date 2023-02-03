@@ -387,9 +387,7 @@ const STextInput = forwardRef<ITextInputRef, ITextInputTypes>((props, ref) => {
       <View style={[styles.inputContainer]}>
         <View style={styles.nativeInputContainer}>
           <TextInput
-            ref={(ref) => {
-              NativeTextInputRef.current = ref;
-            }}
+            ref={NativeTextInputRef}
             editable={active}
             value={value}
             onChangeText={onChangeText}
