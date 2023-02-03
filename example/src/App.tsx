@@ -11,13 +11,14 @@ import {
   dark
 } from 'react-native-ccl';
 import { tokens } from './theme';
+import { DefaultGLobalState } from './app/Constants';
 
 const App = () => {
   const isDarkTheme = useColorScheme() === "dark"
 
   return (
     <RNCCLProvider
-      globalState={{}}
+      globalState={DefaultGLobalState}
       theme={{
         name: isDarkTheme ? "Dark" : "Light",
         colors: isDarkTheme ? dark : light,

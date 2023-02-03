@@ -25,7 +25,7 @@ export {
 } from "./Components";
 
 export { dark, light, fonts, tokens } from './Theme';
-export { isIphoneX, ifIphoneX, getStatusBarHeight, getBottomSpace, makeColorPassive } from "./Utils"
+export { isIphoneX, ifIphoneX, getStatusBarHeight, getBottomSpace, makeColorPassive, isObject } from "./Utils"
 
 export type {
   ITextProps,
