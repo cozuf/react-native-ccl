@@ -3,7 +3,6 @@ import {
   View,
   Switch as NativeSwitch,
   SwitchProps,
-  Omit,
   ViewStyle,
   StyleProp,
   StyleSheet,

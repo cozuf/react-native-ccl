@@ -2,7 +2,6 @@ import React, { FC, Fragment, isValidElement, ReactElement, ReactNode, useEffect
 import {
   Animated,
   FlatListProps,
-  Omit,
   StyleProp,
   StyleSheet,
   TouchableOpacity,

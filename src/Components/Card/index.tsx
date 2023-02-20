@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, ReactNode, useRef, useState } from "react";
-import { Animated, View, Omit, Pressable, Easing, ViewStyle, StyleSheet } from "react-native";
+import { Animated, View, Pressable, Easing, ViewStyle, StyleSheet } from "react-native";
 import { makeColorPassive } from "../../Utils";
 import { Icon, IIconProps, } from "..";
 import { useTheme } from '../../Context/Theme';

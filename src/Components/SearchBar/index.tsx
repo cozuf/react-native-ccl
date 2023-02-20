@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Omit, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { ITextInputTypes, TextInput } from '..';
 
 export interface ISearchBarProps {

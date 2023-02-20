@@ -1,5 +1,5 @@
 import React, { FC, Fragment, ReactNode, useEffect, useState } from 'react';
-import { Dimensions, Omit, Platform, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Dimensions, Platform, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import RNDatePicker, { DatePickerProps } from 'react-native-date-picker';
 import { Button, IModalProps, Text, ITextProps, Seperator } from '..';
 import { useTheme } from '../../Context/Theme';

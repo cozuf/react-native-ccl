@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import {
-  Omit,
   StyleProp,
   Text as NativeText,
   TextProps as NativeTextProps,

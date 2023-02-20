@@ -7,7 +7,6 @@ import {
   StyleProp,
   ViewStyle,
   FlexAlignType,
-  Omit,
   GestureResponderEvent,
   StyleSheet,
   ColorValue,
@@ -320,7 +319,7 @@ const Button: FC<IButtonTypes> = ({
           wrap !== 'free' ? styles.container : {},
           containerStyle
         ]}
-        disabled={loading || props.disabled}
+        disabled={loading || props.disabled as TouchableOpacityProps["disabled"]}
         {...(props as TouchableOpacityProps)}
       >
         {renderChildren()}

@@ -4,7 +4,6 @@ import {
   ScrollViewProps,
   View,
   ViewStyle,
-  Omit,
   ScrollView,
   SafeAreaView,
   StyleSheet,

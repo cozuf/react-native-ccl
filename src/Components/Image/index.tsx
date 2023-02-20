@@ -3,7 +3,6 @@ import {
   Image as NativeImage,
   ImageProps,
   ImageSourcePropType,
-  Omit,
 } from 'react-native';
 
 export interface IImageProps {

@@ -4,7 +4,6 @@ import {
   FlatList,
   FlatListProps,
   ListRenderItemInfo,
-  Omit,
   StyleProp,
   StyleSheet,
   TouchableOpacity,

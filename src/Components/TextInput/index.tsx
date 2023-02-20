@@ -8,7 +8,6 @@ import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
   Pressable,
-  Omit,
   KeyboardTypeOptions,
   StyleProp,
   StyleSheet,

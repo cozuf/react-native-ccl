@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Omit, StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { Button, IButtonTypes } from '..';
 import type { ITextProps } from '../Text';
 

@@ -1,5 +1,5 @@
 import React, { FC, Fragment, useState } from 'react';
-import { FlatListProps, ListRenderItemInfo, Omit, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { FlatListProps, ListRenderItemInfo, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { Chip, Seperator } from '..';
 
 export interface IChipGroupProps<ItemT> {

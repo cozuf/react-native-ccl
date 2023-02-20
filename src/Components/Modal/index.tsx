@@ -1,6 +1,6 @@
 import React, { FC, Fragment, ReactNode, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, ColorValue, Modal as NativeModal, Platform, Pressable, StyleSheet, View } from "react-native";
-import type { ModalProps, Omit, StyleProp, ViewStyle } from "react-native";
+import type { ModalProps, StyleProp, ViewStyle } from "react-native";
 import { Button, Icon, Seperator, Text } from "..";
 import { useTheme } from "../../Context";
 import { getBottomSpace, getStatusBarHeight } from "../../Utils";
