@@ -1,5 +1,5 @@
 import React, { RefObject, useEffect, useRef, useState } from 'react';
-import { Button, ISnackBarProps, PageContainer, Seperator, ISnackBarRef, TapSelector, useSetSnakBar, useSnackBar } from 'react-native-ccl';
+import { Button, ISnackBarProps, PageContainer, Seperator, ISnackBarRef, TapSelector, useSetSnackBar, useSnackBar } from 'react-native-ccl';
 
 const FORMS = [
     {
@@ -48,7 +48,7 @@ const DURATIONS = [
 
 const SnackBarPage = () => {
     const snackBar = useSnackBar()
-    const setSnackBar = useSetSnakBar()
+    const setSnackBar = useSetSnackBar()
     const snackBarRef = useRef<ISnackBarRef>() as RefObject<ISnackBarRef>
     const [visible, setVisible] = useState<boolean | null>(false)
     const [formIndex, setFormIndex] = useState<number>(0);

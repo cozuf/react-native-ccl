@@ -21,7 +21,8 @@ export {
   SnackBar,
   Card,
   StateCard,
-  SegmentedButton
+  SegmentedButton,
+  BottomSheet
 } from "./Components";
 
 export { dark, light, fonts, tokens } from './Theme';
@@ -36,6 +37,9 @@ export type {
   ITextInputTypes,
   IButtonProps,
   IButtonTypes,
+  ISperatorProps,
+  IDateTimePickerProps,
+  IDateTimePickerTypes,
   ITapSelectorProps,
   ITapSelectorTypes,
   IRadioButtonProps,
@@ -48,6 +52,8 @@ export type {
   IChipGroupProps,
   IChipGroupTypes,
   IBadgeProps,
+  IModalProps,
+  IModalTypes,
   ISearchBarProps,
   ISearchBarTypes,
   ISelectBoxProps,
@@ -57,14 +63,12 @@ export type {
   ISnackBarProps,
   ISnackBarRef,
   ICardProps,
-  IModalProps,
-  IModalTypes,
-  IDateTimePickerProps,
-  IDateTimePickerTypes,
   IPageContainerProps,
   IPageContainerTypes,
   IStateCardProps,
   ISegmentedButtonProps,
+  IBottomSheetProps,
+  IBottomSheetRef
 } from "./Components"
 
 export {
@@ -87,7 +91,7 @@ export {
   withModal,
   SnackBarProvider,
   useSnackBar,
-  useSetSnakBar,
+  useSetSnackBar,
   withSnackBar,
   RNCCLProvider
 } from "./Context"
