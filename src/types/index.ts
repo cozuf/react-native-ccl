@@ -1,10 +1,10 @@
 import type { Dispatch, ReactNode, Ref } from 'react'
 import type { ColorValue } from 'react-native'
-import type { IModalProps, IBottomSheetProps, ISnackBarProps } from './Components'
-import type { IGLobalStateRef } from './Context'
+import type { IModalProps, IBottomSheetProps, ISnackBarProps } from '../Components'
+import type { IGLobalStateRef } from '../Context'
 
 declare global {
-    namespace RNCCL {
+    export namespace RNCCL {
 
         //#region ColorScheme
 
