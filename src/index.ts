@@ -114,6 +114,7 @@ export {
 // -> SnackBar
 // success - error - warning - default
 // border ekle
+// modal ile yap boşluğa dokununca snackbar kaybolsun
 
 // -> types
 // global'deki context type'ları gözden geçir ve düzenle
